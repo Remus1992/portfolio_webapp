@@ -62,3 +62,32 @@ def webdev_home(request):
 
 def webdev_view(request):
     return render(request, "web_dev/web_dev_single_view.html", {"website": website})
+
+
+def blog_single_view(request, cat, slug):
+    blog = get_object_or_404(Blog, category__slug=cat, slug=slug)
+    cat = Category.objects.all()
+    return render(request, 'blog/blog_single_view.html', {'blog': blog, 'cat': cat})
+
+
+def blog(request):
+    blog_list = Blog.objects.filter(fitness_library=False)
+    return render(request, "blog/blog_home.html", {'blogs': blog_list})
+
+
+def blog_create(request):
+    if request.method == 'POST':
+        user = User()
+
+        # tags = request.POST.getlist('tag')
+        print(request.POST)
+        blog = form.save(commit=False)
+        blog.author = request.user
+        blog.save()
+        return HttpResponseRedirect(reverse('blog_single_view', kwargs={'cat': blog.category.slug, 'slug': blog.slug}))
+
+    return render(request, 'blog/blog_create.html', {
+        # 'tag': Tag.objects.all()
+        'cat': Category.objects.all(),
+        'form': form
+    })

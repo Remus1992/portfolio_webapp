@@ -1,3 +1,10 @@
 from django.contrib import admin
 
-# Register your models here.
+from R_E_M.models import User, Album, Photo, Website, Blog, Category
+
+admin.site.register(User)
+admin.site.register(Album)
+admin.site.register(Photo)
+admin.site.register(Website)
+admin.site.register(Blog)
+admin.site.register(Category)
