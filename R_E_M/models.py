@@ -79,13 +79,13 @@ def website_image_uh(instance, filename):
 class Website(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="websites")
     website_name = models.CharField(max_length=50, blank=True, null=True)
-    website_link = models.CharField(max_length=50, blank=True, null=True)
+    website_link = models.CharField(max_length=100, blank=True, null=True)
     website_details = models.TextField()
     slug = models.SlugField(blank=True, null=True, unique=True)
-    alt_text = models.CharField(max_length=50, blank=True, null=True)
     date_built = models.CharField(max_length=50)
     youtube = models.CharField(max_length=255, blank=True, null=True)
-    image = models.ImageField(upload_to=website_image_uh, blank=True, null=True)
+    website_screenshot = models.ImageField(upload_to=website_image_uh, blank=True, null=True)
+    alt_text = models.CharField(max_length=50, blank=True, null=True)
     image_details = models.TextField()
 
     def __str__(self):
@@ -120,8 +120,7 @@ class Blog(models.Model):
     category = models.ForeignKey('Category', default=1, related_name='blogs', on_delete=models.SET_DEFAULT)
     image = models.ImageField(upload_to=blog_image_uh, blank=True, null=True)
     alt_text = models.CharField(max_length=30, blank=True, null=True)
-    youtube = models.CharField(max_length=255, blank=True, null=True)
-    fitness_library = models.BooleanField(default=True)
+    youtube_link = models.CharField(max_length=255, blank=True, null=True)
 
     def __str__(self):
         return self.title
@@ -169,3 +168,42 @@ class Category(models.Model):
 
     class Meta:
         verbose_name_plural = 'Categories'
+
+
+def movie_poster_image_uh(instance, filename):
+    return 'movies/{}/{}'.format(instance.title, filename)
+
+
+def movie_document_uh(instance, filename):
+    return "movies/{}/{}".format(instance.title, filename)
+
+
+class Movie(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="movies")
+    title = models.CharField(max_length=50, blank=True, null=True)
+    tag_line = models.TextField(max_length=300, blank=True, null=True)
+    movie_details = models.TextField()
+    slug = models.SlugField(blank=True, null=True, unique=True)
+    # alt_text = models.CharField(max_length=50, blank=True, null=True)
+    date_built = models.CharField(max_length=50)
+    youtube = models.CharField(max_length=255, blank=True, null=True)
+    movie_poster = models.ImageField(upload_to=movie_poster_image_uh, blank=True, null=True)
+    movie_script = models.FileField(upload_to=movie_document_uh, blank=True, null=True)
+
+    def __str__(self):
+        return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            number = 0
+            slug_title = slugify(self.title)
+            checking = True
+            while checking:
+                results = Website.objects.filter(slug=slug_title)
+                if results.exists():
+                    slug_title = slugify(self.title) + '_' + str(number + 1)
+                    number += 1
+                else:
+                    checking = False
+                self.slug = slug_title
+        super().save(args, kwargs)
