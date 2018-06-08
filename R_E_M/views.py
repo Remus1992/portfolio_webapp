@@ -54,7 +54,7 @@ def photo_upload(request):
             if new_picture:
                 photo.image = new_picture
             photo.save()
-
+        return HttpResponseRedirect(reverse("album_view", kwargs={"slug": album.slug}))
     return render(request, 'photos/photo_upload_page.html')
 
 
@@ -83,7 +83,7 @@ def movie_create(request):
         script = request.FILES.get('movie_script')
         if script:
             movie.movie_script = script
-
+        return HttpResponseRedirect(reverse("movie_single_view", kwargs={"slug": movie.slug}))
     return render(request, "movies/movie_create.html")
 
 
@@ -109,7 +109,7 @@ def webdev_create(request):
         screenshot = request.FILES.get('website_screenshot')
         if screenshot:
             website.website_screenshot = screenshot
-
+        return HttpResponseRedirect(reverse("webdev_view", kwargs={"slug": website.slug}))
     return render(request, "web_dev/web_dev_create.html")
 
 

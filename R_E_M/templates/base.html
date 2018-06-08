@@ -1,10 +1,130 @@
+{% load static %}
+
+{% block content %}
+{% endblock %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Remus Ex Machina | Remington Henderson</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/style.css' %}"/>
 </head>
-<body>
 
-</body>
-</html>
+<header id="header" role="banner">
+    <div class="header-inner">
+        <div id="logoWrapper" class="title-logo-wrapper" data-content-field="site-title">
+
+            <h1 id="logoImage" class="tmpl-loading logo-image"><a href="/"><img
+                    src="//static1.squarespace.com/static/55ca0e9fe4b0e3531a269135/t/566c31820e4c116bdc02abed/1520917495223/?format=1500w"
+                    alt="Mitchell Kanashkevich - Traditions, culture, travel photography"/></a></h1>
+
+        </div><!-- comment the linebreak between these two elements because science
+          --><label for="mobileNavToggle" class="mobile-nav-toggle-label show-on-scroll-mobile">
+        <div class="top-bar"></div>
+        <div class="middle-bar"></div>
+        <div class="bottom-bar"></div>
+    </label><!-- comment the linebreak between these two elements because science
+          -->
+        <div id="headerNav" class="tmpl-loading">
+
+            <div id="mainNavWrapper" class="nav-wrapper desktop-nav-wrapper show-on-scroll">
+                <nav id="mainNavigation" data-content-field="navigation">
+
+
+                    <div class="external">
+                        <a href="http://www.mitchellk-photos.com/photo-diaries">
+                            Blog
+                        </a>
+                    </div>
+
+
+                    <div class="external">
+                        <a href="/galleries">
+                            Photos
+                        </a>
+                    </div>
+
+
+                    <div class="external">
+                        <a href="http://www.mitchellk-photos.com/travel-photography-resource">
+                            Learn
+                        </a>
+                    </div>
+
+
+                    <div class="external">
+                        <a href="/free-photographic-education">
+                            Tips + Free Stuff
+                        </a>
+                    </div>
+
+
+                    <div class="external">
+                        <a href="http://mitchellk.photoshelter.com/archive" target="_blank">
+                            Photo Archives
+                        </a>
+                    </div>
+
+
+                    <div class="collection">
+                        <a href="/travel-with-me/">
+                            Travel with me
+                        </a>
+                    </div>
+
+
+                    <div class="folder">
+                        <input type="checkbox" name="folder-toggle-565c2ce3e4b01110e1dff605"
+                               id="folder-toggle-565c2ce3e4b01110e1dff605" class="folder-toggle-box hidden"/>
+                        <label for="folder-toggle-565c2ce3e4b01110e1dff605" class="folder-toggle-label" onclick
+                               data-href="/info/">Info</label>
+                        <div class="subnav">
+
+
+                            <div class="collection">
+                                <a href="/about/">
+                                    Bio
+                                </a>
+                            </div>
+
+
+                            <div class="collection">
+                                <a href="/faq/">
+                                    FAQ
+                                </a>
+                            </div>
+
+
+                            <div class="collection">
+                                <a href="/guidesfixers/">
+                                    Guides
+                                </a>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+                    <div class="collection">
+                        <a href="/contact/">
+                            Contact
+                        </a>
+                    </div>
+
+
+                </nav>
+            </div>
+            <!-- style below blocks out the mobile nav toggle only when nav is loaded -->
+            <style>.mobile-nav-toggle-label {
+                display: inline-block;
+            }</style>
+
+
+        </div>
+    </div>
+</header>
+
+
