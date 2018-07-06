@@ -10,17 +10,21 @@ def about(request):
     return render(request, 'misc/about.html')
 
 
+def contact(request):
+    return render(request, 'misc/contact.html')
+
+
 def photography_home(request):
     complete_album_list = Album.objects.all()
     return render(request, 'photos/photo_home.html', {'albums': complete_album_list})
 
 
-def photo_album_view(request):
+def photo_album_view(request, slug):
     album = Album.objects.get(slug=slug)
     return render(request, 'photos/photo_album_view.html', {"album": album})
 
 
-def photo_single_view(request):
+def photo_single_view(request, slug):
     photo = get_object_or_404(Album, slug=slug)
     return render(request, 'photos/single_photo_view.html', {"photo": photo})
 
@@ -38,22 +42,32 @@ def photo_upload(request):
 
         # photo
         photo_list = 0
-        for picture in request.POST:
-            if picture.startswith('photo_name_'):
+        # images = request.FILES.getlist('images')
+        for picture in request.FILES.getlist("images"):
+            # if picture.startswith('photo_name_'):
                 photo_list += 1
 
-        for picture in range(photo_list):
+        for picture in range(1, photo_list + 1):
             photo = Photo()
             photo.album = album
             photo.owner = request.user
-            photo.title = request.POST.get('photo_name_{}'.format(picture))
+            photo.title = request.POST.get('image_name_{}'.format(picture))
             photo.alt_text = request.POST.get('alt_text_{}'.format(picture))
-            photo.date_taken = request.POST.get('creation_date')
-            photo.image_details = request.POST.get('image_details')
-            new_picture = request.FILES.get('new_picture_{}'.format(picture))
-            if new_picture:
-                photo.image = new_picture
+            photo.date_taken = request.POST.get('creation_date_{}'.format(picture))
+            photo.image_details = request.POST.get('image_details_{}'.format(picture))
             photo.save()
+
+            # if request.FILES:
+            #     images = request.FILES.getlist('images')
+            #     for i in range(len(images)):
+            #         if picture == i:
+            #             new_picture = request.POST.get(i)
+            #             photo.image = new_picture
+            #             photo.save()
+
+
+                # new_picture = request.FILES.get('new_picture_{}'.format(picture))
+
         return HttpResponseRedirect(reverse("album_view", kwargs={"slug": album.slug}))
     return render(request, 'photos/photo_upload_page.html')
 

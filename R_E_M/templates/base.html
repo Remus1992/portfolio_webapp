@@ -1,31 +1,23 @@
 {% load static %}
 
-{% block content %}
-{% endblock %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Remus Ex Machina | Remington Henderson</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/reset_style.css' %}"/>
     <link rel="stylesheet" type="text/css" href="{% static 'styles/style.css' %}"/>
+
 </head>
 
 <header id="header" role="banner">
     <div class="header-inner">
-        <div id="logoWrapper" class="title-logo-wrapper" data-content-field="site-title">
-
-            <h1 id="logoImage" class="tmpl-loading logo-image"><a href="/"><img
-                    src="//static1.squarespace.com/static/55ca0e9fe4b0e3531a269135/t/566c31820e4c116bdc02abed/1520917495223/?format=1500w"
-                    alt="Mitchell Kanashkevich - Traditions, culture, travel photography"/></a></h1>
-
-        </div><!-- comment the linebreak between these two elements because science
-          --><label for="mobileNavToggle" class="mobile-nav-toggle-label show-on-scroll-mobile">
-        <div class="top-bar"></div>
-        <div class="middle-bar"></div>
-        <div class="bottom-bar"></div>
-    </label><!-- comment the linebreak between these two elements because science
+        <label for="mobileNavToggle" class="mobile-nav-toggle-label show-on-scroll-mobile">
+            <div class="top-bar"></div>
+            <div class="middle-bar"></div>
+            <div class="bottom-bar"></div>
+        </label><!-- comment the linebreak between these two elements because science
           -->
         <div id="headerNav" class="tmpl-loading">
 
@@ -34,46 +26,34 @@
 
 
                     <div class="external">
-                        <a href="http://www.mitchellk-photos.com/photo-diaries">
+                        <a href="{% url 'blog_home' %}">
                             Blog
                         </a>
                     </div>
 
-
                     <div class="external">
-                        <a href="/galleries">
+                        <a href="{% url 'photos_home' %}">
                             Photos
                         </a>
                     </div>
 
-
-                    <div class="external">
-                        <a href="http://www.mitchellk-photos.com/travel-photography-resource">
-                            Learn
+                    <div class="external" style="margin-right: 20px;">
+                        <a href="{% url 'movie_home' %}">
+                            Filmmaking
                         </a>
                     </div>
+                    <div id="logoWrapper" class="title-logo-wrapper" data-content-field="site-title">
 
+                        <h1 id="logoImage" class="tmpl-loading logo-image"><a href="{% url "home" %}"><img
+                                src="/static/R_E_M/img/REM(452x151).png"
+                                alt="REM logo"/></a></h1>
 
-                    <div class="external">
-                        <a href="/free-photographic-education">
-                            Tips + Free Stuff
+                    </div>
+                    <div class="external" style="margin-left: 20px;">
+                        <a href={% url "webdev" %}>
+                            Web Dev
                         </a>
                     </div>
-
-
-                    <div class="external">
-                        <a href="http://mitchellk.photoshelter.com/archive" target="_blank">
-                            Photo Archives
-                        </a>
-                    </div>
-
-
-                    <div class="collection">
-                        <a href="/travel-with-me/">
-                            Travel with me
-                        </a>
-                    </div>
-
 
                     <div class="folder">
                         <input type="checkbox" name="folder-toggle-565c2ce3e4b01110e1dff605"
@@ -82,34 +62,16 @@
                                data-href="/info/">Info</label>
                         <div class="subnav">
 
-
                             <div class="collection">
-                                <a href="/about/">
+                                <a href="{% url 'about' %}">
                                     Bio
                                 </a>
                             </div>
-
-
-                            <div class="collection">
-                                <a href="/faq/">
-                                    FAQ
-                                </a>
-                            </div>
-
-
-                            <div class="collection">
-                                <a href="/guidesfixers/">
-                                    Guides
-                                </a>
-                            </div>
-
-
                         </div>
                     </div>
 
-
                     <div class="collection">
-                        <a href="/contact/">
+                        <a href="{% url 'contact' %}">
                             Contact
                         </a>
                     </div>
@@ -128,3 +90,5 @@
 </header>
 
 
+{% block content %}
+{% endblock %}

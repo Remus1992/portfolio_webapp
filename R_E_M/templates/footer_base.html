@@ -1,0 +1,87 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/reset_style.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/footer_base.css' %}"/>
+
+</head>
+
+<div id="preFooter">
+    <div class="pre-footer-inner with-custom">
+        <div class="sqs-layout sqs-grid-12 columns-12" data-layout-label="Pre-Footer Content" data-type="block-field"
+             data-updated-on="1448869950226" id="preFooterBlocks">
+            <div class="row sqs-row">
+                <div class="col sqs-col-12 span-12">
+                    <div class="sqs-block socialaccountlinks-v2-block sqs-block-socialaccountlinks-v2"
+                         data-block-type="54" id="block-yui_3_17_2_1_1403260543132_3969">
+                        <div class="sqs-block-content">
+
+                            <div class="sqs-svg-icon--outer social-icon-alignment-center social-icons-color-white social-icons-size-large social-icons-shape-circle social-icons-style-border">
+                                <nav class="sqs-svg-icon--list">
+                                    <a href="https://www.instagram.com/remus_ex_machina/" target="_blank"
+                                       class="sqs-svg-icon--wrapper instagram">
+                                        <div>
+                                            <svg class="sqs-svg-icon--social" viewBox="0 0 64 64">
+                                                <use class="sqs-use--icon" xlink:href="#instagram-icon"></use>
+                                                <use class="sqs-use--mask" xlink:href="#instagram-mask"></use>
+                                            </svg>
+                                        </div>
+                                    </a><a href="https://www.facebook.com/profile.php?id=100009530977954" target="_blank"
+                                           class="sqs-svg-icon--wrapper facebook">
+                                    <div>
+                                        <svg class="sqs-svg-icon--social" viewBox="0 0 64 64">
+                                            <use class="sqs-use--icon" xlink:href="#facebook-icon"></use>
+                                            <use class="sqs-use--mask" xlink:href="#facebook-mask"></use>
+                                        </svg>
+                                    </div>
+                                </a>
+                                </nav>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<footer id="footer" role="contentinfo">
+    <div class="footer-inner">
+        <div class="nav-wrapper back-to-top-nav">
+            <nav>
+                <div class="back-to-top"><a href="#header">Back to Top</a></div>
+            </nav>
+        </div>
+
+
+        <div class="sqs-layout sqs-grid-12 columns-12" data-layout-label="Footer Content" data-type="block-field"
+             data-updated-on="1492518055782" id="footerBlocks">
+            <div class="row sqs-row">
+                <div class="col sqs-col-12 span-12">
+                    <div class="sqs-block html-block sqs-block-html" data-block-type="2"
+                         id="block-yui_3_17_2_28_1448861542916_5540">
+                        <div class="sqs-block-content"><p class="text-align-center">All images text and ideas © Mitchell
+                            Kanashkevich 2017</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<div class="sqs-custom-cart custom-cart empty">
+    <a href="/cart" class="custom-cart-button">Cart (<span class="sqs-cart-quantity">0</span>)</a>
+</div>
+
+
+</div>
+</div>
+
+{% block content %}
+{% endblock %}

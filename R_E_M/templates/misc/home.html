@@ -3,22 +3,29 @@
 {% load static %}
 
 {% block title %}
-: Home
+    : Home
 {% endblock %}
 
 {% block content %}
 
-<style>
-    body {
-        background-color: black;
-        background-image: url("/static/R_E_M/img/rembrandt-lighting.jpg");
+    <style>
 
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: contain;
-        color: white;
-</style>
+        html {
+            background: url("/static/R_E_M/img/rembrandt-lighting.jpg") no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
 
-{#<h1>Home</h1>#}
+        body {
+        {#background-color: white;#}{#background-image: url("/static/R_E_M/img/rembrandt-lighting.jpg");#}{##}{#background-repeat: no-repeat;#}{#background-position: center;#}{#background-size: contain;#}{#color: white;#}
+        }
+    </style>
+
+    <div>
+        <h1>Home</h1>
+    </div>
+
 
 {% endblock %}

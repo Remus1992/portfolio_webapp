@@ -20,9 +20,11 @@ h1 {
     margin: .67em 0;
 }
 
+/*
 img {
     border: 0;
 }
+*/
 
 input {
     font-family: inherit;
@@ -177,26 +179,26 @@ html:not(.no-js) body:not(.always-use-overlay-nav) #headerNav {
     text-align: center;
 }
 
-#header #logoWrapper {
-    position: relative;
-    left: 50%;
-    -webkit-transform: translate(-50%, 0);
-    -moz-transform: translate(-50%, 0);
-    -ms-transform: translate(-50%, 0);
-    -o-transform: translate(-50%, 0);
-    transform: translate(-50%, 0);
-    text-align: center;
-}
+/*#header #logoWrapper {*/
+    /*position: relative;*/
+    /*left: 50%;*/
+    /*-webkit-transform: translate(-50%, 0);*/
+    /*-moz-transform: translate(-50%, 0);*/
+    /*-ms-transform: translate(-50%, 0);*/
+    /*-o-transform: translate(-50%, 0);*/
+    /*transform: translate(-50%, 0);*/
+    /*text-align: center;*/
+/*}*/
 
 #header #logoWrapper, #header #logoImage {
     height: auto;
-    width: 36px;
+    width: 80px;
     line-height: 1;
 }
 
-#header #logoWrapper {
-    z-index: 1001;
-}
+/*#header #logoWrapper {*/
+    /*z-index: 1001;*/
+/*}*/
 
 #logoImage {
     margin: 0;
@@ -209,10 +211,16 @@ html:not(.no-js) body:not(.always-use-overlay-nav) #headerNav {
 }
 
 #logoImage img {
-    width: 36px;
-    max-width: 36px;
+    margin-top: 5px;
+    width: 80px;
+    max-width: 80px;
     height: auto;
     -ms-interpolation-mode: bicubic;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
 }
 
 #mainNavWrapper nav a, #mainNavWrapper nav a:visited, #mainNavWrapper nav label {
@@ -519,3 +527,6 @@ body:not(.always-use-overlay-nav) .nav-wrapper.desktop-nav-wrapper .folder:hover
     font-weight: 400;
     font-style: normal;
 }
+
+
+
