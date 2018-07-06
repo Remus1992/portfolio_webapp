@@ -1,5 +1,9 @@
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404, reverse, redirect
 from R_E_M.models import User, Album, Photo, Website, Blog, Category, Movie
+import base64
+from django.core.files.base import ContentFile
+import re
+from PIL import Image
 
 
 def home(request):
@@ -31,7 +35,7 @@ def photo_single_view(request, slug):
 
 def photo_upload(request):
     if request.method == "POST":
-        print(request.POST)
+        # print(request.POST)
         print(request.FILES)
         album = Album()
         album.owner = request.user
@@ -40,33 +44,22 @@ def photo_upload(request):
         album.alt_text = request.POST.get('album_alt_text')
         album.save()
 
-        # photo
-        photo_list = 0
-        # images = request.FILES.getlist('images')
-        for picture in request.FILES.getlist("images"):
-            # if picture.startswith('photo_name_'):
-                photo_list += 1
+        for k, v in request.POST.items():
+            if re.match('^image_\d+$', k):
+                num = int(re.search(r'\d+', k).group())
+                format, imgstr = v.split(';base64,')
+                ext = format.split('/')[-1]
+                data = ContentFile(base64.b64decode(imgstr), name='temp.' + ext)
 
-        for picture in range(1, photo_list + 1):
-            photo = Photo()
-            photo.album = album
-            photo.owner = request.user
-            photo.title = request.POST.get('image_name_{}'.format(picture))
-            photo.alt_text = request.POST.get('alt_text_{}'.format(picture))
-            photo.date_taken = request.POST.get('creation_date_{}'.format(picture))
-            photo.image_details = request.POST.get('image_details_{}'.format(picture))
-            photo.save()
-
-            # if request.FILES:
-            #     images = request.FILES.getlist('images')
-            #     for i in range(len(images)):
-            #         if picture == i:
-            #             new_picture = request.POST.get(i)
-            #             photo.image = new_picture
-            #             photo.save()
-
-
-                # new_picture = request.FILES.get('new_picture_{}'.format(picture))
+                photo = Photo()
+                photo.image = data
+                photo.album = album
+                photo.owner = request.user
+                photo.title = request.POST.get('image_name_{}'.format(num))
+                photo.alt_text = request.POST.get('alt_text_{}'.format(num))
+                photo.date_taken = request.POST.get('creation_date_{}'.format(num))
+                photo.image_details = request.POST.get('image_details_{}'.format(num))
+                photo.save()
 
         return HttpResponseRedirect(reverse("album_view", kwargs={"slug": album.slug}))
     return render(request, 'photos/photo_upload_page.html')
