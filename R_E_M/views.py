@@ -3,7 +3,7 @@ from R_E_M.models import User, Album, Photo, Website, Blog, Category, Movie
 import base64
 from django.core.files.base import ContentFile
 import re
-from PIL import Image
+# from PIL import Image
 
 
 def home(request):
@@ -25,6 +25,7 @@ def photography_home(request):
 
 def photo_album_view(request, slug):
     album = Album.objects.get(slug=slug)
+    # photos = Photo.objects.get(album=slug)
     return render(request, 'photos/photo_album_view.html', {"album": album})
 
 

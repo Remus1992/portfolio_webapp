@@ -1,1 +1,39 @@
-<h1>Photo Album View</h1>
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    : {{ album.title }}
+{% endblock %}
+
+{% block content %}
+    <style>
+    img {
+        width: 200px;
+    }
+    </style>
+
+    <h1>Photo Album View</h1>
+
+    <div>
+        <h2>Title</h2>
+        {{ album.title }}
+        <h2>Details</h2>
+        {{ album.album_details }}
+        <br>
+        <br>
+
+        {% for photo in album.photo_album.all %}
+            {#        {{ photo.image }}#}
+            <img src="{{ photo.image.url }}">
+            <br>
+            {{ photo.date_taken }}
+            <br>
+            {{ photo.image_details }}
+            <br>
+            <br>
+        {% endfor %}
+
+    </div>
+
+{% endblock %}

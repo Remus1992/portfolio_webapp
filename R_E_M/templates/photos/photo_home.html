@@ -3,11 +3,27 @@
 {% load static %}
 
 {% block title %}
-: Photo Home
+    : Photo Home
 {% endblock %}
 
 {% block content %}
+    <style>
+    .container {
+        margin: 50px;
+    }
+    </style>
+    <div class="container">
 
-<h1>Photo Home</h1>
+        <h1>Photo Home</h1>
+        <a href="{% url 'picture_upload' %}">Upload</a>
+        <br>
+        <br>
 
+        {% for album in albums %}
+            <p>{{ album.title }}</p>
+            <a href="{% url 'album_view' album.slug %}">See More</a>
+            <br>
+            <br>
+        {% endfor %}
+    </div>
 {% endblock %}
