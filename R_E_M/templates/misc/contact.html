@@ -3,11 +3,17 @@
 {% load static %}
 
 {% block title %}
-: Contact
+    : Contact
 {% endblock %}
 
 {% block content %}
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static 'styles/style.css' %}"/>
+    </head>
+    <h1>Contact</h1>
 
-<h1>Contact</h1>
+{% endblock %}
 
+{% block footer %}
+    {% include 'footer_base.html' %}
 {% endblock %}

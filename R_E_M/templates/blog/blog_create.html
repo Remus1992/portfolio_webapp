@@ -18,7 +18,7 @@
     </style>
     <div class="row">
         <section class="create">
-            <form class="blog_create" method="post">
+            <form class="blog_create" method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form.as_p }}
                 <p>Blog Title</p>

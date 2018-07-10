@@ -9,12 +9,15 @@
 {% block content %}
 
     {% for b in blogs %}
+        <head>
+            <link rel="stylesheet" type="text/css" href="{% static 'styles/style.css' %}"/>
+        </head>
         <style>
-             .container {
-                 margin: 20px auto;
+            .container {
+                margin: 20px auto;
 
-                 width: 70%;
-             }
+                width: 70%;
+            }
 
             h2 {
                 text-align: center;
@@ -40,3 +43,6 @@
 
 {% endblock %}
 
+{% block footer %}
+    {% include 'footer_base.html' %}
+{% endblock %}

@@ -32,7 +32,7 @@ def photo_album_view(request, slug):
 
 
 def photo_single_view(request, album, slug):
-    photo = get_object_or_404(Album, album_details__slug=album, slug=slug)
+    photo = get_object_or_404(Photo, album__slug=album, slug=slug)
     album_list = Album.objects.all()
     return render(request, 'photos/single_photo_view.html', {"albums": album_list, "photo": photo})
 
@@ -138,7 +138,7 @@ def blog(request):
 def blog_create(request):
     if request.method == 'POST':
         blog = Blog()
-        cat = Category()
+        cat, created = Category.objects.get_or_create(name=request.POST.get('category'))
 
         # tags = request.POST.getlist('tag')
         print(request.POST)
@@ -147,10 +147,11 @@ def blog_create(request):
         blog.author = request.user
         blog.content = request.POST.get('blog_content')
 
-        cat.name = request.POST.get('category')
+        blog.category = cat
 
         blog_image = request.FILES.get('blog_image')
         if blog_image:
+            print("we got here")
             blog.image = blog_image
 
         blog.alt_text = request.POST.get('alt_text')

@@ -7,8 +7,12 @@
 {% endblock %}
 
 {% block content %}
+
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static 'styles/style.css' %}"/>
+    </head>
     <style>
-        img {
+        .image {
             width: 250px;
         }
 
@@ -33,16 +37,13 @@
         <br>
 
         {% for album in albums %}
-            {% for photo in album.photo_album.all %}
-{#                {% if photo == album.photo_album[0] %}#}
-                    <p>{{ album.title }}</p>
-                    <a href="{% url 'album_view' album.slug %}">See More</a>
-                    <br>
-                    <br>
-
-                    <a href="{% url 'album_view' album.slug %}"><img src="{{ photo.image.url }}"></a>
-{#                {% endif %}#}
-            {% endfor %}
+            <p>{{ album.title }}</p>
+            <a href="{% url 'album_view' album.slug %}"><img src="{{ album.photo_album.all.0.image.url }}" class="image"></a>
         {% endfor %}
     </div>
+{% endblock %}
+
+
+{% block footer %}
+    {% include 'footer_base.html' %}
 {% endblock %}
