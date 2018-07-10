@@ -9,18 +9,32 @@
 {% block content %}
 
     {% for b in blogs %}
-        <main class="blog">
-            <div class="blog">
-                <h2 class="blog-title"> {{ b.title }}</h2>
-{#                <p class="cart-text">{{ b.grab_blurb }}</p>#}
-                <p class="blog-text">{{ b.content }}</p>
-                <a href="{% url 'blog_single_view' b.category.slug b.slug %}" class="read-more">...Read More</a>
-            </div>
-            <div class="card-footer text-muted">
-                Posted on {{ b.date }} by {{ b.author.username }}
-            </div>
+        <style>
+             .container {
+                 margin: 20px auto;
 
-        </main>
+                 width: 70%;
+             }
+
+            h2 {
+                text-align: center;
+            }
+
+        </style>
+        <div class="container">
+            <main class="blog">
+                <div class="blog">
+                    <h2 class="blog-title"> {{ b.title }}</h2>
+                    {#                <p class="cart-text">{{ b.grab_blurb }}</p>#}
+                    <p class="blog-text">{{ b.content }}</p>
+                    <a href="{% url 'blog_single_view' b.category.slug b.slug %}" class="read-more">...Read More</a>
+                </div>
+                <div class="card-footer text-muted">
+                    Posted on {{ b.date }} by {{ b.author.username }}
+                </div>
+
+            </main>
+        </div>
 
     {% endfor %}
 

@@ -8,13 +8,12 @@
 
 {% block content %}
     <head>
-        {#        <link href="R_E_M/static/styles/lightbox.css" rel="stylesheet">#}
         <link href="{% static 'styles/lightbox.css' %}" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-{#        <script#}
-{#                src="https://code.jquery.com/jquery-1.7.js"#}
-{#                integrity="sha256-fBiF7IYg9AoQ0EWUjT+fe4+cT3vS/x3ftIap8n6V4+M="#}
-{#                crossorigin="anonymous"></script>#}
+        {#        <script#}
+        {#                src="https://code.jquery.com/jquery-2.0.0.js"#}
+        {#                integrity="sha256-iW43nTNM8LFseNmWKhV5FHFW1KcjVQMvzg3l9nPU4oc="#}
+        {#                crossorigin="anonymous"></script>#}
 
     </head>
     <style>
@@ -28,7 +27,7 @@
             width: 70%;
         }
 
-        h1 {
+        h1, body {
             font-family: 'Alegreya Sans SC', sans-serif;
             font-weight: bold;
         }
@@ -37,16 +36,12 @@
 
     <div class="container">
         <h1><b>{{ album.title }}</b></h1>
-
+        <p>_________</p>
+        <br>
+        {{ album.album_details }}
+        <br>
+        <br>
         <div>
-            {#            <h2>Title</h2>#}
-
-            {#            <h2>Details</h2>#}
-            {{ album.album_details }}
-            <br>
-            <br>
-
-
             {% for photo in album.photo_album.all %}
 
                 <a href="{{ photo.image.url }}" data-lightbox="{{ album.alt_text }}"
@@ -58,5 +53,7 @@
 
     {#    <script src="path/to/lightbox.js"></script>#}
     <script src={% static 'javascript/lightbox.js' %}" ></script>
+
+
 
 {% endblock %}

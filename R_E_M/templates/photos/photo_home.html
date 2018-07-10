@@ -8,10 +8,23 @@
 
 {% block content %}
     <style>
-    .container {
-        margin: 50px;
-    }
+        img {
+            width: 250px;
+        }
+
+        .container {
+            margin: 20px auto;
+            text-align: center;
+            width: 70%;
+        }
+
+        h1, body {
+            font-family: 'Alegreya Sans SC', sans-serif;
+            font-weight: bold;
+        }
+
     </style>
+
     <div class="container">
 
         <h1>Photo Home</h1>
@@ -20,10 +33,16 @@
         <br>
 
         {% for album in albums %}
-            <p>{{ album.title }}</p>
-            <a href="{% url 'album_view' album.slug %}">See More</a>
-            <br>
-            <br>
+            {% for photo in album.photo_album.all %}
+{#                {% if photo == album.photo_album[0] %}#}
+                    <p>{{ album.title }}</p>
+                    <a href="{% url 'album_view' album.slug %}">See More</a>
+                    <br>
+                    <br>
+
+                    <a href="{% url 'album_view' album.slug %}"><img src="{{ photo.image.url }}"></a>
+{#                {% endif %}#}
+            {% endfor %}
         {% endfor %}
     </div>
 {% endblock %}

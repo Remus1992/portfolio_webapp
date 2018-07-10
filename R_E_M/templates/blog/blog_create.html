@@ -28,7 +28,14 @@
                 <br>
                 <p>Category</p>
                 <br>
-                <input type="text" id="category" name="category">
+{#                <input type="text" id="category" name="category">#}
+                <input list="categories" id="category" name="category">
+
+                <datalist id="categories">
+                    {% for c in cat %}
+                        <option value="{{ c.name }}">
+                    {% endfor %}
+                </datalist>
                 <br>
                 <p>Blog Image</p>
                 <input type="file" id="blog_image" name="blog_image">
