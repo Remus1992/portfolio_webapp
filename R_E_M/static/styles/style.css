@@ -180,14 +180,14 @@ html:not(.no-js) body:not(.always-use-overlay-nav) #headerNav {
 }
 
 /*#header #logoWrapper {*/
-    /*position: relative;*/
-    /*left: 50%;*/
-    /*-webkit-transform: translate(-50%, 0);*/
-    /*-moz-transform: translate(-50%, 0);*/
-    /*-ms-transform: translate(-50%, 0);*/
-    /*-o-transform: translate(-50%, 0);*/
-    /*transform: translate(-50%, 0);*/
-    /*text-align: center;*/
+/*position: relative;*/
+/*left: 50%;*/
+/*-webkit-transform: translate(-50%, 0);*/
+/*-moz-transform: translate(-50%, 0);*/
+/*-ms-transform: translate(-50%, 0);*/
+/*-o-transform: translate(-50%, 0);*/
+/*transform: translate(-50%, 0);*/
+/*text-align: center;*/
 /*}*/
 
 #header #logoWrapper, #header #logoImage {
@@ -197,7 +197,7 @@ html:not(.no-js) body:not(.always-use-overlay-nav) #headerNav {
 }
 
 /*#header #logoWrapper {*/
-    /*z-index: 1001;*/
+/*z-index: 1001;*/
 /*}*/
 
 #logoImage {
@@ -527,6 +527,4 @@ body:not(.always-use-overlay-nav) .nav-wrapper.desktop-nav-wrapper .folder:hover
     font-weight: 400;
     font-style: normal;
 }
-
-
 

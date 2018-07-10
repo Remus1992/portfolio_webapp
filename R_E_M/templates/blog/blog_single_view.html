@@ -1,10 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+
+{% load static %}
+{% load accounts_tags %}
+
+{% block title %}{{ blog.title }}{% endblock %}
+{% block content %}
+<main class="blog single_view">
+
+    {% blog_image_or_default blog %}
+    <!-- Title -->
+    <h2 class="blog">{{ blog.title }}</h2>
+
+    <!-- Author -->
+    <p class="lead">
+        by
+        <a href="#" class="author">{{ blog.author.username }}</a>
+    </p>
+
+
+    <!-- Date/Time -->
+    <p class="post-time">Posted on {{ blog.date }}</p>
+
+    <!--Post content-->
+    <p>{{ blog.content }}</p>
+    {% if blog.youtube %}
+
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ blog.youtube }}" frameborder="0"
+            allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+    {% endif %}
+
+    <div class="card my-4">
+        <h5 class="card-header">Leave a Comment:</h5>
+        <div class="card-body">
+            <form>
+                <div class="form-group">
+                    <textarea class="form-control" rows="4" cols="50"></textarea>
+                </div>
+                <button type="submit" class="button">Submit</button>
+            </form>
+        </div>
+    </div>
+</main>
+
+{% endblock %}

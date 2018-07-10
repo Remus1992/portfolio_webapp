@@ -3,11 +3,49 @@
 {% load static %}
 
 {% block title %}
-: Blog Create
+    {#    : Blog Create#}
+    {{ blog.title }}
 {% endblock %}
 
 {% block content %}
+    <style>
+        .row {
+            margin: 50px;
+            border-style: solid;
+            border-width: 5px;
+            padding: 10px;
+        }
+    </style>
+    <div class="row">
+        <section class="create">
+            <form class="blog_create" method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <p>Blog Title</p>
+                <input type="text" id="blog_title" name="blog_title">
+                <p>Blog Content</p>
+                <textarea id="blog_content" name="blog_content" cols="30" rows="10"></textarea>
+                <br>
+                <p>Category</p>
+                <br>
+                <input type="text" id="category" name="category">
+                <br>
+                <p>Blog Image</p>
+                <input type="file" id="blog_image" name="blog_image">
+                <br>
+                <p>Image Alt Text</p>
+                <input type="text" id="alt_text" name="alt_text">
+                <br>
+                <p>YouTube Link</p>
+                <input type="text" id="youtube_link" name="youtube_link">
+                <br>
+                <input class="button" type="submit" value="Submit" id="sub-btn">
+            </form>
+        </section>
+    </div>
 
-<h1>Blog Create</h1>
+{% endblock %}
+
+{% block js %}
 
 {% endblock %}

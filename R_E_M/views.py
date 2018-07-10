@@ -3,6 +3,8 @@ from R_E_M.models import User, Album, Photo, Website, Blog, Category, Movie
 import base64
 from django.core.files.base import ContentFile
 import re
+
+
 # from PIL import Image
 
 
@@ -29,15 +31,16 @@ def photo_album_view(request, slug):
     return render(request, 'photos/photo_album_view.html', {"album": album})
 
 
-def photo_single_view(request, slug):
-    photo = get_object_or_404(Album, slug=slug)
-    return render(request, 'photos/single_photo_view.html', {"photo": photo})
+def photo_single_view(request, album, slug):
+    photo = get_object_or_404(Album, album_details__slug=album, slug=slug)
+    album_list = Album.objects.all()
+    return render(request, 'photos/single_photo_view.html', {"albums": album_list, "photo": photo})
 
 
 def photo_upload(request):
     if request.method == "POST":
         # print(request.POST)
-        print(request.FILES)
+        # print(request.FILES)
         album = Album()
         album.owner = request.user
         album.title = request.POST.get('album_title')
@@ -135,6 +138,7 @@ def blog(request):
 def blog_create(request):
     if request.method == 'POST':
         blog = Blog()
+        cat = Category()
 
         # tags = request.POST.getlist('tag')
         print(request.POST)
@@ -142,6 +146,8 @@ def blog_create(request):
         blog.title = request.POST.get('blog_title')
         blog.author = request.user
         blog.content = request.POST.get('blog_content')
+
+        cat.name = request.POST.get('category')
 
         blog_image = request.FILES.get('blog_image')
         if blog_image:

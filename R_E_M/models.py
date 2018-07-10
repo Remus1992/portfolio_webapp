@@ -117,7 +117,7 @@ class Blog(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     content = models.TextField()
     slug = models.SlugField(blank=True, null=True, unique=True)
-    category = models.ForeignKey('Category', default=1, related_name='blogs', on_delete=models.SET_DEFAULT)
+    category = models.ForeignKey("Category", default=1, related_name='blogs', on_delete=models.SET_DEFAULT)
     image = models.ImageField(upload_to=blog_image_uh, blank=True, null=True)
     alt_text = models.CharField(max_length=30, blank=True, null=True)
     youtube_link = models.CharField(max_length=255, blank=True, null=True)

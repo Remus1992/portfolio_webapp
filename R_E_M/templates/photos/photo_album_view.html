@@ -7,33 +7,56 @@
 {% endblock %}
 
 {% block content %}
+    <head>
+        {#        <link href="R_E_M/static/styles/lightbox.css" rel="stylesheet">#}
+        <link href="{% static 'styles/lightbox.css' %}" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+{#        <script#}
+{#                src="https://code.jquery.com/jquery-1.7.js"#}
+{#                integrity="sha256-fBiF7IYg9AoQ0EWUjT+fe4+cT3vS/x3ftIap8n6V4+M="#}
+{#                crossorigin="anonymous"></script>#}
+
+    </head>
     <style>
-    img {
-        width: 200px;
-    }
+        img {
+            width: 250px;
+        }
+
+        .container {
+            margin: 20px auto;
+            text-align: center;
+            width: 70%;
+        }
+
+        h1 {
+            font-family: 'Alegreya Sans SC', sans-serif;
+            font-weight: bold;
+        }
+
     </style>
 
-    <h1>Photo Album View</h1>
+    <div class="container">
+        <h1><b>{{ album.title }}</b></h1>
 
-    <div>
-        <h2>Title</h2>
-        {{ album.title }}
-        <h2>Details</h2>
-        {{ album.album_details }}
-        <br>
-        <br>
+        <div>
+            {#            <h2>Title</h2>#}
 
-        {% for photo in album.photo_album.all %}
-            {#        {{ photo.image }}#}
-            <img src="{{ photo.image.url }}">
-            <br>
-            {{ photo.date_taken }}
-            <br>
-            {{ photo.image_details }}
+            {#            <h2>Details</h2>#}
+            {{ album.album_details }}
             <br>
             <br>
-        {% endfor %}
 
+
+            {% for photo in album.photo_album.all %}
+
+                <a href="{{ photo.image.url }}" data-lightbox="{{ album.alt_text }}"
+                   data-title="{{ photo.image_details }}"><img src="{{ photo.image.url }}"></a>
+
+            {% endfor %}
+        </div>
     </div>
+
+    {#    <script src="path/to/lightbox.js"></script>#}
+    <script src={% static 'javascript/lightbox.js' %}" ></script>
 
 {% endblock %}
