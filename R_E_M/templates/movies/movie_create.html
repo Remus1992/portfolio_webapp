@@ -3,11 +3,47 @@
 {% load static %}
 
 {% block title %}
-: About
+    : About
 {% endblock %}
 
 {% block content %}
-
-<h1>Movie Create</h1>
-
+    <style>
+        .row {
+            margin: 50px;
+            border-style: solid;
+            border-width: 5px;
+            padding: 10px;
+        }
+    </style>
+    <h1>Movie Create</h1>
+    <div class="row">
+        <section class="create">
+            <form class="blog_create" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <p>Movie Title</p>
+                <input type="text" id="movie_title" name="movie_title">
+                <p>Movie Tagline</p>
+                <input type="text" id="movie_tag" name="movie_tag">
+                <p>Movie Details</p>
+                <textarea id="movie_details" name="movie_details" cols="30" rows="10"></textarea>
+                <br>
+                <p>Movie Date</p>
+                <input type="date" id="movie_date" name="movie_date">
+                <br>
+                <p>Movie Poster</p>
+                <input type="file" id="movie_poster" name="movie_poster">
+                <br>
+                <p>Image Alt Text</p>
+                <input type="text" id="alt_text" name="alt_text">
+                <br>
+                <p>Movie Script</p>
+                <input type="file" id="movie_script" name="movie_script">
+                <br>
+                <p>YouTube Link</p>
+                <input type="text" id="youtube_link" name="movie_youtube">
+                <br>
+                <input class="button" type="submit" value="Submit" id="sub-btn">
+            </form>
+        </section>
+    </div>
 {% endblock %}

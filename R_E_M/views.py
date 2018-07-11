@@ -70,15 +70,19 @@ def photo_upload(request):
 
 
 def filmmaking_home(request):
-    return render(request, 'movies/movie_home.html')
+    complete_movie_list = Movie.objects.all()
+    return render(request, 'movies/movie_home.html', {'movies': complete_movie_list})
 
 
-def movie_single_view(request):
-    return render(request, "movies/movie_view.html")
+def movie_single_view(request, slug):
+    movie = Movie.objects.get(slug=slug)
+    return render(request, "movies/movie_view.html", {"movie": movie})
 
 
 def movie_create(request):
     if request.method == "POST":
+        print(request.FILES)
+        print(request.POST)
         movie = Movie()
         movie.owner = request.user
         movie.title = request.POST.get('movie_title')
@@ -86,6 +90,7 @@ def movie_create(request):
         movie.movie_details = request.POST.get('movie_details')
         movie.date_built = request.POST.get('movie_date')
         movie.youtube = request.POST.get('movie_youtube')
+        movie.alt_text = request.POST.get('alt_text')
 
         poster = request.FILES.get('movie_poster')
         if poster:
@@ -94,6 +99,9 @@ def movie_create(request):
         script = request.FILES.get('movie_script')
         if script:
             movie.movie_script = script
+
+        movie.save()
+
         return HttpResponseRedirect(reverse("movie_single_view", kwargs={"slug": movie.slug}))
     return render(request, "movies/movie_create.html")
 

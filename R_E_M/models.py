@@ -184,10 +184,10 @@ class Movie(models.Model):
     tag_line = models.TextField(max_length=300, blank=True, null=True)
     movie_details = models.TextField()
     slug = models.SlugField(blank=True, null=True, unique=True)
-    # alt_text = models.CharField(max_length=50, blank=True, null=True)
     date_built = models.CharField(max_length=50)
     youtube = models.CharField(max_length=255, blank=True, null=True)
     movie_poster = models.ImageField(upload_to=movie_poster_image_uh, blank=True, null=True)
+    alt_text = models.CharField(max_length=50, blank=True, null=True)
     movie_script = models.FileField(upload_to=movie_document_uh, blank=True, null=True)
 
     def __str__(self):

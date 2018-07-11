@@ -8,6 +8,42 @@
 
 {% block content %}
 
-<h1>Movie Home</h1>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static 'styles/style.css' %}"/>
+    </head>
+    <style>
+        .image {
+            width: 250px;
+        }
 
+        .container {
+            margin: 20px auto;
+            text-align: center;
+            width: 70%;
+        }
+
+        h1, body {
+            font-family: 'Alegreya Sans SC', sans-serif;
+            font-weight: bold;
+        }
+
+    </style>
+
+    <div class="container">
+
+        <h1>Movie Home</h1>
+        <a href="{% url 'movie_create' %}">Upload</a>
+        <br>
+        <br>
+
+        {% for movie in movies %}
+            <p>{{ movie.title }}</p>
+            <a href="{% url 'movie_single_view' movie.slug %}"><img src="{{ movie.movie_poster.url }}" class="image"></a>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+
+{% block footer %}
+    {% include 'footer_base.html' %}
 {% endblock %}

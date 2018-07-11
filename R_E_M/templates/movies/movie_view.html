@@ -1,1 +1,55 @@
-<h1>Movie View</h1>
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}
+    : {{ movie.title }}
+{% endblock %}
+
+{% block content %}
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static 'styles/style.css' %}"/>
+
+    </head>
+    <style>
+        .image {
+            width: 250px;
+        }
+
+        .container {
+            margin: 20px auto;
+            text-align: center;
+            width: 70%;
+        }
+
+        h1, body {
+            font-family: 'Alegreya Sans SC', sans-serif;
+            font-weight: bold;
+        }
+
+    </style>
+
+    <div class="container">
+        <h1><b>{{ movie.title }}</b></h1>
+        <p>_________</p>
+        <br>
+        {{ movie.tag_line }}
+        <p>_________</p>
+        <br>
+        {{ movie.movie_details }}
+        <br>
+        <br>
+        <img src="{{ movie.movie_poster.url }}" alt="{{ movie.alt_text }}">
+        <br>
+        <object width="400" height="400" data="{{ movie.movie_script.url }}"></object>
+
+    </div>
+
+    <script src="{% static 'javascript/lightbox.js' %}"></script>
+
+
+{% endblock %}
+
+{% block footer %}
+    {% include 'footer_base.html' %}
+{% endblock %}
