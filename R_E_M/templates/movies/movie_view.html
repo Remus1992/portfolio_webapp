@@ -43,6 +43,12 @@
         <br>
         <object width="400" height="400" data="{{ movie.movie_script.url }}"></object>
 
+        {% if movie.youtube %}
+
+            {{ movie.youtube|safe }}
+
+        {% endif %}
+
     </div>
 
     <script src="{% static 'javascript/lightbox.js' %}"></script>
