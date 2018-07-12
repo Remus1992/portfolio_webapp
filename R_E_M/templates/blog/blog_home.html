@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load static %}
+{% load R_E_M_tags %}
 
 {% block title %}
     : Blog Home
@@ -15,13 +16,15 @@
     <style>
         .container {
             margin: 20px auto;
-
-            width: 70%;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-start;
+            width: 80%;
         }
 
         h2 {
-            text-align: center;
-            font-weight: bold;
+        {#text-align: center;#} font-weight: bold;
+            font-size: large;
         }
 
         body {
@@ -38,16 +41,29 @@
         }
 
         .blog {
-            max-height: 200px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+            width: 25%;
             position: relative;
+            border: lightgrey 1px solid;
+            margin: 20px;
+
+        }
+
+        .blog:hover {
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .main_content {
+            max-height: 200px;
+            white-space: nowrap;
             overflow: hidden;
-            border: 1px solid;
+            text-overflow: ellipsis;
             padding: 20px;
-            box-shadow: 5px 10px #888888;
-            margin-bottom: 20px;
         }
 
         .blog .read-more {
+
             position: absolute;
             bottom: 0;
             left: 0;
@@ -60,20 +76,66 @@
             background-image: linear-gradient(to bottom, transparent, gray);
         }
 
+        .button {
+            background-color: white;
+            opacity: 0.5;
+            border: black solid 1px;
+            color: black;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 20px;
+            cursor: pointer;
+        }
+
+        .image_holder {
+            text-align: center;
+            height: 150px;
+            overflow: hidden;
+        }
+
+        .image_holder .blog_image {
+            width: 100%;
+        }
+
+        .blog_image {
+            margin-top: -50%;
+            opacity: 0.8;
+
+        }
+
+        .card-footer {
+            font-weight: lighter;
+            padding-bottom: 10px;
+            padding-left: 1em
+        }
     </style>
     <div class="container">
         {% for b in blogs %}
             <div class="blog">
+                {#                <div class="image_holder">#}
+                {#                    {% blog_image_or_default b %}#}
+                {#                </div>#}
+                <div class="image_holder"
+                     style="background: url({{ b.image.url }}); background-size: cover; background-position: center;
+                             {#background-attachment: fixed;#}
+                             ">
+                    <a href="{% url 'blog_single_view' b.category.slug b.slug %}"
+                       class="button">Read More ></a>
+                </div>
+
                 <div class="main_content">
+                    <h3>Blog / {{ b.category }}</h3>
                     <h2 class="blog-title"> {{ b.title }}</h2>
-                    {#                <p class="cart-text">{{ b.grab_blurb }}</p>#}
+                    <div class="card-footer">
+                        ~ Posted on {{ b.date }}
+                    </div>
                     <pre class="blog-text">{{ b.content }}</pre>
-                    <p class="read-more"><a href="{% url 'blog_single_view' b.category.slug b.slug %}"
-                                            class="read-more">...Read More</a></p>
+
                 </div>
-                <div class="card-footer text-muted">
-                    Posted on {{ b.date }} by {{ b.author.username }}
-                </div>
+                <p class="read-more"></p>
             </div>
         {% endfor %}
     </div>
