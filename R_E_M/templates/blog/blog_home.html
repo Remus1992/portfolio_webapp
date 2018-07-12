@@ -6,24 +6,19 @@
 {% block title %}
     : Blog Home
 {% endblock %}
-
-{% block content %}
-
-
-    <head>
-        <link rel="stylesheet" type="text/css" href="{% static 'styles/style.css' %}"/>
-    </head>
+{% block css %}
     <style>
         .container {
             margin: 20px auto;
             display: flex;
             flex-wrap: wrap;
-            align-items: flex-start;
+            align-items: center;
             width: 80%;
+            justify-content: center;
         }
 
         h2 {
-        {#text-align: center;#} font-weight: bold;
+            font-weight: bold;
             font-size: large;
         }
 
@@ -43,10 +38,10 @@
         .blog {
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
             transition: 0.3s;
-            width: 25%;
+            width: 28%;
             position: relative;
             border: lightgrey 1px solid;
-            margin: 20px;
+            margin: 15px;
 
         }
 
@@ -62,37 +57,35 @@
             padding: 20px;
         }
 
-        .blog .read-more {
-
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            text-align: center;
-            margin: 0;
-            padding: 30px 0;
-
-            /* "transparent" only works here because == rgba(0,0,0,0) */
-            background-image: linear-gradient(to bottom, transparent, gray);
-        }
-
         .button {
-            background-color: white;
-            opacity: 0.5;
-            border: black solid 1px;
-            color: black;
+            background-color: transparent;
+            opacity: 0.8;
+            border: white solid 2px;
+            color: white;
             padding: 15px 32px;
             text-align: center;
             text-decoration: none;
             display: inline-block;
             font-size: 16px;
-            margin: 20px;
+            margin: 40px;
             cursor: pointer;
+            font-weight: bold;
+        }
+
+        a:visited {
+            color: white
+        }
+
+        .button:hover {
+            background-color: white;
+            color: black;
+            opacity: 0.8;
+            font-weight: bold;
         }
 
         .image_holder {
             text-align: center;
-            height: 150px;
+            height: 175px;
             overflow: hidden;
         }
 
@@ -111,27 +104,52 @@
             padding-bottom: 10px;
             padding-left: 1em
         }
+
+        .category {
+            padding-bottom: 5px;
+        }
+
+        .blog .read-more {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            margin: 0;
+            padding: 30px 0;
+            background-image: linear-gradient(to bottom, transparent, white);
+
     </style>
+{% endblock %}
+{% block content %}
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+    </head>
+
     <div class="container">
         {% for b in blogs %}
             <div class="blog">
                 {#                <div class="image_holder">#}
                 {#                    {% blog_image_or_default b %}#}
                 {#                </div>#}
-                <div class="image_holder"
-                     style="background: url({{ b.image.url }}); background-size: cover; background-position: center;
+{#                <div class="image_holder"#}
+{#                     style="background: url({{ b.image.url }}); background-size: cover; background-position: center;#}
                              {#background-attachment: fixed;#}
-                             ">
+{#                             ">#}
+{#                    <a href="{% url 'blog_single_view' b.category.slug b.slug %}"#}
+{#                       class="button">Read More &nbsp; &nbsp; &nbsp; &nbsp;></a>#}
+{#                </div>#}
+                <div class="image_holder" data-parallax="scroll" data-image-src="{{ b.image.url }}">
                     <a href="{% url 'blog_single_view' b.category.slug b.slug %}"
-                       class="button">Read More ></a>
+                       class="button">Read More &nbsp; &nbsp; &nbsp; &nbsp;></a>
                 </div>
 
                 <div class="main_content">
-                    <h3>Blog / {{ b.category }}</h3>
+                    <div class="category">Blog / {{ b.category }}</div>
                     <h2 class="blog-title"> {{ b.title }}</h2>
-                    <div class="card-footer">
-                        ~ Posted on {{ b.date }}
-                    </div>
+                    <div class="card-footer"><i>~ Posted on {{ b.date }}</i></div>
                     <pre class="blog-text">{{ b.content }}</pre>
 
                 </div>
@@ -139,7 +157,7 @@
             </div>
         {% endfor %}
     </div>
-
+    <script src="{% static 'javascript/parallax.js-1.5.0/parallax.min.js' %}"></script>
 
 
 {% endblock %}
