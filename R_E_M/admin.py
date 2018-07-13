@@ -1,9 +1,10 @@
 from django.contrib import admin
 
-from R_E_M.models import User, Album, Photo, Website, Blog, Category, Movie
+from R_E_M.models import User, Album, AlbumCategory, Photo, Website, Blog, Category, Movie
 
 admin.site.register(User)
 admin.site.register(Album)
+admin.site.register(AlbumCategory)
 admin.site.register(Photo)
 admin.site.register(Website)
 admin.site.register(Blog)

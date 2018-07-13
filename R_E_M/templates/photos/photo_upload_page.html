@@ -26,10 +26,12 @@
     </div>
 
 
+
+
     <script>
         let imagesPreview = function (input, placeToInsertImagePreview) {
             $(placeToInsertImagePreview).html('');
-            let album_html = '<div class="album_info"><h1>Album Upload</h1><div><label for="album_title">Album Title</label></div><div><input type="text" id="album_title" name="album_title"></div><div><label for="album_details">Album Details</label></div><div><input type="text" id="album_details" name="album_details"></div><div><label for="album_alt_text">Album Alt Text</label></div><div><input type="text" id="album_alt_text" name="album_alt_text"></div></div>';
+            let album_html = '<div class="album_info"><h1>Album Upload</h1><div><label for="album_title">Album Title</label></div><div><input type="text" id="album_title" name="album_title"></div><div><label for="album_category">Category</label></div><input list="categories" id="album_category" name="album_category"><datalist id="categories">{% for c in cat %}<option value="{{ c.name }}">{% endfor %}</datalist><div><label for="album_details">Album Details</label></div><div><input type="text" id="album_details" name="album_details"></div><div><label for="album_alt_text">Album Alt Text</label></div><div><input type="text" id="album_alt_text" name="album_alt_text"></div></div>';
             $(placeToInsertImagePreview).append(album_html);
 
             if (input.files) {

@@ -42,7 +42,7 @@
 
         {% for album in albums %}
             <p>{{ album.title }}</p>
-            <a href="{% url 'album_view' album.slug %}"><img src="{{ album.photo_album.all.0.image.url }}" class="image"></a>
+            <a href="{% url 'album_view' album.category.slug album.slug %}"><img src="{{ album.photo_album.all.0.image.url }}" class="image"></a>
         {% endfor %}
     </div>
 {% endblock %}

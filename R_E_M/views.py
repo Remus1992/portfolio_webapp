@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404, reverse, redirect
-from R_E_M.models import User, Album, Photo, Website, Blog, Category, Movie
+from R_E_M.models import User, Album, AlbumCategory, Photo, Website, Blog, Category, Movie
 import base64
 from django.core.files.base import ContentFile
 import re
@@ -22,19 +22,22 @@ def contact(request):
 
 def photography_home(request):
     complete_album_list = Album.objects.all()
-    return render(request, 'photos/photo_home.html', {'albums': complete_album_list})
+    album_categories = AlbumCategory.objects.all()
+    return render(request, 'photos/photo_home.html', {"album_cats": album_categories, 'albums': complete_album_list})
 
 
-def photo_album_view(request, slug):
-    album = Album.objects.get(slug=slug)
+def photo_album_view(request, cat, slug):
+    album = Album.objects.get(category__slug=cat, slug=slug)
     # photos = Photo.objects.get(album=slug)
     return render(request, 'photos/photo_album_view.html', {"album": album})
 
 
-def photo_single_view(request, album, slug):
-    photo = get_object_or_404(Photo, album__slug=album, slug=slug)
+def photo_single_view(request, cat, album, slug):
+    photo = get_object_or_404(Photo, category__slug=cat, album__slug=album, slug=slug)
+    album_categories = AlbumCategory.objects.all()
     album_list = Album.objects.all()
-    return render(request, 'photos/single_photo_view.html', {"albums": album_list, "photo": photo})
+    return render(request, 'photos/single_photo_view.html',
+                  {"album_cats": album_categories, "albums": album_list, "photo": photo})
 
 
 def photo_upload(request):
@@ -42,6 +45,8 @@ def photo_upload(request):
         # print(request.POST)
         # print(request.FILES)
         album = Album()
+        cat, created = AlbumCategory.objects.get_or_create(name=request.POST.get('album_category'))
+        album.category = cat
         album.owner = request.user
         album.title = request.POST.get('album_title')
         album.album_details = request.POST.get('album_details')
@@ -65,8 +70,8 @@ def photo_upload(request):
                 photo.image_details = request.POST.get('image_details_{}'.format(num))
                 photo.save()
 
-        return HttpResponseRedirect(reverse("album_view", kwargs={"slug": album.slug}))
-    return render(request, 'photos/photo_upload_page.html')
+        return HttpResponseRedirect(reverse("album_view", kwargs={'cat': album.category.slug, "slug": album.slug}))
+    return render(request, 'photos/photo_upload_page.html', {'cat': AlbumCategory.objects.all()})
 
 
 def filmmaking_home(request):
@@ -147,16 +152,10 @@ def blog_create(request):
     if request.method == 'POST':
         blog = Blog()
         cat, created = Category.objects.get_or_create(name=request.POST.get('category'))
-
-        # tags = request.POST.getlist('tag')
-        print(request.POST)
-
         blog.title = request.POST.get('blog_title')
         blog.author = request.user
         blog.content = request.POST.get('blog_content')
-
         blog.category = cat
-
         blog_image = request.FILES.get('blog_image')
         if blog_image:
             print("we got here")
@@ -164,11 +163,6 @@ def blog_create(request):
 
         blog.alt_text = request.POST.get('alt_text')
         blog.youtube_link = request.POST.get('youtube_link')
-
         blog.save()
         return HttpResponseRedirect(reverse('blog_single_view', kwargs={'cat': blog.category.slug, 'slug': blog.slug}))
-
-    return render(request, 'blog/blog_create.html', {
-        # 'tag': Tag.objects.all()
-        'cat': Category.objects.all()
-    })
+    return render(request, 'blog/blog_create.html', {'cat': Category.objects.all()})
