@@ -245,7 +245,7 @@ class MovieStillPhoto(models.Model):
     movie_album = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name="movie_photo_album")
     title = models.CharField(max_length=50, blank=True, null=True)
     slug = models.SlugField(blank=True, null=True, unique=True)
-    image = models.ImageField(upload_to=photo_image_uh, blank=True, null=True)
+    image = models.ImageField(upload_to=movie_still_photo_image_uh, blank=True, null=True)
     alt_text = models.CharField(max_length=50, blank=True, null=True)
     date_taken = models.CharField(max_length=50)
     image_details = models.TextField()

@@ -49,6 +49,12 @@
 
         {% endif %}
 
+        <div>
+            {% for still in movie.movie_photo_album.all %}
+                <img src="{{ still.image.url }}" alt="{{ still.alt_text }}">
+            {% endfor %}
+        </div>
+
     </div>
 
     <script src="{% static 'javascript/lightbox.js' %}"></script>
