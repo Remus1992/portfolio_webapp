@@ -9,17 +9,36 @@
 {% block content %}
     <head>
         <link rel="stylesheet" type="text/css" href="{% static 'styles/style.css' %}"/>
-
+        <link href="{% static 'styles/lightbox.css' %}" rel="stylesheet">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
     <style>
         .image {
             width: 250px;
         }
 
-        .container {
+        .page_container {
             margin: 20px auto;
             text-align: center;
-            width: 70%;
+            width: 80%;
+            margin: 20px auto;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+        }
+
+        pre {
+            text-align: left;
+            white-space: pre-wrap; /* Since CSS 2.1 */
+            white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+            white-space: -pre-wrap; /* Opera 4-6 */
+            white-space: -o-pre-wrap; /* Opera 7 */
+            word-wrap: break-word; /* Internet Explorer 5.5+ */
+        }
+
+        .content_container, .movie_container, .script_container, .album_container {
+            width: 50%;
         }
 
         h1, body {
@@ -29,29 +48,29 @@
 
     </style>
 
-    <div class="container">
-        <h1><b>{{ movie.title }}</b></h1>
-        <p>_________</p>
-        <br>
-        {{ movie.tag_line }}
-        <p>_________</p>
-        <br>
-        {{ movie.movie_details }}
-        <br>
-        <br>
-        <img src="{{ movie.movie_poster.url }}" alt="{{ movie.alt_text }}">
-        <br>
-        <object width="400" height="400" data="{{ movie.movie_script.url }}"></object>
-
-        {% if movie.youtube %}
-
-            {{ movie.youtube|safe }}
-
-        {% endif %}
-
-        <div>
+    <div class="page_container">
+        <div class="content_container">
+            {#            <h1><b>{{ movie.title }}</b></h1>#}
+            <img src="{{ movie.movie_poster.url }}" alt="{{ movie.alt_text }}">
+            <br>
+            <pre>{{ movie.tag_line }}</pre>
+            <br>
+            <pre>{{ movie.movie_details }}</pre>
+        </div>
+        <div class="movie_container">
+            {% if movie.youtube %}
+                {{ movie.youtube|safe }}
+            {% endif %}
+        </div>
+        <div class="script_container">
+            <object width="400" height="400" data="{{ movie.movie_script.url }}"></object>
+        </div>
+        <div class="album_container">
             {% for still in movie.movie_photo_album.all %}
-                <img src="{{ still.image.url }}" alt="{{ still.alt_text }}">
+                {#                <img src="{{ still.image.url }}" alt="{{ still.alt_text }}" class="image">#}
+
+                <a href="{{ still.image.url }}" data-lightbox="{{ movie.alt_text }}"
+                   data-title="{{ still.image_details }}"><img src="{{ still.image.url }}" class="image"></a>
             {% endfor %}
         </div>
 
