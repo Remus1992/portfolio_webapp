@@ -7,6 +7,11 @@
 {% endblock %}
 
 {% block content %}
+   <head>
+        <link rel="stylesheet" type="text/css" href="{% static 'styles/photography_upload_style.css' %}"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+
     <style>
         .row {
             margin: 50px;
@@ -42,8 +47,46 @@
                 <p>YouTube Link</p>
                 <input type="text" id="youtube_link" name="movie_youtube">
                 <br>
+                <input class='btn' name="images" type="file" multiple id="gallery-photo-add">
+                <div class="gallery">
+
+                </div>
                 <input class="button" type="submit" value="Submit" id="sub-btn">
             </form>
         </section>
     </div>
+
+    <script>
+        let imagesPreview = function (input, placeToInsertImagePreview) {
+            $(placeToInsertImagePreview).html('');
+
+            if (input.files) {
+                let filesAmount = input.files.length;
+
+                for (let i = 0; i < filesAmount; i++) {
+                    let reader = new FileReader();
+                    let num = i;
+                    let name = input.files[i].name;
+                    reader.onload = function (event) {
+                        let html = $('<div class="img_holder" id="image_${num + 1}"></div>', {
+                            'id': `image_div_${num + 1}`
+                        })
+                            .append($(`<input>`).attr({
+                                'type': 'hidden',
+                                'value': event.target.result,
+                                'name': `image_${num + 1}`
+                            }))
+                            .append($(`<p>${name}</p><img class="image" src="${event.target.result}" id="new_picture_${num + 1}"><div><label for="image_name_${num + 1}">Photo Title</label></div><div><input type="text" name="image_name_${num + 1}"></div><div><label for="alt_text_${num + 1}">Alt Text</label></div><div><input type="text" id="alt_text_${num + 1}" name="alt_text_${num + 1}"></div><div><label for="creation_date_${num + 1}">Date Taken</label></div><div><input type="date" id="creation_date_${num + 1}" name="creation_date_${num + 1}"></div><div><label for="image_details_${num + 1}">Image Details</label></div><div><input type="text" id="image_details_${num + 1}" name="image_details_${num + 1}"></div>`));
+                        $(placeToInsertImagePreview).append(html);
+                    };
+
+                    reader.readAsDataURL(input.files[i]);
+                }
+            }
+            input.value = ''
+        };
+        $('#gallery-photo-add').on('change', function () {
+            imagesPreview(this, 'div.gallery');
+        });
+    </script>
 {% endblock %}

@@ -40,10 +40,6 @@ class Album(models.Model):
         super().save(args, kwargs)
 
 
-def photo_image_uh(instance, filename):
-    return 'photography/{}/{}'.format(instance.album, filename)
-
-
 class AlbumCategory(models.Model):
     name = models.CharField(max_length=50)
     slug = models.SlugField(blank=True, null=True, unique=True)
@@ -68,6 +64,10 @@ class AlbumCategory(models.Model):
 
     class Meta:
         verbose_name_plural = 'AlbumCategories'
+
+
+def photo_image_uh(instance, filename):
+    return 'photography/{}/{}'.format(instance.album, filename)
 
 
 class Photo(models.Model):
@@ -227,6 +227,39 @@ class Movie(models.Model):
             checking = True
             while checking:
                 results = Website.objects.filter(slug=slug_title)
+                if results.exists():
+                    slug_title = slugify(self.title) + '_' + str(number + 1)
+                    number += 1
+                else:
+                    checking = False
+                self.slug = slug_title
+        super().save(args, kwargs)
+
+
+def movie_still_photo_image_uh(instance, filename):
+    return 'movies/{}/{}'.format(instance.movie_album, filename)
+
+
+class MovieStillPhoto(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="movie_photos")
+    movie_album = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name="movie_photo_album")
+    title = models.CharField(max_length=50, blank=True, null=True)
+    slug = models.SlugField(blank=True, null=True, unique=True)
+    image = models.ImageField(upload_to=photo_image_uh, blank=True, null=True)
+    alt_text = models.CharField(max_length=50, blank=True, null=True)
+    date_taken = models.CharField(max_length=50)
+    image_details = models.TextField()
+
+    def __str__(self):
+        return self.title
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            number = 0
+            slug_title = slugify(self.title)
+            checking = True
+            while checking:
+                results = Photo.objects.filter(slug=slug_title)
                 if results.exists():
                     slug_title = slugify(self.title) + '_' + str(number + 1)
                     number += 1

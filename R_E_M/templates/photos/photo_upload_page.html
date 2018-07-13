@@ -52,11 +52,6 @@
                             }))
                             .append($(`<p>${name}</p><img class="image" src="${event.target.result}" id="new_picture_${num + 1}"><div><label for="image_name_${num + 1}">Photo Title</label></div><div><input type="text" name="image_name_${num + 1}"></div><div><label for="alt_text_${num + 1}">Alt Text</label></div><div><input type="text" id="alt_text_${num + 1}" name="alt_text_${num + 1}"></div><div><label for="creation_date_${num + 1}">Date Taken</label></div><div><input type="date" id="creation_date_${num + 1}" name="creation_date_${num + 1}"></div><div><label for="image_details_${num + 1}">Image Details</label></div><div><input type="text" id="image_details_${num + 1}" name="image_details_${num + 1}"></div>`));
                         $(placeToInsertImagePreview).append(html);
-
-
-                        {#let html = `<div class="img_holder" id="image_${num + 1}"><p>${name}</p><img class="image" src="${event.target.result}" id="new_picture_${num + 1}"><div><label for="image_name_${num + 1}">Photo Title</label></div><div><input type="text" name="image_name_${num + 1}"></div><div><label for="alt_text_${num + 1}">Alt Text</label></div><div><input type="text" id="alt_text_${num + 1}" name="alt_text_${num + 1}"></div><div><label for="creation_date_${num + 1}">Date Taken</label></div><div><input type="date" id="creation_date_${num + 1}" name="creation_date_${num + 1}"></div><div><label for="image_details_${num + 1}">Image Details</label></div><div><input type="text" id="image_details_${num + 1}" name="image_details_${num + 1}"></div></div>`;#}
-                        {#$(placeToInsertImagePreview).append(html)#}
-                        // $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(placeToInsertImagePreview);
                     };
 
                     reader.readAsDataURL(input.files[i]);
@@ -64,49 +59,9 @@
             }
             input.value = ''
         };
-
         $('#gallery-photo-add').on('change', function () {
             imagesPreview(this, 'div.gallery');
         });
-
-
-        // Method Three - My own
-        /*
-        document.querySelector('#create_album_button').addEventListener("click", newImage);
-
-        function newImage() {
-            var num = document.getElementById("image_list").children.length + 1;
-            var new_row = '<div class="img_holder"><input type="file" class="img" set-to="div' + num + '"/><img class="image" id="div' + num + '" src="#" alt="image_' + num + '"/><div><label for="photo_name_' + num + '">Photo Title</label></div><div><input type="text" id="photo_name_' + num + '" name="photo_name_' + num + '"></div><div><label for="alt_text_' + num + '">Alt Text</label></div><div><input type="text" id="alt_text_' + num + '" name="alt_text_' + num + '"></div><div><label for="creation_date">Date Taken</label></div><div><input type="date" id="creation_date" name="creation_date"></div><div><label for="image_details">Image Details</label></div><div><input type="text" id="image_details" name="image_details"></div></div>';
-            document.querySelector("#image_list").innerHTML += new_row;
-        }
-
-
-            // From Capstone
-            document.querySelector('#additional_image_button').addEventListener("click", newImage);
-
-            function newImage() {
-                var num = document.getElementById("additional_picture_box").children.length + 1;
-                console.log(num);
-                var new_row = '<div class="row" id="row_' + num + '"> <div class="col-25"></div><div class="col-50"><input type="file" id="project_images_' + num + ' name="project_images' + num + '" ></div><div class="col-15"> <input type="button" button class="btn btn-danger" id="pictures_close_button_' + num + '" value="&#xd7;" onClick="removeElement(\'additional_picture_box\',\'row_' + num + '\');"></button></div></div>';
-                document.querySelector("#additional_picture_box").innerHTML += new_row;
-             }
-
-            function removeElement(parentDiv, childDiv) {
-                if (childDiv == parentDiv) {
-                    alert("The parent div cannot be removed.")
-                }
-                else if (document.getElementById(childDiv)) {
-                    var child = document.getElementById(childDiv);
-                    var parent = document.getElementById(parentDiv);
-                    parent.removeChild(child);
-                }
-                else {
-                    alert("Child div has already been removed or does not exist.");
-                    return false;
-                }
-             }
-         */
-
     </script>
 
 {% endblock %}

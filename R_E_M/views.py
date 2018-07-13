@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404, reverse, redirect
-from R_E_M.models import User, Album, AlbumCategory, Photo, Website, Blog, Category, Movie
+from R_E_M.models import User, Album, AlbumCategory, Photo, Website, Blog, Category, Movie, MovieStillPhoto
 import base64
 from django.core.files.base import ContentFile
 import re
@@ -31,7 +31,7 @@ def photo_album_view(request, cat, slug):
     # photos = Photo.objects.get(album=slug)
     return render(request, 'photos/photo_album_view.html', {"album": album})
 
-
+# ?????
 def photo_single_view(request, cat, album, slug):
     photo = get_object_or_404(Photo, category__slug=cat, album__slug=album, slug=slug)
     album_categories = AlbumCategory.objects.all()
@@ -106,6 +106,24 @@ def movie_create(request):
             movie.movie_script = script
 
         movie.save()
+
+        for k, v in request.POST.items():
+            if re.match('^image_\d+$', k):
+                num = int(re.search(r'\d+', k).group())
+                format, imgstr = v.split(';base64,')
+                ext = format.split('/')[-1]
+                data = ContentFile(base64.b64decode(imgstr), name='temp.' + ext)
+
+                photo = MovieStillPhoto()
+                photo.image = data
+                photo.movie_album = movie
+                photo.owner = request.user
+                photo.title = request.POST.get('image_name_{}'.format(num))
+                photo.alt_text = request.POST.get('alt_text_{}'.format(num))
+                photo.date_taken = request.POST.get('creation_date_{}'.format(num))
+                photo.image_details = request.POST.get('image_details_{}'.format(num))
+                photo.save()
+
 
         return HttpResponseRedirect(reverse("movie_single_view", kwargs={"slug": movie.slug}))
     return render(request, "movies/movie_create.html")
