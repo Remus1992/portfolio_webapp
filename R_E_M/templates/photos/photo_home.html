@@ -12,17 +12,11 @@
         <link rel="stylesheet" type="text/css" href="{% static 'styles/style.css' %}"/>
     </head>
     <style>
-        .image {
-            width: 250px;
-        }
 
         .container {
             margin: 20px auto;
             text-align: center;
             width: 70%;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
 
         }
 
@@ -31,6 +25,54 @@
             font-weight: bold;
         }
 
+        /*
+        .album_container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        */
+        .album_container {
+            position: relative;
+            width: 50%;
+        }
+
+        .image {
+            opacity: 1;
+            display: block;
+            width: 100%;
+            height: auto;
+            transition: .5s ease;
+            backface-visibility: hidden;
+        }
+
+        .middle {
+            transition: .5s ease;
+            opacity: 0;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .album_container:hover .image {
+            opacity: 0.3;
+            -webkit-filter: blur(2px); /* Safari 6.0 - 9.0 */
+            filter: blur(2px);
+        }
+
+        .album_container:hover .middle {
+            opacity: 1;
+        }
+
+        .text {
+            background-color: #4CAF50;
+            color: white;
+            font-size: 16px;
+            padding: 16px 32px;
+        }
     </style>
 
     <div class="container">
@@ -40,9 +82,23 @@
         <br>
         <br>
 
-        {% for album in albums %}
-            <p>{{ album.title }}</p>
-            <a href="{% url 'album_view' album.category.slug album.slug %}"><img src="{{ album.photo_album.all.0.image.url }}" class="image"></a>
+        {% for cat in album_cats %}
+            <div class="category_container">
+                <h2>-------- {{ cat.name }} --------</h2>
+            </div>
+            <div class="album_container">
+                {% for album in albums %}
+
+                    <img src="{{ album.photo_album.all.0.image.url }}" class="image">
+                    <div class="middle">
+                        <div class="text">{{ album.title }}</div>
+                        <div class="text">{{ album.album_details }}</div>
+                        <a href="{% url 'album_view' album.category.slug album.slug %}" class="text">Read More &nbsp;
+                            &nbsp; &nbsp;
+                            &nbsp;></a>
+                    </div>
+                {% endfor %}
+            </div>
         {% endfor %}
     </div>
 {% endblock %}
