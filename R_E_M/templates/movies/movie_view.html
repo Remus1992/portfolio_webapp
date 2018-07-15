@@ -15,7 +15,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
     <style>
-        .image {
+        .poster {
             width: 250px;
         }
 
@@ -37,7 +37,7 @@
         }
 
         .content_container, .movie_container, .script_container, .album_container {
-            width: 50%;
+            width: 100%;
         }
 
         h1, body {
@@ -95,12 +95,38 @@
             background-color: #fff
         }
 
+        .slick-slide img {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .center_image {
+            width: 100%;
+        }
+
+        .preview_image {
+            {#height: 100px;#}
+            width: 80px;
+            margin: 10px;
+            vertical-align: middle;
+        }
+
+        .slider-nav {
+            height: 100px;
+            width: auto;
+        }
+
+        .script {
+            width: 400px;
+            height: 700px;
+        }
+
     </style>
 
     <div class="page_container">
         <div class="content_container">
             {#            <h1><b>{{ movie.title }}</b></h1>#}
-            <img src="{{ movie.movie_poster.url }}" alt="{{ movie.alt_text }}">
+            <img src="{{ movie.movie_poster.url }}" alt="{{ movie.alt_text }}" class="poster">
             <br>
             <pre>{{ movie.tag_line }}</pre>
             <br>
@@ -112,7 +138,7 @@
             {% endif %}
         </div>
         <div class="script_container">
-            <object width="400" height="400" data="{{ movie.movie_script.url }}"></object>
+            <object class="script" data="{{ movie.movie_script.url }}"></object>
         </div>
         {#        <div class="album_container">#}
         {#            {% for still in movie.movie_photo_album.all %}#}
@@ -122,7 +148,7 @@
         {#                   data-title="{{ still.image_details }}"><img src="{{ still.image.url }}" class="image"></a>#}
         {#            {% endfor %}#}
         {#        </div>#}
-{#       <!--#}
+               <!--
         <div class="slider slider-single">
             <div><h3>1</h3></div>
             <div><h3>2</h3></div>
@@ -147,16 +173,16 @@
             <div><h3><span>9</span></h3></div>
             <div><h3><span>10</span></h3></div>
         </div>
-{#     -->#}
+          -->
 
         <div class="slider slider-single">
             {% for still in movie.movie_photo_album.all %}
-                <div><img src="{{ still.image.url }}" class="image"></div>
+                <div><img src="{{ still.image.url }}" class="center_image"></div>
             {% endfor %}
         </div>
         <div class="slider slider-nav">
             {% for still in movie.movie_photo_album.all %}
-                <div><img src="{{ still.image.url }}" class="image"></div>
+                <div><img src="{{ still.image.url }}" class="preview_image"></div>
             {% endfor %}
         </div>
     </div>
