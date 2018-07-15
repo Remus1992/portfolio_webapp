@@ -34,13 +34,13 @@
         */
         .album_container {
             position: relative;
-            width: 50%;
+            width: 250px;
         }
 
         .image {
             opacity: 1;
             display: block;
-            width: 100%;
+            width: 250px;
             height: auto;
             transition: .5s ease;
             backface-visibility: hidden;
@@ -68,10 +68,13 @@
         }
 
         .text {
-            background-color: #4CAF50;
-            color: white;
-            font-size: 16px;
-            padding: 16px 32px;
+        {#background-color: #4CAF50;#} color: black;
+        {#font-size: 16px;#}{#padding: 16px 32px;#}
+        }
+
+        .category_container {
+            height: 20px;
+            padding: 20px;
         }
     </style>
 
@@ -84,19 +87,18 @@
 
         {% for cat in album_cats %}
             <div class="category_container">
-                <h2>-------- {{ cat.name }} --------</h2>
+                <h1>-------- {{ cat.name }} --------</h1>
             </div>
             <div class="album_container">
                 {% for album in albums %}
-
-                    <img src="{{ album.photo_album.all.0.image.url }}" class="image">
-                    <div class="middle">
-                        <div class="text">{{ album.title }}</div>
-                        <div class="text">{{ album.album_details }}</div>
-                        <a href="{% url 'album_view' album.category.slug album.slug %}" class="text">Read More &nbsp;
-                            &nbsp; &nbsp;
-                            &nbsp;></a>
-                    </div>
+                    {% if album.category == cat %}
+                        <img src="{{ album.photo_album.all.0.image.url }}" class="image">
+                        <div class="middle">
+                            <div class="text">{{ album.title }}</div>
+                            <div class="text">{{ album.album_details }}</div>
+                            <a href="{% url 'album_view' album.category.slug album.slug %}" class="text">Read More</a>
+                        </div>
+                    {% endif %}
                 {% endfor %}
             </div>
         {% endfor %}
