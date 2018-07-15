@@ -122,6 +122,7 @@
         {#                   data-title="{{ still.image_details }}"><img src="{{ still.image.url }}" class="image"></a>#}
         {#            {% endfor %}#}
         {#        </div>#}
+{#       <!--#}
         <div class="slider slider-single">
             <div><h3>1</h3></div>
             <div><h3>2</h3></div>
@@ -146,23 +147,18 @@
             <div><h3><span>9</span></h3></div>
             <div><h3><span>10</span></h3></div>
         </div>
+{#     -->#}
 
         <div class="slider slider-single">
             {% for still in movie.movie_photo_album.all %}
                 <div><img src="{{ still.image.url }}" class="image"></div>
             {% endfor %}
-            <div><h3>1</h3></div>
         </div>
         <div class="slider slider-nav">
             {% for still in movie.movie_photo_album.all %}
                 <div><img src="{{ still.image.url }}" class="image"></div>
             {% endfor %}
-            <div><h3><span>1</span></h3></div>
         </div>
-
-        {% for still in movie.movie_photo_album.all %}
-            <div><img src="{{ still.image.url }}" class="image"></div>
-        {% endfor %}
     </div>
 
     </div>
