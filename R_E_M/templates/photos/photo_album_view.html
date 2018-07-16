@@ -15,13 +15,15 @@
     </head>
     <style>
         .image {
-            width: 250px;
+            width: 200px;
+            margin: 5px;
         }
 
         .container {
             margin: 20px auto;
             text-align: center;
             width: 70%;
+
         }
 
         h1, body {
@@ -29,6 +31,27 @@
             font-weight: bold;
         }
 
+        .grid-item {
+            float: left;
+            width: 250px;
+        }
+
+        .grid {
+
+        }
+
+        .grid-item--width2 {
+            width: 400px;
+        }
+
+        /*
+                .album {
+                    display: flex;
+                    flex-wrap: wrap;
+                    justify-content: flex-start;
+                    align-content: stretch;
+                }
+        */
     </style>
 
     <div class="container">
@@ -38,18 +61,27 @@
         {{ album.album_details }}
         <br>
         <br>
-        <div>
+        <div class="album grid">
             {% for photo in album.photo_album.all %}
 
                 <a href="{{ photo.image.url }}" data-lightbox="{{ album.alt_text }}"
-                   data-title="{{ photo.image_details }}"><img src="{{ photo.image.url }}" class="image"></a>
+                   data-title="{{ photo.image_details }}"><img src="{{ photo.image.url }}"
+                                                               class="image grid-item "></a>
 
             {% endfor %}
         </div>
     </div>
 
-    <script src="{% static 'javascript/lightbox.js' %}" ></script>
+    <script src="{% static 'javascript/lightbox.js' %}"></script>
+    <script src="{% static 'javascript/masonry.js' %}"></script>
 
+    <script>
+        $('.grid').masonry({
+            // options
+            itemSelector: '.grid-item',
+            columnWidth: 10
+        });
+    </script>
 
 {% endblock %}
 

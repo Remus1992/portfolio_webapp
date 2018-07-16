@@ -25,17 +25,18 @@
             font-weight: bold;
         }
 
-        /*
+
         .album_container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
         }
-        */
-        .album_container {
+
+        .album_set {
             position: relative;
             width: 250px;
             height: 250px;
+            margin: 5px;
         }
 
         .image {
@@ -45,7 +46,9 @@
             overflow: hidden;
             transition: .5s ease;
             backface-visibility: hidden;
-        {#position: absolute;#} clip-path: rect(0px, 250px, 250px, 0px);
+            position: absolute;
+            object-position: center;
+            clip: rect(0px, 250px, 250px, 0px);
 
         }
 
@@ -60,13 +63,13 @@
             text-align: center;
         }
 
-        .album_container:hover .image {
+        .album_set:hover .image {
             opacity: 0.3;
             -webkit-filter: blur(2px); /* Safari 6.0 - 9.0 */
             filter: blur(2px);
         }
 
-        .album_container:hover .middle {
+        .album_set:hover .middle {
             opacity: 1;
         }
 
@@ -83,6 +86,17 @@
         .album_image_holder {
             width: 250px;
             height: 250px;
+        }
+
+        .album_image_holder:hover {
+            content: "";
+            opacity: 0.4;
+        }
+
+        .text:hover {
+            color: black;
+            content: "";
+            opacity: 1;
         }
     </style>
 
@@ -102,7 +116,6 @@
                     {% if album.category == cat %}
                         <div class="album_image_holder"
                              style="background: url({{ album.photo_album.all.0.image.url }}); background-size: 250px 250px;">
-                            {#                <img src="{{ album.photo_album.all.0.image.url }}" class="image">#}
                             <div class="middle">
                                 <div class="text">{{ album.title }}</div>
                                 <div class="text">{{ album.album_details }}</div>
@@ -114,6 +127,30 @@
                 {% endfor %}
             </div>
         {% endfor %}
+
+
+        {% for cat in album_cats %}
+            <div class="category_container">
+                <h1>-------- {{ cat.name }} --------</h1>
+            </div>
+            <div class="album_container">
+                {% for album in albums %}
+                    {% if album.category == cat %}
+                        <div class="album_set">
+                            <img src="{{ album.photo_album.all.0.image.url }}" class="image">
+                            <div class="middle">
+                                <div class="text">{{ album.title }}</div>
+                                <div class="text">{{ album.album_details }}</div>
+                                <a href="{% url 'album_view' album.category.slug album.slug %}" class="text">Read
+                                    More</a>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endfor %}
+
+
     </div>
 {% endblock %}
 
