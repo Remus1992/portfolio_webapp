@@ -74,12 +74,22 @@
 
     <script src="{% static 'javascript/lightbox.js' %}"></script>
     <script src="{% static 'javascript/masonry.js' %}"></script>
+    <script src="{% static 'javascript/masonry_imagesLoaded.js' %}"></script>
 
     <script>
         $('.grid').masonry({
             // options
             itemSelector: '.grid-item',
             columnWidth: 0
+        });
+
+        // init Masonry
+        var $grid = $('.grid').masonry({
+            // options...
+        });
+        // layout Masonry after each image loads
+        $grid.imagesLoaded().progress(function () {
+            $grid.masonry('layout');
         });
     </script>
 
