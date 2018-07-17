@@ -11,21 +11,28 @@
     <style>
 
         html {
-            background: url("/static/R_E_M/img/rembrandt-lighting.jpg") no-repeat center center fixed;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
+            {#background: url("/static/R_E_M/img/rembrandt-lighting.jpg") no-repeat center center fixed;#}
+            {#-webkit-background-size: cover;#}
+            {#-moz-background-size: cover;#}
+            {#-o-background-size: cover;#}
+            {#background-size: cover;#}
         }
 
         body {
         {#background-color: white;#}{#background-image: url("/static/R_E_M/img/rembrandt-lighting.jpg");#}{##}{#background-repeat: no-repeat;#}{#background-position: center;#}{#background-size: contain;#}{#color: white;#}
         }
+
+        html, body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
     </style>
 
-    <div>
-        <h1>Home</h1>
-    </div>
 
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.7/p5.min.js"></script>
+
+    <script src="{% static 'javascript/glitch.js' %}"></script>
 
 {% endblock %}
