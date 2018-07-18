@@ -141,15 +141,15 @@
             }
         }
     </style>
+    <div class="page_container">
+        <div class="container">
 
-    <div class="container">
+            <h1>Photo Home</h1>
+            <a href="{% url 'picture_upload' %}">Upload</a>
+            <br>
+            <br>
 
-        <h1>Photo Home</h1>
-        <a href="{% url 'picture_upload' %}">Upload</a>
-        <br>
-        <br>
-
-        <!--
+            <!--
         {% for cat in album_cats %}
             <div class="category_container">
                 <h1>-------- {{ cat.name }} --------</h1>
@@ -172,32 +172,32 @@
         {% endfor %}
         -->
 
-        {% for cat in album_cats %}
-            <div class="category_container">
-                <h1>-------- {{ cat.name }} --------</h1>
-            </div>
-            <div class="album_container">
-                {% for album in albums %}
-                    {% if album.category == cat %}
-                        <a href="{% url 'album_view' album.category.slug album.slug %}" class="text">
-                            <div class="album_set">
-                                <img src="{{ album.photo_album.all.0.image.url }}" class="image"
-                                     alt="{{ album.photo_album.all.0. }}">
-                                <div class="middle">
-                                    <div class="text text_top">{{ album.title }}</div>
-                                    <div class="text text_center">
-                                        <hr>
+            {% for cat in album_cats %}
+                <div class="category_container">
+                    <h1>-------- {{ cat.name }} --------</h1>
+                </div>
+                <div class="album_container">
+                    {% for album in albums %}
+                        {% if album.category == cat %}
+                            <a href="{% url 'album_view' album.category.slug album.slug %}" class="text">
+                                <div class="album_set">
+                                    <img src="{{ album.photo_album.all.0.image.url }}" class="image"
+                                         alt="{{ album.photo_album.all.0. }}">
+                                    <div class="middle">
+                                        <div class="text text_top">{{ album.title }}</div>
+                                        <div class="text text_center">
+                                            <hr>
+                                        </div>
+                                        <div class="text text_bottom">{{ album.album_details }}</div>
                                     </div>
-                                    <div class="text text_bottom">{{ album.album_details }}</div>
                                 </div>
-                            </div>
-                        </a>
-                    {% endif %}
-                {% endfor %}
-            </div>
-        {% endfor %}
+                            </a>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endfor %}
 
-
+        </div>
     </div>
 {% endblock %}
 

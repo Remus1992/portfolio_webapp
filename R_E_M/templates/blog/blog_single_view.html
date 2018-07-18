@@ -42,44 +42,45 @@
 
     </style>
 
-    <div class="container">
+    <div class="page_container">
+        <div class="container">
 
-        {% blog_image_or_default blog %}
-        <!-- Title -->
-        <h2 class="blog">{{ blog.title }}</h2>
+            {% blog_image_or_default blog %}
+            <!-- Title -->
+            <h2 class="blog">{{ blog.title }}</h2>
 
-        <!-- Author -->
-        <p class="lead">
-            by
-            <a href="#" class="author">{{ blog.author.username }}</a>
-        </p>
+            <!-- Author -->
+            <p class="lead">
+                by
+                <a href="#" class="author">{{ blog.author.username }}</a>
+            </p>
 
 
-        <!-- Date/Time -->
-        <p class="post-time">Posted on {{ blog.date }}</p>
+            <!-- Date/Time -->
+            <p class="post-time">Posted on {{ blog.date }}</p>
 
-        <!--Post content-->
-        <pre>{{ blog.content }}</pre>
+            <!--Post content-->
+            <pre>{{ blog.content }}</pre>
 
-        {% if blog.youtube_link %}
+            {% if blog.youtube_link %}
 
-            {{ blog.youtube_link|safe }}
+                {{ blog.youtube_link|safe }}
 
-        {% endif %}
+            {% endif %}
 
-        <div class="card my-4">
-            <h5 class="card-header">Leave a Comment:</h5>
-            <div class="card-body">
-                <form>
-                    <div class="form-group">
-                        <textarea class="form-control" rows="4" cols="50"></textarea>
-                    </div>
-                    <button type="submit" class="button">Submit</button>
-                </form>
+            <div class="card my-4">
+                <h5 class="card-header">Leave a Comment:</h5>
+                <div class="card-body">
+                    <form>
+                        <div class="form-group">
+                            <textarea class="form-control" rows="4" cols="50"></textarea>
+                        </div>
+                        <button type="submit" class="button">Submit</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-
 {% endblock %}
 
 {% block footer %}

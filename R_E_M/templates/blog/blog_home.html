@@ -156,7 +156,7 @@
 
         .checkFocus {
             background-color: rgba(175, 155, 155, 0.5);
-            {#color: white;#}
+        {#color: white;#}
         }
 
         .checkbox:hover {
@@ -168,6 +168,9 @@
             margin: 30px auto;
             text-align: center;
         }
+
+
+
     </style>
 {% endblock %}
 {% block content %}
@@ -176,49 +179,51 @@
 
 
     </head>
+    <div class="page_container">
+        <div class="search_container">
+            <form method="GET" action="">
+                <input type="text" name="q" placeholder="Search.." id="search_bar">
+                <button type="submit" value="Search"><img src="/static/R_E_M/img/search_icon.png" alt="search_logo"
+                                                          id="search_img"/>
+                </button>
+            </form>
 
-    <div class="search_container">
-        <form method="GET" action="">
-            <input type="text" name="q" placeholder="Search.." id="search_bar">
-            <button type="submit" value="Search"><img src="/static/R_E_M/img/search_icon.png" alt="search_logo"
-                                                      id="search_img"/>
-            </button>
-        </form>
-
-    </div>
-    <div class="categories-link-set">
-        {% for c in cat %}
-            <!--
-                <input class="filter-checkbox" type="checkbox" value="3" id="Filter_industry_3" name="Filter[industry][]">
-                <label for="Filter_industry_3"><span>Architecture</span></label>
-            -->
-            <span class="checkbox" id="{{ c.slug }}">
+        </div>
+        <div class="categories-link-set">
+            {% for c in cat %}
+                <!--
+                    <input class="filter-checkbox" type="checkbox" value="3" id="Filter_industry_3" name="Filter[industry][]">
+                    <label for="Filter_industry_3"><span>Architecture</span></label>
+                -->
+                <span class="checkbox" id="{{ c.slug }}">
                 <input class="filter-checkbox" type="checkbox">
                 <label for="{{ c.name }}">{{ c.name }}</label>
             </span>
-        {% endfor %}
+            {% endfor %}
 
-    </div>
-    <div class="line_container">
-        <hr>
-    </div>
-    <div class="blog_container">
-        {% for b in blogs %}
-            <div class="blog {{ b.category.slug }}" data-image-src>
-                <div class="image_holder" data-parallax="scroll" data-src="{{ b.image.url }}" data-image-src="{{ b.image.url }}">
-                    <a href="{% url 'blog_single_view' b.category.slug b.slug %}"
-                       class="button">Read More &nbsp; &nbsp; &nbsp; &nbsp;></a>
+        </div>
+        <div class="line_container">
+            <hr>
+        </div>
+        <div class="blog_container">
+            {% for b in blogs %}
+                <div class="blog {{ b.category.slug }}" data-image-src>
+                    <div class="image_holder" data-parallax="scroll" data-src="{{ b.image.url }}"
+                         data-image-src="{{ b.image.url }}">
+                        <a href="{% url 'blog_single_view' b.category.slug b.slug %}"
+                           class="button">Read More &nbsp; &nbsp; &nbsp; &nbsp;></a>
+                    </div>
+
+                    <div class="main_content">
+                        <div class="category">Blog / {{ b.category }}</div>
+                        <h2 class="blog-title"> {{ b.title }}</h2>
+                        <div class="card-footer"><i>~ Posted on {{ b.date }}</i></div>
+                        <pre class="blog-text">{{ b.content }}</pre>
+
+                    </div>
                 </div>
-
-                <div class="main_content">
-                    <div class="category">Blog / {{ b.category }}</div>
-                    <h2 class="blog-title"> {{ b.title }}</h2>
-                    <div class="card-footer"><i>~ Posted on {{ b.date }}</i></div>
-                    <pre class="blog-text">{{ b.content }}</pre>
-
-                </div>
-            </div>
-        {% endfor %}
+            {% endfor %}
+        </div>
     </div>
     <script src="{% static 'javascript/parallax.js-1.5.0/parallax.js' %}"></script>
 

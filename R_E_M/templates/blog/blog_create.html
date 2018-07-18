@@ -20,41 +20,42 @@
             padding: 10px;
         }
     </style>
-    <div class="row">
-        <section class="create">
-            <form class="blog_create" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                {{ form.as_p }}
-                <p>Blog Title</p>
-                <input type="text" id="blog_title" name="blog_title">
-                <p>Blog Content</p>
-                <textarea id="blog_content" name="blog_content" cols="30" rows="10"></textarea>
-                <br>
-                <p>Category</p>
-                <br>
-                {#                <input type="text" id="category" name="category">#}
-                <input list="categories" id="category" name="category">
+    <div class="page_container">
+        <div class="row">
+            <section class="create">
+                <form class="blog_create" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <p>Blog Title</p>
+                    <input type="text" id="blog_title" name="blog_title">
+                    <p>Blog Content</p>
+                    <textarea id="blog_content" name="blog_content" cols="30" rows="10"></textarea>
+                    <br>
+                    <p>Category</p>
+                    <br>
+                    {#                <input type="text" id="category" name="category">#}
+                    <input list="categories" id="category" name="category">
 
-                <datalist id="categories">
-                    {% for c in cat %}
-                        <option value="{{ c.name }}">
-                    {% endfor %}
-                </datalist>
-                <br>
-                <p>Blog Image</p>
-                <input type="file" id="blog_image" name="blog_image">
-                <br>
-                <p>Image Alt Text</p>
-                <input type="text" id="alt_text" name="alt_text">
-                <br>
-                <p>YouTube Link</p>
-                <input type="text" id="youtube_link" name="youtube_link">
-                <br>
-                <input class="button" type="submit" value="Submit" id="sub-btn">
-            </form>
-        </section>
+                    <datalist id="categories">
+                        {% for c in cat %}
+                            <option value="{{ c.name }}">
+                        {% endfor %}
+                    </datalist>
+                    <br>
+                    <p>Blog Image</p>
+                    <input type="file" id="blog_image" name="blog_image">
+                    <br>
+                    <p>Image Alt Text</p>
+                    <input type="text" id="alt_text" name="alt_text">
+                    <br>
+                    <p>YouTube Link</p>
+                    <input type="text" id="youtube_link" name="youtube_link">
+                    <br>
+                    <input class="button" type="submit" value="Submit" id="sub-btn">
+                </form>
+            </section>
+        </div>
     </div>
-
 {% endblock %}
 
 {% block js %}

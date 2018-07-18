@@ -53,25 +53,25 @@
                 }
         */
     </style>
+    <div class="page_container">
+        <div class="container">
+            <h1><b>{{ album.title }}</b></h1>
+            <p>_________</p>
+            <br>
+            {{ album.album_details }}
+            <br>
+            <br>
+            <div class="album grid">
+                {% for photo in album.photo_album.all %}
 
-    <div class="container">
-        <h1><b>{{ album.title }}</b></h1>
-        <p>_________</p>
-        <br>
-        {{ album.album_details }}
-        <br>
-        <br>
-        <div class="album grid">
-            {% for photo in album.photo_album.all %}
+                    <a href="{{ photo.image.url }}" data-lightbox="{{ album.alt_text }}"
+                       data-title="{{ photo.image_details }}"><img src="{{ photo.image.url }}"
+                                                                   class="image grid-item "></a>
 
-                <a href="{{ photo.image.url }}" data-lightbox="{{ album.alt_text }}"
-                   data-title="{{ photo.image_details }}"><img src="{{ photo.image.url }}"
-                                                               class="image grid-item "></a>
-
-            {% endfor %}
+                {% endfor %}
+            </div>
         </div>
     </div>
-
     <script src="{% static 'javascript/lightbox.js' %}"></script>
     <script src="{% static 'javascript/masonry.js' %}"></script>
     <script src="{% static 'javascript/masonry_imagesLoaded.js' %}"></script>
