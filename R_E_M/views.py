@@ -3,6 +3,7 @@ from R_E_M.models import User, Album, AlbumCategory, Photo, Website, Blog, Categ
 import base64
 from django.core.files.base import ContentFile
 import re
+from django.db.models import Q
 
 
 # from PIL import Image
@@ -163,7 +164,15 @@ def blog_single_view(request, cat, slug):
 
 def blog(request):
     blog_list = Blog.objects.all()
-    return render(request, "blog/blog_home.html", {'blogs': blog_list})
+    cat = Category.objects.all()
+    query = request.GET.get("q")
+    if query:
+        blog_list = blog_list.filter(
+            Q(title__icontains=query) |
+            Q(content__icontains=query) |
+            Q(category__name__icontains=query)
+        )
+    return render(request, "blog/blog_home.html", {'blogs': blog_list, 'cat': cat})
 
 
 def blog_create(request):

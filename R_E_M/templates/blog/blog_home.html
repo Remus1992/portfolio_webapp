@@ -8,14 +8,12 @@
 {% endblock %}
 {% block css %}
     <style>
-        .container {
-            margin: 20px auto;
+        .blog_container {
+            margin: 30px auto;
             display: flex;
             flex-wrap: wrap;
-
-            {#align-items: center;#}
-            width: 80%;
-            justify-content: baseline;
+            width: 70%;
+            justify-content: space-between;
         }
 
         h2 {
@@ -119,7 +117,56 @@
             margin: 0;
             padding: 30px 0;
             background-image: linear-gradient(to bottom, transparent, white);
+        }
 
+        .search_container {
+            margin: 20px;
+            text-align: center;
+
+        }
+
+        #search_bar {
+            height: 30px;
+        }
+
+        #search_img {
+            width: 25px;
+        }
+
+        /* Filter Checkbox */
+        .categories-link-set {
+            width: 70%;
+            margin: 30px auto;
+            text-align: center;
+        }
+
+        .filter-checkbox {
+            display: none;
+        }
+
+        .checkbox {
+            font-size: 1.5em;
+            padding: 4px;
+            margin: 10px;
+
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+            transition: 0.3s;
+            border-radius: 50px;
+        }
+
+        .checkFocus {
+            background-color: #44aaee;
+        }
+
+        .checkbox:hover {
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .line_container {
+            width: 70%;
+            margin: 30px auto;
+            text-align: center;
+        }
     </style>
 {% endblock %}
 {% block content %}
@@ -129,20 +176,35 @@
 
     </head>
 
-    <div class="container">
+    <div class="search_container">
+        <form method="GET" action="">
+            <input type="text" name="q" placeholder="Search.." id="search_bar">
+            <button type="submit" value="Search"><img src="/static/R_E_M/img/search_icon.png" alt="search_logo"
+                                                      id="search_img"/>
+            </button>
+        </form>
+
+    </div>
+    <div class="categories-link-set">
+        {% for c in cat %}
+            <!--
+                <input class="filter-checkbox" type="checkbox" value="3" id="Filter_industry_3" name="Filter[industry][]">
+                <label for="Filter_industry_3"><span>Architecture</span></label>
+            -->
+            <span class="checkbox" id="{{ c.slug }}">
+                <input class="filter-checkbox" type="checkbox">
+                <label for="{{ c.name }}">{{ c.name }}</label>
+            </span>
+        {% endfor %}
+
+    </div>
+    <div class="line_container">
+        <hr>
+    </div>
+    <div class="blog_container">
         {% for b in blogs %}
-            <div class="blog">
-                {#                <div class="image_holder">#}
-                {#                    {% blog_image_or_default b %}#}
-                {#                </div>#}
-{#                <div class="image_holder"#}
-{#                     style="background: url({{ b.image.url }}); background-size: cover; background-position: center;#}
-                             {#background-attachment: fixed;#}
-{#                             ">#}
-{#                    <a href="{% url 'blog_single_view' b.category.slug b.slug %}"#}
-{#                       class="button">Read More &nbsp; &nbsp; &nbsp; &nbsp;></a>#}
-{#                </div>#}
-                <div class="image_holder" data-parallax="scroll" data-image-src="{{ b.image.url }}">
+            <div class="blog {{ b.category.slug }}" data-image-src>
+                <div class="image_holder" data-parallax="scroll" data-src="{{ b.image.url }}" data-image-src="{{ b.image.url }}">
                     <a href="{% url 'blog_single_view' b.category.slug b.slug %}"
                        class="button">Read More &nbsp; &nbsp; &nbsp; &nbsp;></a>
                 </div>
@@ -154,13 +216,36 @@
                     <pre class="blog-text">{{ b.content }}</pre>
 
                 </div>
-                <p class="read-more"></p>
             </div>
         {% endfor %}
     </div>
-    <script src="{% static 'javascript/parallax.js-1.5.0/parallax.min.js' %}"></script>
+    <script src="{% static 'javascript/parallax.js-1.5.0/parallax.js' %}"></script>
 
+    <script>
+        $('.checkbox').click(function () {
+            let cat = this.id;
 
+            // removing shade from other elements
+            $('.checkbox').each(function (i, el) {
+                $(el).removeClass('checkFocus');
+            });
+
+            // remove parallax
+
+            $('.image_holder').parallax('destroy');
+            $('.blog').each(function (i, el) {
+
+                let img = $(el).find('.image_holder');
+                if (!$(el).hasClass(cat)) {
+                    $(el).hide();
+                } else {
+                    $(el).show();
+                }
+            });
+            $('.image_holder').parallax('render');
+            $(this).addClass('checkFocus');
+        })
+    </script>
 {% endblock %}
 
 {% block footer %}

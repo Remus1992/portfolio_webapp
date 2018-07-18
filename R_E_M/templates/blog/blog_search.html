@@ -1,0 +1,16 @@
+<div class="blog_container">
+
+    {% for b in blogs %}
+        <div class="blog">
+            <div class="image_holder">
+                {% blog_image_or_default b %}
+            </div>
+            <div class="image_holder"
+                 style="background: url({{ b.image.url }}); background-size: cover; background-position: center;
+                         background-attachment: fixed;
+                         ">
+                <a href="{% url 'blog_single_view' b.category.slug b.slug %}"
+                   class="button">Read More &nbsp; &nbsp; &nbsp; &nbsp;></a>
+            </div>
+        </div>
+    {% endfor %}
