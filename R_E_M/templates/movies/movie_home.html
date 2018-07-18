@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block title %}
-: Movie Home
+    : Movie Home
 {% endblock %}
 
 {% block content %}
@@ -28,18 +28,20 @@
         }
 
     </style>
+    <div class="page_container">
+        <div class="container">
 
-    <div class="container">
+            <h1>Movie Home</h1>
+            <a href="{% url 'movie_create' %}">Upload</a>
+            <br>
+            <br>
 
-        <h1>Movie Home</h1>
-        <a href="{% url 'movie_create' %}">Upload</a>
-        <br>
-        <br>
-
-        {% for movie in movies %}
-            <p>{{ movie.title }}</p>
-            <a href="{% url 'movie_single_view' movie.slug %}"><img src="{{ movie.movie_poster.url }}" class="image"></a>
-        {% endfor %}
+            {% for movie in movies %}
+                <p>{{ movie.title }}</p>
+                <a href="{% url 'movie_single_view' movie.slug %}"><img src="{{ movie.movie_poster.url }}"
+                                                                        class="image"></a>
+            {% endfor %}
+        </div>
     </div>
 {% endblock %}
 

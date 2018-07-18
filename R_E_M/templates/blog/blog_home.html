@@ -155,7 +155,7 @@
         }
 
         .checkFocus {
-            background-color: rgba(175, 155, 155, 0.5);
+            background-color: rgba(227, 227, 227, 0.5);
         {#color: white;#}
         }
 
@@ -168,7 +168,6 @@
             margin: 30px auto;
             text-align: center;
         }
-
 
 
     </style>
@@ -205,6 +204,9 @@
         <div class="line_container">
             <hr>
         </div>
+        <div class="ajax_div">
+
+        </div>
         <div class="blog_container">
             {% for b in blogs %}
                 <div class="blog {{ b.category.slug }}" data-image-src>
@@ -228,29 +230,55 @@
     <script src="{% static 'javascript/parallax.js-1.5.0/parallax.js' %}"></script>
 
     <script>
-        $('.checkbox').click(function () {
-            let cat = this.id;
 
-            // removing shade from other elements
-            $('.checkbox').each(function (i, el) {
-                $(el).removeClass('checkFocus');
+            $('.checkbox').click(function () {
+                let cat = this.id;
+
+                // removing shade from other elements
+                $('.checkbox').each(function (i, el) {
+                    $(el).removeClass('checkFocus');
+                });
+
+                // remove parallax
+
+                $('.image_holder').parallax('destroy');
+                $('.blog').each(function (i, el) {
+
+                    let img = $(el).find('.image_holder');
+                    if (!$(el).hasClass(cat)) {
+                        $(el).hide();
+                    } else {
+                        $(el).show();
+                    }
+                });
+                $('.image_holder').parallax('render');
+                $(this).addClass('checkFocus');
             });
+ /*
+        $(".checkbox").click(function () {
+            let cat = this.id;
+            console.log(cat);
 
-            // remove parallax
-
-            $('.image_holder').parallax('destroy');
-            $('.blog').each(function (i, el) {
-
-                let img = $(el).find('.image_holder');
-                if (!$(el).hasClass(cat)) {
-                    $(el).hide();
-                } else {
-                    $(el).show();
+            $.get("/blog/", function (cat) {
+                console.log("got this far");
+                let i;
+                for (i=0; 1 < cat.object.length; i++) {
+                    console.log(cat.blog_title);
                 }
             });
-            $('.image_holder').parallax('render');
-            $(this).addClass('checkFocus');
+
+            $.ajax({
+                url: /blog/,
+                success: function (cat) {
+                    console.log(cat);
+                    let i;
+                    for (i = 0; 1 < cat.object.length; i++) {
+                        console.log(cat.blog_title);
+                    }
+                }
+            });
         })
+*/
     </script>
 {% endblock %}
 

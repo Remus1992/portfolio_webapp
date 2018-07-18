@@ -14,3 +14,47 @@
             </div>
         </div>
     {% endfor %}
+    <style>
+        /*
+.album_image_holder {
+    width: 250px;
+    height: 250px;
+}
+
+.album_image_holder:hover {
+    content: "";
+    opacity: 0.4;
+}
+
+.text:hover {
+    color: black;
+    content: "";
+    opacity: 1;
+}
+*/
+    </style>
+
+    <body>
+    <!--
+        {% for cat in album_cats %}
+            <div class="category_container">
+                <h1>-------- {{ cat.name }} --------</h1>
+            </div>
+            <div class="album_container">
+                {% for album in albums %}
+                    {% if album.category == cat %}
+                        <div class="album_image_holder"
+                             style="background: url({{ album.photo_album.all.0.image.url }}); background-size: 250px 250px;">
+                            <div class="middle">
+                                <div class="text">{{ album.title }}</div>
+                                <div class="text">{{ album.album_details }}</div>
+                                <a href="{% url 'album_view' album.category.slug album.slug %}" class="text">Read
+                                    More</a>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        {% endfor %}
+        -->
+    </body>
