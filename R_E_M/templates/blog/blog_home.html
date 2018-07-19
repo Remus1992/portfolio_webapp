@@ -230,31 +230,32 @@
     <script src="{% static 'javascript/parallax.js-1.5.0/parallax.js' %}"></script>
 
     <script>
-        /*
-         $('.checkbox').click(function () {
-             let cat = this.id;
 
-             // removing shade from other elements
-             $('.checkbox').each(function (i, el) {
-                 $(el).removeClass('checkFocus');
-             });
+        $('.checkbox').click(function () {
+            let cat = this.id;
 
-             // remove parallax
+            // removing shade from other elements
+            $('.checkbox').each(function (i, el) {
+                $(el).removeClass('checkFocus');
+            });
 
-             $('.image_holder').parallax('destroy');
-             $('.blog').each(function (i, el) {
+            /*
+                        // remove parallax
+                        $('.image_holder').parallax('destroy');
+                        $('.blog').each(function (i, el) {
 
-                 let img = $(el).find('.image_holder');
-                 if (!$(el).hasClass(cat)) {
-                     $(el).hide();
-                 } else {
-                     $(el).show();
-                 }
-             });
-             $('.image_holder').parallax('render');
-             $(this).addClass('checkFocus');
-         });
- */
+                            let img = $(el).find('.image_holder');
+                            if (!$(el).hasClass(cat)) {
+                                $(el).hide();
+                            } else {
+                                $(el).show();
+                            }
+                        });
+                        $('.image_holder').parallax('render');
+            */
+            $(this).addClass('checkFocus');
+        });
+
 
         function getCookie(name) {
             let cookieValue = null;
@@ -303,7 +304,7 @@
                     let html = "";
                     $(bc).html('');
                     $(response).each(function (i, b) {
-                        html+=`<div class="blog ${b.category.slug}" data-image-src>
+                        html += `<div class="blog ${b.category.slug}" data-image-src>
                     <div class="image_holder" data-parallax="scroll" data-src="${b.image.url}"
                          data-image-src="${b.image.url}">
                          <a href="/blog/${b.category.slug}/${b.slug}/"
@@ -311,7 +312,7 @@
                     </div>
 
                     <div class="main_content">
-                        <div class="category">Blog / ${b.category}</div>
+                        <div class="category">Blog / ${b.category.name}</div>
                         <h2 class="blog-title"> ${b.title}</h2>
                         <div class="card-footer"><i>~ Posted on ${b.date}</i></div>
                         <pre class="blog-text">${b.content}</pre></div></div>`
