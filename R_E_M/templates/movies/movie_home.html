@@ -27,91 +27,159 @@
             font-weight: bold;
         }
 
-        /* ******* */
+        /* ***** Card 2 CSS ***** */
+        /*
+    Code snippet by maridlcrmn for Bootsnipp.com
+    Follow me on Twitter @maridlcrmn
+    Image credits: unsplash.com, uifaces.com/authorized
+    Image placeholders: placemi.com
+    */
 
-        .row {
-            width: 75%;
-            margin: 0% auto;
+        #t-cards {
+            padding-top: 80px;
+            padding-bottom: 80px;
+            background-color: #345;
         }
 
-        .int_container {
+        /********************************/
+        /*          Panel cards         */
+        /********************************/
+        .panel.panel-card {
             position: relative;
-            width: 20%;
-            height: 225px;
-            margin: 50px 65px 20px 0px;
-            padding: 0;
+            height: 350px;
+            width: 250px;
+            border: none;
             overflow: hidden;
-            background: green;
-            display: inline-block;
-
         }
 
-        img {
-            height: 100%;
+        .panel.panel-card .panel-heading {
+            position: relative;
+            z-index: 2;
+            height: 400px;
+            border-bottom-color: #fff;
+            overflow: hidden;
+
+            -webkit-transition: height 600ms ease-in-out;
+            transition: height 600ms ease-in-out;
         }
 
-        .hover {
+        .panel.panel-card .panel-heading img {
             position: absolute;
-            top: 170px;
-            left: 0;
-            background-color: black;
-            color: white;
-            font-family: Arial;
-            text-align: center;
+            top: 50%;
+            left: 50%;
+            z-index: 1;
             width: 100%;
-            height: 100%;
-            transition-duration: 0.5s;
-            opacity: 0.6;
+
+            -webkit-transform: translate3d(-50%, -50%, 0);
+            transform: translate3d(-50%, -50%, 0);
         }
 
-        .int_container:hover .hover {
-            animation: up-bump 0.4s ease;
-            top: 0px;
+        .panel.panel-card .panel-heading button {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            z-index: 3;
         }
 
-        img {
-            width: 150px;
-            height: 150px;
-            display: block;
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: 35px;
+        .panel.panel-card .panel-figure {
+            position: absolute;
+            /* New addition */
+            margin-top: -150px;
 
+            top: auto;
+            left: 50%;
+            /* New addition */
+            z-index: 5;
+
+            width: 70px;
+            height: 70px;
+            background-color: #fff;
+            border-radius: 50%;
+            opacity: 1;
+            -webkit-box-shadow: 0 0 0 3px #fff;
+            box-shadow: 0 0 0 3px #fff;
+
+            -webkit-transform: translate3d(-50%, -50%, 0);
+            transform: translate3d(-50%, -50%, 0);
+
+            -webkit-transition: opacity 400ms ease-in-out;
+            transition: opacity 400ms ease-in-out;
         }
 
-        h5 {
-            font-size: 1.005em;
+        .panel.panel-card .panel-body {
+            padding-top: 40px;
+            padding-bottom: 20px;
+            /* New addition */
+            margin-top: -150px;
+            position: relative;
+            background: rgba(255, 255, 255, 0.5);
+            z-index: 4;
+
+            -webkit-transition: padding 400ms ease-in-out;
+            transition: padding 400ms ease-in-out;
         }
 
+        .panel.panel-card .panel-thumbnails {
+            padding: 0 15px 20px;
+        }
+
+        .panel-thumbnails .thumbnail {
+            width: 60px;
+            max-width: 100%;
+            margin: 0 auto;
+            background-color: #fff;
+        }
+
+        .panel.panel-card:hover .panel-heading {
+            height: 55px;
+
+            -webkit-transition: height 400ms ease-in-out;
+            transition: height 400ms ease-in-out;
+        }
+
+        .panel.panel-card:hover .panel-figure {
+            opacity: 0;
+
+            -webkit-transition: opacity 400ms ease-in-out;
+            transition: opacity 400ms ease-in-out;
+        }
+
+        .panel.panel-card:hover .panel-body {
+            padding-top: 20px;
+
+            -webkit-transition: padding 400ms ease-in-out;
+            transition: padding 400ms ease-in-out;
+        }
+
+        .card_icon {
+            border-radius: 50%;
+            width: 70px;
+            height: 70px;
+        }
     </style>
     <div class="page_container">
         <div class="container">
-
             <h1>Movie Home</h1>
             <a href="{% url 'movie_create' %}">Upload</a>
             <br>
             <br>
-
-            {% for movie in movies %}
-                <div class="movie_container">
-
-                    <p>{{ movie.title }}</p>
-                    <a href="{% url 'movie_single_view' movie.slug %}"><img src="{{ movie.movie_poster.url }}"
-                </div>                                                   class="image"></a>
-            {% endfor %}
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="int_container">
-
-            <img src="http://www.iconsdb.com/icons/preview/white/banknotes-xxl.png"/>
-
-            <div class="hover">
-                <h3>Sales Customer Wins</h3>
-                <h5>First Medical Health Plan, Puerto Rico</h5>
-                <p>The client has purchased the Edifecs Smart Trading solution to support their EDI processing channel
-                    for a brand new line of business called the Government Health Plans. </p>
+            <div class="movie_card_container">
+                {% for movie in movies %}
+                    <a href="{% url 'movie_single_view' movie.slug %}">{{ movie.title }}</a>
+                    <div class="panel panel-default panel-card">
+                        <div class="panel-heading">
+                            <img src="{{ movie.movie_poster.url }}"/>
+                        </div>
+                        <div class="panel-figure">
+                            <img class="card_icon"
+                                 src="https://s3.amazonaws.com/uifaces/faces/twitter/adellecharles/73.jpg"/>
+                        </div>
+                        <div class="panel-body text-center">
+                            <h4 class="panel-header"><a href="{% url 'movie_single_view' movie.slug %}">{{ movie.title }}</a></h4>
+                            <small>{{ movie.movie_details }}</small>
+                        </div>
+                    </div>
+                {% endfor %}
             </div>
         </div>
     </div>
