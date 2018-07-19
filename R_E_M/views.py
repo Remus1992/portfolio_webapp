@@ -4,6 +4,7 @@ import base64
 from django.core.files.base import ContentFile
 import re
 from django.db.models import Q
+from django.http import JsonResponse
 
 
 # from PIL import Image
@@ -27,14 +28,14 @@ def photography_home(request):
     return render(request, 'photos/photo_home.html', {"album_cats": album_categories, 'albums': complete_album_list})
 
 
-def photo_album_view(request, cat, slug):
-    album = Album.objects.get(category__slug=cat, slug=slug)
+def photo_album_view(request, cat, album_slug):
+    album = Album.objects.get(category__slug=cat, slug=album_slug)
     # photos = Photo.objects.get(album=slug)
     return render(request, 'photos/photo_album_view.html', {"album": album})
 
-# ?????
-def photo_single_view(request, cat, album, slug):
-    photo = get_object_or_404(Photo, category__slug=cat, album__slug=album, slug=slug)
+
+def photo_single_view(request, cat, album_slug, slug):
+    photo = get_object_or_404(Photo, album__category__slug=cat, album__slug=album_slug, slug=slug)
     album_categories = AlbumCategory.objects.all()
     album_list = Album.objects.all()
     return render(request, 'photos/single_photo_view.html',
@@ -125,7 +126,6 @@ def movie_create(request):
                 photo.image_details = request.POST.get('image_details_{}'.format(num))
                 photo.save()
 
-
         return HttpResponseRedirect(reverse("movie_single_view", kwargs={"slug": movie.slug}))
     return render(request, "movies/movie_create.html")
 
@@ -173,6 +173,37 @@ def blog(request):
             Q(category__name__icontains=query)
         )
     return render(request, "blog/blog_home.html", {'blogs': blog_list, 'cat': cat})
+
+
+def blog_ajax(request):
+    if request.method == "POST":
+        blog_response = Blog.objects.filter(
+            category__slug=request.POST.get("category")
+        )
+        response = []
+        for b in blog_response:
+            response.append(
+                {
+                    "title": b.title,
+                    "author": {
+                        "username": b.author.username
+                    },
+                    "date": b.date,
+                    "content": b.content,
+                    "slug": b.slug,
+                    "category": {
+                        "name": b.category.name,
+                        "slug": b.category.slug
+                    },
+                    "image": {
+                        "url": b.image.url
+                    },
+                    "alt_text": b.alt_text,
+                    "youtube_link": b.youtube_link
+                }
+            )
+        return JsonResponse(response, safe=False)
+    return JsonResponse({"message": "Must be POST"})
 
 
 def blog_create(request):

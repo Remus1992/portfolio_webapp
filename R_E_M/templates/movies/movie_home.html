@@ -27,6 +27,62 @@
             font-weight: bold;
         }
 
+        /* ******* */
+
+        .row {
+            width: 75%;
+            margin: 0% auto;
+        }
+
+        .int_container {
+            position: relative;
+            width: 20%;
+            height: 225px;
+            margin: 50px 65px 20px 0px;
+            padding: 0;
+            overflow: hidden;
+            background: green;
+            display: inline-block;
+
+        }
+
+        img {
+            height: 100%;
+        }
+
+        .hover {
+            position: absolute;
+            top: 170px;
+            left: 0;
+            background-color: black;
+            color: white;
+            font-family: Arial;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            transition-duration: 0.5s;
+            opacity: 0.6;
+        }
+
+        .int_container:hover .hover {
+            animation: up-bump 0.4s ease;
+            top: 0px;
+        }
+
+        img {
+            width: 150px;
+            height: 150px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 35px;
+
+        }
+
+        h5 {
+            font-size: 1.005em;
+        }
+
     </style>
     <div class="page_container">
         <div class="container">
@@ -37,12 +93,29 @@
             <br>
 
             {% for movie in movies %}
-                <p>{{ movie.title }}</p>
-                <a href="{% url 'movie_single_view' movie.slug %}"><img src="{{ movie.movie_poster.url }}"
-                                                                        class="image"></a>
+                <div class="movie_container">
+
+                    <p>{{ movie.title }}</p>
+                    <a href="{% url 'movie_single_view' movie.slug %}"><img src="{{ movie.movie_poster.url }}"
+                </div>                                                   class="image"></a>
             {% endfor %}
         </div>
     </div>
+
+    <div class="row">
+        <div class="int_container">
+
+            <img src="http://www.iconsdb.com/icons/preview/white/banknotes-xxl.png"/>
+
+            <div class="hover">
+                <h3>Sales Customer Wins</h3>
+                <h5>First Medical Health Plan, Puerto Rico</h5>
+                <p>The client has purchased the Edifecs Smart Trading solution to support their EDI processing channel
+                    for a brand new line of business called the Government Health Plans. </p>
+            </div>
+        </div>
+    </div>
+
 {% endblock %}
 
 

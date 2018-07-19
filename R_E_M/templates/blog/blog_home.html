@@ -207,7 +207,7 @@
         <div class="ajax_div">
 
         </div>
-        <div class="blog_container">
+        <div class="blog_container" id="blog_container">
             {% for b in blogs %}
                 <div class="blog {{ b.category.slug }}" data-image-src>
                     <div class="image_holder" data-parallax="scroll" data-src="{{ b.image.url }}"
@@ -230,55 +230,98 @@
     <script src="{% static 'javascript/parallax.js-1.5.0/parallax.js' %}"></script>
 
     <script>
+        /*
+         $('.checkbox').click(function () {
+             let cat = this.id;
 
-            $('.checkbox').click(function () {
-                let cat = this.id;
+             // removing shade from other elements
+             $('.checkbox').each(function (i, el) {
+                 $(el).removeClass('checkFocus');
+             });
 
-                // removing shade from other elements
-                $('.checkbox').each(function (i, el) {
-                    $(el).removeClass('checkFocus');
-                });
+             // remove parallax
 
-                // remove parallax
+             $('.image_holder').parallax('destroy');
+             $('.blog').each(function (i, el) {
 
-                $('.image_holder').parallax('destroy');
-                $('.blog').each(function (i, el) {
+                 let img = $(el).find('.image_holder');
+                 if (!$(el).hasClass(cat)) {
+                     $(el).hide();
+                 } else {
+                     $(el).show();
+                 }
+             });
+             $('.image_holder').parallax('render');
+             $(this).addClass('checkFocus');
+         });
+ */
 
-                    let img = $(el).find('.image_holder');
-                    if (!$(el).hasClass(cat)) {
-                        $(el).hide();
-                    } else {
-                        $(el).show();
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                let cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    let cookie = jQuery.trim(cookies[i]);
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
                     }
-                });
-                $('.image_holder').parallax('render');
-                $(this).addClass('checkFocus');
-            });
- /*
+                }
+            }
+            return cookieValue;
+        }
+
+        let csrftoken = getCookie('csrftoken');
+
+        function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        });
+
         $(".checkbox").click(function () {
             let cat = this.id;
             console.log(cat);
-
-            $.get("/blog/", function (cat) {
-                console.log("got this far");
-                let i;
-                for (i=0; 1 < cat.object.length; i++) {
-                    console.log(cat.blog_title);
-                }
-            });
-
             $.ajax({
-                url: /blog/,
-                success: function (cat) {
-                    console.log(cat);
-                    let i;
-                    for (i = 0; 1 < cat.object.length; i++) {
-                        console.log(cat.blog_title);
-                    }
+                url: "{% url "blog_ajax" %}",
+                method: "POST",
+                data: {
+                    category: cat
+                },
+                success: function (response) {
+                    console.dir(response);
+                    $('.image_holder').parallax('destroy');
+                    let bc = $("#blog_container");
+                    let html = "";
+                    $(bc).html('');
+                    $(response).each(function (i, b) {
+                        html+=`<div class="blog ${b.category.slug}" data-image-src>
+                    <div class="image_holder" data-parallax="scroll" data-src="${b.image.url}"
+                         data-image-src="${b.image.url}">
+                         <a href="/blog/${b.category.slug}/${b.slug}/"
+                           class="button">Read More &nbsp; &nbsp; &nbsp; &nbsp;></a>
+                    </div>
+
+                    <div class="main_content">
+                        <div class="category">Blog / ${b.category}</div>
+                        <h2 class="blog-title"> ${b.title}</h2>
+                        <div class="card-footer"><i>~ Posted on ${b.date}</i></div>
+                        <pre class="blog-text">${b.content}</pre></div></div>`
+                    });
+                    $(bc).html(html);
+                    $('.image_holder').parallax('render');
                 }
             });
         })
-*/
+
     </script>
 {% endblock %}
 

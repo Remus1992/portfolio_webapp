@@ -44,7 +44,7 @@
             display: block;
             height: 250px;
             overflow: hidden;
-            transition: .5s ease;
+            transition: .3s ease;
             backface-visibility: hidden;
             position: absolute;
             object-position: center;
@@ -95,13 +95,13 @@
 
         .album_set:hover .text_bottom {
             /* Apply animation to this element */
-            animation: text_bottom 0.5s ease-out;
+            animation: text_bottom 0.3s ease-out;
         }
 
         /* Move it (define the animation) */
         @keyframes text_bottom {
             0% {
-                transform: translateY(100%);
+                transform: translateY(300%);
             }
             100% {
                 transform: translateY(0%);
@@ -110,13 +110,13 @@
 
         .album_set:hover .text_top {
             /* Apply animation to this element */
-            animation: text_top 0.5s ease-out;
+            animation: text_top 0.3s ease-out;
         }
 
         /* Move it (define the animation) */
         @keyframes text_top {
             0% {
-                transform: translateY(-100%);
+                transform: translateY(-300%);
             }
             100% {
                 transform: translateY(0%);
