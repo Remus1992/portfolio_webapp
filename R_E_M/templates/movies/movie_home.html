@@ -138,6 +138,12 @@
             width: 70px;
             height: 70px;
         }
+
+        .movie_card_container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
     </style>
     <div class="page_container">
         <div class="container">
@@ -147,7 +153,7 @@
             <br>
             <div class="movie_card_container">
                 {% for movie in movies %}
-{#                    <a href="{% url 'movie_single_view' movie.slug %}">{{ movie.title }}</a>#}
+                    {#                    <a href="{% url 'movie_single_view' movie.slug %}">{{ movie.title }}</a>#}
                     <div class="panel panel-default panel-card">
                         <div class="panel-heading">
                             <img src="{{ movie.movie_poster.url }}"/>
@@ -157,7 +163,8 @@
                                  src="https://s3.amazonaws.com/uifaces/faces/twitter/adellecharles/73.jpg"/>
                         </div>
                         <div class="panel-body text-center">
-                            <h4 class="panel-header"><a href="{% url 'movie_single_view' movie.slug %}">{{ movie.title }}</a></h4>
+                            <h4 class="panel-header"><a
+                                    href="{% url 'movie_single_view' movie.slug %}">{{ movie.title }}</a></h4>
                             <small>{{ movie.movie_details }}</small>
                         </div>
                     </div>
