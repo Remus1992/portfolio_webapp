@@ -147,7 +147,7 @@
             <br>
             <div class="movie_card_container">
                 {% for movie in movies %}
-                    <a href="{% url 'movie_single_view' movie.slug %}">{{ movie.title }}</a>
+{#                    <a href="{% url 'movie_single_view' movie.slug %}">{{ movie.title }}</a>#}
                     <div class="panel panel-default panel-card">
                         <div class="panel-heading">
                             <img src="{{ movie.movie_poster.url }}"/>
