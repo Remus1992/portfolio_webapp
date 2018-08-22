@@ -29,11 +29,11 @@
 
         /* ***** Card 2 CSS ***** */
         /*
-    Code snippet by maridlcrmn for Bootsnipp.com
-    Follow me on Twitter @maridlcrmn
-    Image credits: unsplash.com, uifaces.com/authorized
-    Image placeholders: placemi.com
-    */
+            Code snippet by maridlcrmn for Bootsnipp.com
+            Follow me on Twitter @maridlcrmn
+            Image credits: unsplash.com, uifaces.com/authorized
+            Image placeholders: placemi.com
+        */
 
         #t-cards {
             padding-top: 80px;
@@ -148,7 +148,9 @@
             justify-content: space-between;
         }
 
-        /** New Card **/
+        /****************************/
+        /******** New Card **********/
+        /****************************/
 
         * {
           box-sizing: border-box;
@@ -156,17 +158,12 @@
           padding: 0;
         }
 
-        body{
-          background: #323c41;
-        }
 
         .blog-card {
             width: 350px;
             height: 500px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            margin: -250px 0 0 -175px;
+            position: relative;
+            margin: 15px;
             overflow: hidden;
             border-radius: 10px;
             box-shadow: 3px 3px 20px rgba(0, 0, 0, .5);
@@ -203,13 +200,13 @@
             z-index: 15;
         }
 
-
-
-        .blog-card .gradient-overlay .color-overlay:hover{
+        .blog-card:hover .color-overlay{
             background: rgba(84,104,110,0.8);
         }
 
-        .blog-card .gradient-overlay .card-info:hover{
+        .gradient-overlay {}
+
+        .blog-card:hover .card-info{
               opacity: 1;
               bottom: 120px;
         }
@@ -326,30 +323,27 @@
                     </div>
                 {% endfor %}
                 -->
-
-                {% for movie in movies %}
+{% for movie in movies %}
                     <div class="blog-card spring-fever">
                         <div class="title-content">
-                            <h3>SPRING FEVER</h3>
+                            <h3>{{ movie.title }}</h3>
                             <hr/>
-                            <div class="intro">Yllamco laboris nisi ut aliquip ex ea commodo.</div>
+                            <div class="intro">{{ movie.tag_line }}.</div>
                         </div><!-- /.title-content -->
                         <div class="card-info">
-                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt
-                            ut labore et dolore magna aliqua. Ut enim ad minim.
+                            {{ movie.movie_details }}
                         </div><!-- /.card-info -->
                         <div class="utility-info">
                             <ul class="utility-list">
                                 <li class="comments">12</li>
-                                <li class="date">03.12.2015</li>
+                                <li class="date">{{ movie.date_built }}</li>
                             </ul>
                         </div><!-- /.utility-info -->
                         <!-- overlays -->
                         <div class="gradient-overlay"></div>
                         <div class="color-overlay"></div>
                     </div><!-- /.blog-card -->
-
-                {% endfor %}
+{% endfor %}
             </div>
         </div>
     </div>
