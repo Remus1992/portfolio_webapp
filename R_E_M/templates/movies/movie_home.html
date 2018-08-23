@@ -60,7 +60,7 @@
 
         .blog-card .color-overlay {
             /* Rectangle 11: */
-            background: rgba(84, 104, 110, 0.4);
+            {#background: rgba(84, 104, 110, 0.4);#}
             width: 350px;
             height: 500px;
             position: absolute;
@@ -96,6 +96,11 @@
             bottom: 120px;
         }
 
+        .blog-card:hover .title-content{
+            opacity: 1;
+            bottom: 120px;
+        }
+
         .title-content {
             text-align: center;
             margin: 70px 0 0 0;
@@ -104,10 +109,12 @@
             width: 100%;
             top: 0;
             left: 0;
+            opacity: 0;
+            transition: bottom .3s, opacity .3s cubic-bezier(.33, .66, .66, 1);
         }
 
         h3 {
-            font-size: 20px;
+            font-size: 30px;
             font-weight: 500;
             letter-spacing: 2px;
             color: #9CC9E3;
