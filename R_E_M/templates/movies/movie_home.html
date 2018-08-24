@@ -151,7 +151,7 @@
 
             /** transparent text **/
             {#background: -webkit-linear-gradient(#dce3e7, #002d3f);#}
-            background: -webkit-linear-gradient(rgba(220,227,231, 1), rgba(84, 104, 110, 0));
+            background: -webkit-linear-gradient(rgba(220,227,231, 1) 50%, rgba(84, 104, 110, 0));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
 
@@ -196,6 +196,40 @@
             width: 300px;
         }
 
+        .movie_read_more {
+            position: relative;
+            margin-top: -171px;
+            z-index: 25;
+        }
+
+        .button {
+            opacity: 0;
+        }
+
+        .movie-card:hover .button {
+            background-color: white;
+            opacity: 0.7;
+            border: white solid 2px;
+            color: black;
+            padding: 5px 10px;
+            border-radius: 10px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 40px;
+            cursor: pointer;
+            font-weight: bold;
+
+        }
+
+        .movie-card:hover .button:hover {
+            background-color: white;
+            color: black;
+            opacity: 0.8;
+            font-weight: bold;
+        }
+
     </style>
     <div class="page_container">
         <div class="container">
@@ -205,20 +239,24 @@
             <br>
             {#            <a href="{% url 'movie_single_view' movie.slug %}">{{ movie.title }}</a>#}
             {#            <img src="{{ movie.movie_poster.url }}"/>#}
-            {#            <a href="{% url 'movie_single_view' movie.slug %}">{{ movie.title }}</a></h4>#}
+            {#            <a href="{% url 'movie_single_view' movie.slug %}">{{ movie.title }}</a>#}
             <div class="movie_card_container">
                 {% for movie in movies %}
                     <div class="movie-card">
                         <img src="{{ movie.movie_poster.url }}" class="movie_poster"/>
                         <div class="title-content">
                             <h3>{{ movie.title }}</h3>
-                            <a href="{% url 'movie_single_view' movie.slug %}">{{ movie.title }}</a></h4>
+
                             <hr/>
                             <div class="intro">{{ movie.tag_line }}.</div>
                         </div><!-- /.title-content -->
                         <div class="card-info">
                             {{ movie.movie_details }}
                         </div><!-- /.card-info -->
+                        <div class="movie_read_more">
+                            <a href="{% url 'movie_single_view' movie.slug %}" class="button">Read More</a>
+                        </div>
+
                         <div class="utility-info">
                             <ul class="utility-list">
                                 <li class="comments">12</li>
