@@ -213,10 +213,12 @@ def blog_create(request):
         blog.title = request.POST.get('blog_title')
         blog.author = request.user
         blog.content = request.POST.get('blog_content')
+
         blog.category = cat
+
         blog_image = request.FILES.get('blog_image')
         if blog_image:
-            print("we got here")
+            # print("we got here")
             blog.image = blog_image
 
         blog.alt_text = request.POST.get('alt_text')

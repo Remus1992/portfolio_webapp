@@ -60,7 +60,7 @@ class AlbumCategory(models.Model):
                 else:
                     checking = False
                 self.slug = slug_title
-        super().save(args, kwargs)
+        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name_plural = 'AlbumCategories'
@@ -134,6 +134,39 @@ class Website(models.Model):
         super().save(args, kwargs)
 
 
+def website_screen_shot_image_uh(instance, filename):
+    return 'websites/{}/{}'.format(instance.website_name, filename)
+
+
+class WebsiteScreenShot(models.Model):
+    owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="website_photos")
+    website_screenshots = models.ForeignKey(Website, on_delete=models.CASCADE, related_name="website_screenshots")
+    website_name = models.CharField(max_length=50, blank=True, null=True)
+    slug = models.SlugField(blank=True, null=True, unique=True)
+    image = models.ImageField(upload_to=website_screen_shot_image_uh, blank=True, null=True)
+    alt_text = models.CharField(max_length=50, blank=True, null=True)
+    date_taken = models.CharField(max_length=50)
+    image_details = models.TextField()
+
+    def __str__(self):
+        return self.website_name
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            number = 0
+            slug_title = slugify(self.website_name)
+            checking = True
+            while checking:
+                results = Photo.objects.filter(slug=slug_title)
+                if results.exists():
+                    slug_title = slugify(self.website_name) + '_' + str(number + 1)
+                    number += 1
+                else:
+                    checking = False
+                self.slug = slug_title
+        super().save(args, kwargs)
+
+
 def blog_image_uh(instance, filename):
     return 'blog/{}/blog_image/{}'.format(instance.author, filename)
 
@@ -191,7 +224,7 @@ class Category(models.Model):
                 else:
                     checking = False
                 self.slug = slug_title
-        super().save(args, kwargs)
+        super().save(*args, **kwargs)
 
     class Meta:
         verbose_name_plural = 'Categories'
