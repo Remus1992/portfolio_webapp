@@ -204,10 +204,17 @@
             position: relative;
             margin-top: -171px;
             z-index: 25;
+            transition: bottom .3s, opacity .3s cubic-bezier(.33, .66, .66, 1);
+            bottom: 0;
+        }
+
+        .movie-card:hover .movie_read_more {
+            bottom: 5px;
         }
 
         .button {
             opacity: 0;
+
         }
 
         .movie-card:hover .button {
@@ -224,7 +231,8 @@
             margin: 40px;
             cursor: pointer;
             font-weight: bold;
-            transition: bottom .3s, opacity .3s cubic-bezier(.33, .66, .66, 1);
+
+
         }
 
         .movie-card:hover .button:hover {
