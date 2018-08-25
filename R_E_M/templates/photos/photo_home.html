@@ -10,6 +10,7 @@
 
     <head>
         <link rel="stylesheet" type="text/css" href="{% static 'styles/style.css' %}"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
     <style>
 
@@ -37,18 +38,33 @@
             width: 300px;
             height: 300px;
             margin: 5px;
+
+            /* */
+
+            display: block;
+            overflow: hidden;
+            height: 300px;
+            width: 300px;
         }
 
+
         .image {
-            opacity: 1;
+            /**
+                opacity: 1;
+                display: block;
+                height: 300px;
+                overflow: hidden;
+                transition: .3s ease;
+                backface-visibility: hidden;
+                position: absolute;
+                object-position: center;
+                clip: rect(0px, 300px, 300px, 0px);
+            **/
             display: block;
-            height: 300px;
-            overflow: hidden;
-            transition: .3s ease;
-            backface-visibility: hidden;
-            position: absolute;
-            object-position: center;
-            clip: rect(0px, 300px, 300px, 0px);
+            width: 100%;
+            height: 100%;
+            background-position: center center;
+            background-size: cover;
 
         }
 
@@ -122,6 +138,34 @@
                 transform: translateY(0%);
             }
         }
+
+        /****/
+
+        .profile-image { visibility: hidden; } /* prevent a flash of giant image before the image is wrapped by jQuery */
+
+        .profile-image-wrap {
+            /* whatever the dimensions you want the "cropped" image to be */
+            height: 8em;
+            width: 8em;
+            overflow: hidden;
+        }
+
+        .profile-image-wrap img.square {
+            visibility: visible;
+            width: 100%;
+        }
+
+        .profile-image-wrap img.portrait {
+            visibility: visible;
+            width: 100%;
+            height: auto;
+        }
+
+        .profile-image-wrap img.landscape {
+            visibility: visible;
+            height: 100%;
+            width: auto;
+        }
     </style>
     <div class="page_container">
         <div class="container">
@@ -137,7 +181,7 @@
                         {% if album.category == cat %}
                             <a href="{% url 'album_view' album.category.slug album.slug %}" class="text">
                                 <div class="album_set">
-                                    <img src="{{ album.photo_album.all.0.image.url }}" class="image"
+                                    <img src="{{ album.photo_album.all.0.image.url }}" class="profile-image"
                                          alt="{{ album.photo_album.all.0.image }}">
                                     <div class="middle">
                                         <div class="text text_top">{{ album.title }}</div>
@@ -181,6 +225,36 @@
 -->
         </div>
     </div>
+
+    <script>
+        cropProfileImage = function(pic){
+            var h = $(pic).height(),
+                w = $(pic).width();
+
+            if($(pic).parent('.profile-image-wrap').length === 0){
+                // wrap the image in a "cropping" div
+                $(pic).wrap('<div class="profile-image-wrap"></div>');
+            }
+
+            if(h > w ){
+                // pic is portrait
+                $(pic).addClass('portrait');
+                var m = -(((h/w) * 100)-100)/2; //math the negative margin
+                $(pic).css('margin-top', m + '%');
+            }else if(w > h){
+                // pic is landscape
+                $(pic).addClass('landscape');
+                var m = -(((w/h) * 100)-100)/2;  //math the negative margin
+                $(pic).css('margin-left', m + '%');
+            }else {
+                // pic is square
+                $(pic).addClass('square');
+            }
+        }
+
+        // Call the function for the images you want to crop
+        cropProfileImage('img.profile-image');
+    </script>
 {% endblock %}
 
 
