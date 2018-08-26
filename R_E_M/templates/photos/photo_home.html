@@ -47,7 +47,6 @@
             width: 300px;
         }
 
-
         .image {
             /**
                 opacity: 1;
@@ -141,7 +140,11 @@
 
         /** JQUERY NEW SET **/
 
-        .album-image { visibility: hidden; } /* prevent a flash of giant image before the image is wrapped by jQuery */
+        .album-image {
+            visibility: hidden;
+        }
+
+        /* prevent a flash of giant image before the image is wrapped by jQuery */
 
         .album-image-wrap {
             /* whatever the dimensions you want the "cropped" image to be */
@@ -182,7 +185,7 @@
                             <a href="{% url 'album_view' album.category.slug album.slug %}" class="text">
                                 <div class="album_set">
                                     <img src="{{ album.photo_album.all.0.image.url }}" class="album-image"
-                                                                                       {#  class="image"#}
+                                            {#  class="image"#}
                                          alt="{{ album.photo_album.all.0.image }}">
                                     <div class="middle">
                                         <div class="text text_top">{{ album.title }}</div>
@@ -228,29 +231,29 @@
     </div>
 
     <script>
-        cropAlbumImage = function(pic){
+        cropAlbumImage = function (pic) {
             let h = $(pic).height();
             let w = $(pic).width();
 
             console.log(h);
             console.log(w);
 
-            if($(pic).parent('.album-image-wrap').length === 0){
+            if ($(pic).parent('.album-image-wrap').length === 0) {
                 // wrap the image in a "cropping" div
                 $(pic).wrap('<div class="album-image-wrap"></div>');
             }
 
-            if(h > w ){
+            if (h > w) {
                 // pic is portrait
                 $(pic).addClass('portrait');
-                let m = -(((h/w) * 100)-100)/2; //math the negative margin
+                let m = -(((h / w) * 100) - 100) / 2; //math the negative margin
                 $(pic).css('margin-top', m + '%');
-            } else if(w > h){
+            } else if (w > h) {
                 // pic is landscape
                 $(pic).addClass('landscape');
-                let m = -(((w/h) * 100)-100)/2;  //math the negative margin
+                let m = -(((w / h) * 100) - 100) / 2;  //math the negative margin
                 $(pic).css('margin-left', m + '%');
-            }else {
+            } else {
                 // pic is square
                 $(pic).addClass('square');
             }
@@ -260,11 +263,41 @@
         {#let number_of_albums = $('.album_set').length;#}
         {#console.log(number_of_albums);#}
 
-        for (i = 0; i < $('.album_set').length; i++) {
+        //for (i = 0; i < $('.album_set').length; i++) {
             // Call the function for the images you want to crop
-            cropAlbumImage('img.album-image');
-        }
+            //cropAlbumImage('img.album-image');
+        //}
 
+
+        $(document).ready(function () {
+            $('img.album-image').each(function () {
+                let h = $(this).height();
+                let w = $(this).width();
+
+                console.log(h);
+                console.log(w);
+
+                if ($(this).parent('.album-image-wrap').length === 0) {
+                    // wrap the image in a "cropping" div
+                    $(this).wrap('<div class="album-image-wrap"></div>');
+                }
+
+                if (h > w) {
+                    // pic is portrait
+                    $(this).addClass('portrait');
+                    let m = -(((h / w) * 100) - 100) / 2; //math the negative margin
+                    $(this).css('margin-top', m + '%');
+                } else if (w > h) {
+                    // pic is landscape
+                    $(this).addClass('landscape');
+                    let m = -(((w / h) * 100) - 100) / 2;  //math the negative margin
+                    $(this).css('margin-left', m + '%');
+                } else {
+                    // pic is square
+                    $(this).addClass('square');
+                }
+            })
+        });
 
     </script>
 {% endblock %}
