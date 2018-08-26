@@ -320,14 +320,13 @@
             let cat = this.id;
             console.log(cat);
             $.ajax({
-                url: "{% url "blog_ajax" %}",
+                url: "{% url "photo_ajax" %}",
                 method: "POST",
                 data: {
                     category: cat
                 },
                 success: function (response) {
                     console.dir(response);
-                    $('.image_holder').parallax('destroy');
                     let bc = $("#blog_container");
                     let html = "";
                     $(bc).html('');
@@ -346,7 +345,6 @@
                         <pre class="blog-text">${b.content}</pre></div></div>`
                     });
                     $(bc).html(html);
-                    $('.image_holder').parallax('render');
                 }
             });
         })

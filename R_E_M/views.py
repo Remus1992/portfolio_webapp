@@ -31,29 +31,29 @@ def photography_home(request):
 def photo_ajax(request):
     if request.method == "POST":
         photo_response = Album.objects.filter(
-            
+
             category__slug=request.POST.get("category")
         )
         response = []
-        for b in photo_response:
+        for p in photo_response:
             response.append(
                 {
-                    "title": b.title,
+                    "title": p.title,
                     "author": {
-                        "username": b.author.username
+                        "username": p.author.username
                     },
-                    "date": b.date,
-                    "content": b.content,
-                    "slug": b.slug,
+                    "date": p.date,
+                    "content": p.content,
+                    "slug": p.slug,
                     "category": {
-                        "name": b.category.name,
-                        "slug": b.category.slug
+                        "name": p.category.name,
+                        "slug": p.category.slug
                     },
                     "image": {
-                        "url": b.image.url
+                        "url": p.image.url
                     },
-                    "alt_text": b.alt_text,
-                    "youtube_link": b.youtube_link
+                    "alt_text": p.alt_text,
+                    "youtube_link": p.youtube_link
                 }
             )
         return JsonResponse(response, safe=False)

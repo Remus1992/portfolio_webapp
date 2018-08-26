@@ -1089,7 +1089,7 @@ a, a:visited {
     }
 }
 
-/* Filter Checkbox */
+/************************** Filter Checkbox **************************/
 .categories-link-set {
     width: 70%;
     margin: 30px auto;
@@ -1118,7 +1118,7 @@ a, a:visited {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
-/* Search Bar */
+/************************** Search Bar **************************/
 .search_container {
     margin: 20px;
     text-align: center;
@@ -1133,7 +1133,7 @@ a, a:visited {
     width: 25px;
 }
 
-/****/
+/**************************************************/
 
 .line_container {
     width: 70%;
