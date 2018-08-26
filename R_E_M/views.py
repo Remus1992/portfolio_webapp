@@ -28,6 +28,38 @@ def photography_home(request):
     return render(request, 'photos/photo_home.html', {"album_cats": album_categories, 'albums': complete_album_list})
 
 
+def photo_ajax(request):
+    if request.method == "POST":
+        photo_response = Album.objects.filter(
+            
+            category__slug=request.POST.get("category")
+        )
+        response = []
+        for b in photo_response:
+            response.append(
+                {
+                    "title": b.title,
+                    "author": {
+                        "username": b.author.username
+                    },
+                    "date": b.date,
+                    "content": b.content,
+                    "slug": b.slug,
+                    "category": {
+                        "name": b.category.name,
+                        "slug": b.category.slug
+                    },
+                    "image": {
+                        "url": b.image.url
+                    },
+                    "alt_text": b.alt_text,
+                    "youtube_link": b.youtube_link
+                }
+            )
+        return JsonResponse(response, safe=False)
+    return JsonResponse({"message": "Must be POST"})
+
+
 def photo_album_view(request, cat, album_slug):
     album = Album.objects.get(category__slug=cat, slug=album_slug)
     # photos = Photo.objects.get(album=slug)

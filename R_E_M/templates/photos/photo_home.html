@@ -159,6 +159,30 @@
         }
     </style>
     <div class="page_container">
+        <div class="search_container">
+            <form method="GET" action="">
+                <input type="text" name="q" placeholder="Search.." id="search_bar">
+                <button type="submit" value="Search"><img src="/static/R_E_M/img/search_icon.png" alt="search_logo"
+                                                          id="search_img"/>
+                </button>
+            </form>
+
+        </div>
+        <div class="categories-link-set">
+            {% for c in album_cats %}
+                <span class="checkbox" id="{{ c.slug }}">
+                    <input class="filter-checkbox" type="checkbox">
+                    <label for="{{ c.name }}">{{ c.name }}</label>
+                </span>
+            {% endfor %}
+
+        </div>
+        <div class="line_container">
+            <hr>
+        </div>
+        <div class="ajax_div">
+
+        </div>
         <div class="container">
 
             <h1>Photo Home</h1>
@@ -249,6 +273,83 @@
             })
         });
 
+        $('.checkbox').click(function () {
+            let cat = this.id;
+
+            // removing shade from other elements
+            $('.checkbox').each(function (i, el) {
+                $(el).removeClass('checkFocus');
+            });
+
+            $(this).addClass('checkFocus');
+        });
+
+
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                let cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    let cookie = jQuery.trim(cookies[i]);
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        let csrftoken = getCookie('csrftoken');
+
+        function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        });
+
+        $(".checkbox").click(function () {
+            let cat = this.id;
+            console.log(cat);
+            $.ajax({
+                url: "{% url "blog_ajax" %}",
+                method: "POST",
+                data: {
+                    category: cat
+                },
+                success: function (response) {
+                    console.dir(response);
+                    $('.image_holder').parallax('destroy');
+                    let bc = $("#blog_container");
+                    let html = "";
+                    $(bc).html('');
+                    $(response).each(function (i, b) {
+                        html += `<div class="blog ${b.category.slug}" data-image-src>
+                    <div class="image_holder" data-parallax="scroll" data-src="${b.image.url}"
+                         data-image-src="${b.image.url}">
+                         <a href="/blog/${b.category.slug}/${b.slug}/"
+                           class="button">Read More &nbsp; &nbsp; &nbsp; &nbsp;></a>
+                    </div>
+
+                    <div class="main_content">
+                        <div class="category">Blog / ${b.category.name}</div>
+                        <h2 class="blog-title"> ${b.title}</h2>
+                        <div class="card-footer"><i>~ Posted on ${b.date}</i></div>
+                        <pre class="blog-text">${b.content}</pre></div></div>`
+                    });
+                    $(bc).html(html);
+                    $('.image_holder').parallax('render');
+                }
+            });
+        })
     </script>
 {% endblock %}
 

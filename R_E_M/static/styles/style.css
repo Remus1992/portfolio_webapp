@@ -1089,6 +1089,58 @@ a, a:visited {
     }
 }
 
+/* Filter Checkbox */
+.categories-link-set {
+    width: 70%;
+    margin: 30px auto;
+    text-align: center;
+}
+
+.filter-checkbox {
+    display: none;
+}
+
+.checkbox {
+    font-size: 1.5em;
+    padding: 4px;
+    margin: 10px;
+
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+    border-radius: 50px;
+}
+
+.checkFocus {
+    background-color: rgba(227, 227, 227, 0.5);
+}
+
+.checkbox:hover {
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+/* Search Bar */
+.search_container {
+    margin: 20px;
+    text-align: center;
+
+}
+
+#search_bar {
+    height: 30px;
+}
+
+#search_img {
+    width: 25px;
+}
+
+/****/
+
+.line_container {
+    width: 70%;
+    margin: 30px auto;
+    text-align: center;
+}
+
 #footer #preFooter {
     height: 50px;
     /*margin-top: -50px;*/
