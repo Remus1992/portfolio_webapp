@@ -20,12 +20,6 @@ h1 {
     margin: .67em 0;
 }
 
-/*
-img {
-    border: 0;
-}
-*/
-
 input {
     font-family: inherit;
     font-size: 100%;
@@ -236,6 +230,9 @@ nav {
     text-decoration: none;
     line-height: 1em;
     color: rgba(255, 255, 255, .9);
+
+    /*font-family: 'Raleway', sans-serif;*/
+    font-family: 'Alegreya Sans SC', sans-serif;
 }
 
 #mainNavWrapper nav a:hover, #mainNavWrapper nav a:visited:hover, #mainNavWrapper nav label:hover, #mainNavWrapper nav a:active, #mainNavWrapper nav a:visited:active, #mainNavWrapper nav label:active {
@@ -1148,4 +1145,10 @@ a, a:visited {
 
 .page_container {
     min-height: calc(75vh - 70px);
+}
+
+.container {
+    margin: 20px auto;
+    text-align: center;
+    width: 70%;
 }
