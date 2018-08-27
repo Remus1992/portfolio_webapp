@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect, get_object_or_404, reverse, redirect
-from R_E_M.models import User, Album, AlbumCategory, Photo, Website, Blog, Category, Movie, MovieStillPhoto
+from R_E_M.models import User, Album, AlbumCategory, Photo, Website, Blog, Category, Movie, MovieStillPhoto, WebsiteScreenShot, MovieCategory
 import base64
 from django.core.files.base import ContentFile
 import re
@@ -113,21 +113,24 @@ def photo_upload(request):
 
 def filmmaking_home(request):
     complete_movie_list = Movie.objects.all()
-    return render(request, 'movies/movie_home.html', {'movies': complete_movie_list})
+    movie_categories = MovieCategory.objects.all()
+    return render(request, 'movies/movie_home.html', {"movie_cats": movie_categories, 'movies': complete_movie_list})
 
 
-def movie_single_view(request, slug):
-    movie = Movie.objects.get(slug=slug)
+def movie_single_view(request, cat, slug):
+    movie = Movie.objects.get(category__slug=cat, slug=slug)
     return render(request, "movies/movie_view.html", {"movie": movie})
 
 
 def movie_create(request):
     if request.method == "POST":
-        print(request.FILES)
-        print(request.POST)
+        # print(request.FILES)
+        # print(request.POST)
         movie = Movie()
         movie.owner = request.user
         movie.title = request.POST.get('movie_title')
+        cat, created = MovieCategory.objects.get_or_create(name=request.POST.get('movie_category'))
+        movie.category = cat
         movie.tag_line = request.POST.get('movie_tag')
         movie.movie_details = request.POST.get('movie_details')
         movie.date_built = request.POST.get('movie_date')
@@ -161,8 +164,8 @@ def movie_create(request):
                 photo.image_details = request.POST.get('image_details_{}'.format(num))
                 photo.save()
 
-        return HttpResponseRedirect(reverse("movie_single_view", kwargs={"slug": movie.slug}))
-    return render(request, "movies/movie_create.html")
+        return HttpResponseRedirect(reverse("movie_single_view", kwargs={"cat": movie.category.slug, "slug": movie.slug}))
+    return render(request, "movies/movie_create.html", {'cat': MovieCategory.objects.all()})
 
 
 def webdev_home(request):

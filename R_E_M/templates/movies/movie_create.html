@@ -29,6 +29,15 @@
                 <input type="text" id="movie_title" name="movie_title">
                 <p>Movie Tagline</p>
                 <input type="text" id="movie_tag" name="movie_tag">
+                <p>Category</p>
+                <input list="categories" id="movie_category" name="movie_category">
+
+                <datalist id="categories">
+                    {% for c in cat %}
+                        <option value="{{ c.name }}">
+                    {% endfor %}
+                </datalist>
+                <br>
                 <p>Movie Details</p>
                 <textarea id="movie_details" name="movie_details" cols="30" rows="10"></textarea>
                 <br>

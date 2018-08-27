@@ -275,7 +275,7 @@
                             {{ movie.movie_details }}
                         </div><!-- /.card-info -->
                         <div class="movie_read_more">
-                            <a href="{% url 'movie_single_view' movie.slug %}" class="button">Read More</a>
+                            <a href="{% url 'movie_single_view' movie.category.slug movie.slug %}" class="button">Read More</a>
                         </div>
 
                         <div class="utility-info">
