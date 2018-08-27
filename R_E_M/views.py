@@ -28,38 +28,6 @@ def photography_home(request):
     return render(request, 'photos/photo_home.html', {"album_cats": album_categories, 'albums': complete_album_list})
 
 
-def photo_ajax(request):
-    if request.method == "POST":
-        photo_response = Album.objects.filter(
-
-            category__slug=request.POST.get("category")
-        )
-        response = []
-        for p in photo_response:
-            response.append(
-                {
-                    "title": p.title,
-                    "author": {
-                        "username": p.author.username
-                    },
-                    "date": p.date,
-                    "content": p.content,
-                    "slug": p.slug,
-                    "category": {
-                        "name": p.category.name,
-                        "slug": p.category.slug
-                    },
-                    "image": {
-                        "url": p.image.url
-                    },
-                    "alt_text": p.alt_text,
-                    "youtube_link": p.youtube_link
-                }
-            )
-        return JsonResponse(response, safe=False)
-    return JsonResponse({"message": "Must be POST"})
-
-
 def photo_album_view(request, cat, album_slug):
     album = Album.objects.get(category__slug=cat, slug=album_slug)
     # photos = Photo.objects.get(album=slug)
@@ -72,6 +40,33 @@ def photo_single_view(request, cat, album_slug, slug):
     album_list = Album.objects.all()
     return render(request, 'photos/single_photo_view.html',
                   {"album_cats": album_categories, "albums": album_list, "photo": photo})
+
+
+def photo_ajax(request):
+    if request.method == "POST":
+        album_response = Album.objects.filter(
+
+            category__slug=request.POST.get("category")
+        )
+        response = []
+        for album in album_response:
+            response.append(
+                {
+                    "title": album.title,
+                    "owner": {
+                        "username": album.author.username
+                    },
+                    "slug": album.slug,
+                    "category": {
+                        "name": album.category.name,
+                        "slug": album.category.slug
+                    },
+                    "album_details": album.album_details,
+                    "alt_text": album.alt_text
+                }
+            )
+        return JsonResponse(response, safe=False)
+    return JsonResponse({"message": "Must be POST"})
 
 
 def photo_upload(request):
@@ -245,9 +240,7 @@ def blog_create(request):
         blog.title = request.POST.get('blog_title')
         blog.author = request.user
         blog.content = request.POST.get('blog_content')
-
         blog.category = cat
-
         blog_image = request.FILES.get('blog_image')
         if blog_image:
             # print("we got here")

@@ -191,7 +191,6 @@
             <br>
             <div class="album_container">
                 {% for cat in album_cats %}
-
                     {% for album in albums %}
                         {% if album.category == cat %}
                             <a href="{% url 'album_view' album.category.slug album.slug %}" class="text">
@@ -327,24 +326,24 @@
                 },
                 success: function (response) {
                     console.dir(response);
-                    let bc = $("#blog_container");
+                    let ac = $("#album_container");
                     let html = "";
-                    $(bc).html('');
-                    $(response).each(function (i, b) {
-                        html += `<div class="blog ${b.category.slug}" data-image-src>
-                    <div class="image_holder" data-parallax="scroll" data-src="${b.image.url}"
-                         data-image-src="${b.image.url}">
-                         <a href="/blog/${b.category.slug}/${b.slug}/"
-                           class="button">Read More &nbsp; &nbsp; &nbsp; &nbsp;></a>
-                    </div>
-
-                    <div class="main_content">
-                        <div class="category">Blog / ${b.category.name}</div>
-                        <h2 class="blog-title"> ${b.title}</h2>
-                        <div class="card-footer"><i>~ Posted on ${b.date}</i></div>
-                        <pre class="blog-text">${b.content}</pre></div></div>`
+                    $(ac).html('');
+                    $(response).each(function (i, album) {
+                        html += `<a href="/photography/${album.category.slug}/${album.slug}" class="text ${album.category.slug}">
+                                <div class="album_set">
+                                    <img src="${album.photo_album.all.0.image.url}" class="album-image" alt="${album.photo_album.all.0.image}">
+                                    <div class="middle">
+                                        <div class="text text_top">${album.title}</div>
+                                        <div class="text text_center">
+                                            <hr>
+                                        </div>
+                                        <div class="text text_bottom">${album.album_details}</div>
+                                    </div>
+                                </div>
+                            </a>`
                     });
-                    $(bc).html(html);
+                    $(ac).html(html);
                 }
             });
         })
