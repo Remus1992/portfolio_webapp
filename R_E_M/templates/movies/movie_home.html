@@ -246,8 +246,12 @@
     </style>
     <div class="page_container">
         <div class="container">
-            <h1>Movie Home</h1>
-            <a href="{% url 'movie_create' %}">Upload</a>
+            {% if user.is_authenticated %}
+
+                <a href="{% url 'movie_create' %}">Upload Project</a>
+                <br>
+                <br>
+            {% endif %}
             <br>
             <br>
             {#            <a href="{% url 'movie_single_view' movie.slug %}">{{ movie.title }}</a>#}

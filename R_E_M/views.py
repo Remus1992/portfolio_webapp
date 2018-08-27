@@ -25,6 +25,13 @@ def contact(request):
 def photography_home(request):
     complete_album_list = Album.objects.all()
     album_categories = AlbumCategory.objects.all()
+    query = request.GET.get("q")
+    if query:
+        complete_album_list = complete_album_list.filter(
+            Q(title__icontains=query) |
+            Q(album_details__icontains=query) |
+            Q(category__name__icontains=query)
+        )
     return render(request, 'photos/photo_home.html', {"album_cats": album_categories, 'albums': complete_album_list})
 
 

@@ -159,8 +159,12 @@
         <div class="line_container">
             <hr>
         </div>
+        {% if user.is_authenticated %}
+            <a href="{% url 'blog_create' %}">Create Blog</a>
+            <br>
+            <br>
+        {% endif %}
         <div class="ajax_div">
-
         </div>
         <div class="blog_container" id="blog_container">
             {% for b in blogs %}

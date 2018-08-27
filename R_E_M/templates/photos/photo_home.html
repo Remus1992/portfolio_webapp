@@ -21,7 +21,7 @@
 
         }
 
-        h1, body {
+        body {
             font-family: 'Alegreya Sans SC', sans-serif;
             font-weight: bold;
         }
@@ -185,10 +185,12 @@
         </div>
         <div class="container">
 
-            <h1>Photo Home</h1>
-            <a href="{% url 'picture_upload' %}">Upload</a>
+        {% if user.is_authenticated %}
+
+            <a href="{% url 'picture_upload' %}">Upload Album</a>
             <br>
             <br>
+        {% endif %}
             <div class="album_container" id="album_container">
                 {% for album in albums %}
                     <a href="{% url 'album_view' album.category.slug album.slug %}" class="text">
@@ -238,7 +240,6 @@
     <script>
         $(document).ready(function () {
             calcImgs()
-
         });
 
         function calcImgs() {
