@@ -259,6 +259,7 @@
                     let html = "";
                     $(bc).html('');
                     $(response).each(function (i, b) {
+                        console.dir(b)
                         html += `<div class="blog ${b.category.slug}" data-image-src>
                     <div class="image_holder" data-parallax="scroll" data-src="${b.image.url}"
                          data-image-src="${b.image.url}">

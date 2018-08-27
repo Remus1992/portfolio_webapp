@@ -189,27 +189,21 @@
             <a href="{% url 'picture_upload' %}">Upload</a>
             <br>
             <br>
-            <div class="album_container">
-                {% for cat in album_cats %}
-                    {% for album in albums %}
-                        {% if album.category == cat %}
-                            <a href="{% url 'album_view' album.category.slug album.slug %}" class="text">
-                                <div class="album_set">
-                                    <img src="{{ album.photo_album.all.0.image.url }}" class="album-image"
-                                            {#  class="image"#}
-                                         alt="{{ album.photo_album.all.0.image }}">
-                                    <div class="middle">
-                                        <div class="text text_top">{{ album.title }}</div>
-                                        <div class="text text_center">
-                                            <hr>
-                                        </div>
-                                        <div class="text text_bottom">{{ album.album_details }}</div>
-                                    </div>
+            <div class="album_container" id="album_container">
+                {% for album in albums %}
+                    <a href="{% url 'album_view' album.category.slug album.slug %}" class="text">
+                        <div class="album_set">
+                            <img src="{{ album.photo_album.all.0.image.url }}" class="album-image"
+                                 alt="{{ album.photo_album.all.0.image }}">
+                            <div class="middle">
+                                <div class="text text_top">{{ album.title }}</div>
+                                <div class="text text_center">
+                                    <hr>
                                 </div>
-                            </a>
-                        {% endif %}
-                    {% endfor %}
-
+                                <div class="text text_bottom">{{ album.album_details }}</div>
+                            </div>
+                        </div>
+                    </a>
                 {% endfor %}
             </div>
             <!--
@@ -223,7 +217,7 @@
                             <a href="{% url 'album_view' album.category.slug album.slug %}" class="text">
                                 <div class="album_set">
                                     <img src="{{ album.photo_album.all.0.image.url }}" class="image"
-                                         alt="{{ album.photo_album.all.0. }}">
+                                         alt="{{ album.photo_album.all.0.alt }}">
                                     <div class="middle">
                                         <div class="text text_top">{{ album.title }}</div>
                                         <div class="text text_center">
@@ -243,12 +237,17 @@
 
     <script>
         $(document).ready(function () {
+            calcImgs()
+
+        });
+
+        function calcImgs() {
             $('img.album-image').each(function () {
                 let h = $(this).height();
                 let w = $(this).width();
 
-                console.log(h);
-                console.log(w);
+                // console.log(h);
+                // console.log(w);
 
                 if ($(this).parent('.album-image-wrap').length === 0) {
                     // wrap the image in a "cropping" div
@@ -270,7 +269,7 @@
                     $(this).addClass('square');
                 }
             })
-        });
+        }
 
         $('.checkbox').click(function () {
             let cat = this.id;
@@ -317,7 +316,7 @@
 
         $(".checkbox").click(function () {
             let cat = this.id;
-            console.log(cat);
+            // console.log(category);
             $.ajax({
                 url: "{% url "photo_ajax" %}",
                 method: "POST",
@@ -325,14 +324,13 @@
                     category: cat
                 },
                 success: function (response) {
-                    console.dir(response);
+                    //console.dir(response);
                     let ac = $("#album_container");
                     let html = "";
                     $(ac).html('');
                     $(response).each(function (i, album) {
-                        html += `<a href="/photography/${album.category.slug}/${album.slug}" class="text ${album.category.slug}">
-                                <div class="album_set">
-                                    <img src="${album.photo_album.all.0.image.url}" class="album-image" alt="${album.photo_album.all.0.image}">
+                        html += `<a href="/photography/galleries/${album.category.slug}/${album.slug}" class="text ${album.category.slug}"><div class="album_set">
+                                    <img src="${album.photo_album[0].url}" class="album-image" alt="">
                                     <div class="middle">
                                         <div class="text text_top">${album.title}</div>
                                         <div class="text text_center">
@@ -344,6 +342,7 @@
                             </a>`
                     });
                     $(ac).html(html);
+                    calcImgs()
                 }
             });
         })

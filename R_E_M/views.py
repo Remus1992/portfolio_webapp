@@ -44,17 +44,17 @@ def photo_single_view(request, cat, album_slug, slug):
 
 def photo_ajax(request):
     if request.method == "POST":
+        print('we are at post')
         album_response = Album.objects.filter(
 
             category__slug=request.POST.get("category")
         )
         response = []
         for album in album_response:
-            response.append(
-                {
+            response.append({
                     "title": album.title,
                     "owner": {
-                        "username": album.author.username
+                        "username": album.owner.username
                     },
                     "slug": album.slug,
                     "category": {
@@ -62,9 +62,10 @@ def photo_ajax(request):
                         "slug": album.category.slug
                     },
                     "album_details": album.album_details,
-                    "alt_text": album.alt_text
-                }
-            )
+                    "alt_text": album.alt_text,
+                    "photo_album": [{"url": img.image.url} for img in album.photo_album.all()]
+                })
+
         return JsonResponse(response, safe=False)
     return JsonResponse({"message": "Must be POST"})
 
@@ -99,7 +100,7 @@ def photo_upload(request):
                 photo.image_details = request.POST.get('image_details_{}'.format(num))
                 photo.save()
 
-        return HttpResponseRedirect(reverse("album_view", kwargs={'cat': album.category.slug, "slug": album.slug}))
+        return HttpResponseRedirect('/photography/galleries/{}/{}/'.format(album.category.slug, album.slug))
     return render(request, 'photos/photo_upload_page.html', {'cat': AlbumCategory.objects.all()})
 
 
