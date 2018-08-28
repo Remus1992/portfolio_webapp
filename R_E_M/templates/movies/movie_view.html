@@ -126,6 +126,10 @@
             float: left;
             margin: 20px;
         }
+
+        .movie_still_container {
+            height: 500px;
+        }
     </style>
 
     <div class="page_container">
@@ -180,7 +184,7 @@
         </div>
           -->
 
-        <div class="slider slider-single">
+        <div class="slider slider-single movie_still_container">
             {% for still in movie.movie_photo_album.all %}
                 <div><img src="{{ still.image.url }}" class="center_image"></div>
             {% endfor %}

@@ -34,20 +34,6 @@
 
         }
 
-        .image {
-            /**
-                opacity: 1;
-                display: block;
-                height: 300px;
-                overflow: hidden;
-                transition: .3s ease;
-                backface-visibility: hidden;
-                position: absolute;
-                object-position: center;
-                clip: rect(0px, 300px, 300px, 0px);
-            **/
-        }
-
         .middle {
             transition: .5s ease;
             opacity: 0;
@@ -72,10 +58,6 @@
         }
 
         .album_set:hover {
-        }
-
-        .text {
-        {#font-size: 1.5vw;#}{#color: black;#}
         }
 
         .category_container {
@@ -336,7 +318,7 @@
                             </a>`
                     });
                     $(ac).html(html);
-                    calcImgs()
+                    calcImgs();
                 }
             });
         })

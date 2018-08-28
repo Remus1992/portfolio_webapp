@@ -114,6 +114,14 @@ def photo_upload(request):
 def filmmaking_home(request):
     complete_movie_list = Movie.objects.all()
     movie_categories = MovieCategory.objects.all()
+    query = request.GET.get("q")
+    if query:
+        complete_movie_list = complete_movie_list.filter(
+            Q(title__icontains=query) |
+            Q(tag_line__icontains=query) |
+            Q(movie_details__icontains=query) |
+            Q(category__name__icontains=query)
+        )
     return render(request, 'movies/movie_home.html', {"movie_cats": movie_categories, 'movies': complete_movie_list})
 
 

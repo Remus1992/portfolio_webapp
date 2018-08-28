@@ -10,257 +10,54 @@
 
     <head>
         <link rel="stylesheet" type="text/css" href="{% static 'styles/style.css' %}"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
+
     <style>
-        .image {
-            width: 250px;
-        }
-
-        .container {
-            margin: 20px auto;
-            text-align: center;
-            width: 70%;
-        }
-
-        h1, body {
-            font-family: 'Alegreya Sans SC', sans-serif;
-            font-weight: bold;
-        }
-
-        .movie_card_container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-
-        /****************************/
-        /******** New Card **********/
-        /****************************/
-
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+
         }
-
-        .movie-card {
-            width: 300px;
-            height: 430px;
-            position: relative;
-            margin: 15px;
-            overflow: hidden;
-            border-radius: 10px;
-            box-shadow: 3px 3px 20px rgba(0, 0, 0, .5);
-            text-align: center;
-        }
-
-        .movie-card .color-overlay {
-            /* Rectangle 11: */
-            {#background: rgba(84, 104, 110, 0.4);#}
-            width: 300px;
-            height: 430px;
-            position: absolute;
-            z-index: 10;
-            top: 0;
-            left: 0;
-            transition: background .3s cubic-bezier(.33, .66, .66, 1);
-        }
-
-        .movie-card .gradient-overlay {
-            /* bg-gradient: */
-            background-image: -webkit-linear-gradient(rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, .6) 21%);
-            background-image: -moz-linear-gradient(rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, .6) 21%);
-            background-image: -o-linear-gradient(rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, .6) 21%);
-            background-image: linear-gradient(rgba(0, 0, 0, 0.00) 0%, rgba(0, 0, 0, .6) 21%);
-            width: 300px;
-            height: 430px;
-            position: absolute;
-            top: 300px;
-            left: 0;
-            z-index: 15;
-        }
-
-        .movie-card:hover .color-overlay {
-            background: rgba(84, 104, 110, 0.9);
-        }
-
-        .title-content {
-            text-align: center;
-            margin: 45px 0 0 0;
-            padding: 0 15px 0 15px;
-            position: absolute;
-            z-index: 20;
-            width: 100%;
-            left: 0;
-            opacity: 0;
-
-            {#top: -5px;#}
-            {#transition: top .3s, opacity .3s cubic-bezier(.33, .66, .66, 1);#}
-
-            bottom: 275px;
-            transition: bottom .3s, opacity .3s cubic-bezier(.33, .66, .66, 1);
-        }
-
-        .movie-card:hover .title-content{
-            opacity: 1;
-            {#top: 0;#}
-
-            bottom: 280px;
-        }
-
-        h3 {
-            font-size: 30px;
-            font-weight: 500;
-            letter-spacing: 2px;
-            color: #9CC9E3;
-            font-family: 'Roboto', sans-serif;
+        a {
             font-family: 'Alegreya Sans SC', sans-serif;
-            margin-bottom: 0;
-        }
-
-        hr {
-            width: 50px;
-            height: 3px;
-            margin: 10px auto;
-            border: 0;
-            background: #D0BB57;
-        }
-
-        .intro {
-            width: 170px;
-            margin: 0 auto;
-            color: #DCE3E7;
-            font-family: 'Droid Serif', serif;
-            font-family: 'Alegreya Sans SC', sans-serif;
-            font-size: 13px;
-            font-style: italic;
-            line-height: 18px;
-        }
-
-
-        .card-info {
-            width: 100%;
-            position: relative;
-            bottom: 100px;
-            left: 0;
-            margin-top: -170px;
-            padding: 0 50px;
-            color: rgba(220,227,231, 1);
-
-            font-family: 'Droid Serif', serif;
-            font-family: 'Alegreya Sans SC', sans-serif;
-            font-style: 16px;
-            line-height: 24px;
-            z-index: 20;
-            opacity: 0;
-            transition: bottom .3s, opacity .3s cubic-bezier(.33, .66, .66, 1);
-
-            /** transparent text **/
-            background: -webkit-linear-gradient(rgba(220,227,231, 1) 50%, rgba(84, 104, 110, 0));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-
-            height: 192px;
-            overflow: hidden;
-        }
-
-        .movie-card:hover .card-info {
-            opacity: 1;
-            bottom: 105px;
-        }
-
-        .utility-info {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            z-index: 20;
-        }
-
-        .utility-list {
-            list-style-type: none;
-            margin: 0 0 30px 20px;
-            padding: 0;
-            width: 100%;
-
-        }
-
-        .utility-list li {
-            margin: 0 15px 0 0;
-            padding: 0 0 0 22px;
-            display: inline-block;
-            color: #DCE3E7;
-            font-family: 'Roboto', sans-serif;
-            font-family: 'Alegreya Sans SC', sans-serif;
-        }
-
-        .utility-list .comments {
-            background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/1765/icon-chat.svg) no-repeat 0 .1em;
-        }
-
-        .utility-list .date {
-            background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/1765/icon-calendar.svg) no-repeat 0 .1em;
-        }
-
-        .movie_poster {
-            width: 300px;
-        }
-
-        .movie_read_more {
-            position: relative;
-            margin-top: -171px;
-            z-index: 25;
-            transition: bottom .3s, opacity .3s cubic-bezier(.33, .66, .66, 1);
-            bottom: 0;
-        }
-
-        .movie-card:hover .movie_read_more {
-            bottom: 5px;
-        }
-
-        .button {
-            opacity: 0;
-
-        }
-
-        .movie-card:hover .button {
-            background-color: white;
-            opacity: 0.7;
-            border: white solid 2px;
-            color: black;
-            padding: 5px 10px;
-            border-radius: 10px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 40px;
-            cursor: pointer;
-            font-weight: bold;
-
-
-        }
-
-        .movie-card:hover .button:hover {
-            background-color: white;
-            color: black;
-            opacity: 0.8;
-            font-weight: bold;
         }
 
     </style>
+
     <div class="page_container">
+        <div class="search_container">
+            <form method="GET" action="">
+                <input type="text" name="q" placeholder="Search.." id="search_bar">
+                <button type="submit" value="Search"><img src="/static/R_E_M/img/search_icon.png" alt="search_logo"
+                                                          id="search_img"/>
+                </button>
+            </form>
+        </div>
+        <div class="categories-link-set">
+            {% for c in movie_cats %}
+                <span class="checkbox" id="{{ c.slug }}">
+                    <input class="filter-checkbox" type="checkbox">
+                    <label for="{{ c.name }}">{{ c.name }}</label>
+                </span>
+            {% endfor %}
+
+        </div>
+        <div class="line_container">
+            <hr>
+        </div>
+        <div class="ajax_div">
+
+        </div>
         <div class="container">
+
             {% if user.is_authenticated %}
 
                 <a href="{% url 'movie_create' %}">Upload Project</a>
-                <br>
-                <br>
             {% endif %}
             <br>
             <br>
-            {#            <a href="{% url 'movie_single_view' movie.slug %}">{{ movie.title }}</a>#}
-            {#            <img src="{{ movie.movie_poster.url }}"/>#}
-            {#            <a href="{% url 'movie_single_view' movie.slug %}">{{ movie.title }}</a>#}
             <div class="movie_card_container">
                 {% for movie in movies %}
                     <div class="movie-card">
@@ -275,7 +72,7 @@
                             {{ movie.movie_details }}
                         </div><!-- /.card-info -->
                         <div class="movie_read_more">
-                            <a href="{% url 'movie_single_view' movie.category.slug movie.slug %}" class="button">Read More</a>
+                            <a href="{% url 'movie_single_view' movie.category.slug movie.slug %}" class="movie_button">Read More</a>
                         </div>
 
                         <div class="utility-info">
@@ -292,8 +89,83 @@
             </div>
         </div>
     </div>
-    </div>
+    <script>
+        $('.checkbox').click(function () {
+            let cat = this.id;
 
+            // removing shade from other elements
+            $('.checkbox').each(function (i, el) {
+                $(el).removeClass('checkFocus');
+            });
+
+            $(this).addClass('checkFocus');
+        });
+
+
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                let cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    let cookie = jQuery.trim(cookies[i]);
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        let csrftoken = getCookie('csrftoken');
+
+        function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        });
+
+        $(".checkbox").click(function () {
+            let cat = this.id;
+            // console.log(category);
+            $.ajax({
+                url: "{% url "photo_ajax" %}",
+                method: "POST",
+                data: {
+                    category: cat
+                },
+                success: function (response) {
+                    //console.dir(response);
+                    let ac = $("#album_container");
+                    let html = "";
+                    $(ac).html('');
+                    $(response).each(function (i, album) {
+                        html += `<a href="/photography/galleries/${album.category.slug}/${album.slug}" class="text ${album.category.slug}"><div class="album_set">
+                                    <img src="${album.photo_album[0].url}" class="album-image" alt="">
+                                    <div class="middle">
+                                        <div class="text text_top">${album.title}</div>
+                                        <div class="text text_center">
+                                            <hr>
+                                        </div>
+                                        <div class="text text_bottom">${album.album_details}</div>
+                                    </div>
+                                </div>
+                            </a>`
+                    });
+                    $(ac).html(html);
+                    calcImgs();
+                }
+            });
+        })
+    </script>
 {% endblock %}
 
 
