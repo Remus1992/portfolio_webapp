@@ -15,17 +15,15 @@
 
 
     <div class="container">
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <input class='btn' name="images" type="file" multiple id="gallery-photo-add">
-            <div class="gallery">
+{#        <form method="post" enctype="multipart/form-data">#}
+{#            {% csrf_token %}#}
+{#            <input class='btn' name="images" type="file" multiple id="gallery-photo-add">#}
+{#            <div class="gallery"></div>#}
+{#            <input class='btn' type="submit" value="Submit">#}
+{#        </form>#}
 
-            </div>
-            <input class='btn' type="submit" value="Submit">
-        </form>
 
-        <!-- Trigger/Open The Modal -->
-        <button id="myBtn">Open Modal</button>
+        <button id="myBtn">Create New Album</button>
 
         <!-- The Modal -->
         <div id="myModal" class="modal">
@@ -33,10 +31,26 @@
             <!-- Modal content -->
             <div class="modal-content">
                 <span class="close">&times;</span>
-                <p>Some text in the Modal..</p>
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <input class='btn' name="images" type="file" multiple id="gallery-photo-add">
+                    <div class="gallery"></div>
+                    <input class='btn' type="submit" value="Submit">
+                </form>
             </div>
-
         </div>
+
+{#        <!-- Trigger/Open The Modal -->#}
+{#        <button id="myBtn">Create New Album</button>#}
+{#        <!-- The Modal -->#}
+{#        <div id="myModal" class="modal">#}
+{##}
+{#            <!-- Modal content -->#}
+{#            <div class="modal-content">#}
+{#                <span class="close">&times;</span>#}
+{#                <p>Some text in the Modal..</p>#}
+{#            </div>#}
+{#        </div>#}
     </div>
 
 
@@ -45,7 +59,7 @@
     <script>
         let imagesPreview = function (input, placeToInsertImagePreview) {
             $(placeToInsertImagePreview).html('');
-            let album_html = '<div class="album_info"><h1>Album Upload</h1><div><label for="album_title">Album Title</label></div><div><input type="text" id="album_title" name="album_title"></div><div><label for="album_category">Category</label></div><input list="categories" id="album_category" name="album_category"><datalist id="categories">{% for c in cat %}<option value="{{ c.name }}">{% endfor %}</datalist><div><label for="album_details">Album Details</label></div><div><input type="text" id="album_details" name="album_details"></div><div><label for="album_alt_text">Album Alt Text</label></div><div><input type="text" id="album_alt_text" name="album_alt_text"></div></div>';
+            let album_html = '<div class="album_info"><h1>Album Upload</h1><div><label for="album_title">Album Title</label></div><div><input type="text" id="album_title" name="album_title"></div><div><label for="album_category">Category</label></div><input list="categories" id="album_category" name="album_category"><datalist id="categories">{% for c in cat %}<option value="{{ c.name }}">{% endfor %}</datalist><div><label for="album_details">Album Details</label></div><div><input type="text" id="album_details" name="album_details"></div><div><label for="album_alt_text">Album Alt Text</label></div><div><input type="text" id="album_alt_text" name="album_alt_text"></div></div><div class="gallery_images"></div>';
             $(placeToInsertImagePreview).append(album_html);
 
             if (input.files) {
@@ -65,7 +79,7 @@
                                 'name': `image_${num + 1}`
                             }))
                             .append($(`<p>${name}</p><img class="image" src="${event.target.result}" id="new_picture_${num + 1}"><div><label for="image_name_${num + 1}">Photo Title</label></div><div><input type="text" name="image_name_${num + 1}"></div><div><label for="alt_text_${num + 1}">Alt Text</label></div><div><input type="text" id="alt_text_${num + 1}" name="alt_text_${num + 1}"></div><div><label for="creation_date_${num + 1}">Date Taken</label></div><div><input type="date" id="creation_date_${num + 1}" name="creation_date_${num + 1}"></div><div><label for="image_details_${num + 1}">Image Details</label></div><div><input type="text" id="image_details_${num + 1}" name="image_details_${num + 1}"></div>`));
-                        $(placeToInsertImagePreview).append(html);
+                        $('div.gallery_images').append(html);
                     };
 
                     reader.readAsDataURL(input.files[i]);
