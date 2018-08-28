@@ -3,7 +3,7 @@
 }
 
 .image {
-  height : 100px;
+  height : 150px;
   /*width: 50px;*/
 }
 
@@ -42,12 +42,19 @@
     border-width: 5px;
     padding: 5px;
     width: 30%;
+    height: 500px;
     float: left;
 }
 
 .gallery_images {
     margin-left: 35%;
+    height: 500px;
+    overflow: scroll;
 
+}
+
+.gallery_images img{
+    float: left;
 }
 
 
