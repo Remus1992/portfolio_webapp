@@ -8,9 +8,11 @@
 }
 
 .img_holder {
-    border-style: solid;
-    border-width: 5px;
+    border: 1px solid #888;
     padding: 5px;
+    height: 350px;
+    width: 225px;
+    margin: 5px;
 
 }
 
@@ -29,35 +31,65 @@
     border: none;
     border-radius: 4px;
     margin: 4px;
+    margin-left: 15px;
 }
 
 .gallery {
-    width: 80%;
+    width: 100%;
     overflow: hidden;
-    justify-content: center;
+    /*justify-content: center;*/
 }
 
 .album_info {
-    border-style: solid;
-    border-width: 5px;
+    border-right: 1px solid #888;
+    background-color: #e2e0e0;
     padding: 5px;
-    width: 30%;
+    width: 23%;
     height: 500px;
     float: left;
 }
 
 .gallery_images {
-    margin-left: 35%;
-    height: 500px;
-    overflow: scroll;
+    margin-left: 23%;
+    height: 510px;
+    overflow: auto;
+    display: flex;
+    flex-wrap: wrap;
 
 }
 
 .gallery_images img{
-    float: left;
+    /*float: left;*/
 }
 
+.input-row, .submit-row {
+    display: flex;
 
+    background-color: #cccccc;
+}
+
+.input-row {
+    border-bottom: 1px solid #888;
+    justify-content: space-between;
+    /*-moz-border-radius-topleft: 5px;*/
+    /*-moz-border-radius-topright: 5px;*/
+}
+
+.input-row h2 {
+    padding: 16px;
+}
+
+.submit-row {
+    border-top: 1px solid #888;
+    justify-content: flex-end;
+    /*-moz-border-radius-bottomleft: 5px;*/
+    /*-moz-border-radius-bottomright: 5px;*/
+}
+
+.album_upload_form {
+    border-radius: 5px;
+    box-shadow: 3px 3px 20px rgba(0, 0, 0, .5);
+}
 /* MODAL APPROACH */
 body {font-family: Arial, Helvetica, sans-serif;}
 
@@ -73,24 +105,25 @@ body {font-family: Arial, Helvetica, sans-serif;}
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    background-color: rgba(184,184,184,0.4); /* Black w/ opacity */
 }
 
 /* Modal Content */
 .modal-content {
     background-color: #fefefe;
     margin: auto;
-    padding: 20px;
-    border: 1px solid #888;
+    /*padding: 20px;*/
     width: 80%;
+    border-radius: 5px;
 }
 
 /* The Close Button */
 .close {
     color: #aaaaaa;
-    float: right;
+    /*float: right;*/
     font-size: 28px;
     font-weight: bold;
+    padding: 11px;
 }
 
 .close:hover,
