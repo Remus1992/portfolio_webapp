@@ -54,8 +54,6 @@
 
                 <a href="{% url 'movie_create' %}">Upload Project</a>
             {% endif %}
-            <br>
-            <br>
             <div class="movie_card_container {{ movie.category.slug }}" id="movie_card_container">
                 {% for movie in movies %}
                     <div class="movie-card">

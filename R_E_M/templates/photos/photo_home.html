@@ -13,12 +13,9 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
     <style>
-
         body {
             font-family: 'Alegreya Sans SC', sans-serif;
         }
-
-
     </style>
     <div class="page_container">
         <div class="search_container">
@@ -37,16 +34,13 @@
                     <label for="{{ c.name }}">{{ c.name }}</label>
                 </span>
             {% endfor %}
-
         </div>
         <div class="line_container">
             <hr>
         </div>
         <div class="ajax_div">
-
         </div>
         <div class="container">
-
             {% if user.is_authenticated %}
 
                 <a href="{% url 'picture_upload' %}">Upload Album</a>
@@ -70,32 +64,6 @@
                     </a>
                 {% endfor %}
             </div>
-            <!--
-            {% for cat in album_cats %}
-                <div class="category_container">
-                    <h1>-------- {{ cat.name }} --------</h1>
-                </div>
-                <div class="album_container">
-                    {% for album in albums %}
-                        {% if album.category == cat %}
-                            <a href="{% url 'album_view' album.category.slug album.slug %}" class="text">
-                                <div class="album_set">
-                                    <img src="{{ album.photo_album.all.0.image.url }}" class="image"
-                                         alt="{{ album.photo_album.all.0.alt }}">
-                                    <div class="middle">
-                                        <div class="text text_top">{{ album.title }}</div>
-                                        <div class="text text_center">
-                                            <hr>
-                                        </div>
-                                        <div class="text text_bottom">{{ album.album_details }}</div>
-                                    </div>
-                                </div>
-                            </a>
-                        {% endif %}
-                    {% endfor %}
-                </div>
-            {% endfor %}
--->
         </div>
     </div>
 
