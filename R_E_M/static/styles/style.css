@@ -1118,8 +1118,6 @@ a, a:visited {
 /************************** Search Bar **************************/
 .search_container {
     margin: 20px;
-    text-align: center;
-
 }
 
 #search_bar {
@@ -1130,6 +1128,10 @@ a, a:visited {
     width: 25px;
 }
 
+.search_div {
+    display: flex;
+    justify-content: center;
+}
 /**************************************************/
 
 .line_container {
@@ -1211,7 +1213,7 @@ a, a:visited {
     padding: 0 15px 0 15px;
     position: absolute;
     z-index: 20;
-    width: 100%;
+    width: 90%;
     left: 0;
     opacity: 0;
 
@@ -1221,8 +1223,6 @@ a, a:visited {
 
 .movie-card:hover .title-content{
     opacity: 1;
-    {#top: 0;#}
-
     bottom: 280px;
 }
 
@@ -1257,7 +1257,7 @@ h3 {
 
 
 .card-info {
-    width: 100%;
+    width: 67%;
     position: relative;
     bottom: 100px;
     left: 0;

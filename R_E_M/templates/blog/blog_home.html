@@ -26,12 +26,12 @@
     <div class="page_container">
         <div class="search_container">
             <form method="GET" action="">
-                <input type="text" name="q" placeholder="Search.." id="search_bar">
-                <button type="submit" value="Search"><img src="/static/R_E_M/img/search_icon.png" alt="search_logo"
-                                                          id="search_img"/>
-                </button>
+                <div class="search_div">
+                    <input type="text" name="q" placeholder="Search..." id="search_bar" value="{{ request.GET.q }}">
+                    <button type="submit" value="Search" class="search_button"><img src="/static/R_E_M/img/search_icon.png" alt="search_logo"
+                                                          id="search_img"/></button>
+                </div>
             </form>
-
         </div>
         <div class="categories-link-set">
             {% for c in cat %}
