@@ -99,7 +99,7 @@ def photo_ajax(request):
                     },
                     "album_details": album.album_details,
                     "alt_text": album.alt_text,
-                    "photo_album": [{"url": img.image.url} for img in album.photo_album.all()]
+                    "photo_album": [{"url": img.image.url, "alt_text": img.alt_text} for img in album.photo_album.all()]
                 })
 
         return JsonResponse(response, safe=False)
