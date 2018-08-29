@@ -53,7 +53,6 @@ def photo_ajax(request):
     if request.method == "POST":
         print('we are at post')
         album_response = Album.objects.filter(
-
             category__slug=request.POST.get("category")
         )
         response = []
@@ -128,6 +127,42 @@ def filmmaking_home(request):
 def movie_single_view(request, cat, slug):
     movie = Movie.objects.get(category__slug=cat, slug=slug)
     return render(request, "movies/movie_view.html", {"movie": movie})
+
+
+def movie_ajax(request):
+    if request.method == "POST":
+        print(request.POST)
+        movie_response = Movie.objects.filter(
+            category__slug=request.POST.get("category")
+        )
+        response = []
+        for movie in movie_response:
+            response.append(
+                {
+                    "title": movie.title,
+                    "owner": {
+                        "username": movie.owner.username
+                    },
+                    "date_built": movie.date_built,
+                    "movie_details": movie.movie_details,
+                    "slug": movie.slug,
+                    "tag_line": movie.tag_line,
+                    "category": {
+                        "name": movie.category.name,
+                        "slug": movie.category.slug
+                    },
+                    "movie_poster": {
+                        "url": movie.movie_poster.url
+                    },
+                    "movie_script": {
+                        "url": movie.movie_script.url
+                    },
+                    "alt_text": movie.alt_text,
+                    "youtube": movie.youtube
+                }
+            )
+        return JsonResponse(response, safe=False)
+    return JsonResponse({"message": "Must be POST"})
 
 
 def movie_create(request):

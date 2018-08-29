@@ -58,7 +58,7 @@
             {% endif %}
             <br>
             <br>
-            <div class="movie_card_container">
+            <div class="movie_card_container {{ movie.category.slug }}" id="movie_card_container">
                 {% for movie in movies %}
                     <div class="movie-card">
                         <img src="{{ movie.movie_poster.url }}" class="movie_poster"/>
@@ -66,7 +66,7 @@
                             <h3>{{ movie.title }}</h3>
 
                             <hr/>
-                            <div class="intro">{{ movie.tag_line }}.</div>
+                            <div class="intro">{{ movie.tag_line }}</div>
                         </div><!-- /.title-content -->
                         <div class="card-info">
                             {{ movie.movie_details }}
@@ -135,33 +135,43 @@
 
         $(".checkbox").click(function () {
             let cat = this.id;
-            // console.log(category);
+            console.log(cat);
             $.ajax({
-                url: "{% url "photo_ajax" %}",
+                url: "{% url "movie_ajax" %}",
                 method: "POST",
                 data: {
                     category: cat
                 },
                 success: function (response) {
-                    //console.dir(response);
-                    let ac = $("#album_container");
+                    let mc = $("#movie_card_container");
                     let html = "";
-                    $(ac).html('');
-                    $(response).each(function (i, album) {
-                        html += `<a href="/photography/galleries/${album.category.slug}/${album.slug}" class="text ${album.category.slug}"><div class="album_set">
-                                    <img src="${album.photo_album[0].url}" class="album-image" alt="">
-                                    <div class="middle">
-                                        <div class="text text_top">${album.title}</div>
-                                        <div class="text text_center">
-                                            <hr>
-                                        </div>
-                                        <div class="text text_bottom">${album.album_details}</div>
+                    $(mc).html('');
+                    $(response).each(function (i, movie) {
+                        console.dir(response)
+                        html += `<div class="movie-card ${movie.category.slug}" id="movie_card_container">
+                                    <img src="${movie.movie_poster.url}" class="movie_poster"/>
+                                    <div class="title-content">
+                                        <h3>${movie.title}</h3>
+                                        <hr/>
+                                        <div class="intro">${movie.tag_line}.</div>
+                                    </div><!-- /.title-content -->
+                                    <div class="card-info">
+                                        ${movie.movie_details}
+                                    </div><!-- /.card-info -->
+                                    <div class="movie_read_more">
+                                        <a href="/filmmaking/movies/${movie.category.slug}/${movie.slug}" class="movie_button">Read More</a>
                                     </div>
-                                </div>
-                            </a>`
+                                    <div class="utility-info">
+                                        <ul class="utility-list">
+                                            <li class="comments">12</li>
+                                            <li class="date">${movie.date_built}</li>
+                                        </ul>
+                                    </div>
+                                    <div class="gradient-overlay"></div>
+                                    <div class="color-overlay"></div>
+                                </div>`
                     });
-                    $(ac).html(html);
-                    calcImgs();
+                    $(mc).html(html);
                 }
             });
         })
