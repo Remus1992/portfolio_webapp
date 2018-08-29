@@ -12,7 +12,6 @@
         <link rel="stylesheet" type="text/css" href="{% static 'styles/style.css' %}"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script>
-
             function calcImg(img) {
                 console.log(img);
                 let h = $(img).height();
@@ -90,9 +89,9 @@
                             <div class="input-row">
                                 <h2>Album Upload</h2>
                                 <span>
-                            <input class='modal_btn' name="images" type="file" value="Add Photos" multiple id="gallery-photo-add">
-                            <span class="close">&times;</span>
-                        </span>
+                                    <input class='modal_btn' name="images" type="file" value="Add Photos" multiple id="gallery-photo-add">
+                                    <span class="close">&times;</span>
+                                </span>
                             </div>
                             <div class="gallery">
                                 <div class="album_info">
@@ -244,7 +243,7 @@
                     calcImgs();
                 }
             });
-        })
+        });
 
         // IMAGE UPLOADER PLUS MODAL
         let imagesPreview = function (input, placeToInsertImagePreview) {
@@ -318,6 +317,8 @@
         // When the user clicks on <span> (x), close the modal
         span.onclick = function() {
             modal.style.display = "none";
+            let ac = $("div.gallery_images");
+            $(ac).html('');
         };
     </script>
 {% endblock %}

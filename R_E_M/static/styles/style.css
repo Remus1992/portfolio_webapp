@@ -1115,6 +1115,9 @@ a, a:visited {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
+.checkbox:hover, .checkbox:hover label{
+    cursor: pointer;
+}
 /************************** Search Bar **************************/
 .search_container {
     margin: 20px;
@@ -1122,6 +1125,10 @@ a, a:visited {
 
 #search_bar {
     height: 30px;
+}
+
+#search_bar:hover {
+    /*box-shadow: 1px 1px 3px rgba(0, 0, 0, .2);*/
 }
 
 #search_img {
@@ -1132,6 +1139,17 @@ a, a:visited {
     display: flex;
     justify-content: center;
 }
+
+.search_button {
+    /*background-color: #cecece;*/
+
+}
+
+.search_button:hover {
+    /*background-color: #b2b2b2;*/
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, .2);
+}
+
 /**************************************************/
 
 .line_container {
@@ -1586,6 +1604,10 @@ pre {
 }
 
 /* Photo Album Upload */
+
+#myBtn:hover {
+    cursor: pointer;
+}
 
 .img_temp {
     width: 100px;
