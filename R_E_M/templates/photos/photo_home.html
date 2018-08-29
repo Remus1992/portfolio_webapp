@@ -10,6 +10,7 @@
 
     <head>
         <link rel="stylesheet" type="text/css" href="{% static 'styles/style.css' %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'styles/photography_upload_style.css' %}"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
     <style>
@@ -43,9 +44,42 @@
         <div class="container">
             {% if user.is_authenticated %}
 
-                <a href="{% url 'picture_upload' %}">Upload Album</a>
+{#                <a href="{% url 'picture_upload' %}">Upload Album</a>#}
+
+{#                <button id="myBtn">Create New Album</button>#}
+                <h4 id="myBtn">Create New Album</h4>
                 <br>
-                <br>
+                <!-- The Modal -->
+                <div id="myModal" class="modal">
+
+                    <!-- Modal content -->
+                    <div class="modal-content">
+
+                        <form method="post" enctype="multipart/form-data" class="album_upload_form">
+                            {% csrf_token %}
+                            <div class="input-row">
+                                <h2>Album Upload</h2>
+                                <span>
+                            <input class='btn' name="images" type="file" value="Add Photos" multiple id="gallery-photo-add">
+                            <span class="close">&times;</span>
+                        </span>
+                            </div>
+                            <div class="gallery">
+                                <div class="album_info">
+                                    <input type="text" id="album_title" name="album_title" class="resizedTextbox" placeholder="Album Title">
+                                    <input type="text" id="album_alt_text" name="album_alt_text" placeholder="Album Alt Text" class="resizedTextbox">
+                                    <input list="categories" id="album_category" name="album_category" placeholder="Album Category" class="resizedTextbox">
+                                    <datalist id="categories">{% for c in album_cats %}<option value="{{ c.name }}">{% endfor %}</datalist>
+                                    <textarea rows="4" cols="50" id="album_details" name="album_details" placeholder="Album Details" class="resizedTextbox album_details"></textarea>
+                                </div>
+                                <div class="gallery_images" id="gallery_images"></div>
+                            </div>
+                            <div class="submit-row">
+                                <input class='btn' type="submit" value="Create Album">
+                            </div>
+                        </form>
+                    </div>
+                </div>
             {% endif %}
             <div class="album_container" id="album_container">
                 {% for album in albums %}
@@ -177,6 +211,80 @@
                 }
             });
         })
+
+        // IMAGE UPLOADER PLUS MODAL
+        let imagesPreview = function (input, placeToInsertImagePreview) {
+            $(placeToInsertImagePreview).html('');
+            let album_html = '<div class="album_info"><input type="text" id="album_title" name="album_title" class="resizedTextbox" placeholder="Album Title"><input type="text" id="album_alt_text" name="album_alt_text" placeholder="Album Alt Text" class="resizedTextbox"><input list="categories" id="album_category" name="album_category" placeholder="Album Category" class="resizedTextbox"><datalist id="categories">{% for c in album_cats %}<option value="{{ c.name }}">{% endfor %}</datalist><textarea rows="4" cols="50" id="album_details" name="album_details" placeholder="Album Details" class="resizedTextbox album_details"></textarea></div><div class="gallery_images" id="gallery_images"></div>';
+            $(placeToInsertImagePreview).append(album_html);
+
+            if (input.files) {
+                let filesAmount = input.files.length;
+
+                for (let i = 0; i < filesAmount; i++) {
+                    let reader = new FileReader();
+                    let num = i;
+                    let name = input.files[i].name;
+                    reader.onload = function (event) {
+                        let html = $(`<div class="img_holder" id="image_${num + 1}"></div>`, {
+                            'id': `image_div_${num + 1}`
+                        })
+                            .append($(`<input>`).attr({
+                                'type': 'hidden',
+                                'value': event.target.result,
+                                'name': `image_${num + 1}`
+                            }))
+                            .append($(`<span class="close" id="close_image_${num + 1}" onClick="removeElement('gallery_images', 'image_${num + 1}')">&times;</span><img class="image" src="${event.target.result}" id="new_picture_${num + 1}"><div><label for="image_name_${num + 1}">Photo Title</label></div><div><input type="text" value="${name}" name="image_name_${num + 1}"></div><div><label for="alt_text_${num + 1}">Alt Text</label></div><div><input type="text" id="alt_text_${num + 1}" name="alt_text_${num + 1}" value="${name}"></div><div><label for="creation_date_${num + 1}">Date Taken</label></div><div><input type="date" id="creation_date_${num + 1}" name="creation_date_${num + 1}"></div><div><label for="image_details_${num + 1}">Image Details</label></div><div><input type="textarea" id="image_details_${num + 1}" name="image_details_${num + 1}"></div>`));
+                        $('div.gallery_images').append(html);
+                    };
+
+                    reader.readAsDataURL(input.files[i]);
+                }
+            }
+            input.value = ''
+        };
+        $('#gallery-photo-add').on('change', function () {
+            imagesPreview(this, 'div.gallery');
+        });
+
+        function removeElement(parentDiv, childDiv) {
+            console.log("Child Div is " + childDiv);
+            console.log("Parent Div is " +parentDiv);
+            if (childDiv == parentDiv) {
+                alert("The parent div cannot be removed.")
+            } else if (document.getElementById(childDiv)) {
+                let child = document.getElementById(childDiv);
+                let parent = document.getElementById(parentDiv);
+                console.log("Child Div is " + child);
+                console.log("Parent Div is " + parent);
+                parent.removeChild(child);
+            }
+            else {
+                alert("Child div has already been removed or does not exist.");
+                return false;
+            }
+        }
+
+
+
+        // Get the modal
+        let modal = document.getElementById('myModal');
+
+        // Get the button that opens the modal
+        let btn = document.getElementById("myBtn");
+
+        // Get the <span> element that closes the modal
+        let span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal
+        btn.onclick = function() {
+            modal.style.display = "block";
+        };
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        };
     </script>
 {% endblock %}
 

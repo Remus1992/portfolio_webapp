@@ -26,6 +26,36 @@ def photography_home(request):
     complete_album_list = Album.objects.all()
     album_categories = AlbumCategory.objects.all()
     query = request.GET.get("q")
+    if request.method == "POST":
+        # print(request.POST)
+        # print(request.FILES)
+        album = Album()
+        cat, created = AlbumCategory.objects.get_or_create(name=request.POST.get('album_category'))
+        album.category = cat
+        album.owner = request.user
+        album.title = request.POST.get('album_title')
+        album.album_details = request.POST.get('album_details')
+        album.alt_text = request.POST.get('album_alt_text')
+        album.save()
+
+        for k, v in request.POST.items():
+            if re.match('^image_\d+$', k):
+                num = int(re.search(r'\d+', k).group())
+                format, imgstr = v.split(';base64,')
+                ext = format.split('/')[-1]
+                data = ContentFile(base64.b64decode(imgstr), name='temp.' + ext)
+
+                photo = Photo()
+                photo.image = data
+                photo.album = album
+                photo.owner = request.user
+                photo.title = request.POST.get('image_name_{}'.format(num))
+                photo.alt_text = request.POST.get('alt_text_{}'.format(num))
+                photo.date_taken = request.POST.get('creation_date_{}'.format(num))
+                photo.image_details = request.POST.get('image_details_{}'.format(num))
+                photo.save()
+
+        return HttpResponseRedirect('/photography/galleries/{}/{}/'.format(album.category.slug, album.slug))
     if query:
         complete_album_list = complete_album_list.filter(
             Q(title__icontains=query) |

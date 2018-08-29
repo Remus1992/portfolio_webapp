@@ -23,8 +23,7 @@
             margin: 20px auto;
             text-align: center;
             width: 50%;
-        {#margin: 20px auto;#}{#display: flex;#}{#flex-wrap: wrap;#} align-items: center;
-        {#justify-content: center;#}
+            align-items: center;
         }
 
         pre {
@@ -92,16 +91,12 @@
 
         .slick-slide.is-active h3 {
             color: #c00;
-            background-color: #fff
+            background-color: #fff;
         }
 
         .slick-slide img {
             margin-left: auto;
             margin-right: auto;
-        }
-
-        .center_image {
-            width: 100%;
         }
 
         .preview_image {
@@ -112,14 +107,26 @@
         }
 
         .slider-nav {
-            height: 100px;
+            height: 140px;
             width: auto;
+        }
+
+        .movie_still_container {
+            height: 500px;
+        }
+
+        .movie_still_container img {
+            height: 100%;
+        }
+
+        .still_slider_container {
+            {#background-color: gray;#}
         }
 
         /******************/
         .script {
             width: 400px;
-            height: 700px;
+            height: 500px;
         }
 
         .poster {
@@ -127,9 +134,7 @@
             margin: 20px;
         }
 
-        .movie_still_container {
-            height: 500px;
-        }
+
     </style>
 
     <div class="page_container">
@@ -149,56 +154,23 @@
         <div class="script_container">
             <object class="script" data="{{ movie.movie_script.url }}"></object>
         </div>
-        {#        <div class="album_container">#}
-        {#            {% for still in movie.movie_photo_album.all %}#}
-        {#                <img src="{{ still.image.url }}" alt="{{ still.alt_text }}" class="image">#}
-        {##}
-        {#                <a href="{{ still.image.url }}" data-lightbox="{{ movie.alt_text }}"#}
-        {#                   data-title="{{ still.image_details }}"><img src="{{ still.image.url }}" class="image"></a>#}
-        {#            {% endfor %}#}
-        {#        </div>#}
-               <!--
-        <div class="slider slider-single">
-            <div><h3>1</h3></div>
-            <div><h3>2</h3></div>
-            <div><h3>3</h3></div>
-            <div><h3>4</h3></div>
-            <div><h3>5</h3></div>
-            <div><h3>6</h3></div>
-            <div><h3>7</h3></div>
-            <div><h3>8</h3></div>
-            <div><h3>9</h3></div>
-            <div><h3>10</h3></div>
-        </div>
-        <div class="slider slider-nav">
-            <div><h3><span>1</span></h3></div>
-            <div><h3><span>2</span></h3></div>
-            <div><h3><span>3</span></h3></div>
-            <div><h3><span>4</span></h3></div>
-            <div><h3><span>5</span></h3></div>
-            <div><h3><span>6</span></h3></div>
-            <div><h3><span>7</span></h3></div>
-            <div><h3><span>8</span></h3></div>
-            <div><h3><span>9</span></h3></div>
-            <div><h3><span>10</span></h3></div>
-        </div>
-          -->
 
-        <div class="slider slider-single movie_still_container">
-            {% for still in movie.movie_photo_album.all %}
-                <div><img src="{{ still.image.url }}" class="center_image"></div>
-            {% endfor %}
-        </div>
-        <div class="slider slider-nav">
-            {% for still in movie.movie_photo_album.all %}
-                <div><img src="{{ still.image.url }}" class="preview_image"></div>
-            {% endfor %}
+        <div class="still_slider_container">
+            <div class="slider slider-single">
+                {% for still in movie.movie_photo_album.all %}
+                    <div class="movie_still_container"><img src="{{ still.image.url }}" class="center_image"></div>
+                {% endfor %}
+            </div>
+            <div class="slider slider-nav">
+                {% for still in movie.movie_photo_album.all %}
+                    <div><img src="{{ still.image.url }}" class="preview_image"></div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 
     </div>
 
-    {#    <script src="{% static 'javascript/lightbox.js' %}"></script>#}
     <script src="{% static 'slick-1.8.1/slick/slick.min.js' %}"></script>
 
     <script>
@@ -208,7 +180,7 @@
             arrows: true,
             fade: false,
             adaptiveHeight: true,
-            infinite: false,
+            infinite: true,
             useTransform: true,
             speed: 400,
             cssEase: 'cubic-bezier(0.77, 0, 0.18, 1)',
@@ -223,7 +195,7 @@
                 slidesToScroll: 7,
                 dots: false,
                 focusOnSelect: false,
-                infinite: false,
+                infinite: true,
                 responsive: [{
                     breakpoint: 1024,
                     settings: {
