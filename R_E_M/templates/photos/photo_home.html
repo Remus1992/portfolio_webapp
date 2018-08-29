@@ -10,6 +10,11 @@
 
     <head>
         <link rel="stylesheet" type="text/css" href="{% static 'styles/style.css' %}"/>
+        <link rel="stylesheet" href="{% static 'styles/jquery.fancybox-1.3.4.css' %}" type="text/css">
+
+        <script type='text/javascript' src='{% static 'javascript/jquery.min.js' %}'></script>
+        <script type='text/javascript' src='{% static 'javascript/jquery.fancybox-1.3.4.pack.js' %}'></script>
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script>
             function calcImg(img) {
@@ -40,6 +45,17 @@
                     $(img).addClass('square');
                 }
             }
+        </script>
+        <script type="text/javascript">
+            $(function() {
+                $("a.group").fancybox({
+                    'nextEffect'	:	'fade',
+                    'prevEffect'	:	'fade',
+                    'overlayOpacity' :  0.8,
+                    'overlayColor' : '#000000',
+                    'arrows' : false,
+                });
+            });
         </script>
     </head>
     <style>
@@ -129,7 +145,33 @@
             </div>
         </div>
     </div>
+<!--
+    <?php
+		// Supply a user id and an access token
+		$userid = "";
+		$accessToken = "";
 
+		// Gets our data
+		function fetchData($url){
+		     $ch = curl_init();
+		     curl_setopt($ch, CURLOPT_URL, $url);
+		     curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+		     curl_setopt($ch, CURLOPT_TIMEOUT, 20);
+		     $result = curl_exec($ch);
+		     curl_close($ch);
+		     return $result;
+		}
+
+		// Pulls and parses data.
+		$result = fetchData("https://api.instagram.com/v1/users/{$userid}/media/recent/?access_token={$accessToken}");
+		$result = json_decode($result);
+	?>
+
+	<?php foreach ($result->data as $post): ?>
+{#		<!-- Renders images. @Options (thumbnail,low_resoulution, high_resolution) -->#}
+		<a class="group" rel="group1" href="<?= $post->images->standard_resolution->url ?>"><img src="<?= $post->images->thumbnail->url ?>"></a>
+	<?php endforeach ?>
+-->
     <script>
     /*
         $(document).ready(function () {
