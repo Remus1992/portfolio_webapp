@@ -14,7 +14,7 @@
 
     </head>
     <style>
-        .image {
+        .image_pic {
             width: 200px;
             margin: 5px;
         }
@@ -47,7 +47,7 @@
                 {% for photo in album.photo_album.all %}
 
                     <a href="{{ photo.image.url }}" data-lightbox="{{ album.alt_text }}"
-                       data-title="<a href='{% url 'picture_view' album.category.slug album.slug photo.slug %}'>{{ photo.image_details }}</a>"><img src="{{ photo.image.url }}" class="image grid-item "></a>
+                       data-title="<a href='{% url 'picture_view' album.category.slug album.slug photo.slug %}'>{{ photo.image_details }}</a>"><img src="{{ photo.image.url }}" class="image_pic grid-item "></a>
 
 {#                    <a href="{% url 'picture_view' album.category.slug album.slug photo.slug %}">{{ photo.image_details }}</a>#}
 
