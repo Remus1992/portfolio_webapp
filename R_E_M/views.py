@@ -151,6 +151,48 @@ def filmmaking_home(request):
             Q(movie_details__icontains=query) |
             Q(category__name__icontains=query)
         )
+    if request.method == "POST":
+        # print(request.FILES)
+        # print(request.POST)
+        movie = Movie()
+        movie.owner = request.user
+        movie.title = request.POST.get('movie_title')
+        cat, created = MovieCategory.objects.get_or_create(name=request.POST.get('movie_category'))
+        movie.category = cat
+        movie.tag_line = request.POST.get('movie_tag')
+        movie.movie_details = request.POST.get('movie_details')
+        movie.date_built = request.POST.get('movie_date')
+        movie.youtube = request.POST.get('movie_youtube')
+        movie.alt_text = request.POST.get('alt_text')
+
+        poster = request.FILES.get('movie_poster')
+        if poster:
+            movie.movie_poster = poster
+
+        script = request.FILES.get('movie_script')
+        if script:
+            movie.movie_script = script
+
+        movie.save()
+
+        for k, v in request.POST.items():
+            if re.match('^image_\d+$', k):
+                num = int(re.search(r'\d+', k).group())
+                format, imgstr = v.split(';base64,')
+                ext = format.split('/')[-1]
+                data = ContentFile(base64.b64decode(imgstr), name='temp.' + ext)
+
+                photo = MovieStillPhoto()
+                photo.image = data
+                photo.movie_album = movie
+                photo.owner = request.user
+                photo.title = request.POST.get('image_name_{}'.format(num))
+                photo.alt_text = request.POST.get('alt_text_{}'.format(num))
+                photo.date_taken = request.POST.get('creation_date_{}'.format(num))
+                photo.image_details = request.POST.get('image_details_{}'.format(num))
+                photo.save()
+
+        return HttpResponseRedirect(reverse("movie_single_view", kwargs={"cat": movie.category.slug, "slug": movie.slug}))
     return render(request, 'movies/movie_home.html', {"movie_cats": movie_categories, 'movies': complete_movie_list})
 
 

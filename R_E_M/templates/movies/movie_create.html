@@ -99,7 +99,7 @@
                                 'value': event.target.result,
                                 'name': `image_${num + 1}`
                             }))
-                            .append($(`<span class="close" id="close_image_${num + 1}" onClick="removeElement('movie_gallery_images', 'image_${num + 1}')">&times;</span><img class="image" src="${event.target.result}" id="new_picture_${num + 1}"><div><label for="image_name_${num + 1}">Photo Title</label></div><div><input type="text" value="${name}" name="image_name_${num + 1}"></div><div><label for="alt_text_${num + 1}">Alt Text</label></div><div><input type="text" id="alt_text_${num + 1}" name="alt_text_${num + 1}" value="${name}"></div><div><label for="creation_date_${num + 1}">Date Taken</label></div><div><input type="date" id="creation_date_${num + 1}" name="creation_date_${num + 1}"></div><div><label for="image_details_${num + 1}">Image Details</label></div><div><input type="textarea" id="image_details_${num + 1}" name="image_details_${num + 1}"></div>`));
+                            .append($(`<span class="close" id="close_image_${num + 1}" onClick="removeElement('movie_gallery_images', 'image_${num + 1}')">&times;</span><img class="movie_image" src="${event.target.result}" id="new_picture_${num + 1}"><div><label for="image_name_${num + 1}">Photo Title</label></div><div><input type="text" value="${name}" name="image_name_${num + 1}"></div><div><label for="alt_text_${num + 1}">Alt Text</label></div><div><input type="text" id="alt_text_${num + 1}" name="alt_text_${num + 1}" value="${name}"></div><div><label for="creation_date_${num + 1}">Date Taken</label></div><div><input type="date" id="creation_date_${num + 1}" name="creation_date_${num + 1}"></div><div><label for="image_details_${num + 1}">Image Details</label></div><div><input type="textarea" id="image_details_${num + 1}" name="image_details_${num + 1}"></div>`));
                         $(placeToInsertImagePreview).append(html);
                     };
 
@@ -146,12 +146,6 @@
         };
 
         // When the user clicks on <span> (x), close the modal
-        //span.onclick = function() {
-         //   movieUploadModal.style.display = "none";
-         //   let mc = $("div.movie_gallery_images");
-         //   $(mc).html('');
-        //};
-
         span.onclick = function() {
             movieUploadModal.style.display = "none";
             let movie_html = '<div class="movie_info"><input type="text" id="movie_title" name="movie_title" class="resizedTextbox" placeholder="Movie Title"><input type="text" id="movie_tag" name="movie_tag" placeholder="Movie Tagline" class="resizedTextbox"><input list="categories" id="movie_category" name="movie_category" placeholder="Movie Category" class="resizedTextbox"><datalist id="categories">{% for c in cat %}<option value="{{ c.name }}">{% endfor %}</datalist><input type="text" id="youtube_link" name="movie_youtube" placeholder="YouTube Link" class="resizedTextbox"><input type="date" id="movie_date" name="movie_date" class="resizedTextbox"><br><br><br><p>Movie Poster</p><input type="file" id="movie_poster" name="movie_poster" class="resizedTextbox"><input type="text" id="alt_text" name="alt_text" placeholder="Poster Alt Text" class="resizedTextbox"><br><br><br><p>Movie Script</p><input type="file" id="movie_script" name="movie_script" class="resizedTextbox"></div><div class="movie-details-row"><textarea id="movie_details" name="movie_details" cols="30" rows="10" placeholder="Movie Details"></textarea></div><div class="movie-still-input-row"><h2>Movie Stills</h2><input class="movie_modal_btn" name="images" type="file" multiple id="gallery-movie-still-add"></div><div id="movie_gallery_images" class="movie_gallery_images"></div>'
