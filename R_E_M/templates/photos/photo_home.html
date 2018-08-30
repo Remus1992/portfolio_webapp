@@ -91,25 +91,25 @@
 
 {#                <a href="{% url 'picture_upload' %}">Upload Album</a>#}
 
-{#                <button id="myBtn">Create New Album</button>#}
-                <h4 id="myBtn">Create New Album</h4>
+{#                <button id="photoModalBtn">Create New Album</button>#}
+                <h4 id="photoModalBtn">Create New Album</h4>
                 <br>
                 <!-- The Modal -->
-                <div id="myModal" class="modal">
+                <div id="photoModal" class="album_modal">
 
                     <!-- Modal content -->
-                    <div class="modal-content">
+                    <div class="album_modal_content">
 
                         <form method="post" enctype="multipart/form-data" class="album_upload_form">
                             {% csrf_token %}
-                            <div class="input-row">
+                            <div class="album-input-row">
                                 <h2>Album Upload</h2>
                                 <span>
-                                    <input class='modal_btn' name="images" type="file" value="Add Photos" multiple id="gallery-photo-add">
-                                    <span class="close">&times;</span>
+                                    <input class='album_modal_btn' name="images" type="file" value="Add Photos" multiple id="gallery-photo-add">
+                                    <span class="album-close">&times;</span>
                                 </span>
                             </div>
-                            <div class="gallery">
+                            <div class="album_gallery">
                                 <div class="album_info">
                                     <input type="text" id="album_title" name="album_title" class="resizedTextbox" placeholder="Album Title">
                                     <input type="text" id="album_alt_text" name="album_alt_text" placeholder="Album Alt Text" class="resizedTextbox">
@@ -117,10 +117,10 @@
                                     <datalist id="categories">{% for c in album_cats %}<option value="{{ c.name }}">{% endfor %}</datalist>
                                     <textarea rows="4" cols="50" id="album_details" name="album_details" placeholder="Album Details" class="resizedTextbox album_details"></textarea>
                                 </div>
-                                <div class="gallery_images" id="gallery_images"></div>
+                                <div class="album_gallery_images" id="album_gallery_images"></div>
                             </div>
-                            <div class="submit-row">
-                                <input class='modal_btn' type="submit" value="Create Album">
+                            <div class="album-submit-row">
+                                <input class='album-input-row' type="submit" value="Create Album">
                             </div>
                         </form>
                     </div>
@@ -290,7 +290,7 @@
         // IMAGE UPLOADER PLUS MODAL
         let imagesPreview = function (input, placeToInsertImagePreview) {
             $(placeToInsertImagePreview).html('');
-            let album_html = '<div class="album_info"><input type="text" id="album_title" name="album_title" class="resizedTextbox" placeholder="Album Title"><input type="text" id="album_alt_text" name="album_alt_text" placeholder="Album Alt Text" class="resizedTextbox"><input list="categories" id="album_category" name="album_category" placeholder="Album Category" class="resizedTextbox"><datalist id="categories">{% for c in album_cats %}<option value="{{ c.name }}">{% endfor %}</datalist><textarea rows="4" cols="50" id="album_details" name="album_details" placeholder="Album Details" class="resizedTextbox album_details"></textarea></div><div class="gallery_images" id="gallery_images"></div>';
+            let album_html = '<div class="album_info"><input type="text" id="album_title" name="album_title" class="resizedTextbox" placeholder="Album Title"><input type="text" id="album_alt_text" name="album_alt_text" placeholder="Album Alt Text" class="resizedTextbox"><input list="categories" id="album_category" name="album_category" placeholder="Album Category" class="resizedTextbox"><datalist id="categories">{% for c in album_cats %}<option value="{{ c.name }}">{% endfor %}</datalist><textarea rows="4" cols="50" id="album_details" name="album_details" placeholder="Album Details" class="resizedTextbox album_details"></textarea></div><div class="album_gallery_images" id="album_gallery_images"></div>';
             $(placeToInsertImagePreview).append(album_html);
 
             if (input.files) {
@@ -309,8 +309,8 @@
                                 'value': event.target.result,
                                 'name': `image_${num + 1}`
                             }))
-                            .append($(`<span class="close" id="close_image_${num + 1}" onClick="removeElement('gallery_images', 'image_${num + 1}')">&times;</span><img class="image" src="${event.target.result}" id="new_picture_${num + 1}"><div><label for="image_name_${num + 1}">Photo Title</label></div><div><input type="text" value="${name}" name="image_name_${num + 1}"></div><div><label for="alt_text_${num + 1}">Alt Text</label></div><div><input type="text" id="alt_text_${num + 1}" name="alt_text_${num + 1}" value="${name}"></div><div><label for="creation_date_${num + 1}">Date Taken</label></div><div><input type="date" id="creation_date_${num + 1}" name="creation_date_${num + 1}"></div><div><label for="image_details_${num + 1}">Image Details</label></div><div><input type="textarea" id="image_details_${num + 1}" name="image_details_${num + 1}"></div>`));
-                        $('div.gallery_images').append(html);
+                            .append($(`<span class="album-close" id="close_image_${num + 1}" onClick="removeElement('album_gallery_images', 'image_${num + 1}')">&times;</span><img class="album_image" src="${event.target.result}" id="new_picture_${num + 1}"><div><label for="image_name_${num + 1}">Photo Title</label></div><div><input type="text" value="${name}" name="image_name_${num + 1}"></div><div><label for="alt_text_${num + 1}">Alt Text</label></div><div><input type="text" id="alt_text_${num + 1}" name="alt_text_${num + 1}" value="${name}"></div><div><label for="creation_date_${num + 1}">Date Taken</label></div><div><input type="date" id="creation_date_${num + 1}" name="creation_date_${num + 1}"></div><div><label for="image_details_${num + 1}">Image Details</label></div><div><input type="textarea" id="image_details_${num + 1}" name="image_details_${num + 1}"></div>`));
+                        $('div.album_gallery_images').append(html);
                     };
 
                     reader.readAsDataURL(input.files[i]);
@@ -319,7 +319,7 @@
             input.value = ''
         };
         $('#gallery-photo-add').on('change', function () {
-            imagesPreview(this, 'div.gallery');
+            imagesPreview(this, 'div.album_gallery');
         });
 
         function removeElement(parentDiv, childDiv) {
@@ -343,23 +343,23 @@
 
 
         // Get the modal
-        let modal = document.getElementById('myModal');
+        let photoAlbumModal = document.getElementById('photoModal');
 
         // Get the button that opens the modal
-        let btn = document.getElementById("myBtn");
+        let photoAlbumBtn = document.getElementById("photoModalBtn");
 
         // Get the <span> element that closes the modal
-        let span = document.getElementsByClassName("close")[0];
+        let span = document.getElementsByClassName("album-close")[0];
 
         // When the user clicks the button, open the modal
-        btn.onclick = function() {
-            modal.style.display = "block";
+        photoAlbumBtn.onclick = function() {
+            photoAlbumModal.style.display = "block";
         };
 
         // When the user clicks on <span> (x), close the modal
         span.onclick = function() {
-            modal.style.display = "none";
-            let ac = $("div.gallery_images");
+            photoAlbumModal.style.display = "none";
+            let ac = $("div.album_gallery_images");
             $(ac).html('');
         };
     </script>

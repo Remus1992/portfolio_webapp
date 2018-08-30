@@ -1125,6 +1125,7 @@ a, a:visited {
 
 #search_bar {
     height: 30px;
+    width: 250px;
 }
 
 #search_bar:hover {
@@ -1174,9 +1175,7 @@ a, a:visited {
 }
 
 
-/****************************/
-/******** Movie Card **********/
-/****************************/
+/**************** Movie Card ************************/
 
 .movie_card_container {
     display: flex;
@@ -1603,9 +1602,9 @@ pre {
     width: auto;
 }
 
-/* Photo Album Upload */
+/*************************** Photo Album Upload ***************************/
 
-#myBtn:hover {
+#photoModalBtn:hover {
     cursor: pointer;
 }
 
@@ -1613,7 +1612,7 @@ pre {
     width: 100px;
 }
 
-.image {
+.album_image {
     height: 150px;
     /*width: 50px;*/
 }
@@ -1627,7 +1626,7 @@ pre {
 
 }
 
-.modal_btn {
+.album_modal_btn {
     font: 1rem 'Fira Sans', sans-serif;
     padding: .5rem;
     background: transparent;
@@ -1638,12 +1637,12 @@ pre {
     transition: 3ms;
 }
 
-.modal_btn:hover {
+.album_modal_btn:hover {
     background: #b2b2b2;
     cursor: pointer;
 }
 
-.gallery {
+.album_gallery {
     width: 100%;
     overflow: hidden;
     /*justify-content: center;*/
@@ -1658,7 +1657,7 @@ pre {
     float: left;
 }
 
-.gallery_images {
+.album_gallery_images {
     margin-left: 20%;
     height: 510px;
     overflow: auto;
@@ -1667,30 +1666,30 @@ pre {
 
 }
 
-.gallery_images img {
+.album_gallery_images img {
     margin-left: 40px;
 }
 
-.input-row, .submit-row {
+.album-input-row, .album-submit-row {
     display: flex;
 
     background-color: #cccccc;
 }
 
-.input-row {
+.album-input-row {
     border-bottom: 1px solid #888;
     justify-content: space-between;
     /*-moz-border-radius-topleft: 5px;*/
     /*-moz-border-radius-topright: 5px;*/
 }
 
-.input-row h2 {
+.album-input-row h2 {
     padding: 16px;
     font-size: 28px;
     font-weight: bold;
 }
 
-.submit-row {
+.album-submit-row {
     border-top: 1px solid #888;
     justify-content: flex-end;
     /*-moz-border-radius-bottomleft: 5px;*/
@@ -1703,7 +1702,7 @@ pre {
 }
 
 /* The Modal (background) */
-.modal {
+.album_modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
     z-index: 1; /* Sit on top */
@@ -1718,7 +1717,7 @@ pre {
 }
 
 /* Modal Content */
-.modal-content {
+.album_modal_content {
     background-color: #fefefe;
     margin: auto;
     margin-top: -20px;
@@ -1728,7 +1727,7 @@ pre {
 }
 
 /* The Close Button */
-.close {
+.album-close {
     color: #aaaaaa;
     float: right;
     font-size: 28px;
@@ -1736,8 +1735,8 @@ pre {
     padding: 11px;
 }
 
-.close:hover,
-.close:focus {
+.album-close:hover,
+.album-close:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;
