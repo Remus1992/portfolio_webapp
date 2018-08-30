@@ -7,106 +7,81 @@
 {% endblock %}
 
 {% block content %}
-   <head>
+    <head>
         <link rel="stylesheet" type="text/css" href="{% static 'styles/photography_upload_style.css' %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'styles/style.css' %}"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
 
     <style>
-        .row {
-            margin: 50px;
-            border-style: solid;
-            border-width: 5px;
-            padding: 10px;
+      body {
+            font-family: 'Alegreya Sans SC', sans-serif;
         }
     </style>
-    <h1>Movie Create</h1>
-    <div class="row">
-        <section class="create">
-            <form class="blog_create" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                <p>Movie Title</p>
-                <input type="text" id="movie_title" name="movie_title">
-                <p>Movie Tagline</p>
-                <input type="text" id="movie_tag" name="movie_tag">
-                <p>Category</p>
-                <input list="categories" id="movie_category" name="movie_category">
+    <div class="container">
+        {% if user.is_authenticated %}
+            <h4 id="movieModalBtn">Create New Movie</h4>
+            <br>
+            <!-- The Modal -->
+            <div id="movieModal" class="movie_modal">
 
-                <datalist id="categories">
-                    {% for c in cat %}
-                        <option value="{{ c.name }}">
-                    {% endfor %}
-                </datalist>
-                <br>
+                <!-- Modal content -->
+                <div class="movie_modal_content">
 
-                <p>Movie Date</p>
-                <input type="date" id="movie_date" name="movie_date">
-                <br>
-                <p>Movie Poster</p>
-                <input type="file" id="movie_poster" name="movie_poster">
-                <br>
-                <p>Image Alt Text</p>
-                <input type="text" id="alt_text" name="alt_text">
-                <br>
-                <p>Movie Script</p>
-                <input type="file" id="movie_script" name="movie_script">
-                <br>
-                <p>YouTube Link</p>
-                <input type="text" id="youtube_link" name="movie_youtube">
-                <br>
-                <p>Movie Details</p>
-                <textarea id="movie_details" name="movie_details" cols="30" rows="10"></textarea>
-                <br>
-                <p>Movie Stills</p>
-                <input class='btn' name="images" type="file" multiple id="gallery-photo-add">
-                <div class="gallery">
-
+                    <form method="post" enctype="multipart/form-data" class="movie_upload_form">
+                        {% csrf_token %}
+                        <div class="movie-input-row">
+                            <h2>Movie Upload</h2>
+                            <span>
+                                <span class="movie-close">&times;</span>
+                            </span>
+                        </div>
+                        <div class="movie_gallery">
+                            <div class="movie_info">
+                                <input type="text" id="movie_title" name="movie_title" class="resizedTextbox" placeholder="Movie Title">
+                                <input type="text" id="movie_tag" name="movie_tag" placeholder="Movie Tagline" class="resizedTextbox">
+                                <input list="categories" id="movie_category" name="movie_category" placeholder="Movie Category" class="resizedTextbox">
+                                <datalist id="categories">{% for c in cat %}<option value="{{ c.name }}">{% endfor %}</datalist>
+                                <input type="text" id="youtube_link" name="movie_youtube" placeholder="YouTube Link" class="resizedTextbox">
+                                <input type="date" id="movie_date" name="movie_date" class="resizedTextbox">
+                                <br>
+                                <br>
+                                <br>
+                                <p>Movie Poster</p>
+                                <input type="file" id="movie_poster" name="movie_poster" class="resizedTextbox">
+                                <input type="text" id="alt_text" name="alt_text" placeholder="Poster Alt Text" class="resizedTextbox">
+                                <br>
+                                <br>
+                                <br>
+                                <p>Movie Script</p>
+                                <input type="file" id="movie_script" name="movie_script" class="resizedTextbox">
+                            </div>
+                            <div class="movie-details-row">
+                                <textarea id="movie_details" name="movie_details" cols="30" rows="10" placeholder="Movie Details"></textarea>
+                            </div>
+                            <div class="movie-still-input-row">
+                                <h2>Movie Stills</h2>
+                                <input class='movie_modal_btn' name="images" type="file" multiple id="gallery-movie-still-add">
+                            </div>
+                            <div class="movie_gallery_images" id="movie_gallery_images"></div>
+                        </div>
+                        <div class="movie-submit-row">
+                            <input class='movie_modal_btn' type="submit" id="sub-btn" value="Create Movie">
+                        </div>
+                    </form>
                 </div>
-                <input class="button" type="submit" value="Submit" id="sub-btn">
-            </form>
-        </section>
+            </div>
+
+        {% endif %}
     </div>
-
     <script>
+        // .append($(`<p>${name}</p><img class="image" src="${event.target.result}" id="new_picture_${num + 1}"><div><label for="image_name_${num + 1}">Photo Title</label></div><div><input type="text" name="image_name_${num + 1}"></div><div><label for="alt_text_${num + 1}">Alt Text</label></div><div><input type="text" id="alt_text_${num + 1}" name="alt_text_${num + 1}"></div><div><label for="creation_date_${num + 1}">Date Taken</label></div><div><input type="date" id="creation_date_${num + 1}" name="creation_date_${num + 1}"></div><div><label for="image_details_${num + 1}">Image Details</label></div><div><input type="text" id="image_details_${num + 1}" name="image_details_${num + 1}"></div>`));
+
+        // IMAGE UPLOADER PLUS MODAL
         let imagesPreview = function (input, placeToInsertImagePreview) {
             $(placeToInsertImagePreview).html('');
-
-            if (input.files) {
-                let filesAmount = input.files.length;
-
-                for (let i = 0; i < filesAmount; i++) {
-                    let reader = new FileReader();
-                    let num = i;
-                    let name = input.files[i].name;
-                    reader.onload = function (event) {
-                        let html = $('<div class="img_holder" id="image_${num + 1}"></div>', {
-                            'id': `image_div_${num + 1}`
-                        })
-                            .append($(`<input>`).attr({
-                                'type': 'hidden',
-                                'value': event.target.result,
-                                'name': `image_${num + 1}`
-                            }))
-                            .append($(`<p>${name}</p><img class="image" src="${event.target.result}" id="new_picture_${num + 1}"><div><label for="image_name_${num + 1}">Photo Title</label></div><div><input type="text" name="image_name_${num + 1}"></div><div><label for="alt_text_${num + 1}">Alt Text</label></div><div><input type="text" id="alt_text_${num + 1}" name="alt_text_${num + 1}"></div><div><label for="creation_date_${num + 1}">Date Taken</label></div><div><input type="date" id="creation_date_${num + 1}" name="creation_date_${num + 1}"></div><div><label for="image_details_${num + 1}">Image Details</label></div><div><input type="text" id="image_details_${num + 1}" name="image_details_${num + 1}"></div>`));
-                        $(placeToInsertImagePreview).append(html);
-                    };
-
-                    reader.readAsDataURL(input.files[i]);
-                }
-            }
-            input.value = ''
-        };
-
-        $('#gallery-photo-add').on('change', function () {
-            imagesPreview(this, 'div.gallery');
-        });
-
-
-         // IMAGE UPLOADER PLUS MODAL
-        let imagesPreview = function (input, placeToInsertImagePreview) {
-            $(placeToInsertImagePreview).html('');
-            let album_html = '<div class="album_info"><input type="text" id="album_title" name="album_title" class="resizedTextbox" placeholder="Album Title"><input type="text" id="album_alt_text" name="album_alt_text" placeholder="Album Alt Text" class="resizedTextbox"><input list="categories" id="album_category" name="album_category" placeholder="Album Category" class="resizedTextbox"><datalist id="categories">{% for c in album_cats %}<option value="{{ c.name }}">{% endfor %}</datalist><textarea rows="4" cols="50" id="album_details" name="album_details" placeholder="Album Details" class="resizedTextbox album_details"></textarea></div><div class="gallery_images" id="gallery_images"></div>';
-            $(placeToInsertImagePreview).append(album_html);
+            let movie_html = '<div class="movie_info"><input type="text" id="movie_title" name="movie_title" class="resizedTextbox" placeholder="Movie Title"><input type="text" id="movie_tag" name="movie_tag" placeholder="Movie Tagline" class="resizedTextbox"><input list="categories" id="movie_category" name="movie_category" placeholder="Movie Category" class="resizedTextbox"><datalist id="categories">{% for c in cat %}<option value="{{ c.name }}">{% endfor %}</datalist><input type="text" id="youtube_link" name="movie_youtube" placeholder="YouTube Link" class="resizedTextbox"><input type="date" id="movie_date" name="movie_date" class="resizedTextbox"><br><br><br><p>Movie Poster</p><input type="file" id="movie_poster" name="movie_poster" class="resizedTextbox"><input type="text" id="alt_text" name="alt_text" placeholder="Poster Alt Text" class="resizedTextbox"><br><br><br><p>Movie Script</p><input type="file" id="movie_script" name="movie_script" class="resizedTextbox"></div><div class="movie-details-row"><textarea id="movie_details" name="movie_details" cols="30" rows="10" placeholder="Movie Details"></textarea></div><div class="movie-still-input-row"><h2>Movie Stills</h2><input class="movie_modal_btn" name="images" type="file" multiple id="gallery-movie-still-add"></div><div id="movie_gallery_images" class="movie_gallery_images"></div>'
+            $(placeToInsertImagePreview).append(movie_html);
 
             if (input.files) {
                 let filesAmount = input.files.length;
@@ -124,8 +99,8 @@
                                 'value': event.target.result,
                                 'name': `image_${num + 1}`
                             }))
-                            .append($(`<span class="close" id="close_image_${num + 1}" onClick="removeElement('gallery_images', 'image_${num + 1}')">&times;</span><img class="image" src="${event.target.result}" id="new_picture_${num + 1}"><div><label for="image_name_${num + 1}">Photo Title</label></div><div><input type="text" value="${name}" name="image_name_${num + 1}"></div><div><label for="alt_text_${num + 1}">Alt Text</label></div><div><input type="text" id="alt_text_${num + 1}" name="alt_text_${num + 1}" value="${name}"></div><div><label for="creation_date_${num + 1}">Date Taken</label></div><div><input type="date" id="creation_date_${num + 1}" name="creation_date_${num + 1}"></div><div><label for="image_details_${num + 1}">Image Details</label></div><div><input type="textarea" id="image_details_${num + 1}" name="image_details_${num + 1}"></div>`));
-                        $('div.gallery_images').append(html);
+                            .append($(`<span class="close" id="close_image_${num + 1}" onClick="removeElement('movie_gallery_images', 'image_${num + 1}')">&times;</span><img class="image" src="${event.target.result}" id="new_picture_${num + 1}"><div><label for="image_name_${num + 1}">Photo Title</label></div><div><input type="text" value="${name}" name="image_name_${num + 1}"></div><div><label for="alt_text_${num + 1}">Alt Text</label></div><div><input type="text" id="alt_text_${num + 1}" name="alt_text_${num + 1}" value="${name}"></div><div><label for="creation_date_${num + 1}">Date Taken</label></div><div><input type="date" id="creation_date_${num + 1}" name="creation_date_${num + 1}"></div><div><label for="image_details_${num + 1}">Image Details</label></div><div><input type="textarea" id="image_details_${num + 1}" name="image_details_${num + 1}"></div>`));
+                        $('div.movie_gallery_images').append(html);
                     };
 
                     reader.readAsDataURL(input.files[i]);
@@ -133,8 +108,9 @@
             }
             input.value = ''
         };
-        $('#gallery-photo-add').on('change', function () {
-            imagesPreview(this, 'div.gallery');
+
+        $('#gallery-movie-still-add').on('change', function () {
+            imagesPreview(this, 'div.movie_gallery');
         });
 
         function removeElement(parentDiv, childDiv) {
@@ -155,27 +131,25 @@
             }
         }
 
-
-
         // Get the modal
-        let modal = document.getElementById('myModal');
+        let movieUploadModal = document.getElementById('movieModal');
 
         // Get the button that opens the modal
-        let btn = document.getElementById("myBtn");
+        let movieBtn = document.getElementById("movieModalBtn");
 
         // Get the <span> element that closes the modal
-        let span = document.getElementsByClassName("close")[0];
+        let span = document.getElementsByClassName("movie-close")[0];
 
         // When the user clicks the button, open the modal
-        btn.onclick = function() {
-            modal.style.display = "block";
+        movieBtn.onclick = function() {
+            movieUploadModal.style.display = "block";
         };
 
         // When the user clicks on <span> (x), close the modal
         span.onclick = function() {
-            modal.style.display = "none";
-            let ac = $("div.gallery_images");
-            $(ac).html('');
+            movieUploadModal.style.display = "none";
+            let mc = $("div.movie_gallery_images");
+            $(mc).html('');
         };
     </script>
 {% endblock %}

@@ -88,10 +88,6 @@
         </div>
         <div class="container">
             {% if user.is_authenticated %}
-
-{#                <a href="{% url 'picture_upload' %}">Upload Album</a>#}
-
-{#                <button id="photoModalBtn">Create New Album</button>#}
                 <h4 id="photoModalBtn">Create New Album</h4>
                 <br>
                 <!-- The Modal -->
@@ -120,7 +116,7 @@
                                 <div class="album_gallery_images" id="album_gallery_images"></div>
                             </div>
                             <div class="album-submit-row">
-                                <input class='album-input-row' type="submit" value="Create Album">
+                                <input class='album_modal_btn' type="submit" value="Create Album">
                             </div>
                         </form>
                     </div>
