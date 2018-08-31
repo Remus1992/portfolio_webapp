@@ -1436,6 +1436,10 @@ h3 {
     float: left;
 }
 
+.movie_info p {
+    font-weight: bold;
+}
+
 .movie-details-row, .movie-still-input-row, .movie_gallery_images {
     margin-left: 20%;
 }
@@ -1491,6 +1495,7 @@ h3 {
 .movie-still-input-row h2 {
     padding: 16px;
     font-size: 20px;
+    font-weight: bold;
 }
 
 .movie-submit-row {
@@ -1547,6 +1552,7 @@ h3 {
 }
 
 .resizedTextbox {
+    padding-left: 5px;
     width: 90%;
     height: 25px;
     margin: 5px;
@@ -1557,6 +1563,12 @@ h3 {
     height: 100px;
 }
 
+.movie_modal {
+    -webkit-transition: all 0.3s ease-out;  /* Chrome 1-25, Safari 3.2+ */
+    -moz-transition: all 0.3s ease-out;  /* Firefox 4-15 */
+    -o-transition: all 0.3s ease-out;  /* Opera 10.50–12.00 */
+    transition: all 0.3s ease-out;
+}
 
 /********** Blog Cards **************/
 
@@ -1704,7 +1716,7 @@ pre {
 
 #blog_content {
     width: 98.4%;
-    height: 501px;
+    height: 504px;
 }
 
 .blog-input-row, .blog-submit-row {
@@ -1731,6 +1743,7 @@ pre {
 .blog-submit-row {
     border-top: 1px solid #888;
     justify-content: flex-end;
+    margin-top: -3px;
     /*-moz-border-radius-bottomleft: 5px;*/
     /*-moz-border-radius-bottomright: 5px;*/
 }
@@ -1777,6 +1790,7 @@ pre {
 }
 
 .resizedTextbox {
+    padding-left: 5px;
     width: 90%;
     height: 25px;
     margin: 5px;
@@ -1787,6 +1801,9 @@ pre {
     height: 100px;
 }
 
+.blog_info p {
+    font-weight: bold;
+}
 
 /********* Photo Album Pages ********/
 
@@ -2046,6 +2063,7 @@ pre {
 }
 
 .resizedTextbox {
+    padding-left: 5px;
     width: 90%;
     height: 25px;
     margin: 5px;

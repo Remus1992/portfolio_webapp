@@ -220,7 +220,7 @@
                     $(mc).html(html);
                 }
             });
-        })
+        });
 
     // IMAGE UPLOADER PLUS MODAL
         let imagesPreview = function (input, placeToInsertImagePreview) {
@@ -244,7 +244,7 @@
                                 'value': event.target.result,
                                 'name': `image_${num + 1}`
                             }))
-                            .append($(`<span class="close" id="close_image_${num + 1}" onClick="removeElement('movie_gallery_images', 'image_${num + 1}')">&times;</span><img class="movie_image" src="${event.target.result}" id="new_picture_${num + 1}"><div><label for="image_name_${num + 1}">Photo Title</label></div><div><input type="text" value="${name}" name="image_name_${num + 1}"></div><div><label for="alt_text_${num + 1}">Alt Text</label></div><div><input type="text" id="alt_text_${num + 1}" name="alt_text_${num + 1}" value="${name}"></div><div><label for="creation_date_${num + 1}">Date Taken</label></div><div><input type="date" id="creation_date_${num + 1}" name="creation_date_${num + 1}"></div><div><label for="image_details_${num + 1}">Image Details</label></div><div><input type="textarea" id="image_details_${num + 1}" name="image_details_${num + 1}"></div>`));
+                            .append($(`<span class="movie-close" id="close_image_${num + 1}" onClick="removeElement('movie_gallery_images', 'image_${num + 1}')">&times;</span><img class="movie_image" src="${event.target.result}" id="new_picture_${num + 1}"><div><label for="image_name_${num + 1}">Photo Title</label></div><div><input type="text" value="${name}" name="image_name_${num + 1}"></div><div><label for="alt_text_${num + 1}">Alt Text</label></div><div><input type="text" id="alt_text_${num + 1}" name="alt_text_${num + 1}" value="${name}"></div><div><label for="creation_date_${num + 1}">Date Taken</label></div><div><input type="date" id="creation_date_${num + 1}" name="creation_date_${num + 1}"></div><div><label for="image_details_${num + 1}">Image Details</label></div><div><input type="textarea" id="image_details_${num + 1}" name="image_details_${num + 1}"></div>`));
                         $(placeToInsertImagePreview).append(html);
                     };
 
