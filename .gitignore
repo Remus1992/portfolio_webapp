@@ -1,2 +1,4 @@
 .idea/
 background_practice/
+secret.py
+__pycache__/

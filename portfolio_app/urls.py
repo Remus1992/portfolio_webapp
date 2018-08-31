@@ -29,6 +29,7 @@ urlpatterns = [
     path('filmmaking/', include('R_E_M.urls_filmmaking')),
     path('webdev/', include('R_E_M.urls_webdev')),
     path('blog/', include('R_E_M.urls_blog')),
+    path('instagram_api/', views.instagram_api, name="instagram_api" )
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)  \
               + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

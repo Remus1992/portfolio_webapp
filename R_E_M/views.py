@@ -1,10 +1,12 @@
-from django.shortcuts import render, HttpResponseRedirect, get_object_or_404, reverse, redirect
+from django.shortcuts import render, HttpResponseRedirect, HttpResponse, get_object_or_404, reverse, redirect
 from R_E_M.models import User, Album, AlbumCategory, Photo, Website, Blog, Category, Movie, MovieStillPhoto, WebsiteScreenShot, MovieCategory
 import base64
 from django.core.files.base import ContentFile
 import re
+import requests
 from django.db.models import Q
 from django.http import JsonResponse
+from R_E_M.secret import insta_api_access_token
 
 
 # from PIL import Image
@@ -377,3 +379,8 @@ def blog_create(request):
         blog.save()
         return HttpResponseRedirect(reverse('blog_single_view', kwargs={'cat': blog.category.slug, 'slug': blog.slug}))
     return render(request, 'blog/blog_create.html', {'cat': Category.objects.all()})
+
+
+def instagram_api(request):
+    r = requests.get("https://api.instagram.com/v1/users/self/media/recent/?access_token={}".format(insta_api_access_token))
+    return HttpResponse(r.text)
