@@ -10,16 +10,14 @@
 {% block content %}
     <head>
         <link rel="stylesheet" type="text/css" href="{% static 'styles/style.css' %}"/>
-
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
     <style>
-        .row {
-            margin: 50px;
-            border-style: solid;
-            border-width: 5px;
-            padding: 10px;
+        body {
+            font-family: 'Alegreya Sans SC', sans-serif;
         }
     </style>
+    <!--
     <div class="page_container">
         <div class="row">
             <section class="create">
@@ -56,6 +54,73 @@
             </section>
         </div>
     </div>
+-->
+    <div class="container">
+        {% if user.is_authenticated %}
+            <h4 id="blogModalBtn">Create New Blog</h4>
+            <br>
+            <!-- The Modal -->
+            <div id="blogModal" class="blog_modal">
+
+                <!-- Modal content -->
+                <div class="blog_modal_content">
+
+                    <form method="post" enctype="multipart/form-data" class="blog_upload_form">
+                        {% csrf_token %}
+                        <div class="blog-input-row">
+                            <h2>Blog Upload</h2>
+                            <span>
+                                <span class="blog-close">&times;</span>
+                            </span>
+                        </div>
+                        <div class="blog_gallery">
+                            <div class="blog_info">
+                                <input type="text" id="blog_title" name="blog_title" class="resizedTextbox" placeholder="Blog Title">
+                                <input list="categories" id="category" name="category" placeholder="Blog Category" class="resizedTextbox">
+                                <datalist id="categories">{% for c in cat %}<option value="{{ c.name }}">{% endfor %}</datalist>
+                                <input type="text" id="youtube_link" name="youtube_link" placeholder="YouTube Link" class="resizedTextbox">
+                                <br>
+                                <br>
+                                <br>
+                                <p>Blog Image</p>
+                                <input type="file" id="blog_image" name="blog_image" class="resizedTextbox">
+                                <input type="text" id="alt_text" name="alt_text" placeholder="Alt Text" class="resizedTextbox">
+                            </div>
+                            <div class="blog-details-row">
+                                <textarea id="blog_content" name="blog_content" cols="30" rows="10" placeholder="Blog Content"></textarea>
+                            </div>
+                        </div>
+                        <div class="blog-submit-row">
+                            <input class='blog_modal_btn' type="submit" id="sub-btn" value="Create Blog">
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        {% endif %}
+    </div>
+    <script>
+        // Get the modal
+        let blogUploadModal = document.getElementById('blogModal');
+
+        // Get the button that opens the modal
+        let blogBtn = document.getElementById("blogModalBtn");
+
+        // Get the <span> element that closes the modal
+        let span = document.getElementsByClassName("blog-close")[0];
+
+        // When the user clicks the button, open the modal
+        blogBtn.onclick = function() {
+            blogUploadModal.style.display = "block";
+        };
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            blogUploadModal.style.display = "none";
+            let blog_html = '<div class="blog_info"><input type="text" id="blog_title" name="blog_title" class="resizedTextbox" placeholder="Blog Title"><input list="categories" id="category" name="category" placeholder="Blog Category" class="resizedTextbox"><datalist id="categories">{% for c in cat %}<option value="{{ c.name }}">{% endfor %}</datalist><input type="text" id="youtube_link" name="youtube_link" placeholder="YouTube Link" class="resizedTextbox"><br><br><br><p>Blog Image</p><input type="file" id="blog_image" name="blog_image" class="resizedTextbox"><input type="text" id="alt_text" name="alt_text" placeholder="Alt Text" class="resizedTextbox"></div><div class="blog-details-row"><textarea id="blog_content" name="blog_content" cols="30" rows="10" placeholder="Blog Content"></textarea></div>'
+            $("div.blog_gallery").html(blog_html);
+        };
+    </script>
 {% endblock %}
 
 {% block js %}

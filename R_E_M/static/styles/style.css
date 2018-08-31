@@ -1661,6 +1661,133 @@ pre {
     background-image: linear-gradient(to bottom, transparent, white);
 }
 
+/*************************** Blog Upload ***************************/
+
+
+.blog_upload_form {
+    border-radius: 5px;
+    box-shadow: 3px 3px 20px rgba(0, 0, 0, .5);
+}
+
+#blogModalBtn:hover {
+    cursor: pointer;
+}
+
+.blog_modal_btn {
+    font: 1rem 'Fira Sans', sans-serif;
+    padding: .5rem;
+    background: transparent;
+    border: 1px solid #888;
+    border-radius: 1px;
+    margin: 4px;
+    margin-left: 15px;
+    transition: 3ms;
+}
+
+.blog_modal_btn:hover {
+    background: #b2b2b2;
+    cursor: pointer;
+}
+
+.blog_info {
+    border-right: 1px solid #888;
+    background-color: #e2e0e0;
+    padding: 5px;
+    width: 20%;
+    height: 500px;
+    float: left;
+}
+
+.blog-details-row {
+    margin-left: 20%;
+}
+
+#blog_content {
+    width: 98.4%;
+    height: 501px;
+}
+
+.blog-input-row, .blog-submit-row {
+    display: flex;
+}
+
+.blog-input-row, .blog-submit-row {
+    background-color: #cccccc;
+}
+
+.blog-input-row {
+    border-bottom: 1px solid #888;
+    justify-content: space-between;
+    /*-moz-border-radius-topleft: 5px;*/
+    /*-moz-border-radius-topright: 5px;*/
+}
+
+.blog-input-row h2 {
+    padding: 16px;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.blog-submit-row {
+    border-top: 1px solid #888;
+    justify-content: flex-end;
+    /*-moz-border-radius-bottomleft: 5px;*/
+    /*-moz-border-radius-bottomright: 5px;*/
+}
+
+/* The Modal (background) */
+.blog_modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 30; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(184, 184, 184, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.blog_modal_content {
+    background-color: #fefefe;
+    margin: auto;
+    margin-top: -20px;
+    /*padding: 20px;*/
+    width: 90%;
+    border-radius: 5px;
+}
+
+/* The Close Button */
+.blog-close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    padding: 11px;
+}
+
+.blog-close:hover,
+.blog-close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.resizedTextbox {
+    width: 90%;
+    height: 25px;
+    margin: 5px;
+    border: 1px solid #888;
+}
+
+.blog_content {
+    height: 100px;
+}
+
+
 /********* Photo Album Pages ********/
 
 .album_container {
