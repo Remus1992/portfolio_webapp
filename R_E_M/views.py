@@ -25,6 +25,12 @@ def contact(request):
 
 
 def photography_home(request):
+    r = requests.get(
+        "https://api.instagram.com/v1/users/self/media/recent/?access_token={}".format(insta_api_access_token))
+    data = r.json()["data"]
+    # for i in data["data"]:
+    #     print(i["link"])
+
     complete_album_list = Album.objects.all()
     album_categories = AlbumCategory.objects.all()
     query = request.GET.get("q")
@@ -64,7 +70,7 @@ def photography_home(request):
             Q(album_details__icontains=query) |
             Q(category__name__icontains=query)
         )
-    return render(request, 'photos/photo_home.html', {"album_cats": album_categories, 'albums': complete_album_list})
+    return render(request, 'photos/photo_home.html', {"album_cats": album_categories, 'albums': complete_album_list, "insta": data})
 
 
 def photo_album_view(request, cat, album_slug):

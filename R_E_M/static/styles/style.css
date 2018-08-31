@@ -1922,6 +1922,10 @@ pre {
     width: auto;
 }
 
+.instagram_title {
+    padding-top: 30px;
+    padding-bottom: 10px;
+}
 /*************************** Photo Album Upload ***************************/
 
 #photoModalBtn:hover {
