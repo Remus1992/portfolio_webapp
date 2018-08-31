@@ -7,6 +7,7 @@ import requests
 from django.db.models import Q
 from django.http import JsonResponse
 from R_E_M.secret import insta_api_access_token
+from django.core.mail import send_mail
 
 
 # from PIL import Image
@@ -21,6 +22,18 @@ def about(request):
 
 
 def contact(request):
+    if request.method == "POST":
+        email = request.POST.get('contact_email')
+        subject = request.POST.get('contact_subject')
+        body = request.POST.get('contact_body')
+        send_mail(
+            'New Contact From {}'.format(email),
+            'Subject:\n{}\nMessage:\n{}'.format(subject, body),
+            '{}'.format('remington.henderson@gmail.com'),
+            ['remington.henderson@gmail.com'],
+            fail_silently=False,
+        )
+
     return render(request, 'misc/contact.html')
 
 

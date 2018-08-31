@@ -1151,30 +1151,6 @@ a, a:visited {
     box-shadow: 1px 1px 3px rgba(0, 0, 0, .2);
 }
 
-/**************************************************/
-
-.line_container {
-    width: 70%;
-    margin: 30px auto;
-    text-align: center;
-}
-
-#footer #preFooter {
-    height: 50px;
-    /*margin-top: -50px;*/
-}
-
-.page_container {
-    min-height: calc(75vh - 70px);
-}
-
-.container {
-    margin: 20px auto;
-    text-align: center;
-    width: 70%;
-}
-
-
 /**************** Movie Card ************************/
 
 .movie_card_container {
@@ -2077,3 +2053,109 @@ pre {
 .album_details {
     height: 100px;
 }
+
+/********************* Contact Page *********************/
+
+.contact_container {
+    width: 70%;
+    margin: 30px auto;
+    text-align: center;
+}
+
+.contact_input, .contact_input_body {
+    padding-left: 5px;
+    width: 90%;
+    margin: 5px 0 20px 0;
+    border: 1px solid #888;
+}
+
+.contact_input {
+    height: 25px;
+}
+
+.contact_input_body {
+    height: 75px;
+}
+
+.contact_form {
+    float: left;
+    width: 50%;
+    text-align: left;
+}
+
+.contact_form span{
+    font-size: 20px;
+}
+
+.contact_description {
+    margin-left: 50%;
+    text-align: left;
+}
+
+.contact_description p {
+    font-size: 20px;
+    line-height: 30px;
+}
+
+.contact_header {
+    margin-top: 30px;
+    margin-bottom: 60px;
+}
+
+.contact_header h1 {
+    font-weight: bold;
+}
+
+.contact_header hr {
+    width: 200px;
+    height: 2px;
+    background: black;
+}
+
+.contact_submit_button {
+    font-size: 20px;
+    padding: .5rem;
+    background: black;
+    color: white;
+    border-radius: 15px;
+    margin: 4px;
+    margin-left: 15px;
+    transition: 100ms;
+}
+
+.contact_submit_button:hover {
+    cursor: pointer;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, .2);
+}
+
+.contact_submit {
+    margin-left: 34%;
+}
+
+
+/**************************************************/
+
+.line_container {
+    width: 70%;
+    margin: 30px auto;
+    text-align: center;
+}
+
+#footer #preFooter {
+    height: 50px;
+    /*margin-top: -50px;*/
+}
+
+.page_container {
+    min-height: calc(75vh - 46px);
+}
+
+.container {
+    margin: 20px auto;
+    text-align: center;
+    width: 70%;
+}
+
+body {
+        font-family: 'Alegreya Sans SC', sans-serif;
+    }

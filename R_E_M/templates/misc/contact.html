@@ -11,18 +11,44 @@
         <link rel="stylesheet" type="text/css" href="{% static 'styles/style.css' %}"/>
     </head>
     <style>
-        {#html, body {#}
-        {#    height: 100%;#}
-        {#    margin: 0;#}
-        {#}#}
 
     </style>
 
-    <body>
     <div class="page_container">
-        <h1>Contact</h1>
+        <div class="contact_container">
+            <div class="contact_header">
+                <h1>Contact</h1>
+                <br>
+                <hr>
+            </div>
+            <form method="post" enctype="multipart/form-data" class="contact_form">
+                {% csrf_token %}
+                <span>Email Address*</span>
+                <br>
+                <input type="text" class="contact_input" name="contact_email">
+                <br>
+                <span>Subject*</span>
+                <br>
+                <input type="text" class="contact_input" name="contact_subject">
+                <br>
+                <span>Subject*</span>
+                <br>
+                <textarea type="text" class="contact_input_body" name="contact_body"></textarea>
+                <div class="contact_submit">
+                    <input class='contact_submit_button' type="submit" value="Submit">
+                </div>
+
+            </form>
+            <div class="contact_description">
+                <p>If you have any enquiry about my images or have any project in mind that you think I might fit into,
+                    please feel free to contact me using this form. </p>
+                <br>
+                <p>For non-work related emails I will say that, while I love to hear from everybody, I don't always have
+                    the time to chat, or answer questions, or do interviews. I will definitely do my best to answer,
+                    but, please be aware that it might not be right away.</p>
+            </div>
+        </div>
     </div>
-    </body>
 
 {% endblock %}
 
