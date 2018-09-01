@@ -306,7 +306,57 @@ def movie_create(request):
 
 
 def webdev_home(request):
+    if request.method == "POST":
+        website = Website()
+        website.owner = request.user
+        website.website_name = request.POST.get('web_name')
+        website.website_link = request.POST.get('web_link')
+        website.website_details = request.POST.get('web_details')
+        website.date_built = request.POST.get('web_date')
+        website.youtube = request.POST.get('web_youtube')
+        website.alt_text = request.POST.get('web_alt_text')
+
+        screenshot = request.FILES.get('website_screenshot')
+        if screenshot:
+            website.website_screenshot = screenshot
+        return HttpResponseRedirect(reverse("webdev_view", kwargs={"slug": website.slug}))
     return render(request, "web_dev/web_dev_home.html")
+
+
+def website_ajax(request):
+    if request.method == "POST":
+        print(request.POST)
+        movie_response = Movie.objects.filter(
+            category__slug=request.POST.get("category")
+        )
+        response = []
+        for movie in movie_response:
+            response.append(
+                {
+                    "title": movie.title,
+                    "owner": {
+                        "username": movie.owner.username
+                    },
+                    "date_built": movie.date_built,
+                    "movie_details": movie.movie_details,
+                    "slug": movie.slug,
+                    "tag_line": movie.tag_line,
+                    "category": {
+                        "name": movie.category.name,
+                        "slug": movie.category.slug
+                    },
+                    "movie_poster": {
+                        "url": movie.movie_poster.url
+                    },
+                    "movie_script": {
+                        "url": movie.movie_script.url
+                    },
+                    "alt_text": movie.alt_text,
+                    "youtube": movie.youtube
+                }
+            )
+        return JsonResponse(response, safe=False)
+    return JsonResponse({"message": "Must be POST"})
 
 
 def webdev_view(request):

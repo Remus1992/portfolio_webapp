@@ -3,12 +3,304 @@
 {% load static %}
 
 {% block title %}
-: WebDev Home
+    : WebDev Home
 {% endblock %}
 
 {% block content %}
+    <head>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles/style.css' %}"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
 
-<h1>WebDev Home</h1>
+
+    <div class="page_container">
+        <div class="search_container">
+            <form method="GET" action="">
+                <div class="search_div">
+                    <input type="text" name="q" placeholder="Search..." id="search_bar" value="{{ request.GET.q }}">
+                    <button type="submit" value="Search" class="search_button"><img
+                            src="/static/R_E_M/img/search_icon.png" alt="search_logo"
+                            id="search_img"/></button>
+                </div>
+            </form>
+        </div>
+        <div class="categories-link-set">
+            {% for c in website_cats %}
+                <span class="checkbox" id="{{ c.slug }}">
+                    <input class="filter-checkbox" type="checkbox">
+                    <label for="{{ c.name }}">{{ c.name }}</label>
+                </span>
+            {% endfor %}
+
+        </div>
+        <div class="line_container">
+            <hr>
+        </div>
+        <div class="ajax_div">
+
+        </div>
+        <div class="container">
+
+            {% if user.is_authenticated %}
+                <h4 id="websiteModalBtn">Create New Website</h4>
+                <br>
+                <!-- The Modal -->
+                <div id="websiteModal" class="website_modal">
+
+                    <!-- Modal content -->
+                    <div class="website_modal_content">
+
+                        <form method="post" enctype="multipart/form-data" class="website_upload_form">
+                            {% csrf_token %}
+                            <div class="website-input-row">
+                                <h2>Create Website</h2>
+                                <span>
+                                <span class="website-close">&times;</span>
+                            </span>
+                            </div>
+                            <div class="website_gallery">
+                                <div class="website_info">
+                                    <input type="text" id="website_title" name="website_title" class="resizedTextbox"
+                                           placeholder="Website Title">
+                                    <input type="text" id="website_tag" name="website_tag" placeholder="website Tagline"
+                                           class="resizedTextbox">
+                                    <input list="categories" id="website_category" name="website_category"
+                                           placeholder="website Category" class="resizedTextbox">
+                                    <datalist id="categories">{% for c in website_cats %}
+                                        <option value="{{ c.name }}">{% endfor %}</datalist>
+                                    <input type="text" id="youtube_link" name="website_youtube" placeholder="YouTube Link"
+                                           class="resizedTextbox">
+                                    <input type="date" id="website_date" name="website_date" class="resizedTextbox">
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <p>website Poster</p>
+                                    <input type="file" id="website_poster" name="website_poster" class="resizedTextbox">
+                                    <input type="text" id="alt_text" name="alt_text" placeholder="Poster Alt Text"
+                                           class="resizedTextbox">
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <p>website Script</p>
+                                    <input type="file" id="website_script" name="website_script" class="resizedTextbox">
+                                </div>
+                                <div class="website-details-row">
+                                    <textarea id="website_details" name="website_details" cols="30" rows="10"
+                                              placeholder="website Details"></textarea>
+                                </div>
+                                <div class="website-still-input-row">
+                                    <h2>website Stills</h2>
+                                    <input class='website_modal_btn' name="images" type="file" multiple
+                                           id="gallery-website-still-add">
+                                </div>
+                                <div class="website_gallery_images" id="website_gallery_images"></div>
+                            </div>
+                            <div class="website-submit-row">
+                                <input class='website_modal_btn' type="submit" id="sub-btn" value="Create website">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            {% endif %}
+            <div class="website_card_container {{ website.category.slug }}" id="website_card_container">
+                {% for website in websites %}
+                    <div class="website-card">
+                        <img src="{{ website.website_poster.url }}" class="website_poster"/>
+                        <div class="title-content">
+                            <h3>{{ website.title }}</h3>
+
+                            <hr/>
+                            <div class="intro">{{ website.tag_line }}</div>
+                        </div><!-- /.title-content -->
+                        <div class="card-info">
+                            {{ website.website_details }}
+                        </div><!-- /.card-info -->
+                        <div class="website_read_more">
+                            <a href="{% url 'website_single_view' website.category.slug website.slug %}" class="website_button">Read
+                                More</a>
+                        </div>
+
+                        <div class="utility-info">
+                            <ul class="utility-list">
+                                <li class="comments">12</li>
+                                <li class="date">{{ website.date_built }}</li>
+                            </ul>
+                        </div><!-- /.utility-info -->
+                        <!-- overlays -->
+                        <div class="gradient-overlay"></div>
+                        <div class="color-overlay"></div>
+                    </div><!-- /.website-card -->
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+<script>
+        $('.checkbox').click(function () {
+            let cat = this.id;
+
+            // removing shade from other elements
+            $('.checkbox').each(function (i, el) {
+                $(el).removeClass('checkFocus');
+            });
+
+            $(this).addClass('checkFocus');
+        });
+
+
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                let cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    let cookie = jQuery.trim(cookies[i]);
+                    // Does this cookie string begin with the name we want?
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        let csrftoken = getCookie('csrftoken');
+
+        function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        });
+
+        $(".checkbox").click(function () {
+            let cat = this.id;
+            console.log(cat);
+            $.ajax({
+                url: "{% url "website_ajax" %}",
+                method: "POST",
+                data: {
+                    category: cat
+                },
+                success: function (response) {
+                    let mc = $("#website_card_container");
+                    let html = "";
+                    $(mc).html('');
+                    $(response).each(function (i, website) {
+                        console.dir(response)
+                        html += `<div class="website-card ${website.category.slug}" id="website_card_container">
+                                    <img src="${website.website_poster.url}" class="website_poster"/>
+                                    <div class="title-content">
+                                        <h3>${website.title}</h3>
+                                        <hr/>
+                                        <div class="intro">${website.tag_line}.</div>
+                                    </div><!-- /.title-content -->
+                                    <div class="card-info">
+                                        ${website.website_details}
+                                    </div><!-- /.card-info -->
+                                    <div class="website_read_more">
+                                        <a href="/filmmaking/websites/${website.category.slug}/${website.slug}" class="website_button">Read More</a>
+                                    </div>
+                                    <div class="utility-info">
+                                        <ul class="utility-list">
+                                            <li class="comments">12</li>
+                                            <li class="date">${website.date_built}</li>
+                                        </ul>
+                                    </div>
+                                    <div class="gradient-overlay"></div>
+                                    <div class="color-overlay"></div>
+                                </div>`
+                    });
+                    $(mc).html(html);
+                }
+            });
+        });
+
+    // IMAGE UPLOADER PLUS MODAL
+        let imagesPreview = function (input, placeToInsertImagePreview) {
+            $(placeToInsertImagePreview).html('');
+            //let website_html = '<div class="website_info"><input type="text" id="website_title" name="website_title" class="resizedTextbox" placeholder="website Title"><input type="text" id="website_tag" name="website_tag" placeholder="website Tagline" class="resizedTextbox"><input list="categories" id="website_category" name="website_category" placeholder="website Category" class="resizedTextbox"><datalist id="categories">{% for c in website_cats %}<option value="{{ c.name }}">{% endfor %}</datalist><input type="text" id="youtube_link" name="website_youtube" placeholder="YouTube Link" class="resizedTextbox"><input type="date" id="website_date" name="website_date" class="resizedTextbox"><br><br><br><p>website Poster</p><input type="file" id="website_poster" name="website_poster" class="resizedTextbox"><input type="text" id="alt_text" name="alt_text" placeholder="Poster Alt Text" class="resizedTextbox"><br><br><br><p>website Script</p><input type="file" id="website_script" name="website_script" class="resizedTextbox"></div><div class="website-details-row"><textarea id="website_details" name="website_details" cols="30" rows="10" placeholder="website Details"></textarea></div><div class="website-still-input-row"><h2>website Stills</h2><input class="website_modal_btn" name="images" type="file" multiple id="gallery-website-still-add"></div><div id="website_gallery_images" class="website_gallery_images"></div>'
+            //$(placeToInsertImagePreview).append(website_html);
+
+            if (input.files) {
+                let filesAmount = input.files.length;
+
+                for (let i = 0; i < filesAmount; i++) {
+                    let reader = new FileReader();
+                    let num = i;
+                    let name = input.files[i].name;
+                    reader.onload = function (event) {
+                        let html = $(`<div class="img_holder" id="image_${num + 1}"></div>`, {
+                            'id': `image_div_${num + 1}`
+                        })
+                            .append($(`<input>`).attr({
+                                'type': 'hidden',
+                                'value': event.target.result,
+                                'name': `image_${num + 1}`
+                            }))
+                            .append($(`<span class="website-close" id="close_image_${num + 1}" onClick="removeElement('website_gallery_images', 'image_${num + 1}')">&times;</span><img class="website_image" src="${event.target.result}" id="new_picture_${num + 1}"><div><label for="image_name_${num + 1}">Photo Title</label></div><div><input type="text" value="${name}" name="image_name_${num + 1}"></div><div><label for="alt_text_${num + 1}">Alt Text</label></div><div><input type="text" id="alt_text_${num + 1}" name="alt_text_${num + 1}" value="${name}"></div><div><label for="creation_date_${num + 1}">Date Taken</label></div><div><input type="date" id="creation_date_${num + 1}" name="creation_date_${num + 1}"></div><div><label for="image_details_${num + 1}">Image Details</label></div><div><input type="textarea" id="image_details_${num + 1}" name="image_details_${num + 1}"></div>`));
+                        $(placeToInsertImagePreview).append(html);
+                    };
+
+                    reader.readAsDataURL(input.files[i]);
+                }
+            }
+            input.value = ''
+        };
+
+        $('#gallery-website-still-add').on('change', function () {
+            imagesPreview(this, 'div.website_gallery_images');
+        });
+
+        function removeElement(parentDiv, childDiv) {
+            console.log("Child Div is " + childDiv);
+            console.log("Parent Div is " +parentDiv);
+            if (childDiv == parentDiv) {
+                alert("The parent div cannot be removed.")
+            } else if (document.getElementById(childDiv)) {
+                let child = document.getElementById(childDiv);
+                let parent = document.getElementById(parentDiv);
+                console.log("Child Div is " + child);
+                console.log("Parent Div is " + parent);
+                parent.removeChild(child);
+            }
+            else {
+                alert("Child div has already been removed or does not exist.");
+                return false;
+            }
+        }
+
+        // Get the modal
+        let websiteUploadModal = document.getElementById('websiteModal');
+
+        // Get the button that opens the modal
+        let websiteBtn = document.getElementById("websiteModalBtn");
+
+        // Get the <span> element that closes the modal
+        let span = document.getElementsByClassName("website-close")[0];
+
+        // When the user clicks the button, open the modal
+        websiteBtn.onclick = function() {
+            websiteUploadModal.style.display = "block";
+        };
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            websiteUploadModal.style.display = "none";
+            let website_html = '<div class="website_info"><input type="text" id="website_title" name="website_title" class="resizedTextbox" placeholder="website Title"><input type="text" id="website_tag" name="website_tag" placeholder="website Tagline" class="resizedTextbox"><input list="categories" id="website_category" name="website_category" placeholder="website Category" class="resizedTextbox"><datalist id="categories">{% for c in website_cats %}<option value="{{ c.name }}">{% endfor %}</datalist><input type="text" id="youtube_link" name="website_youtube" placeholder="YouTube Link" class="resizedTextbox"><input type="date" id="website_date" name="website_date" class="resizedTextbox"><br><br><br><p>website Poster</p><input type="file" id="website_poster" name="website_poster" class="resizedTextbox"><input type="text" id="alt_text" name="alt_text" placeholder="Poster Alt Text" class="resizedTextbox"><br><br><br><p>website Script</p><input type="file" id="website_script" name="website_script" class="resizedTextbox"></div><div class="website-details-row"><textarea id="website_details" name="website_details" cols="30" rows="10" placeholder="website Details"></textarea></div><div class="website-still-input-row"><h2>website Stills</h2><input class="website_modal_btn" name="images" type="file" multiple id="gallery-website-still-add"></div><div id="website_gallery_images" class="website_gallery_images"></div>'
+            $("div.website_gallery").html(website_html);
+            $('#gallery-website-still-add').on('change', function () {
+                imagesPreview(this, 'div.website_gallery_images');
+            });
+
+        };
+    </script>
 {% endblock %}
 
 
