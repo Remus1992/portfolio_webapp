@@ -136,9 +136,13 @@ MEDIA_URL = '/media/'
 
 DATA_UPLOAD_MAX_MEMORY_SIZE = 330000000
 
-EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
+# EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+ACCOUNT_EMAIL_VERIFICATION = "none"
+
 EMAIL_HOST='smtp.gmail.com'
-EMAIL_PORT=465
-EMAIL_HOST_USER = 'sarath4coding'
+EMAIL_PORT=587
+EMAIL_HOST_USER = 'remington.henderson'
 EMAIL_HOST_PASSWORD = gmail_password
 DEFAULT_EMAIL_FROM = gmail

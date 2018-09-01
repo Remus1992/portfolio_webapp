@@ -26,9 +26,10 @@ def contact(request):
         email = request.POST.get('contact_email')
         subject = request.POST.get('contact_subject')
         body = request.POST.get('contact_body')
+
         send_mail(
             'New Contact From {}'.format(email),
-            'Subject:\n{}\nMessage:\n{}'.format(subject, body),
+            'Email:\n{}\n\nSubject:\n{}\n\nMessage:\n{}'.format(email, subject, body),
             '{}'.format('remington.henderson@gmail.com'),
             ['remington.henderson@gmail.com'],
             fail_silently=False,
