@@ -1,5 +1,5 @@
 from django.shortcuts import render, HttpResponseRedirect, HttpResponse, get_object_or_404, reverse, redirect
-from R_E_M.models import User, Album, AlbumCategory, Photo, Website, Blog, Category, Movie, MovieStillPhoto, WebsiteScreenShot, MovieCategory
+from R_E_M.models import User, Album, AlbumCategory, Photo, Website, Blog, Category, Movie, MovieStillPhoto, WebsiteScreenShot, MovieCategory, WebsiteCategory
 import base64
 from django.core.files.base import ContentFile
 import re
@@ -306,21 +306,42 @@ def movie_create(request):
 
 
 def webdev_home(request):
+    website_categories = WebsiteCategory.objects.all()
+    complete_website_list = Website.objects.all()
     if request.method == "POST":
         website = Website()
         website.owner = request.user
         website.website_name = request.POST.get('web_name')
         website.website_link = request.POST.get('web_link')
+        cat, created = MovieCategory.objects.get_or_create(name=request.POST.get('website_category'))
+        website.category = cat
         website.website_details = request.POST.get('web_details')
         website.date_built = request.POST.get('web_date')
         website.youtube = request.POST.get('web_youtube')
         website.alt_text = request.POST.get('web_alt_text')
+        web_main_page = request.FILES.get('website_main_page')
+        if web_main_page:
+            website.main_page = web_main_page
 
-        screenshot = request.FILES.get('website_screenshot')
-        if screenshot:
-            website.website_screenshot = screenshot
+        website.save()
+
+        for k, v in request.POST.items():
+            if re.match('^image_\d+$', k):
+                num = int(re.search(r'\d+', k).group())
+                format, imgstr = v.split(';base64,')
+                ext = format.split('/')[-1]
+                data = ContentFile(base64.b64decode(imgstr), name='temp.' + ext)
+
+                photo = WebsiteScreenShot()
+                photo.image = data
+                photo.website_screenshots = website
+                photo.owner = request.user
+                photo.title = request.POST.get('image_name_{}'.format(num))
+                photo.alt_text = request.POST.get('alt_text_{}'.format(num))
+                photo.save()
+
         return HttpResponseRedirect(reverse("webdev_view", kwargs={"slug": website.slug}))
-    return render(request, "web_dev/web_dev_home.html")
+    return render(request, "web_dev/web_dev_home.html", {"website_cats": website_categories, "websites": complete_website_list})
 
 
 def website_ajax(request):
