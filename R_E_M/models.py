@@ -161,29 +161,29 @@ class Website(models.Model):
 
 
 def website_screen_shot_image_uh(instance, filename):
-    return 'websites/{}/{}'.format(instance.website_name, filename)
+    return 'websites/{}/{}'.format(instance.website_screenshots, filename)
 
 
 class WebsiteScreenShot(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="website_photos")
     website_screenshots = models.ForeignKey(Website, on_delete=models.CASCADE, related_name="website_screenshots")
-    website_name = models.CharField(max_length=50, blank=True, null=True)
+    screenshot_name = models.CharField(max_length=50, blank=True, null=True)
     slug = models.SlugField(blank=True, null=True, unique=True)
     image = models.ImageField(upload_to=website_screen_shot_image_uh, blank=True, null=True)
     alt_text = models.CharField(max_length=50, blank=True, null=True)
 
     def __str__(self):
-        return self.website_name
+        return self.screenshot_name
 
     def save(self, *args, **kwargs):
         if not self.slug:
             number = 0
-            slug_title = slugify(self.website_name)
+            slug_title = slugify(self.screenshot_name)
             checking = True
             while checking:
                 results = WebsiteScreenShot.objects.filter(slug=slug_title)
                 if results.exists():
-                    slug_title = slugify(self.website_name) + '_' + str(number + 1)
+                    slug_title = slugify(self.screenshot_name) + '_' + str(number + 1)
                     number += 1
                 else:
                     checking = False

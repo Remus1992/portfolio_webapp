@@ -2132,7 +2132,7 @@ pre {
     margin-left: 34%;
 }
 
-/*************************** website Upload ***************************/
+/*************************** Website Upload ***************************/
 
 #websiteModalBtn:hover {
     cursor: pointer;
@@ -2321,6 +2321,11 @@ pre {
     transition: all 0.3s ease-out;
 }
 
+/************************* WEBDEV PAGE *************************/
+
+.website-card img {
+    width: 300px;
+}
 
 /**************************************************/
 

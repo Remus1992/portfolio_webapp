@@ -101,29 +101,15 @@
             <div class="website_card_container {{ website.category.slug }}" id="website_card_container">
                 {% for website in websites %}
                     <div class="website-card">
-                        <img src="{{ website.main_page.url }}" class="website_poster"/>
-                        <div class="title-content">
-                            <h3>{{ website.website_name }}</h3>
-
-                            <hr/>
-                        </div><!-- /.title-content -->
-                        <div class="card-info">
-                            {{ website.website_details }}
-                        </div><!-- /.card-info -->
+                        <img src="{{ website.main_page.url }}" class="website_cover"/>
+                        <p>{{ website.website_name }}</p>
+                        <p>{{ website.date_built }}</p>
                         <div class="website_read_more">
                             <a href="{% url 'website_single_view' website.category.slug website.slug %}" class="website_button">Read
                                 More</a>
                         </div>
 
-                        <div class="utility-info">
-                            <ul class="utility-list">
-                                <li class="comments">12</li>
-                                <li class="date">{{ website.date_built }}</li>
-                            </ul>
-                        </div><!-- /.utility-info -->
-                        <!-- overlays -->
-                        <div class="gradient-overlay"></div>
-                        <div class="color-overlay"></div>
+
                     </div><!-- /.website-card -->
                 {% endfor %}
             </div>

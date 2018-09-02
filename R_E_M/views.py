@@ -313,7 +313,7 @@ def webdev_home(request):
         website.owner = request.user
         website.website_name = request.POST.get('web_name')
         website.website_link = request.POST.get('web_link')
-        cat, created = MovieCategory.objects.get_or_create(name=request.POST.get('website_category'))
+        cat, created = WebsiteCategory.objects.get_or_create(name=request.POST.get('website_category'))
         website.category = cat
         website.website_details = request.POST.get('web_details')
         website.date_built = request.POST.get('web_date')
@@ -333,14 +333,14 @@ def webdev_home(request):
                 data = ContentFile(base64.b64decode(imgstr), name='temp.' + ext)
 
                 photo = WebsiteScreenShot()
-                photo.image = data
                 photo.website_screenshots = website
+                photo.image = data
+
                 photo.owner = request.user
-                photo.title = request.POST.get('image_name_{}'.format(num))
+                photo.screenshot_name = request.POST.get('image_name_{}'.format(num))
                 photo.alt_text = request.POST.get('alt_text_{}'.format(num))
                 photo.save()
-
-        return HttpResponseRedirect(reverse("webdev_view", kwargs={"slug": website.slug}))
+        return HttpResponseRedirect(reverse("website_single_view", kwargs={"cat": website.category.slug, "slug": website.slug}))
     return render(request, "web_dev/web_dev_home.html", {"website_cats": website_categories, "websites": complete_website_list})
 
 
@@ -380,7 +380,8 @@ def website_ajax(request):
     return JsonResponse({"message": "Must be POST"})
 
 
-def webdev_view(request):
+def webdev_view(request, cat, slug):
+    website = Website.objects.get(category__slug=cat, slug=slug)
     return render(request, "web_dev/web_dev_single_view.html", {"website": website})
 
 
