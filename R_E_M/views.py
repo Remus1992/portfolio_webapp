@@ -419,6 +419,22 @@ def blog(request):
             Q(content__icontains=query) |
             Q(category__name__icontains=query)
         )
+    if request.method == 'POST':
+        blog = Blog()
+        cat, created = Category.objects.get_or_create(name=request.POST.get('category'))
+        blog.title = request.POST.get('blog_title')
+        blog.author = request.user
+        blog.content = request.POST.get('blog_content')
+        blog.category = cat
+        blog_image = request.FILES.get('blog_image')
+        if blog_image:
+            # print("we got here")
+            blog.image = blog_image
+
+        blog.alt_text = request.POST.get('alt_text')
+        blog.youtube_link = request.POST.get('youtube_link')
+        blog.save()
+        return HttpResponseRedirect(reverse('blog_single_view', kwargs={'cat': blog.category.slug, 'slug': blog.slug}))
     return render(request, "blog/blog_home.html", {'blogs': blog_list, 'cat': cat})
 
 
