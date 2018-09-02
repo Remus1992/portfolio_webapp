@@ -2340,21 +2340,25 @@ pre {
     border: 1px solid #ddd;
 }
 
-.website_cover {
-
-}
-
 .web_container {
     margin: 20px auto;
     text-align: center;
     width: 90%;
 }
 
+.website_read_more, .website_name_container, .website_date_container {
+    display: none;
+}
+
+.website-card:hover .website_read_more, .website-card:hover .website_name_container, .website-card:hover .website_date_container {
+    display: block;
+}
+
 .website_read_more {
     margin-top: 46px;
 }
 
-.website_read_more:hover .website_button, .website_button:visited {
+.website-card:hover .website_read_more .website_button, .website_button:visited {
     background-color: transparent;
     opacity: 0.8;
     border: white solid 2px;
@@ -2369,17 +2373,15 @@ pre {
     font-weight: bold;
 }
 
-.website_button:hover {
+.website_read_more:hover .website_button:hover {
     background-color: white;
     color: black;
     opacity: 0.8;
     font-weight: bold;
 }
-.website-header, .website_read_more {
-    display: none;
-}
 
-.website_header:hover {
+
+.website-card:hover .website_header {
     /*margin-top: -214px;*/
     display: flex;
     justify-content: space-between;
@@ -2401,7 +2403,7 @@ pre {
     font-size: 25px;
 }
 
-.website-card .web_gradient {
+ .web_gradient {
     position: absolute;
 }
 
@@ -2424,6 +2426,7 @@ pre {
     color: #e8eff0;
 
 }
+
 /**************************************************/
 
 .line_container {
