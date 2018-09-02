@@ -39,7 +39,7 @@
         <div class="ajax_div">
 
         </div>
-        <div class="container">
+        <div class="web_container">
 
             {% if user.is_authenticated %}
                 <h4 id="websiteModalBtn">Create New Website</h4>
@@ -102,8 +102,11 @@
                 {% for website in websites %}
                     <div class="website-card">
                         <img src="{{ website.main_page.url }}" class="website_cover"/>
-                        <p>{{ website.website_name }}</p>
-                        <p>{{ website.date_built }}</p>
+                        <div class="website_header">
+                            <div class="website_name_container"><p>{{ website.website_name }}</p></div>
+                            <div class="website_date_container"><p>{{ website.date_built }}</p></div>
+                        </div>
+
                         <div class="website_read_more">
                             <a href="{% url 'website_single_view' website.category.slug website.slug %}" class="website_button">Read
                                 More</a>
@@ -283,4 +286,6 @@
     </script>
 {% endblock %}
 
-
+{% block footer %}
+    {% include 'footer_base.html' %}
+{% endblock %}

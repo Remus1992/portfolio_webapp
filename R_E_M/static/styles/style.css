@@ -1592,7 +1592,7 @@ pre {
     padding: 20px;
 }
 
-.button, .button:visited {
+.blog_button, .blog_button:visited {
     background-color: transparent;
     opacity: 0.8;
     border: white solid 2px;
@@ -1607,7 +1607,7 @@ pre {
     font-weight: bold;
 }
 
-.button:hover {
+.blog_button:hover {
     background-color: white;
     color: black;
     opacity: 0.8;
@@ -2323,9 +2323,52 @@ pre {
 
 /************************* WEBDEV PAGE *************************/
 
-.website-card img {
-    width: 300px;
+.website-card {
+    width: 33.3333333333333%;
 }
+
+.website-card img {
+    width: 100%;
+}
+
+.web_container {
+    margin: 20px auto;
+    text-align: center;
+    width: 90%;
+}
+
+.website_read_more {
+    margin-top: 14px;
+}
+
+.website_button, .website_button:visited {
+    background-color: transparent;
+    opacity: 0.8;
+    border: white solid 2px;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 40px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.website_button:hover {
+    background-color: white;
+    color: black;
+    opacity: 0.8;
+    font-weight: bold;
+}
+
+.website_header {
+    margin-top: -214px;
+    display: flex;
+    justify-content: space-between;
+}
+
 
 /**************************************************/
 
