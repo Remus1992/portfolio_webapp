@@ -102,18 +102,18 @@
                 {% for website in websites %}
                     <div class="website-card">
                         <img src="{{ website.main_page.url }}" class="website_cover"/>
-                        <div class="website_header">
-                            <div class="website_name_container"><p>{{ website.website_name }}</p></div>
-                            <div class="website_date_container"><p>{{ website.date_built }}</p></div>
+                        <div class="web_gradient">
+                            <div class="website_header">
+                                <div class="website_name_container"><p>{{ website.website_name }}</p></div>
+                                <div class="website_date_container"><p>{{ website.date_built }}</p></div>
+                            </div>
+
+                            <div class="website_read_more">
+                                <a href="{% url 'website_single_view' website.category.slug website.slug %}" class="website_button">Read
+                                    More</a>
+                            </div>
                         </div>
-
-                        <div class="website_read_more">
-                            <a href="{% url 'website_single_view' website.category.slug website.slug %}" class="website_button">Read
-                                More</a>
-                        </div>
-
-
-                    </div><!-- /.website-card -->
+                    </div>
                 {% endfor %}
             </div>
         </div>
