@@ -1,3 +1,237 @@
-<h1>WebDev Single</h1>
+{% extends 'base.html' %}
 
-{{ website.website_name }}
+{% load static %}
+
+{% block title %}
+    : {{ website.title }}
+{% endblock %}
+
+{% block content %}
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static 'styles/style.css' %}"/>
+        {#        <link href="{% static 'styles/lightbox.css' %}" rel="stylesheet">#}
+        <link rel="stylesheet" type="text/css" href="{% static 'slick-1.8.1/slick/slick.css' %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'slick-1.8.1/slick/slick-theme.css' %}"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    </head>
+    <style>
+        .poster {
+            width: 250px;
+        }
+
+        .page_container {
+            margin: 20px auto;
+            text-align: center;
+            width: 50%;
+            align-items: center;
+        }
+
+        pre {
+            text-align: left;
+            white-space: pre-wrap; /* Since CSS 2.1 */
+            white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+            white-space: -pre-wrap; /* Opera 4-6 */
+            white-space: -o-pre-wrap; /* Opera 7 */
+            word-wrap: break-word; /* Internet Explorer 5.5+ */
+        }
+
+        .content_container, .movie_container, .script_container, .album_container {
+            width: 100%;
+        }
+
+        h1, body {
+            font-family: 'Alegreya Sans SC', sans-serif;
+            font-weight: bold;
+        }
+
+        /* ************* Slick Slide ************** */
+
+        body {
+            background-color: #aacccc
+        }
+
+        .js .slider-single > div:nth-child(1n+2) {
+            display: none
+        }
+
+        .js .slider-single.slick-initialized > div:nth-child(1n+2) {
+            display: block
+        }
+
+        h3 {
+            background: #f0f0f0;
+            color: #3498db;
+            font-size: 2.25rem;
+            margin: .5rem;
+            padding: 2%;
+            position: relative;
+            text-align: center;
+        }
+
+        .slider-single h3 {
+            line-height: 10rem;
+        }
+
+        .slider-nav h3::before {
+            content: "";
+            display: block;
+            padding-top: 75%;
+        }
+
+        .slider-nav h3 span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .slider-nav .slick-slide {
+            cursor: pointer;
+        }
+
+        .slick-slide.is-active h3 {
+            color: #c00;
+            background-color: #fff;
+        }
+
+        .slick-slide img {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .preview_image {
+            {#height: 100px;#}
+            width: 80px;
+            margin: 10px;
+            vertical-align: middle;
+        }
+
+        .slider-nav {
+            height: 140px;
+            width: auto;
+        }
+
+        .movie_still_container {
+            height: 350px;
+        }
+
+        .movie_still_container img {
+            width: 100%;
+        }
+
+        .still_slider_container {
+            {#background-color: gray;#}
+        }
+
+        /******************/
+        .script {
+            width: 400px;
+            height: 500px;
+        }
+
+        .poster {
+            float: left;
+            margin: 20px;
+        }
+
+
+    </style>
+
+    <div class="page_container">
+        <div class="content_container">
+            {#            <h1><b>{{ movie.title }}</b></h1>#}
+            <img src="{{ website.main_page.url }}" alt="{{ website.alt_text }}" class="poster">
+            <br>
+            <pre>{{ website.website_name }}</pre>
+            <br>
+            <a href="{{ website.website_link.url }}" target="_blank">{{ website.website_link }}</a>
+            <br>
+            <pre>{{ website.website_details }}</pre>
+
+        </div>
+        <div class="movie_container">
+            {% if website.youtube %}
+                {{ website.youtube|safe }}
+            {% endif %}
+        </div>
+        <div class="still_slider_container">
+            <div class="slider slider-single">
+                {% for screenshot in website.website_screenshots.all %}
+                    <div class="movie_still_container"><img src="{{ screenshot.image.url }}" class="center_image"></div>
+                {% endfor %}
+            </div>
+            <div class="slider slider-nav">
+                {% for screenshot in website.website_screenshots.all %}
+                    <div><img src="{{ screenshot.image.url }}" class="preview_image"></div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+    <script src="{% static 'slick-1.8.1/slick/slick.min.js' %}"></script>
+
+    <script>
+        $('.slider-single').slick({
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: true,
+            fade: false,
+            adaptiveHeight: true,
+            infinite: true,
+            useTransform: true,
+            speed: 400,
+            cssEase: 'cubic-bezier(0.77, 0, 0.18, 1)',
+        });
+
+        $('.slider-nav')
+            .on('init', function (event, slick) {
+                $('.slider-nav .slick-slide.slick-current').addClass('is-active');
+            })
+            .slick({
+                slidesToShow: 7,
+                slidesToScroll: 7,
+                dots: false,
+                focusOnSelect: false,
+                infinite: true,
+                responsive: [{
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 5,
+                        slidesToScroll: 5,
+                    }
+                }, {
+                    breakpoint: 640,
+                    settings: {
+                        slidesToShow: 4,
+                        slidesToScroll: 4,
+                    }
+                }, {
+                    breakpoint: 420,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                    }
+                }]
+            });
+
+        $('.slider-single').on('afterChange', function (event, slick, currentSlide) {
+            $('.slider-nav').slick('slickGoTo', currentSlide);
+            var currrentNavSlideElem = '.slider-nav .slick-slide[data-slick-index="' + currentSlide + '"]';
+            $('.slider-nav .slick-slide.is-active').removeClass('is-active');
+            $(currrentNavSlideElem).addClass('is-active');
+        });
+
+        $('.slider-nav').on('click', '.slick-slide', function (event) {
+            event.preventDefault();
+            var goToSingleSlide = $(this).data('slick-index');
+
+            $('.slider-single').slick('slickGoTo', goToSingleSlide);
+        });
+    </script>
+{% endblock %}
+
+{% block footer %}
+    {% include 'footer_base.html' %}
+{% endblock %}
