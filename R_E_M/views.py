@@ -21,6 +21,10 @@ def about(request):
     return render(request, 'misc/about.html')
 
 
+def technology(request):
+    return render(request, 'misc/tech.html')
+
+
 def contact(request):
     if request.method == "POST":
         email = request.POST.get('contact_email')
@@ -308,6 +312,13 @@ def movie_create(request):
 def webdev_home(request):
     website_categories = WebsiteCategory.objects.all()
     complete_website_list = Website.objects.all()
+    query = request.GET.get("q")
+    if query:
+        complete_website_list = complete_website_list.filter(
+            Q(website_name__icontains=query) |
+            Q(website_details__icontains=query) |
+            Q(category__name__icontains=query)
+        )
     if request.method == "POST":
         website = Website()
         website.owner = request.user
