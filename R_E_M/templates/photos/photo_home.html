@@ -112,22 +112,23 @@
                     </div>
                 </div>
             {% endif %}
-            <div class="album_container" id="album_container">
-                {% for album in albums %}
-                    <a href="{% url 'album_view' album.category.slug album.slug %}" class="text {{ album.category.slug }}">
-                        <div class="album_set">
-                            <img src="{{ album.photo_album.all.0.image.url }}" class="album-image"
-                                 alt="{{ album.photo_album.all.0.alt_text }}" onload="calcImg(this)">
-                            <div class="middle">
-                                <div class="text text_top">{{ album.title }}</div>
-                                <div class="text text_center">
-                                    <hr>
-                                </div>
-                                <div class="text text_bottom">{{ album.album_details }}</div>
+        </div>
+        <div class="album_container" id="album_container">
+            {% for album in albums %}
+                <a href="{% url 'album_view' album.category.slug album.slug %}" class="text {{ album.category.slug }}">
+                    <div class="album_set">
+                        <img src="{{ album.photo_album.all.0.image.url }}" class="album-image"
+                             alt="{{ album.photo_album.all.0.alt_text }}" onload="calcImg(this)">
+                        <div class="middle">
+                            <div class="text text_top">{{ album.title }}</div>
+                            <div class="text text_center">
+                                <hr>
                             </div>
+                            <div class="text text_bottom">{{ album.album_details }}</div>
                         </div>
-                    </a>
-                {% endfor %}
+                    </div>
+                </a>
+            {% endfor %}
             <div class="instagram_holder">
                 <div class="instagram_title">
                     <h1>Instagram</h1>
@@ -140,10 +141,8 @@
                     </a>
                 {% endfor %}
             </div>
-            </div>
         </div>
     </div>
-
 
     <script>
     /*

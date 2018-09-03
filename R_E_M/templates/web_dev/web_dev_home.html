@@ -38,7 +38,7 @@
         </div>
         <div class="ajax_div">
         </div>
-        <div class="web_container">
+        <div class="container">
             {% if user.is_authenticated %}
                 <h4 id="websiteModalBtn">Create New Website</h4>
                 <br>
@@ -95,24 +95,24 @@
                     </div>
                 </div>
             {% endif %}
-            <div class="website_card_container {{ website.category.slug }}" id="website_card_container">
-                {% for website in websites %}
-                    <div class="website-card">
-                        <img src="{{ website.main_page.url }}" class="website_cover"/>
-                        <div class="web_gradient">
-                            <div class="website_header">
-                                <div class="website_name_container"><p>{{ website.website_name }}</p></div>
-                                <div class="website_date_container"><p>{{ website.date_built }}</p></div>
-                            </div>
+        </div>
+        <div class="website_card_container {{ website.category.slug }}" id="website_card_container">
+            {% for website in websites %}
+                <div class="website-card">
+                    <img src="{{ website.main_page.url }}" class="website_cover"/>
+                    <div class="web_gradient">
+                        <div class="website_header">
+                            <div class="website_name_container"><p>{{ website.website_name }}</p></div>
+                            <div class="website_date_container"><p>{{ website.date_built }}</p></div>
+                        </div>
 
-                            <div class="website_read_more">
-                                <a href="{% url 'website_single_view' website.category.slug website.slug %}" class="website_button">Read
-                                    More</a>
-                            </div>
+                        <div class="website_read_more">
+                            <a href="{% url 'website_single_view' website.category.slug website.slug %}" class="website_button">Read
+                                More</a>
                         </div>
                     </div>
-                {% endfor %}
-            </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
 <script>

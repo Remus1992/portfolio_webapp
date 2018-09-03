@@ -1551,7 +1551,7 @@ h3 {
 /********** Blog Cards **************/
 
 .blog_container {
-    margin: 30px auto;
+    margin: auto;
     display: flex;
     flex-wrap: wrap;
     width: 80%;
@@ -2325,12 +2325,6 @@ pre {
 
 /************************* WEBDEV PAGE *************************/
 
-.web_container {
-    margin: 20px auto;
-    text-align: center;
-    width: 90%;
-}
-
 .website_card_container {
     display: flex;
     flex-wrap: wrap;
@@ -2442,7 +2436,7 @@ pre {
 }
 
 .container {
-    margin: 20px auto;
+    margin: auto;
     text-align: center;
     width: 70%;
 }
