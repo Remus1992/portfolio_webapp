@@ -1381,14 +1381,6 @@ h3 {
     cursor: pointer;
 }
 
-.img_temp {
-    width: 100px;
-}
-
-.movie_image {
-    height: 150px;
-    /*width: 50px;*/
-}
 
 .img_holder {
     border: 1px solid #888;
@@ -1447,10 +1439,6 @@ h3 {
     overflow: auto;
     display: flex;
     flex-wrap: wrap;
-}
-
-.movie_gallery_images img {
-    margin-left: 40px;
 }
 
 .movie-input-row, .movie-submit-row, .movie-still-input-row {
@@ -1562,6 +1550,37 @@ h3 {
     -moz-transition: all 0.3s ease-out;  /* Firefox 4-15 */
     -o-transition: all 0.3s ease-out;  /* Opera 10.50–12.00 */
     transition: all 0.3s ease-out;
+}
+
+.movie-preview-image {
+    visibility: hidden;
+}
+
+/* prevent a flash of giant image before the image is wrapped by jQuery */
+
+.movie-preview-image-wrap {
+    /* whatever the dimensions you want the "cropped" image to be */
+    height: 180px;
+    width: 180px;
+    margin-left: 33px;
+    overflow: hidden;
+}
+
+.movie-preview-image-wrap img.square {
+    visibility: visible;
+    width: 100%;
+}
+
+.movie-preview-image-wrap img.portrait {
+    visibility: visible;
+    width: 100%;
+    height: auto;
+}
+
+.movie-preview-image-wrap img.landscape {
+    visibility: visible;
+    height: 100%;
+    width: auto;
 }
 
 /********** Blog Cards **************/
