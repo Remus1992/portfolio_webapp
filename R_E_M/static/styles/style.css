@@ -524,6 +524,22 @@ body:not(.always-use-overlay-nav) .nav-wrapper.desktop-nav-wrapper .folder:hover
     font-style: normal;
 }
 
+/* NEW TESTING FOR SCREEN */
+/*#header #logoWrapper, #header #siteTitleWrapper {*/
+    /*z-index: 1001;*/
+/*}*/
+
+/*#header #logoWrapper, #header #siteTitleWrapper {*/
+    /*position: relative;*/
+    /*left: 50%;*/
+    /*-webkit-transform: translate(-50%,0);*/
+    /*-moz-transform: translate(-50%,0);*/
+    /*-ms-transform: translate(-50%,0);*/
+    /*-o-transform: translate(-50%,0);*/
+    /*transform: translate(-50%,0);*/
+    /*text-align: center;*/
+/*}*/
+
 /* ****************************FOOTER************************ */
 
 footer, nav {
@@ -1098,7 +1114,7 @@ a, a:visited {
 }
 
 .checkbox {
-    font-size: 1.5em;
+    font-size: 20px;
     padding: 4px;
     margin: 10px;
 
@@ -1410,7 +1426,7 @@ h3 {
     background-color: #e2e0e0;
     padding: 5px;
     width: 20%;
-    height: 500px;
+    height: 570px;
     float: left;
 }
 
@@ -1427,7 +1443,7 @@ h3 {
 }
 
 .movie_gallery_images {
-    height: 294px;
+    height: 364px;
     overflow: auto;
     display: flex;
     flex-wrap: wrap;
@@ -1492,8 +1508,8 @@ h3 {
 .movie_modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 30; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    z-index: 3000; /* Sit on top */
+    padding-top: 40px; /* Location of the box */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -1684,7 +1700,7 @@ pre {
     background-color: #e2e0e0;
     padding: 5px;
     width: 20%;
-    height: 500px;
+    height: 570px;
     float: left;
 }
 
@@ -1694,7 +1710,7 @@ pre {
 
 #blog_content {
     width: 98.4%;
-    height: 504px;
+    height: 574px;
 }
 
 .blog-input-row, .blog-submit-row {
@@ -1730,8 +1746,8 @@ pre {
 .blog_modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 30; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    z-index: 3000; /* Sit on top */
+    padding-top: 40px; /* Location of the box */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -1900,10 +1916,25 @@ pre {
     width: auto;
 }
 
-.instagram_title {
-    padding-top: 30px;
-    padding-bottom: 10px;
+.instagram_holder {
+    margin: 30px;
+    text-align:center;
+
 }
+
+.instagram_title {
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.instagram_title h1 {
+    font-size: 25px;
+}
+
+.instagram_title hr {
+    width: 70%;
+}
+
 /*************************** Photo Album Upload ***************************/
 
 #photoModalBtn:hover {
@@ -1955,13 +1986,13 @@ pre {
     background-color: #e2e0e0;
     padding: 5px;
     width: 20%;
-    height: 500px;
+    height: 570px;
     float: left;
 }
 
 .album_gallery_images {
     margin-left: 20%;
-    height: 510px;
+    height: 580px;
     overflow: auto;
     display: flex;
     flex-wrap: wrap;
@@ -2007,8 +2038,8 @@ pre {
 .album_modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 1; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    z-index: 3000; /* Sit on top */
+    padding-top: 40px; /* Location of the box */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
@@ -2185,7 +2216,7 @@ pre {
     background-color: #e2e0e0;
     padding: 5px;
     width: 20%;
-    height: 500px;
+    height: 570px;
     float: left;
 }
 
@@ -2202,7 +2233,7 @@ pre {
 }
 
 .website_gallery_images {
-    height: 294px;
+    height: 364px;
     overflow: auto;
     display: flex;
     flex-wrap: wrap;
@@ -2267,8 +2298,8 @@ pre {
 .website_modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
-    z-index: 30; /* Sit on top */
-    padding-top: 100px; /* Location of the box */
+    z-index: 3000; /* Sit on top */
+    padding-top: 40px; /* Location of the box */
     left: 0;
     top: 0;
     width: 100%; /* Full width */
