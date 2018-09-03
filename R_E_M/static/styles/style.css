@@ -1156,7 +1156,9 @@ a, a:visited {
 .movie_card_container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
+    width: 75%;
+    margin: auto;
 }
 
 
@@ -1552,8 +1554,8 @@ h3 {
     margin: 30px auto;
     display: flex;
     flex-wrap: wrap;
-    width: 70%;
-    justify-content: space-between;
+    width: 80%;
+    justify-content: center;
 }
 
 .blog-title h2 {
@@ -1573,7 +1575,7 @@ pre {
 .blog {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
     transition: 0.3s;
-    width: 30%;
+    width: 350px;
     position: relative;
     border: lightgrey 1px solid;
     margin: 15px;
@@ -2332,11 +2334,13 @@ pre {
 .website_card_container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .website-card {
-    width: 32%;
+    /*width: 32%;*/
+    width: 440px;
+    margin: 5px;
     position: relative;
 }
 

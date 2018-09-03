@@ -24,12 +24,12 @@
     </style>
 
     <div class="page_container">
-         <div class="search_container">
+        <div class="search_container">
             <form method="GET" action="">
                 <div class="search_div">
                     <input type="text" name="q" placeholder="Search..." id="search_bar" value="{{ request.GET.q }}">
                     <button type="submit" value="Search" class="search_button"><img src="/static/R_E_M/img/search_icon.png" alt="search_logo"
-                                                          id="search_img"/></button>
+                                                                                    id="search_img"/></button>
                 </div>
             </form>
         </div>
@@ -49,7 +49,6 @@
 
         </div>
         <div class="container">
-
             {% if user.is_authenticated %}
                 <h4 id="movieModalBtn">Create New Movie</h4>
                 <br>
@@ -102,37 +101,36 @@
                         </form>
                     </div>
                 </div>
-
             {% endif %}
-            <div class="movie_card_container {{ movie.category.slug }}" id="movie_card_container">
-                {% for movie in movies %}
-                    <div class="movie-card">
-                        <img src="{{ movie.movie_poster.url }}" class="movie_poster"/>
-                        <div class="title-content">
-                            <h3>{{ movie.title }}</h3>
+        </div>
+        <div class="movie_card_container {{ movie.category.slug }}" id="movie_card_container">
+            {% for movie in movies %}
+                <div class="movie-card">
+                    <img src="{{ movie.movie_poster.url }}" class="movie_poster"/>
+                    <div class="title-content">
+                        <h3>{{ movie.title }}</h3>
 
-                            <hr/>
-                            <div class="intro">{{ movie.tag_line }}</div>
-                        </div><!-- /.title-content -->
-                        <div class="card-info">
-                            {{ movie.movie_details }}
-                        </div><!-- /.card-info -->
-                        <div class="movie_read_more">
-                            <a href="{% url 'movie_single_view' movie.category.slug movie.slug %}" class="movie_button">Read More</a>
-                        </div>
+                        <hr/>
+                        <div class="intro">{{ movie.tag_line }}</div>
+                    </div><!-- /.title-content -->
+                    <div class="card-info">
+                        {{ movie.movie_details }}
+                    </div><!-- /.card-info -->
+                    <div class="movie_read_more">
+                        <a href="{% url 'movie_single_view' movie.category.slug movie.slug %}" class="movie_button">Read More</a>
+                    </div>
 
-                        <div class="utility-info">
-                            <ul class="utility-list">
-                                <li class="comments">12</li>
-                                <li class="date">{{ movie.date_built }}</li>
-                            </ul>
-                        </div><!-- /.utility-info -->
-                        <!-- overlays -->
-                        <div class="gradient-overlay"></div>
-                        <div class="color-overlay"></div>
-                    </div><!-- /.movie-card -->
-                {% endfor %}
-            </div>
+                    <div class="utility-info">
+                        <ul class="utility-list">
+                            <li class="comments">12</li>
+                            <li class="date">{{ movie.date_built }}</li>
+                        </ul>
+                    </div><!-- /.utility-info -->
+                    <!-- overlays -->
+                    <div class="gradient-overlay"></div>
+                    <div class="color-overlay"></div>
+                </div><!-- /.movie-card -->
+            {% endfor %}
         </div>
     </div>
     <script>

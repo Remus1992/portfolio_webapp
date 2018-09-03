@@ -47,48 +47,48 @@
         <div class="ajax_div">
         </div>
         <div class="container">
-        {% if user.is_authenticated %}
-            <h4 id="blogModalBtn">Create New Blog</h4>
-            <br>
-            <!-- The Modal -->
-            <div id="blogModal" class="blog_modal">
+            {% if user.is_authenticated %}
+                <h4 id="blogModalBtn">Create New Blog</h4>
+                <br>
+                <!-- The Modal -->
+                <div id="blogModal" class="blog_modal">
 
-                <!-- Modal content -->
-                <div class="blog_modal_content">
+                    <!-- Modal content -->
+                    <div class="blog_modal_content">
 
-                    <form method="post" enctype="multipart/form-data" class="blog_upload_form">
-                        {% csrf_token %}
-                        <div class="blog-input-row">
-                            <h2>Blog Upload</h2>
-                            <span>
+                        <form method="post" enctype="multipart/form-data" class="blog_upload_form">
+                            {% csrf_token %}
+                            <div class="blog-input-row">
+                                <h2>Blog Upload</h2>
+                                <span>
                                 <span class="blog-close">&times;</span>
                             </span>
-                        </div>
-                        <div class="blog_gallery">
-                            <div class="blog_info">
-                                <input type="text" id="blog_title" name="blog_title" class="resizedTextbox" placeholder="Blog Title">
-                                <input list="categories" id="category" name="category" placeholder="Blog Category" class="resizedTextbox">
-                                <datalist id="categories">{% for c in cat %}<option value="{{ c.name }}">{% endfor %}</datalist>
-                                <input type="text" id="youtube_link" name="youtube_link" placeholder="YouTube Link" class="resizedTextbox">
-                                <br>
-                                <br>
-                                <br>
-                                <p>Blog Image</p>
-                                <input type="file" id="blog_image" name="blog_image" class="resizedTextbox">
-                                <input type="text" id="alt_text" name="alt_text" placeholder="Alt Text" class="resizedTextbox">
                             </div>
-                            <div class="blog-details-row">
-                                <textarea id="blog_content" name="blog_content" cols="30" rows="10" placeholder="Blog Content"></textarea>
+                            <div class="blog_gallery">
+                                <div class="blog_info">
+                                    <input type="text" id="blog_title" name="blog_title" class="resizedTextbox" placeholder="Blog Title">
+                                    <input list="categories" id="category" name="category" placeholder="Blog Category" class="resizedTextbox">
+                                    <datalist id="categories">{% for c in cat %}<option value="{{ c.name }}">{% endfor %}</datalist>
+                                    <input type="text" id="youtube_link" name="youtube_link" placeholder="YouTube Link" class="resizedTextbox">
+                                    <br>
+                                    <br>
+                                    <br>
+                                    <p>Blog Image</p>
+                                    <input type="file" id="blog_image" name="blog_image" class="resizedTextbox">
+                                    <input type="text" id="alt_text" name="alt_text" placeholder="Alt Text" class="resizedTextbox">
+                                </div>
+                                <div class="blog-details-row">
+                                    <textarea id="blog_content" name="blog_content" cols="30" rows="10" placeholder="Blog Content"></textarea>
+                                </div>
                             </div>
-                        </div>
-                        <div class="blog-submit-row">
-                            <input class='blog_modal_btn' type="submit" id="sub-btn" value="Create Blog">
-                        </div>
-                    </form>
+                            <div class="blog-submit-row">
+                                <input class='blog_modal_btn' type="submit" id="sub-btn" value="Create Blog">
+                            </div>
+                        </form>
+                    </div>
                 </div>
-            </div>
 
-        {% endif %}
+            {% endif %}
         </div>
         <div class="blog_container" id="blog_container">
             {% for b in blogs %}
