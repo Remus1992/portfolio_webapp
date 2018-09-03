@@ -347,33 +347,30 @@ def webdev_home(request):
 def website_ajax(request):
     if request.method == "POST":
         print(request.POST)
-        movie_response = Movie.objects.filter(
+        website_response = Website.objects.filter(
             category__slug=request.POST.get("category")
         )
         response = []
-        for movie in movie_response:
+        for website in website_response:
             response.append(
                 {
-                    "title": movie.title,
+                    "website_name": website.website_name,
                     "owner": {
-                        "username": movie.owner.username
+                        "username": website.owner.username
                     },
-                    "date_built": movie.date_built,
-                    "movie_details": movie.movie_details,
-                    "slug": movie.slug,
-                    "tag_line": movie.tag_line,
+                    "date_built": website.date_built,
+                    "website_link": website.website_link,
+                    "website_details": website.website_details,
+                    "slug": website.slug,
                     "category": {
-                        "name": movie.category.name,
-                        "slug": movie.category.slug
+                        "name": website.category.name,
+                        "slug": website.category.slug
                     },
-                    "movie_poster": {
-                        "url": movie.movie_poster.url
+                    "main_page": {
+                        "url": website.main_page.url
                     },
-                    "movie_script": {
-                        "url": movie.movie_script.url
-                    },
-                    "alt_text": movie.alt_text,
-                    "youtube": movie.youtube
+                    "alt_text": website.alt_text,
+                    "youtube": website.youtube
                 }
             )
         return JsonResponse(response, safe=False)

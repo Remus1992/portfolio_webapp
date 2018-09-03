@@ -37,10 +37,8 @@
             <hr>
         </div>
         <div class="ajax_div">
-
         </div>
         <div class="web_container">
-
             {% if user.is_authenticated %}
                 <h4 id="websiteModalBtn">Create New Website</h4>
                 <br>
@@ -96,7 +94,6 @@
                         </form>
                     </div>
                 </div>
-
             {% endif %}
             <div class="website_card_container {{ website.category.slug }}" id="website_card_container">
                 {% for website in websites %}
@@ -172,35 +169,26 @@
                     category: cat
                 },
                 success: function (response) {
-                    let mc = $("#website_card_container");
+                    let wcc = $("#website_card_container");
                     let html = "";
-                    $(mc).html('');
+                    $(wcc).html('');
                     $(response).each(function (i, website) {
                         console.dir(response)
-                        html += `<div class="website-card ${website.category.slug}" id="website_card_container">
-                                    <img src="${website.website_poster.url}" class="website_poster"/>
-                                    <div class="title-content">
-                                        <h3>${website.title}</h3>
-                                        <hr/>
-                                        <div class="intro">${website.tag_line}.</div>
-                                    </div><!-- /.title-content -->
-                                    <div class="card-info">
-                                        ${website.website_details}
-                                    </div><!-- /.card-info -->
-                                    <div class="website_read_more">
-                                        <a href="/filmmaking/websites/${website.category.slug}/${website.slug}" class="website_button">Read More</a>
+                        html += `<div class="website-card ${website.category.slug}">
+                                    <img src='${website.main_page.url}' class="website_cover"/>
+                                    <div class="web_gradient">
+                                        <div class="website_header">
+                                            <div class="website_name_container"><p>${website.website_name}</p></div>
+                                            <div class="website_date_container"><p>${website.date_built}</p></div>
+                                        </div>
+                                        <div class="website_read_more">
+                                            <a href="/webdev/websites/$[website.category.slug]/$[website.slug}" class="website_button">Read
+                                                More</a>
+                                        </div>
                                     </div>
-                                    <div class="utility-info">
-                                        <ul class="utility-list">
-                                            <li class="comments">12</li>
-                                            <li class="date">${website.date_built}</li>
-                                        </ul>
-                                    </div>
-                                    <div class="gradient-overlay"></div>
-                                    <div class="color-overlay"></div>
                                 </div>`
-                    });
-                    $(mc).html(html);
+                        });
+                    $(wcc).html(html);
                 }
             });
         });

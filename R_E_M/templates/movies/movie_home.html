@@ -194,12 +194,12 @@
                     $(mc).html('');
                     $(response).each(function (i, movie) {
                         console.dir(response)
-                        html += `<div class="movie-card ${movie.category.slug}" id="movie_card_container">
+                        html += `<div class="movie-card ${movie.category.slug}">
                                     <img src="${movie.movie_poster.url}" class="movie_poster"/>
                                     <div class="title-content">
                                         <h3>${movie.title}</h3>
                                         <hr/>
-                                        <div class="intro">${movie.tag_line}.</div>
+                                        <div class="intro">${movie.tag_line}</div>
                                     </div><!-- /.title-content -->
                                     <div class="card-info">
                                         ${movie.movie_details}
