@@ -10,6 +10,36 @@
     <head>
         <link rel="stylesheet" type="text/css" href="{% static 'styles/style.css' %}"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+            function calcPreviewImg(img) {
+                console.log(img);
+                let h = $(img).height();
+                let w = $(img).width();
+
+                console.log(h);
+                console.log(w);
+
+                if ($(img).parent('.website_gallery_images').length === 0) {
+                    // wrap the image in a "cropping" div
+                    $(img).wrap('<div class="website-preview-image-wrap"></div>');
+                }
+
+                if (h > w) {
+                    // pic is portrait
+                    $(img).addClass('portrait');
+                    let m = -(((h / w) * 100) - 100) / 2; //math the negative margin
+                    $(img).css('margin-top', m + '%');
+                } else if (w > h) {
+                    // pic is landscape
+                    $(img).addClass('landscape');
+                    let m = -(((w / h) * 100) - 100) / 2;  //math the negative margin
+                    $(img).css('margin-left', m + '%');
+                } else {
+                    // pic is square
+                    $(img).addClass('square');
+                }
+            }
+        </script>
     </head>
 
 
@@ -196,7 +226,7 @@
     // IMAGE UPLOADER PLUS MODAL
         let imagesPreview = function (input, placeToInsertImagePreview) {
             $(placeToInsertImagePreview).html('');
-            //let website_html = '<div class="website_info"><input type="text" id="website_title" name="website_title" class="resizedTextbox" placeholder="website Title"><input type="text" id="website_tag" name="website_tag" placeholder="website Tagline" class="resizedTextbox"><input list="categories" id="website_category" name="website_category" placeholder="website Category" class="resizedTextbox"><datalist id="categories">{% for c in website_cats %}<option value="{{ c.name }}">{% endfor %}</datalist><input type="text" id="youtube_link" name="website_youtube" placeholder="YouTube Link" class="resizedTextbox"><input type="date" id="website_date" name="website_date" class="resizedTextbox"><br><br><br><p>website Poster</p><input type="file" id="website_poster" name="website_poster" class="resizedTextbox"><input type="text" id="alt_text" name="alt_text" placeholder="Poster Alt Text" class="resizedTextbox"><br><br><br><p>website Script</p><input type="file" id="website_script" name="website_script" class="resizedTextbox"></div><div class="website-details-row"><textarea id="website_details" name="website_details" cols="30" rows="10" placeholder="website Details"></textarea></div><div class="website-still-input-row"><h2>website Stills</h2><input class="website_modal_btn" name="images" type="file" multiple id="gallery-website-still-add"></div><div id="website_gallery_images" class="website_gallery_images"></div>'
+            //let website_html = '<div class="website_info"><input type="text" id="website_title" name="website_title" class="resizedTextbox" placeholder="website Title"><input type="text" id="website_tag" name="website_tag" placeholder="website Tagline" class="resizedTextbox"><input list="categories" id="website_category" name="website_category" placeholder="website Category" class="resizedTextbox"><datalist id="categories">{% for c in website_cats %}<option value="{{ c.name }}">{% endfor %}</datalist><input type="text" id="youtube_link" name="website_youtube" placeholder="YouTube Link" class="resizedTextbox"><input type="date" id="website_date" name="website_date" class="resizedTextbox"><br><br><br><p>website Poster</p><input type="file" id="website_poster" name="website_poster" class="resizedTextbox"><input type="text" id="alt_text" name="alt_text" placeholder="Poster Alt Text" class="resizedTextbox"><br><br><br><p>website Script</p><input type="file" id="website_script" name="website_script" class="resizedTextbox"></div><div class="website-details-row"><textarea id="web_details" name="web_details" cols="30" rows="10" placeholder="website Details"></textarea></div><div class="website-still-input-row"><h2>website Stills</h2><input class="website_modal_btn" name="images" type="file" multiple id="gallery-website-still-add"></div><div id="website_gallery_images" class="website_gallery_images"></div>'
             //$(placeToInsertImagePreview).append(website_html);
 
             if (input.files) {
@@ -215,7 +245,7 @@
                                 'value': event.target.result,
                                 'name': `image_${num + 1}`
                             }))
-                            .append($(`<span class="website-close" id="close_image_${num + 1}" onClick="removeElement('website_gallery_images', 'image_${num + 1}')">&times;</span><img class="website_image" src="${event.target.result}" id="new_picture_${num + 1}"><div><label for="image_name_${num + 1}">Photo Title</label></div><div><input type="text" value="${name}" name="image_name_${num + 1}"></div><div><label for="alt_text_${num + 1}">Alt Text</label></div><div><input type="text" id="alt_text_${num + 1}" name="alt_text_${num + 1}" value="${name}"></div>`));
+                            .append($(`<span class="website-close" id="close_image_${num + 1}" onClick="removeElement('website_gallery_images', 'image_${num + 1}')">&times;</span><img class="website-preview-image" src="${event.target.result}" id="new_picture_${num + 1}" onload="calcPreviewImg(this)"><div><label for="image_name_${num + 1}">Photo Title</label></div><div><input type="text" value="${name}" name="image_name_${num + 1}"></div><div><label for="alt_text_${num + 1}">Alt Text</label></div><div><input type="text" id="alt_text_${num + 1}" name="alt_text_${num + 1}" value="${name}"></div>`));
                         $(placeToInsertImagePreview).append(html);
                     };
 
@@ -264,7 +294,7 @@
         // When the user clicks on <span> (x), close the modal
         span.onclick = function() {
             websiteUploadModal.style.display = "none";
-            let website_html = '<div class="website_info"><input type="text" id="website_title" name="website_title" class="resizedTextbox" placeholder="website Title"><input type="text" id="website_tag" name="website_tag" placeholder="website Tagline" class="resizedTextbox"><input list="categories" id="website_category" name="website_category" placeholder="website Category" class="resizedTextbox"><datalist id="categories">{% for c in website_cats %}<option value="{{ c.name }}">{% endfor %}</datalist><input type="text" id="youtube_link" name="website_youtube" placeholder="YouTube Link" class="resizedTextbox"><input type="date" id="website_date" name="website_date" class="resizedTextbox"><br><br><br><p>website Poster</p><input type="file" id="website_poster" name="website_poster" class="resizedTextbox"><input type="text" id="alt_text" name="alt_text" placeholder="Poster Alt Text" class="resizedTextbox"><br><br><br><p>website Script</p><input type="file" id="website_script" name="website_script" class="resizedTextbox"></div><div class="website-details-row"><textarea id="website_details" name="website_details" cols="30" rows="10" placeholder="website Details"></textarea></div><div class="website-still-input-row"><h2>website Stills</h2><input class="website_modal_btn" name="images" type="file" multiple id="gallery-website-still-add"></div><div id="website_gallery_images" class="website_gallery_images"></div>'
+            let website_html = '<div class="website_info"><input type="text" id="website_title" name="website_title" class="resizedTextbox" placeholder="website Title"><input type="text" id="website_tag" name="website_tag" placeholder="website Tagline" class="resizedTextbox"><input list="categories" id="website_category" name="website_category" placeholder="website Category" class="resizedTextbox"><datalist id="categories">{% for c in website_cats %}<option value="{{ c.name }}">{% endfor %}</datalist><input type="text" id="youtube_link" name="website_youtube" placeholder="YouTube Link" class="resizedTextbox"><input type="date" id="website_date" name="website_date" class="resizedTextbox"><br><br><br><p>website Poster</p><input type="file" id="website_poster" name="website_poster" class="resizedTextbox"><input type="text" id="alt_text" name="alt_text" placeholder="Poster Alt Text" class="resizedTextbox"><br><br><br><p>website Script</p><input type="file" id="website_script" name="website_script" class="resizedTextbox"></div><div class="website-details-row"><textarea id="web_details" name="web_details" cols="30" rows="10" placeholder="website Details"></textarea></div><div class="website-still-input-row"><h2>website Stills</h2><input class="website_modal_btn" name="images" type="file" multiple id="gallery-website-still-add"></div><div id="website_gallery_images" class="website_gallery_images"></div>'
             $("div.website_gallery").html(website_html);
             $('#gallery-website-still-add').on('change', function () {
                 imagesPreview(this, 'div.website_gallery_images');
