@@ -9,7 +9,6 @@ from django.http import JsonResponse
 from R_E_M.secret import insta_api_access_token
 from django.core.mail import send_mail
 
-
 # from PIL import Image
 
 
@@ -459,7 +458,7 @@ def blog_ajax(request):
                     "author": {
                         "username": b.author.username
                     },
-                    "date": b.date,
+                    "date": b.date.strftime('%b %e, %Y, %I:%M %p'),
                     "content": b.content,
                     "slug": b.slug,
                     "category": {

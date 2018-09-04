@@ -1,0 +1,142 @@
+.img_temp {
+    width: 100px;
+}
+
+.image {
+    height: 150px;
+    /*width: 50px;*/
+}
+
+.img_holder {
+    border: 1px solid #888;
+    padding: 5px;
+    height: 350px;
+    width: 245px;
+    margin: 6px;
+
+}
+
+.modal_btn {
+    font: 1rem 'Fira Sans', sans-serif;
+    padding: .5rem;
+    background: transparent;
+    border: 1px solid #888;
+    border-radius: 1px;
+    margin: 4px;
+    margin-left: 15px;
+    transition: 3ms;
+}
+
+.modal_btn:hover {
+    background: #b2b2b2;
+    cursor: pointer;
+}
+
+.gallery {
+    width: 100%;
+    overflow: hidden;
+    /*justify-content: center;*/
+}
+
+.album_info {
+    border-right: 1px solid #888;
+    background-color: #e2e0e0;
+    padding: 5px;
+    width: 20%;
+    height: 500px;
+    float: left;
+}
+
+.gallery_images {
+    margin-left: 20%;
+    height: 510px;
+    overflow: auto;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.gallery_images img {
+    margin-left: 40px;
+}
+
+.input-row, .submit-row {
+    display: flex;
+
+    background-color: #cccccc;
+}
+
+.input-row {
+    border-bottom: 1px solid #888;
+    justify-content: space-between;
+    /*-moz-border-radius-topleft: 5px;*/
+    /*-moz-border-radius-topright: 5px;*/
+}
+
+.input-row h2 {
+    padding: 16px;
+}
+
+.submit-row {
+    border-top: 1px solid #888;
+    justify-content: flex-end;
+    /*-moz-border-radius-bottomleft: 5px;*/
+    /*-moz-border-radius-bottomright: 5px;*/
+}
+
+.album_upload_form {
+    border-radius: 5px;
+    box-shadow: 3px 3px 20px rgba(0, 0, 0, .5);
+}
+
+/* The Modal (background) */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    padding-top: 100px; /* Location of the box */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0); /* Fallback color */
+    background-color: rgba(184, 184, 184, 0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    margin-top: -20px;
+    /*padding: 20px;*/
+    width: 90%;
+    border-radius: 5px;
+}
+
+/* The Close Button */
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    padding: 11px;
+}
+
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.resizedTextbox {
+    width: 90%;
+    height: 25px;
+    margin: 5px;
+    border: 1px solid #888;
+}
+
+.album_details {
+    height: 100px;
+}

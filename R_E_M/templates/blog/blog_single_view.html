@@ -3,6 +3,7 @@
 
 {% load static %}
 {% load R_E_M_tags %}
+{% load martortags %}
 
 {% block title %}{{ blog.title }}{% endblock %}
 {% block content %}
@@ -60,7 +61,7 @@
             <p class="post-time">Posted on {{ blog.date }}</p>
 
             <!--Post content-->
-            <pre>{{ blog.content }}</pre>
+            <pre>{{ blog.content|safe_markdown }}</pre>
 
             {% if blog.youtube_link %}
 

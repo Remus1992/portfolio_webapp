@@ -2,6 +2,7 @@
 
 {% load static %}
 {% load R_E_M_tags %}
+{% load martortags %}
 
 {% block title %}
     : Blog Home
@@ -9,14 +10,14 @@
 {% block css %}
     <style>
         body {
-            font-family: 'Alegreya Sans SC', sans-serif;
+            {#font-family: 'Alegreya Sans SC', sans-serif;#}
         }
     </style>
 {% endblock %}
 {% block content %}
     <head>
         <link rel="stylesheet" type="text/css" href="{% static 'styles/style.css' %}"/>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="{% static 'trumbowyg/dist/ui/trumbowyg.css' %}">
     </head>
     <div class="page_container">
         <div class="search_container">
@@ -103,7 +104,7 @@
                         <div class="category">Blog / {{ b.category }}</div>
                         <h2 class="blog-title"> {{ b.title }}</h2>
                         <div class="card-footer"><i>~ Posted on {{ b.date }}</i></div>
-                        <pre class="blog-text">{{ b.content }}</pre>
+                        <pre class="blog-text">{{ b.content|safe_markdown }}</pre>
                         <div class="blog_fade"></div>
                     </div>
                 </div>
@@ -111,9 +112,23 @@
         </div>
 
     </div>
+    <!-- Import jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Import Trumbowyg -->
+    <script src="{% static  'trumbowyg/dist/trumbowyg.js' %}"></script>
+
+    <!-- Import Trumbowyg plugins... -->
+{#    <script src="node_modules/trumbowyg/dist/plugins/upload/trumbowyg.cleanpaste.min.js"></script>#}
+{#    <script src="node_modules/trumbowyg/dist/plugins/upload/trumbowyg.pasteimage.min.js"></script>#}
+
+    <!-- Parallax -->
     <script src="{% static 'javascript/parallax.js-1.5.0/parallax.js' %}"></script>
 
+
     <script>
+
+        $('#blog_content').trumbowyg();
 
         $('.checkbox').click(function () {
             let cat = this.id;
@@ -206,7 +221,7 @@
                     $('.image_holder').parallax('render');
                 }
             });
-        })
+        });
 
         // Get the modal
         let blogUploadModal = document.getElementById('blogModal');
@@ -227,7 +242,10 @@
             blogUploadModal.style.display = "none";
             let blog_html = '<div class="blog_info"><input type="text" id="blog_title" name="blog_title" class="resizedTextbox" placeholder="Blog Title"><input list="categories" id="category" name="category" placeholder="Blog Category" class="resizedTextbox"><datalist id="categories">{% for c in cat %}<option value="{{ c.name }}">{% endfor %}</datalist><input type="text" id="youtube_link" name="youtube_link" placeholder="YouTube Link" class="resizedTextbox"><br><br><br><p>Blog Image</p><input type="file" id="blog_image" name="blog_image" class="resizedTextbox"><input type="text" id="alt_text" name="alt_text" placeholder="Alt Text" class="resizedTextbox"></div><div class="blog-details-row"><textarea id="blog_content" name="blog_content" cols="30" rows="10" placeholder="Blog Content"></textarea></div>'
             $("div.blog_gallery").html(blog_html);
+            $('#blog_content').trumbowyg();
         };
+
+
     </script>
 {% endblock %}
 

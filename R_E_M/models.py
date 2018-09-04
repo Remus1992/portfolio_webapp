@@ -1,6 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.utils.text import slugify
+from martor.models import MartorField
+
+
+class Post(models.Model):
+    description = MartorField()
 
 
 def user_image_uh(instance, filename):
@@ -199,7 +204,7 @@ class Blog(models.Model):
     title = models.CharField(max_length=200)
     author = models.ForeignKey(User, related_name='blogs', on_delete=models.CASCADE)
     date = models.DateTimeField(auto_now_add=True)
-    content = models.TextField()
+    content = MartorField()
     slug = models.SlugField(blank=True, null=True, unique=True)
     category = models.ForeignKey("Category", default=1, related_name='blogs', on_delete=models.SET_DEFAULT)
     image = models.ImageField(upload_to=blog_image_uh, blank=True, null=True)
