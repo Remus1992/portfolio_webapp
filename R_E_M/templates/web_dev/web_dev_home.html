@@ -41,7 +41,11 @@
             }
         </script>
     </head>
-
+    <style>
+        body {
+            font-family: 'Alegreya Sans SC', sans-serif;
+        }
+    </style>
 
     <div class="page_container">
         <div class="search_container">
@@ -140,6 +144,9 @@
                             <a href="{% url 'website_single_view' website.category.slug website.slug %}" class="website_button">Read
                                 More</a>
                         </div>
+                        <div class="website_cat_header">
+                            <div class="website_category_container"><p>Websites/ {{ website.category }}</p></div>
+                        </div>
                     </div>
                 </div>
             {% endfor %}
@@ -214,6 +221,9 @@
                                         <div class="website_read_more">
                                             <a href="/webdev/websites/$[website.category.slug]/$[website.slug}" class="website_button">Read
                                                 More</a>
+                                        </div>
+                                        <div class="website_cat_header">
+                                            <div class="website_category_container"><p>Websites/ ${website.category.name}</p></div>
                                         </div>
                                     </div>
                                 </div>`

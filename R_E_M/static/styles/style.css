@@ -1854,10 +1854,6 @@ pre {
     border: 1px solid #888;
 }
 
-.blog_content {
-    height: 100px;
-    font-family: 'Roboto', sans-serif;
-}
 
 .blog_info p {
     font-weight: bold;
@@ -2544,6 +2540,8 @@ pre {
     margin: 40px;
     cursor: pointer;
     font-weight: bold;
+    -webkit-transition: background-color 50ms ease-in;
+    transition: background-color 50ms ease-in;
 }
 
 .website_read_more:hover .website_button:hover {
@@ -2568,37 +2566,42 @@ pre {
     font-size: 25px;
 }
 
+.website_category_container p {
+    font-size: 20px;
+}
+.website_category_container {
+    text-align: center;
+}
+
 .website-card .web_gradient {
-    display: none;
+    visibility: hidden;
+    /*display: none;*/
+    opacity: 0;
     position: absolute;
     width: 100%;
     height: 100%;
+    -webkit-transition: opacity 150ms ease-in;
+    transition: opacity 150ms ease-in;
+    /*-webkit-transition: opacity 0.3s;*/
+    /*-moz-transition: opacity 0.3s;*/
+    /*-o-transition: opacity 0.3s;*/
+    /*transition: opacity 0.3s;*/
 }
 
 .website-card:hover .web_gradient {
-    display: block;
+    visibility: visible;
+    /*display: block;*/
     opacity: 1;
     background: #2ab5d3;
     background: linear-gradient(-45deg, rgba(201, 201, 201, 0.8) 0%, rgba(91, 91, 91, 0.8) 100%);
     overflow: hidden;
     left:0;
     top:0;
-    -webkit-transition: opacity 250ms ease-in;
-    transition: opacity 250ms ease-in;
     color: #e8eff0;
 }
 
 /**************************************************/
 
 body {
-    font-family: 'Roboto', sans-serif;
+    /*font-family: 'Roboto', sans-serif;*/
 }
-
-/**************************************************************************************************************************************************/
-/**************************************************************************************************************************************************/
-/**************************************************************************************************************************************************/
-/**************************************************************************************************************************************************/
-/**************************************************************************************************************************************************/
-/**************************************************************************************************************************************************/
-/**************************************************************************************************************************************************/
-
