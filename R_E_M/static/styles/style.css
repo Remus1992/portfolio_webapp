@@ -1109,6 +1109,15 @@ a, a:visited {
     text-align: center;
 }
 
+@media only screen and (max-width: 600px) {
+    .categories-link-set {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        width: 100%;
+    }
+}
+
 .filter-checkbox {
     display: none;
 }
@@ -1117,10 +1126,16 @@ a, a:visited {
     font-size: 20px;
     padding: 4px;
     margin: 10px;
-
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
     transition: 0.3s;
     border-radius: 50px;
+}
+
+@media only screen and (max-width: 600px) {
+    .checkbox {
+        font-size: 15px;
+        margin: 5px;
+    }
 }
 
 .checkFocus {
@@ -1142,6 +1157,13 @@ a, a:visited {
 #search_bar {
     height: 30px;
     width: 250px;
+}
+
+@media only screen and (max-width: 600px) {
+    #search_bar {
+        height: 30px;
+        width: 193px;
+    }
 }
 
 #search_bar:hover {
@@ -1242,7 +1264,6 @@ h3 {
     font-weight: 500;
     letter-spacing: 2px;
     color: #9CC9E3;
-    font-family: 'Roboto', sans-serif;
     font-family: 'Alegreya Sans SC', sans-serif;
     margin-bottom: 0;
 }
@@ -1259,7 +1280,6 @@ h3 {
     width: 170px;
     margin: 0 auto;
     color: #DCE3E7;
-    font-family: 'Droid Serif', serif;
     font-family: 'Alegreya Sans SC', sans-serif;
     font-size: 13px;
     font-style: italic;
@@ -1276,7 +1296,6 @@ h3 {
     padding: 0 50px;
     color: rgba(220,227,231, 1);
 
-    font-family: 'Droid Serif', serif;
     font-family: 'Alegreya Sans SC', sans-serif;
     font-style: 16px;
     line-height: 24px;
@@ -1318,7 +1337,6 @@ h3 {
     padding: 0 0 0 22px;
     display: inline-block;
     color: #DCE3E7;
-    font-family: 'Roboto', sans-serif;
     font-family: 'Alegreya Sans SC', sans-serif;
 }
 
@@ -1388,7 +1406,7 @@ h3 {
     height: 350px;
     width: 245px;
     margin: 6px;
-
+    background-color: #dddddd;
 }
 
 .movie_modal_btn {
@@ -1418,7 +1436,7 @@ h3 {
     background-color: #e2e0e0;
     padding: 5px;
     width: 20%;
-    height: 570px;
+    height: 610px;
     float: left;
 }
 
@@ -1435,7 +1453,7 @@ h3 {
 }
 
 .movie_gallery_images {
-    height: 364px;
+    height: 404px;
     overflow: auto;
     display: flex;
     flex-wrap: wrap;
@@ -1833,7 +1851,6 @@ pre {
     height: 300px;
     margin: 5px;
     font-weight: bold;
-
 }
 
 .middle {
@@ -1870,6 +1887,50 @@ pre {
 .text, a:visited {
     color: black;
 }
+
+
+/*** Instagram Holder ***/
+
+.instagram_holder {
+    margin: 30px;
+    text-align:center;
+
+}
+
+.instagram_title {
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.instagram_title h1 {
+    font-size: 25px;
+}
+
+.instagram_title hr {
+    width: 70%;
+}
+
+@media only screen and (max-width: 600px) {
+    .instagram_holder {
+        width: 100%;
+        margin: 0;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .instagram_holder img {
+        width: 32.7%;
+        height: auto;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .album_set {
+        width: 250px;
+        height: 250px;
+    }
+}
+
 
 /* ***** text animation ****** */
 
@@ -1918,6 +1979,14 @@ pre {
     overflow: hidden;
 }
 
+@media only screen and (max-width: 600px) {
+    .album-image-wrap {
+        width: 250px;
+        height: 250px;
+        overflow: hidden;
+    }
+}
+
 .album-image-wrap img.square {
     visibility: visible;
     width: 100%;
@@ -1935,27 +2004,6 @@ pre {
     width: auto;
 }
 
-/*** Instagram Holder ***/
-
-.instagram_holder {
-    margin: 30px;
-    text-align:center;
-
-}
-
-.instagram_title {
-    padding-bottom: 10px;
-    text-align: center;
-}
-
-.instagram_title h1 {
-    font-size: 25px;
-}
-
-.instagram_title hr {
-    width: 70%;
-}
-
 /*************************** Photo Album Upload ***************************/
 
 #photoModalBtn:hover {
@@ -1966,15 +2014,13 @@ pre {
     width: 100px;
 }
 
-
-
 .img_holder {
     border: 1px solid #888;
     padding: 5px;
     height: 350px;
     width: 245px;
     margin: 6px;
-
+    background-color: #dddddd;
 }
 
 .album_modal_btn {
@@ -2222,6 +2268,7 @@ pre {
     height: 283px;
     width: 245px;
     margin: 6px;
+    background-color: #dddddd;
 }
 
 .website_modal_btn {

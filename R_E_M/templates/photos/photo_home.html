@@ -163,7 +163,7 @@
 
             {% for image in insta|slice:":6" %}
                 <a href="{{ image.link }}" target="_blank">
-                    <img src="{{ image.images.thumbnail.url }}" alt="">
+                    <img src="{{ image.images.thumbnail.url }}" alt="{{ image.images. }}">
                 </a>
             {% endfor %}
         </div>
