@@ -11,15 +11,11 @@
     <style>
 
         html {
-            {#background: url("/static/R_E_M/img/rembrandt-lighting.jpg") no-repeat center center fixed;#}
-            {#-webkit-background-size: cover;#}
-            {#-moz-background-size: cover;#}
-            {#-o-background-size: cover;#}
-            {#background-size: cover;#}
-        }
-
-        body {
-        {#background-color: white;{#background-image: url("/static/R_E_M/img/rembrandt-lighting.jpg");#}{##}{#background-repeat: no-repeat;#}{#background-position: center;#}{#background-size: contain;#}{#color: white;#}
+            background: url("/static/R_E_M/img/rembrandt-lighting.jpg") no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
         }
 
         html, body {
@@ -28,12 +24,19 @@
             overflow: hidden;
         }
 
+        #loader {
+            position: absolute;
+            z-index: 9999999999;
+            width: 100%;
+            height: 100%;
+            background-color: black;
+        }
+
         .R_container, .E_container, .M_container {
             width: 500px;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-
         }
 
         .R_container {
@@ -47,49 +50,49 @@
         .M_container {
             margin-left: 1000px;
         }
+
         .R_container img, .E_container img, .M_container img {
-            position: absolute;
+            position: absolute !important;
             {#opacity: .8;#}
             height: 350px;
             width: 350px;
             opacity: 0;
-            {#animation: fadein 4s;#}
-            {#-moz-animation: fadein 4s; /* Firefox */#}
-            {#-webkit-animation: fadein 4s; /* Safari and Chrome */#}
-            {#-o-animation: fadein 4s; /* Opera */#}
-        }
-
-        .REM_container {
-            column-count: 3;
+        {#animation: fadein 4s;#}{#-moz-animation: fadein 4s; /* Firefox */#}{#-webkit-animation: fadein 4s; /* Safari and Chrome */#}{#-o-animation: fadein 4s; /* Opera */#}
         }
 /*
         @keyframes fadein {
             from {
-                opacity:0;
+                opacity: 0;
             }
             to {
-                opacity:0.8;
+                opacity: 0.8;
             }
         }
-        {#@-moz-keyframes fadein { /* Firefox */#}
+
+        @-moz-keyframes fadein { {# Firefox #}
+
             from {
-                opacity:0;
+                opacity: 0;
             }
             to {
-                opacity:0.8;
+                opacity: 0.8;
             }
         }
-        {#@-webkit-keyframes fadein { /* Safari and Chrome */#}
+
+        @-webkit-keyframes fadein { {# Safari and Chrome #}
+
             from {
-                opacity:0;
+                opacity: 0;
             }
             to {
-                opacity:0.8;
+                opacity: 0.8;
             }
         }
-        {#@-o-keyframes fadein { /* Opera */#}
+
+        @-o-keyframes fadein { {# Opera #}
+
             from {
-                opacity:0;
+                opacity: 0;
             }
             to {
                 opacity: 0.8;
@@ -97,25 +100,25 @@
         }
 */
     </style>
-
+    <span id="loader"></span>
     <div class="REM_container">
         <div class="R_container TEST">
-            <img src="/static/R_E_M/img/1_R_RED_PNG/R1.png" alt="R1">
-            <img src="/static/R_E_M/img/1_R_RED_PNG/R2.png" alt="R2">
-            <img src="/static/R_E_M/img/1_R_RED_PNG/R3.png" alt="R3">
-            <img src="/static/R_E_M/img/1_R_RED_PNG/R4.png" alt="R4">
+            <img src="/static/R_E_M/img/1_R_RED_PNG/R1.png" alt="R1" id="R1">
+            <img src="/static/R_E_M/img/1_R_RED_PNG/R2.png" alt="R2" id="R2">
+            <img src="/static/R_E_M/img/1_R_RED_PNG/R3.png" alt="R3" id="R3">
+            <img src="/static/R_E_M/img/1_R_RED_PNG/R4.png" alt="R4" id="R4">
         </div>
         <div class="E_container TEST">
-            <img src="/static/R_E_M/img/2_E_RED_PNG/E1.png" alt="E1">
-            <img src="/static/R_E_M/img/2_E_RED_PNG/E2.png" alt="E2">
-            <img src="/static/R_E_M/img/2_E_RED_PNG/E3.png" alt="E3">
-            <img src="/static/R_E_M/img/2_E_RED_PNG/E4.png" alt="E4">
+            <img src="/static/R_E_M/img/2_E_RED_PNG/E1.png" alt="E1" id="E1">
+            <img src="/static/R_E_M/img/2_E_RED_PNG/E2.png" alt="E2" id="E2">
+            <img src="/static/R_E_M/img/2_E_RED_PNG/E3.png" alt="E3" id="E3">
+            <img src="/static/R_E_M/img/2_E_RED_PNG/E4.png" alt="E4" id="E4">
         </div>
         <div class="M_container TEST">
-            <img src="/static/R_E_M/img/3_M_RED_PNG/M1.png" alt="M1">
-            <img src="/static/R_E_M/img/3_M_RED_PNG/M2.png" alt="M2">
-            <img src="/static/R_E_M/img/3_M_RED_PNG/M3.png" alt="M3">
-            <img src="/static/R_E_M/img/3_M_RED_PNG/M4.png" alt="M4">
+            <img src="/static/R_E_M/img/3_M_RED_PNG/M1.png" alt="M1" id="M1">
+            <img src="/static/R_E_M/img/3_M_RED_PNG/M2.png" alt="M2" id="M2">
+            <img src="/static/R_E_M/img/3_M_RED_PNG/M3.png" alt="M3" id="M3">
+            <img src="/static/R_E_M/img/3_M_RED_PNG/M4.png" alt="M4" id="M4">
         </div>
     </div>
 
@@ -124,16 +127,54 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.7/p5.min.js"></script>
 
 
-    <script src="{% static 'javascript/glitch.js' %}"></script>
+    {#        <script src="{% static 'javascript/glitch.js' %}"></script>#}
 
     <script>
-    $(document).ready( function () {
-        $(".R_container img").animate({ opacity: 0.8 }, 2500)
-        $(".E_container img").animate({ opacity: 0.8 }, 2500)
-        //$(".E_container img").delay(1000).animate({ opacity: 0.8 }, 700)
-        $(".M_container img").animate({ opacity: 0.8 }, 2500)
-        //$(".M_container img").delay(2000).animate({ opacity: 0.8 }, 700)
-    })
+        $(document).ready(function () {
+            let offsets = {};
+            gather_offset('#R1', {'top': '250px', 'opacity': '0.8'});
+            gather_offset('#R2', {'top': '100px', 'left': '300px', 'opacity': '0.8'});
+            gather_offset('#R3', {'top': '-100px', 'left': '300px', 'opacity': '0.8'});
+            gather_offset('#R4', {'top': '250px', 'left': '300px', 'opacity': '0.8'});
+
+            setTimeout(function () {
+                $('#loader').hide('slow');
+                ani("#R1", offsets["#R1"], 2500);
+                ani("#R2", offsets["#R2"], 2500);
+                ani("#R3", offsets["#R3"], 2500);
+                ani("#R4", offsets["#R4"], 2500);
+            }, 500);
+
+
+            function gather_offset(id, css) {
+                offsets[id] = $(id).offset();
+                $(id).css(css)
+            }
+
+            function ani(id, offset, time) {
+                let el = $(`${id}`);
+                $(el).animate(offset, time);
+            }
+
+            //console.log($("#R1").offset())//.animate({opacity: 0.8, top: '0'}, 2500);
+            {#$("#R2").animate({ opacity: 0.8, left: '+=220px', bottom: "-=80px" }, 2500);#}
+            {#$("#R3").animate({ opacity: 0.8, left: '+=180px', top: '-=180px' }, 2500);#}
+            {#$("#R4").animate({ opacity: 0.8, left: '+=200px', bottom: '-=100px' }, 2500);#}
+            {#$("#E1").animate({ opacity: 0.8, left: '250px', slidein }, 2500);#}
+            //$("#E2").animate({ opacity: 0.8, left: '250px' }, 2500);
+            //$("#E3").animate({ opacity: 0.8, left: '250px' }, 2500);
+            //$("#E4").animate({ opacity: 0.8, left: '250px' }, 2500);
+            //$("#M1").animate({ opacity: 0.8, left: '250px' }, 2500);
+            //$("#M2").animate({ opacity: 0.8, left: '250px' }, 2500);
+            //$("#M3").animate({ opacity: 0.8, left: '250px' }, 2500);
+            //$("#M4").animate({ opacity: 0.8, left: '250px' }, 2500)
+
+            //$(".R_container img").animate({ opacity: 0.8 }, 2500)
+            //$(".E_container img").animate({ opacity: 0.8 }, 2500)
+            //$(".E_container img").delay(1000).animate({ opacity: 0.8 }, 700)
+            //$(".M_container img").animate({ opacity: 0.8 }, 2500)
+            //$(".M_container img").delay(2000).animate({ opacity: 0.8 }, 700)
+        })
 
     </script>
 
