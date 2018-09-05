@@ -56,7 +56,7 @@
             {#opacity: .8;#}
             height: 350px;
             width: 350px;
-            opacity: 0;
+            opacity: 0.8;
         {#animation: fadein 4s;#}{#-moz-animation: fadein 4s; /* Firefox */#}{#-webkit-animation: fadein 4s; /* Safari and Chrome */#}{#-o-animation: fadein 4s; /* Opera */#}
         }
 /*
@@ -132,10 +132,14 @@
     <script>
         $(document).ready(function () {
             let offsets = {};
-            gather_offset('#R1', {'top': '250px', 'opacity': '0.8'});
-            gather_offset('#R2', {'top': '100px', 'left': '300px', 'opacity': '0.8'});
-            gather_offset('#R3', {'top': '-100px', 'left': '300px', 'opacity': '0.8'});
-            gather_offset('#R4', {'top': '250px', 'left': '300px', 'opacity': '0.8'});
+            gather_offset('#R1', {'top': '250px'});
+            gather_offset('#R2', {'top': '100px', 'left': '300px'});
+            gather_offset('#R3', {'top': '-100px', 'left': '300px'});
+            gather_offset('#R4', {'top': '250px', 'left': '300px'});
+            gather_offset('#E1', {'top': '250px'});
+            gather_offset('#E2', {'left': '750px'});
+            gather_offset('#E3', {'left': '750px'});
+            gather_offset('#E4', {'left': '750px'});
 
             setTimeout(function () {
                 $('#loader').hide('slow');
@@ -143,6 +147,10 @@
                 ani("#R2", offsets["#R2"], 2500);
                 ani("#R3", offsets["#R3"], 2500);
                 ani("#R4", offsets["#R4"], 2500);
+                ani("#E1", offsets["#E1"], 2500);
+                ani("#E2", offsets["#E2"], 2500);
+                ani("#E3", offsets["#E3"], 2500);
+                ani("#E4", offsets["#E4"], 2500);
             }, 500);
 
 
@@ -156,6 +164,9 @@
                 $(el).animate(offset, time);
             }
 
+            console.log($("#R1").offset());
+            console.log($("#E1").offset());
+            console.log($("#M1").offset());
             //console.log($("#R1").offset())//.animate({opacity: 0.8, top: '0'}, 2500);
             {#$("#R2").animate({ opacity: 0.8, left: '+=220px', bottom: "-=80px" }, 2500);#}
             {#$("#R3").animate({ opacity: 0.8, left: '+=180px', top: '-=180px' }, 2500);#}
