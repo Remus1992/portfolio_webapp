@@ -19,7 +19,7 @@
         }
 
         body {
-        {#background-color: white;#}{#background-image: url("/static/R_E_M/img/rembrandt-lighting.jpg");#}{##}{#background-repeat: no-repeat;#}{#background-position: center;#}{#background-size: contain;#}{#color: white;#}
+        {#background-color: white;{#background-image: url("/static/R_E_M/img/rembrandt-lighting.jpg");#}{##}{#background-repeat: no-repeat;#}{#background-position: center;#}{#background-size: contain;#}{#color: white;#}
         }
 
         html, body {
@@ -27,12 +27,114 @@
             padding: 0;
             overflow: hidden;
         }
+
+        .R_container, .E_container, .M_container {
+            width: 500px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+
+        }
+
+        .R_container {
+            float: left;
+        }
+
+        .E_container {
+            margin-left: 500px;
+        }
+
+        .M_container {
+            margin-left: 1000px;
+        }
+        .R_container img, .E_container img, .M_container img {
+            position: absolute;
+            {#opacity: .8;#}
+            height: 350px;
+            width: 350px;
+            opacity: 0;
+            {#animation: fadein 4s;#}
+            {#-moz-animation: fadein 4s; /* Firefox */#}
+            {#-webkit-animation: fadein 4s; /* Safari and Chrome */#}
+            {#-o-animation: fadein 4s; /* Opera */#}
+        }
+
+        .REM_container {
+            column-count: 3;
+        }
+/*
+        @keyframes fadein {
+            from {
+                opacity:0;
+            }
+            to {
+                opacity:0.8;
+            }
+        }
+        {#@-moz-keyframes fadein { /* Firefox */#}
+            from {
+                opacity:0;
+            }
+            to {
+                opacity:0.8;
+            }
+        }
+        {#@-webkit-keyframes fadein { /* Safari and Chrome */#}
+            from {
+                opacity:0;
+            }
+            to {
+                opacity:0.8;
+            }
+        }
+        {#@-o-keyframes fadein { /* Opera */#}
+            from {
+                opacity:0;
+            }
+            to {
+                opacity: 0.8;
+            }
+        }
+*/
     </style>
 
+    <div class="REM_container">
+        <div class="R_container TEST">
+            <img src="/static/R_E_M/img/1_R_RED_PNG/R1.png" alt="R1">
+            <img src="/static/R_E_M/img/1_R_RED_PNG/R2.png" alt="R2">
+            <img src="/static/R_E_M/img/1_R_RED_PNG/R3.png" alt="R3">
+            <img src="/static/R_E_M/img/1_R_RED_PNG/R4.png" alt="R4">
+        </div>
+        <div class="E_container TEST">
+            <img src="/static/R_E_M/img/2_E_RED_PNG/E1.png" alt="E1">
+            <img src="/static/R_E_M/img/2_E_RED_PNG/E2.png" alt="E2">
+            <img src="/static/R_E_M/img/2_E_RED_PNG/E3.png" alt="E3">
+            <img src="/static/R_E_M/img/2_E_RED_PNG/E4.png" alt="E4">
+        </div>
+        <div class="M_container TEST">
+            <img src="/static/R_E_M/img/3_M_RED_PNG/M1.png" alt="M1">
+            <img src="/static/R_E_M/img/3_M_RED_PNG/M2.png" alt="M2">
+            <img src="/static/R_E_M/img/3_M_RED_PNG/M3.png" alt="M3">
+            <img src="/static/R_E_M/img/3_M_RED_PNG/M4.png" alt="M4">
+        </div>
+    </div>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.7/p5.min.js"></script>
 
+
     <script src="{% static 'javascript/glitch.js' %}"></script>
+
+    <script>
+    $(document).ready( function () {
+        $(".R_container img").animate({ opacity: 0.8 }, 2500)
+        $(".E_container img").animate({ opacity: 0.8 }, 2500)
+        //$(".E_container img").delay(1000).animate({ opacity: 0.8 }, 700)
+        $(".M_container img").animate({ opacity: 0.8 }, 2500)
+        //$(".M_container img").delay(2000).animate({ opacity: 0.8 }, 700)
+    })
+
+    </script>
 
 {% endblock %}
