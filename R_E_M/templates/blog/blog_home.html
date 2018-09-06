@@ -92,7 +92,7 @@
             {% endif %}
         </div>
         <div class="blog_container" id="blog_container">
-            {% for b in blogs %}
+            {% for b in blog_list %}
                 <div class="blog {{ b.category.slug }}" data-image-src>
                     <div class="image_holder" data-parallax="scroll" data-src="{{ b.image.url }}"
                          data-image-src="{{ b.image.url }}">
@@ -112,18 +112,18 @@
         </div>
         <div class="pagination">
             <span class="step-links">
-                {% if blogs.has_previous %}
+                {% if blog_list.has_previous %}
                     <a href="?page=1">&laquo; first</a>
-                    <a href="?page={{ blogs.previous_page_number }}">previous</a>
+                    <a href="?page={{ blog_list.previous_page_number }}">previous</a>
                 {% endif %}
 
                 <span class="current">
-                    Page {{ blogs.number }} of {{ blogs.paginator.num_pages }}.
+                    Page {{ blog_list.number }} of {{ blog_list.paginator.num_pages }}.
                 </span>
 
-                {% if blogs.has_next %}
-                    <a href="?page={{ blogs.next_page_number }}">next</a>
-                    <a href="?page={{ blogs.paginator.num_pages }}">last &raquo;</a>
+                {% if blog_list.has_next %}
+                    <a href="?page={{ blog_list.next_page_number }}">next</a>
+                    <a href="?page={{ blog_list.paginator.num_pages }}">last &raquo;</a>
                 {% endif %}
             </span>
         </div>
@@ -144,8 +144,10 @@
 
     <script>
 
+        // Gives Markdown Editor to the Blog Content Div
         $('#blog_content').trumbowyg();
 
+        // Allows for continual coloring of button after click event
         $('.checkbox').click(function () {
             let cat = this.id;
 
@@ -203,9 +205,10 @@
             }
         });
 
+        // AJAX Call based on Category Button Clicked
         $(".checkbox").click(function () {
             let cat = this.id;
-            console.log(cat);
+            // console.log(cat);
             $.ajax({
                 url: "{% url "blog_ajax" %}",
                 method: "POST",
@@ -213,7 +216,8 @@
                     category: cat
                 },
                 success: function (response) {
-                    console.dir(response);
+                    // console.dir(response);
+                    // Destroys All of the Images created By Parallax when the page originally loaded
                     $('.image_holder').parallax('destroy');
                     let bc = $("#blog_container");
                     let html = "";
@@ -234,6 +238,7 @@
                         <pre class="blog-text">${b.content}</pre></div></div>`
                     });
                     $(bc).html(html);
+                    // Parallax now builds the images for the new set of blog elements
                     $('.image_holder').parallax('render');
                 }
             });

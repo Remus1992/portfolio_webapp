@@ -417,21 +417,71 @@ def blog_single_view(request, cat, slug):
     return render(request, 'blog/blog_single_view.html', {'blog': blog_single, 'cat': cat})
 
 
+def _blogs(request, blog_list, cat):
+    paginator = Paginator(blog_list, 3)
+
+    try:
+        page = int(request.GET.get('page', '1'))
+    except:
+        page = 1
+
+    try:
+        blog_list = paginator.page(page)
+    except PageNotAnInteger:
+        blog_list = paginator.page(1)
+    except EmptyPage:
+        blog_list = paginator.page(paginator.num_pages)
+
+    # Get the index of the current page
+    index = blog_list.number - 1
+    # print(index)
+    # This value is maximum index of pages, so the last page - 1
+    max_index = len(paginator.page_range)
+    # print(max_index)
+    # range of 7, calculate where to slice the list
+    start_index = index - 2 if index >= 2 else 0
+    end_index = index + 3 if index <= max_index - 3 else max_index
+    # print(end_index)
+    # new page range
+    page_range = paginator.page_range[start_index:end_index]
+
+    # showing first and last links in pagination
+    if index >= 3:
+        start_index = 1
+    if end_index-index >= 3 and end_index != max_index:
+        end_index = max_index
+    else:
+        end_index = None
+
+    context = {
+        'blog_list': blog_list,
+        'cat': cat,
+        'page_range': page_range,
+        'start_index': start_index,
+        'end_index': end_index,
+    }
+
+    return render(request, "blog/blog_home.html", context)
+
+
 def blog(request):
     blog_list = Blog.objects.all()
-
-    paginator = Paginator(blog_list, 3)
-    page = request.GET.get('page')
-    blogs = paginator.get_page(page)
-
     cat = Category.objects.all()
+
+    # Original Pagination
+    # paginator = Paginator(blog_list, 9)
+    # page = request.GET.get('page')
+    # blogs = paginator.get_page(page)
+
+    # Blog Search Function
     query = request.GET.get("q")
-    if query:
+    if query is not None and query != '':
         blog_list = blog_list.filter(
             Q(title__icontains=query) |
             Q(content__icontains=query) |
             Q(category__name__icontains=query)
         )
+    # This is the Blog Create View Function and Renders to that completed Blog
     if request.method == 'POST':
         blog = Blog()
         cat, created = Category.objects.get_or_create(name=request.POST.get('category'))
@@ -448,7 +498,8 @@ def blog(request):
         blog.youtube_link = request.POST.get('youtube_link')
         blog.save()
         return HttpResponseRedirect(reverse('blog_single_view', kwargs={'cat': blog.category.slug, 'slug': blog.slug}))
-    return render(request, "blog/blog_home.html", {'blogs': blogs, 'cat': cat})
+    return _blogs(request, blog_list, cat)
+    # return render(request, "blog/blog_home.html", {'blogs': blogs, 'cat': cat})
 
 
 def blog_ajax(request):
