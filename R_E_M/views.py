@@ -8,6 +8,7 @@ from django.db.models import Q
 from django.http import JsonResponse
 from R_E_M.secret import insta_api_access_token
 from django.core.mail import send_mail
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 
 # from PIL import Image
 
@@ -418,6 +419,11 @@ def blog_single_view(request, cat, slug):
 
 def blog(request):
     blog_list = Blog.objects.all()
+
+    paginator = Paginator(blog_list, 3)
+    page = request.GET.get('page')
+    blogs = paginator.get_page(page)
+
     cat = Category.objects.all()
     query = request.GET.get("q")
     if query:
@@ -442,7 +448,7 @@ def blog(request):
         blog.youtube_link = request.POST.get('youtube_link')
         blog.save()
         return HttpResponseRedirect(reverse('blog_single_view', kwargs={'cat': blog.category.slug, 'slug': blog.slug}))
-    return render(request, "blog/blog_home.html", {'blogs': blog_list, 'cat': cat})
+    return render(request, "blog/blog_home.html", {'blogs': blogs, 'cat': cat})
 
 
 def blog_ajax(request):
