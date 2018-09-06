@@ -12,6 +12,7 @@
         body {
             {#font-family: 'Alegreya Sans SC', sans-serif;#}
         }
+
     </style>
 {% endblock %}
 {% block content %}
@@ -110,6 +111,49 @@
                 </div>
             {% endfor %}
         </div>
+<!-- Pagination -->
+    {% if blog_list.has_other_pages %}
+        <div class="text-center">
+            <ul class="pagination pagination-lg text-center">
+
+                {% if blog_list.has_previous %}
+                    <li><a href="?page={{ blog_list.previous_page_number }}
+                        {% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&laquo;</a></li>
+                {% else %}
+                    <li class="disabled"><span>&laquo;</span></li>
+                {% endif %}
+
+                {% if start_index %}
+                    <li><a href="?page={{ start_index }}">{{ start_index }}</a></li>
+                    <li class="disabled"><span>&mldr;</span></li>
+                {% endif %}
+
+                {% for i in page_range %}
+                    {% if blog_list.number == i %}
+                        <li class="active"><span>{{ i }}</span></li>
+                    {% else %}
+                        <li><a href="?page={{ i }}
+                            {% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+
+
+                {% if blog_list.has_next %}
+                    {% if end_index %}
+                        <li class="disabled"><span>&mldr;</span></li>
+                        <li><a href="?page={{ end_index }}">{{ end_index }}</a></li>
+                    {% endif %}
+                    <li><a href="?page={{ blog_list.next_page_number }}
+                        {% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&raquo;</a></li>
+                {% else %}
+                    <li class="disabled"><span>&raquo;</span></li>
+                {% endif %}
+
+            </ul>
+        </div>
+    {% endif %}
+<!-- Pagination -->
+    <!-- Origin Pagination Method
         <div class="pagination">
             <span class="step-links">
                 {% if blog_list.has_previous %}
@@ -127,6 +171,7 @@
                 {% endif %}
             </span>
         </div>
+        -->
     </div>
     <!-- Import jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -157,18 +202,18 @@
             });
 
             /*
-                        // remove parallax
-                        $('.image_holder').parallax('destroy');
-                        $('.blog').each(function (i, el) {
+                // remove parallax
+                $('.image_holder').parallax('destroy');
+                $('.blog').each(function (i, el) {
 
-                            let img = $(el).find('.image_holder');
-                            if (!$(el).hasClass(cat)) {
-                                $(el).hide();
-                            } else {
-                                $(el).show();
-                            }
-                        });
-                        $('.image_holder').parallax('render');
+                    let img = $(el).find('.image_holder');
+                    if (!$(el).hasClass(cat)) {
+                        $(el).hide();
+                    } else {
+                        $(el).show();
+                    }
+                });
+                $('.image_holder').parallax('render');
             */
             $(this).addClass('checkFocus');
         });
@@ -208,7 +253,7 @@
         // AJAX Call based on Category Button Clicked
         $(".checkbox").click(function () {
             let cat = this.id;
-            // console.log(cat);
+            //console.log(cat);
             $.ajax({
                 url: "{% url "blog_ajax" %}",
                 method: "POST",
@@ -216,7 +261,7 @@
                     category: cat
                 },
                 success: function (response) {
-                    // console.dir(response);
+                    //console.dir(response);
                     // Destroys All of the Images created By Parallax when the page originally loaded
                     $('.image_holder').parallax('destroy');
                     let bc = $("#blog_container");

@@ -437,7 +437,9 @@ def _blogs(request, blog_list, cat):
     # print(index)
     # This value is maximum index of pages, so the last page - 1
     max_index = len(paginator.page_range)
+    index_length = len(paginator.page_range)
     # print(max_index)
+    print("Index Length is: {}".format(max_index))
     # range of 7, calculate where to slice the list
     start_index = index - 2 if index >= 2 else 0
     end_index = index + 3 if index <= max_index - 3 else max_index
@@ -459,6 +461,7 @@ def _blogs(request, blog_list, cat):
         'page_range': page_range,
         'start_index': start_index,
         'end_index': end_index,
+        'index_length': index_length,
     }
 
     return render(request, "blog/blog_home.html", context)
