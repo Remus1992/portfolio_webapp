@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponseRedirect, HttpResponse, get_object_or_404, reverse, redirect
-from R_E_M.models import User, Album, AlbumCategory, Photo, Website, Blog, Category, Movie, MovieStillPhoto, WebsiteScreenShot, MovieCategory, WebsiteCategory
+from R_E_M.models import User, Album, AlbumCategory, Photo, Website, Blog, Category, Movie, MovieStillPhoto, \
+    WebsiteScreenShot, MovieCategory, WebsiteCategory
 import base64
 from django.core.files.base import ContentFile
 import re
@@ -9,6 +10,8 @@ from django.http import JsonResponse
 from R_E_M.secret import insta_api_access_token
 from django.core.mail import send_mail
 from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
+from math import ceil
+
 
 # from PIL import Image
 
@@ -88,7 +91,8 @@ def photography_home(request):
             Q(album_details__icontains=query) |
             Q(category__name__icontains=query)
         )
-    return render(request, 'photos/photo_home.html', {"album_cats": album_categories, 'albums': complete_album_list, "insta": data})
+    return render(request, 'photos/photo_home.html',
+                  {"album_cats": album_categories, 'albums': complete_album_list, "insta": data})
 
 
 def photo_album_view(request, cat, album_slug):
@@ -114,19 +118,19 @@ def photo_ajax(request):
         response = []
         for album in album_response:
             response.append({
-                    "title": album.title,
-                    "owner": {
-                        "username": album.owner.username
-                    },
-                    "slug": album.slug,
-                    "category": {
-                        "name": album.category.name,
-                        "slug": album.category.slug
-                    },
-                    "album_details": album.album_details,
-                    "alt_text": album.alt_text,
-                    "photo_album": [{"url": img.image.url, "alt_text": img.alt_text} for img in album.photo_album.all()]
-                })
+                "title": album.title,
+                "owner": {
+                    "username": album.owner.username
+                },
+                "slug": album.slug,
+                "category": {
+                    "name": album.category.name,
+                    "slug": album.category.slug
+                },
+                "album_details": album.album_details,
+                "alt_text": album.alt_text,
+                "photo_album": [{"url": img.image.url, "alt_text": img.alt_text} for img in album.photo_album.all()]
+            })
 
         return JsonResponse(response, safe=False)
     return JsonResponse({"message": "Must be POST"})
@@ -218,7 +222,8 @@ def filmmaking_home(request):
                 photo.image_details = request.POST.get('image_details_{}'.format(num))
                 photo.save()
 
-        return HttpResponseRedirect(reverse("movie_single_view", kwargs={"cat": movie.category.slug, "slug": movie.slug}))
+        return HttpResponseRedirect(
+            reverse("movie_single_view", kwargs={"cat": movie.category.slug, "slug": movie.slug}))
     return render(request, 'movies/movie_home.html', {"movie_cats": movie_categories, 'movies': complete_movie_list})
 
 
@@ -305,7 +310,8 @@ def movie_create(request):
                 photo.image_details = request.POST.get('image_details_{}'.format(num))
                 photo.save()
 
-        return HttpResponseRedirect(reverse("movie_single_view", kwargs={"cat": movie.category.slug, "slug": movie.slug}))
+        return HttpResponseRedirect(
+            reverse("movie_single_view", kwargs={"cat": movie.category.slug, "slug": movie.slug}))
     return render(request, "movies/movie_create.html", {'cat': MovieCategory.objects.all()})
 
 
@@ -351,8 +357,10 @@ def webdev_home(request):
                 photo.screenshot_name = request.POST.get('image_name_{}'.format(num))
                 photo.alt_text = request.POST.get('alt_text_{}'.format(num))
                 photo.save()
-        return HttpResponseRedirect(reverse("website_single_view", kwargs={"cat": website.category.slug, "slug": website.slug}))
-    return render(request, "web_dev/web_dev_home.html", {"website_cats": website_categories, "websites": complete_website_list})
+        return HttpResponseRedirect(
+            reverse("website_single_view", kwargs={"cat": website.category.slug, "slug": website.slug}))
+    return render(request, "web_dev/web_dev_home.html",
+                  {"website_cats": website_categories, "websites": complete_website_list})
 
 
 def website_ajax(request):
@@ -417,7 +425,7 @@ def blog_single_view(request, cat, slug):
     return render(request, 'blog/blog_single_view.html', {'blog': blog_single, 'cat': cat})
 
 
-def _blogs(request, blog_list, cat):
+def _blogs(request, blog_list, category, cat):
     paginator = Paginator(blog_list, 3)
 
     try:
@@ -450,7 +458,7 @@ def _blogs(request, blog_list, cat):
     # showing first and last links in pagination
     if index >= 3:
         start_index = 1
-    if end_index-index >= 3 and end_index != max_index:
+    if end_index - index >= 3 and end_index != max_index:
         end_index = max_index
     else:
         end_index = None
@@ -458,6 +466,7 @@ def _blogs(request, blog_list, cat):
     context = {
         'blog_list': blog_list,
         'cat': cat,
+        'category': category,
         'page_range': page_range,
         'start_index': start_index,
         'end_index': end_index,
@@ -478,11 +487,24 @@ def blog(request):
 
     # Blog Search Function
     query = request.GET.get("q")
-    if query is not None and query != '':
+    category = request.GET.get('category')
+    if query is not None and query != '' and category is not None and category != '':
+        blog_list = blog_list.filter(
+            Q(category__slug=category, title__icontains=query) |
+            Q(category__slug=category, content__icontains=query) |
+            Q(category__slug=category, category__name__icontains=query)
+        )
+    elif query is not None and query != '':
         blog_list = blog_list.filter(
             Q(title__icontains=query) |
             Q(content__icontains=query) |
             Q(category__name__icontains=query)
+        )
+    elif category is not None and category != '':
+        blog_list = blog_list.filter(
+            Q(category__slug=category) |
+            Q(category__slug=category) |
+            Q(category__slug=category)
         )
     # This is the Blog Create View Function and Renders to that completed Blog
     if request.method == 'POST':
@@ -501,7 +523,7 @@ def blog(request):
         blog.youtube_link = request.POST.get('youtube_link')
         blog.save()
         return HttpResponseRedirect(reverse('blog_single_view', kwargs={'cat': blog.category.slug, 'slug': blog.slug}))
-    return _blogs(request, blog_list, cat)
+    return _blogs(request, blog_list, category, cat)
     # return render(request, "blog/blog_home.html", {'blogs': blogs, 'cat': cat})
 
 
@@ -510,9 +532,16 @@ def blog_ajax(request):
         blog_response = Blog.objects.filter(
             category__slug=request.POST.get("category")
         )
-        response = []
+        # print(len(blog_response))
+        page_size = 3
+        print(len(blog_response) // page_size)
+
+        response = {
+            "pages": ceil(len(blog_response) / page_size),
+            "blogs": []
+        }
         for b in blog_response:
-            response.append(
+            response["blogs"].append(
                 {
                     "title": b.title,
                     "author": {
@@ -532,6 +561,7 @@ def blog_ajax(request):
                     "youtube_link": b.youtube_link
                 }
             )
+
         return JsonResponse(response, safe=False)
     return JsonResponse({"message": "Must be POST"})
 
@@ -557,5 +587,6 @@ def blog_create(request):
 
 
 def instagram_api(request):
-    r = requests.get("https://api.instagram.com/v1/users/self/media/recent/?access_token={}".format(insta_api_access_token))
+    r = requests.get(
+        "https://api.instagram.com/v1/users/self/media/recent/?access_token={}".format(insta_api_access_token))
     return HttpResponse(r.text)

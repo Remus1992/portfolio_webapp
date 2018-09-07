@@ -110,9 +110,9 @@
                         </div>
 
                         <div class="folder">
-                            <input type="checkbox" name="folder-toggle-565c2ce3e4b01110e1dff605"
-                                   id="folder-toggle-565c2ce3e4b01110e1dff605" class="folder-toggle-box hidden"/>
-                            <label for="folder-toggle-565c2ce3e4b01110e1dff605" class="folder-toggle-label"><a
+                            <input type="checkbox" name="folder-toggle-sub"
+                                   id="folder-toggle-sub" class="folder-toggle-box hidden"/>
+                            <label for="folder-toggle-sub" class="folder-toggle-label"><a
                                     href="{% url 'about' %}">Info</a></label>
                             <div class="subnav">
 
@@ -177,9 +177,9 @@
     }(jQuery));
 
     $('#mobileNavToggle').clickToggle(function () {
-        $("#overlayNav").css("width", "100%");
+        $("#overlayNav").css("height", "100%");
     }, function () {
-        $("#overlayNav").css("width", "0");
+        $("#overlayNav").css("height", "0");
     });
 
 </script>
