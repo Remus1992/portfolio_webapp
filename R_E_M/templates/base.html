@@ -24,7 +24,7 @@
     <input type="checkbox" name="mobile-nav-toggle" id="mobileNavToggle" class="mobile-nav-toggle-box hidden"/>
 
     <div id="overlayNav" class="overlayNav">
-        <div id="mobileNavWrapper" class="nav-wrapper">
+        <div id="mobileNavWrapper" class="nav-wrapper_mobile">
             <nav id="mobileNavigation">
                 <div class="external">
                     <a href="{% url 'blog_home' %}">
@@ -158,20 +158,29 @@
     //   });
     // });
 
-    $("#mobileNavToggle").click(function () {
+    //$("#mobileNavToggle").toggle(function () {
+     //  $("#overlayNav").css("width", "100%");
+    //});
+
+    (function ($) {
+        $.fn.clickToggle = function (func1, func2) {
+            var funcs = [func1, func2];
+            this.data('toggleclicked', 0);
+            this.click(function () {
+                var data = $(this).data();
+                var tc = data.toggleclicked;
+                $.proxy(funcs[tc], this)();
+                data.toggleclicked = (tc + 1) % 2;
+            });
+            return this;
+        };
+    }(jQuery));
+
+    $('#mobileNavToggle').clickToggle(function () {
         $("#overlayNav").css("width", "100%");
+    }, function () {
+        $("#overlayNav").css("width", "0");
     });
-
-
-
-    function openNav() {
-        document.getElementById("overlayNav").style.width = "100%";
-    }
-
-    function closeNav() {
-        document.getElementById("overlayNav").style.width = "0%";
-    }
-
 
 </script>
 
