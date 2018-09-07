@@ -16,12 +16,14 @@
     {% endblock %}
 </head>
 <body>
-<div id="site">
 
+<style>
+
+</style>
+<div id="site">
     <input type="checkbox" name="mobile-nav-toggle" id="mobileNavToggle" class="mobile-nav-toggle-box hidden"/>
 
-    <div id="overlayNav">
-
+    <div id="overlayNav" class="overlayNav">
         <div id="mobileNavWrapper" class="nav-wrapper">
             <nav id="mobileNavigation">
                 <div class="external">
@@ -45,34 +47,16 @@
                     </a>
                 </div>
                 <div class="external">
-                    <a href="http://mitchellk.photoshelter.com/archive" target="_blank">
-                        Photo Archives
+                    <a href="{% url 'about' %}">
+                        Bio
                     </a>
                 </div>
-                <div class="collection">
-                    <a href="/travel-with-me/">
-                        Travel with me
+                <div class="external">
+                    <a href="{% url 'technology' %}">
+                        Tech
                     </a>
                 </div>
-                <div class="folder">
-                    <input type="checkbox" name="mobile-folder-toggle-565c2ce3e4b01110e1dff605"
-                           id="mobile-folder-toggle-565c2ce3e4b01110e1dff605" class="folder-toggle-box hidden"/>
-                    <label for="mobile-folder-toggle-565c2ce3e4b01110e1dff605" class="folder-toggle-label"><a
-                            href="{% url 'about' %}">Info</label>
-                    <div class="subnav">
-                        <div class="collection">
-                            <a href="{% url 'about' %}">
-                                Bio
-                            </a>
-                        </div>
-                        <div class="collection">
-                            <a href="{% url 'technology' %}">
-                                Tech
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="collection">
+                <div class="external">
                     <a href="{% url 'contact' %}">
                         Contact
                     </a>
@@ -83,7 +67,7 @@
 
     <header id="header" role="banner">
         <div class="header-inner">
-            <label for="mobileNavToggle" class="mobile-nav-toggle-label show-on-scroll-mobile">
+            <label for="mobileNavToggle" class="mobile-nav-toggle-label show-on-scroll-mobile" id="mobileNavToggle">
                 <div class="top-bar"></div>
                 <div class="middle-bar"></div>
                 <div class="bottom-bar"></div>
@@ -164,7 +148,32 @@
         </div>
     </header>
 </div>
+<!-- Import jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
 
+    // $("#mobileNavToggle").click(function(){
+    //   $("#overlayNav").toggle(function() {
+    //      $( this ).css("width", "100%");
+    //   });
+    // });
+
+    $("#mobileNavToggle").click(function () {
+        $("#overlayNav").css("width", "100%");
+    });
+
+
+
+    function openNav() {
+        document.getElementById("overlayNav").style.width = "100%";
+    }
+
+    function closeNav() {
+        document.getElementById("overlayNav").style.width = "0%";
+    }
+
+
+</script>
 
 
 {% block content %}
