@@ -138,9 +138,9 @@
                 </div>
             {% endif %}
         </div>
-        <div class="album_container" id="album_container">
+        <div class="album_container infinite-container" id="album_container">
             {% for album in albums %}
-                <a href="{% url 'album_view' album.category.slug album.slug %}" class="text {{ album.category.slug }}">
+                <a href="{% url 'album_view' album.category.slug album.slug %}" class="text {{ album.category.slug }} infinite-item">
                     <div class="album_set">
                         <img src="{{ album.photo_album.all.0.image.url }}" class="album-image"
                              alt="{{ album.photo_album.all.0.alt_text }}" onload="calcImg(this)">
@@ -155,6 +155,50 @@
                 </a>
             {% endfor %}
         </div>
+
+        {% if albums.has_next %}
+            <a class="infinite-more-link" href="?page={{ numbers.next_page_number }}">More</a>
+        {% endif %}
+
+        {% if albums.has_other_pages %}
+            <div class="text-center">
+                <input type="hidden" id="startIndex" value="{{ start_index }}">
+                <ul id="paginator" class="pagination pagination-lg text-center">
+    
+                    {% if albums.has_previous %}
+                        <li><a href="?page={{ albums.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">&laquo;</a></li>
+                    {% else %}
+                        <li class="disabled"><span>&laquo;</span></li>
+                    {% endif %}
+    
+                    {% if start_index %}
+                        <li><a href="?page={{ start_index }}">{{ start_index }}</a></li>
+                        <li class="disabled"><span>&mldr;</span></li>
+                    {% endif %}
+    
+                    {% for i in page_range %}
+                        {% if albums.number == i %}
+                            <li class="active"><span>{{ i }}</span></li>
+                        {% else %}
+                            <li><a href="?page={{ i }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ i }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+    
+    
+                    {% if albums.has_next %}
+                        {% if end_index %}
+                            <li class="disabled"><span>&mldr;</span></li>
+                            <li><a href="?page={{ end_index }}">{{ end_index }}</a></li>
+                        {% endif %}
+                        <li><a href="?page={{ albums.next_page_number }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&raquo;</a></li>
+                    {% else %}
+                        <li class="disabled"><span>&raquo;</span></li>
+                    {% endif %}
+    
+                </ul>
+            </div>
+        {% endif %}
+    
         <div class="instagram_holder">
             <div class="instagram_title">
                 <h1>Instagram</h1>
@@ -169,7 +213,13 @@
         </div>
     </div>
 
+    <script src="{% static 'waypoints/src/waypoint.js' %}"></script>
+    <script src="{% static 'waypoints/lib/shortcuts/infinite.js' %}"></script>
     <script>
+        // var infinite = new Waypoint.Infinite({
+        //     element: $('.infinite-container')[0]
+        // });
+
     /*
         $(document).ready(function () {
             setTimeout(function() {
@@ -251,38 +301,43 @@
             }
         });
 
-        $(".checkbox").click(function () {
-            let cat = this.id;
-            // console.log(category);
-            $.ajax({
-                url: "{% url "photo_ajax" %}",
-                method: "POST",
-                data: {
-                    category: cat
-                },
-                success: function (response) {
-                    //console.dir(response);
-                    let ac = $("#album_container");
-                    let html = "";
-                    $(ac).html('');
-                    $(response).each(function (i, album) {
-                        html += `<a href="/photography/galleries/${album.category.slug}/${album.slug}" class="text ${album.category.slug}"><div class="album_set">
-                                    <img src="${album.photo_album[0].url}" class="album-image" onload="calcImg(this)" alt="${album.photo_album[0].alt_text}">
-                                    <div class="middle">
-                                        <div class="text text_top">${album.title}</div>
-                                        <div class="text text_center">
-                                            <hr>
-                                        </div>
-                                        <div class="text text_bottom">${album.album_details}</div>
-                                    </div>
-                                </div>
-                            </a>`
-                    });
-                    $(ac).html(html);
-                    calcImgs();
-                }
-            });
+        $('.checkbox').click(function () {
+            window.location.replace(`/photography/?category=${this.id}`);
         });
+
+        // AJAX Call based on Category Button Clicked
+        // $(".checkbox").click(function () {
+        //     let cat = this.id;
+        //     // console.log(category);
+        //     $.ajax({
+        //         url: "{% url "photo_ajax" %}",
+        //         method: "POST",
+        //         data: {
+        //             category: cat
+        //         },
+        //         success: function (response) {
+        //             //console.dir(response);
+        //             let ac = $("#album_container");
+        //             let html = "";
+        //             $(ac).html('');
+        //             $(response).each(function (i, album) {
+        //                 html += `<a href="/photography/galleries/${album.category.slug}/${album.slug}" class="text ${album.category.slug}"><div class="album_set">
+        //                             <img src="${album.photo_album[0].url}" class="album-image" onload="calcImg(this)" alt="${album.photo_album[0].alt_text}">
+        //                             <div class="middle">
+        //                                 <div class="text text_top">${album.title}</div>
+        //                                 <div class="text text_center">
+        //                                     <hr>
+        //                                 </div>
+        //                                 <div class="text text_bottom">${album.album_details}</div>
+        //                             </div>
+        //                         </div>
+        //                     </a>`
+        //             });
+        //             $(ac).html(html);
+        //             calcImgs();
+        //         }
+        //     });
+        // });
 
         // IMAGE UPLOADER PLUS MODAL
         let imagesPreview = function (input, placeToInsertImagePreview) {
