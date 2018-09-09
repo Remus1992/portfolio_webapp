@@ -165,6 +165,44 @@
             {% endfor %}
         </div>
     </div>
+     {% if movies.has_other_pages %}
+            <div class="text-center">
+                <input type="hidden" id="startIndex" value="{{ start_index }}">
+                <ul id="paginator" class="pagination pagination-lg text-center">
+
+                    {% if movies.has_previous %}
+                        <li><a href="?page={{ movies.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">&laquo;</a></li>
+                    {% else %}
+                        <li class="disabled"><span>&laquo;</span></li>
+                    {% endif %}
+
+                    {% if start_index %}
+                        <li><a href="?page={{ start_index }}">{{ start_index }}</a></li>
+                        <li class="disabled"><span>&mldr;</span></li>
+                    {% endif %}
+
+                    {% for i in page_range %}
+                        {% if movies.number == i %}
+                            <li class="active"><span>{{ i }}</span></li>
+                        {% else %}
+                            <li><a href="?page={{ i }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ i }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+
+
+                    {% if movies.has_next %}
+                        {% if end_index %}
+                            <li class="disabled"><span>&mldr;</span></li>
+                            <li><a href="?page={{ end_index }}">{{ end_index }}</a></li>
+                        {% endif %}
+                        <li><a href="?page={{ movies.next_page_number }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&raquo;</a></li>
+                    {% else %}
+                        <li class="disabled"><span>&raquo;</span></li>
+                    {% endif %}
+
+                </ul>
+            </div>
+        {% endif %}
     <script>
         $('.checkbox').click(function () {
             let cat = this.id;
@@ -209,48 +247,52 @@
             }
         });
 
-        $(".checkbox").click(function () {
-            let cat = this.id;
-            console.log(cat);
-            $.ajax({
-                url: "{% url "movie_ajax" %}",
-                method: "POST",
-                data: {
-                    category: cat
-                },
-                success: function (response) {
-                    let mc = $("#movie_card_container");
-                    let html = "";
-                    $(mc).html('');
-                    $(response).each(function (i, movie) {
-                        console.dir(response)
-                        html += `<div class="movie-card ${movie.category.slug}">
-                                    <img src="${movie.movie_poster.url}" class="movie_poster"/>
-                                    <div class="title-content">
-                                        <h3>${movie.title}</h3>
-                                        <hr/>
-                                        <div class="intro">${movie.tag_line}</div>
-                                    </div><!-- /.title-content -->
-                                    <div class="card-info">
-                                        ${movie.movie_details}
-                                    </div><!-- /.card-info -->
-                                    <div class="movie_read_more">
-                                        <a href="/filmmaking/movies/${movie.category.slug}/${movie.slug}" class="movie_button">Read More</a>
-                                    </div>
-                                    <div class="utility-info">
-                                        <ul class="utility-list">
-                                            <li class="comments">12</li>
-                                            <li class="date">${movie.date_built}</li>
-                                        </ul>
-                                    </div>
-                                    <div class="gradient-overlay"></div>
-                                    <div class="color-overlay"></div>
-                                </div>`
-                    });
-                    $(mc).html(html);
-                }
-            });
+        $('.checkbox').click(function () {
+            window.location.replace(`/filmmaking/?category=${this.id}`);
         });
+
+     //   $(".checkbox").click(function () {
+     //       let cat = this.id;
+     //       console.log(cat);
+     //       $.ajax({
+     //           url: "{% url "movie_ajax" %}",
+     //           method: "POST",
+     //           data: {
+     //               category: cat
+     //           },
+     //           success: function (response) {
+     //               let mc = $("#movie_card_container");
+     //               let html = "";
+     //               $(mc).html('');
+     //               $(response).each(function (i, movie) {
+     //                   console.dir(response)
+     //                   html += `<div class="movie-card ${movie.category.slug}">
+     //                               <img src="${movie.movie_poster.url}" class="movie_poster"/>
+     //                               <div class="title-content">
+     //                                   <h3>${movie.title}</h3>
+     //                                   <hr/>
+     //                                   <div class="intro">${movie.tag_line}</div>
+     //                               </div><!-- /.title-content -->
+     //                               <div class="card-info">
+     //                                   ${movie.movie_details}
+     //                               </div><!-- /.card-info -->
+     //                               <div class="movie_read_more">
+     //                                   <a href="/filmmaking/movies/${movie.category.slug}/${movie.slug}" class="movie_button">Read More</a>
+     //                               </div>
+     //                               <div class="utility-info">
+     //                                   <ul class="utility-list">
+     //                                       <li class="comments">12</li>
+     //                                       <li class="date">${movie.date_built}</li>
+     //                                   </ul>
+     //                               </div>
+     //                               <div class="gradient-overlay"></div>
+     //                               <div class="color-overlay"></div>
+     //                           </div>`
+     //               });
+     //               $(mc).html(html);
+     //           }
+     //       });
+     //   });
 
     // IMAGE UPLOADER PLUS MODAL
         let imagesPreview = function (input, placeToInsertImagePreview) {

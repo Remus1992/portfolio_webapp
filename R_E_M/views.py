@@ -75,9 +75,9 @@ def _albums(request, album_categories, category, complete_album_list,  data):
     page_range = paginator.page_range[start_index:end_index]
 
     # showing first and last links in pagination
-    if index >= 9:
+    if index >= 4:
         start_index = 1
-    if end_index - index >= 9 and end_index != max_index:
+    if end_index - index >= 4 and end_index != max_index:
         end_index = max_index
     else:
         end_index = None
@@ -242,17 +242,91 @@ def photo_upload(request):
     return render(request, 'photos/photo_upload_page.html', {'cat': AlbumCategory.objects.all()})
 
 
+def _movies(request, movie_categories, category, complete_movie_list):
+    paginator = Paginator(complete_movie_list, 4)
+
+    try:
+        page = int(request.GET.get('page', '1'))
+    except:
+        page = 1
+
+    try:
+        complete_movie_list = paginator.page(page)
+    except PageNotAnInteger:
+        complete_movie_list = paginator.page(1)
+    except EmptyPage:
+        complete_movie_list = paginator.page(paginator.num_pages)
+
+    # Get the index of the current page
+    index = complete_movie_list.number - 1
+    # print(index)
+    # This value is maximum index of pages, so the last page - 1
+    max_index = len(paginator.page_range)
+    # print(max_index)
+    print("Index Length is: {}".format(max_index))
+    # range of 7, calculate where to slice the list
+    start_index = index - 3 if index >= 3 else 0
+    end_index = index + 4 if index <= max_index - 4 else max_index
+    # print(end_index)
+    # new page range
+    page_range = paginator.page_range[start_index:end_index]
+
+    # showing first and last links in pagination
+    if index >= 4:
+        start_index = 1
+    if end_index - index >= 4 and end_index != max_index:
+        end_index = max_index
+    else:
+        end_index = None
+
+    context = {
+        'movies': complete_movie_list,
+        'movie_cats': movie_categories,
+        'category': category,
+        'page_range': page_range,
+        'start_index': start_index,
+        'end_index': end_index,
+    }
+
+    return render(request, 'movies/movie_home.html', context)
+
+
 def filmmaking_home(request):
     complete_movie_list = Movie.objects.all()
     movie_categories = MovieCategory.objects.all()
+
     query = request.GET.get("q")
-    if query:
+    category = request.GET.get('category')
+
+    if query is not None and query != '' and category is not None and category != '':
+        complete_movie_list = complete_movie_list.filter(
+            Q(category__slug=category, title__icontains=query) |
+            Q(category__slug=category, tag_line__icontains=query) |
+            Q(category__slug=category, movie_details__icontains=query) |
+            Q(category__slug=category, category__name__icontains=query)
+        )
+    elif query is not None and query != '':
         complete_movie_list = complete_movie_list.filter(
             Q(title__icontains=query) |
             Q(tag_line__icontains=query) |
             Q(movie_details__icontains=query) |
             Q(category__name__icontains=query)
         )
+    elif category is not None and category != '':
+        complete_movie_list = complete_movie_list.filter(
+            Q(category__slug=category) |
+            Q(category__slug=category) |
+            Q(category__slug=category)
+        )
+
+    # if query:
+    #     complete_movie_list = complete_movie_list.filter(
+    #         Q(title__icontains=query) |
+    #         Q(tag_line__icontains=query) |
+    #         Q(movie_details__icontains=query) |
+    #         Q(category__name__icontains=query)
+    #     )
+
     if request.method == "POST":
         # print(request.FILES)
         # print(request.POST)
@@ -296,7 +370,8 @@ def filmmaking_home(request):
 
         return HttpResponseRedirect(
             reverse("movie_single_view", kwargs={"cat": movie.category.slug, "slug": movie.slug}))
-    return render(request, 'movies/movie_home.html', {"movie_cats": movie_categories, 'movies': complete_movie_list})
+    return _movies(request, movie_categories, category, complete_movie_list)
+    # return render(request, 'movies/movie_home.html', {"movie_cats": movie_categories, 'movies': complete_movie_list})
 
 
 def movie_single_view(request, cat, slug):
