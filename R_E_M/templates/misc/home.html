@@ -38,7 +38,8 @@
         }
 
         .R_container, .E_container, .M_container {
-            width: 500px;
+            {#width: 500px;#}
+            width: 33.333%;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
@@ -48,11 +49,13 @@
         }
 
         .E_container {
-            margin-left: 500px;
+            {#margin-left: 500px;#}
+            margin-left: 33.333%;
         }
 
         .M_container {
-            margin-left: 1000px;
+            {#margin-left: 1000px;#}
+            margin-left: 66.666%;
         }
 
         .R_container img, .E_container img, .M_container img {
@@ -141,7 +144,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.7/p5.min.js"></script>
 
 
-                <script src="{% static 'javascript/glitch.js' %}"></script>
+    <script src="{% static 'javascript/glitch.js' %}"></script>
 
     <script>
         $(document).ready(function () {

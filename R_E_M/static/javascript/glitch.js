@@ -22,7 +22,7 @@ let imgSrc = '/static/R_E_M/img/rembrandt-lighting.jpg';
 //         glitch = new Glitch(img);
 //         isLoaded = true;
 //     });
-// }, 4000);
+// }, 3000);
 
 function setup() {
     background(0);
@@ -237,7 +237,7 @@ class Glitch {
         this.replaceData(this.imgOrigin, this.copyData);
 
         // sometimes pass without effect processing
-        let n = floor(random(100));
+        let n = floor(random(250));
         if (n > 75 && this.throughFlag) {
             this.throughFlag = false;
             setTimeout(() => {
