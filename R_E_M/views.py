@@ -426,7 +426,7 @@ def blog_single_view(request, cat, slug):
 
 
 def _blogs(request, blog_list, category, cat):
-    paginator = Paginator(blog_list, 3)
+    paginator = Paginator(blog_list, 9)
 
     try:
         page = int(request.GET.get('page', '1'))
@@ -445,20 +445,19 @@ def _blogs(request, blog_list, category, cat):
     # print(index)
     # This value is maximum index of pages, so the last page - 1
     max_index = len(paginator.page_range)
-    index_length = len(paginator.page_range)
     # print(max_index)
     print("Index Length is: {}".format(max_index))
     # range of 7, calculate where to slice the list
-    start_index = index - 2 if index >= 2 else 0
-    end_index = index + 3 if index <= max_index - 3 else max_index
+    start_index = index - 8 if index >= 8 else 0
+    end_index = index + 9 if index <= max_index - 9 else max_index
     # print(end_index)
     # new page range
     page_range = paginator.page_range[start_index:end_index]
 
     # showing first and last links in pagination
-    if index >= 3:
+    if index >= 9:
         start_index = 1
-    if end_index - index >= 3 and end_index != max_index:
+    if end_index - index >= 9 and end_index != max_index:
         end_index = max_index
     else:
         end_index = None
@@ -470,7 +469,6 @@ def _blogs(request, blog_list, category, cat):
         'page_range': page_range,
         'start_index': start_index,
         'end_index': end_index,
-        'index_length': index_length,
     }
 
     return render(request, "blog/blog_home.html", context)

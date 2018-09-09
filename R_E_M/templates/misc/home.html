@@ -25,7 +25,7 @@
         }
 
         .REM_container {
-        {#margin-top: 100px;#} bottom: 50px;
+            bottom: 50px;
             left: 0;
         }
 
@@ -38,8 +38,7 @@
         }
 
         .R_container, .E_container, .M_container {
-            {#width: 500px;#}
-            width: 33.333%;
+        {#width: 500px;#} width: 33.333%;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
@@ -49,73 +48,202 @@
         }
 
         .E_container {
-            {#margin-left: 500px;#}
-            margin-left: 33.333%;
+        {#margin-left: 500px;#} margin-left: 33.333%;
         }
 
         .M_container {
-            {#margin-left: 1000px;#}
-            margin-left: 66.666%;
+        {#margin-left: 1000px;#} margin-left: 66.666%;
         }
 
         .R_container img, .E_container img, .M_container img {
             margin-top: 60px;
             position: absolute !important;
             opacity: 0;
-            height: 350px;
-            width: 350px;
+            {#height: 350px;#}
+            {#width: 350px;#}
+            width: 25%;
+            height: auto;
 
-            {#opacity: 0;#}
-            {#animation: fadein 2s;#}
-            {#-moz-animation: fadein 2s; /* Firefox */#}
-            {#-webkit-animation: fadein 2s; /* Safari and Chrome */#}
-            {#-o-animation: fadein 2s; /* Opera */#}
         }
 
-        {#/*#}
-        @keyframes fadein {
-            from {
+        .small_REM_container {
+            margin-top: 35px;
+        }
+
+        .small_REM_container img {
+            width: 100px;
+            opacity: 0.8;
+        }
+
+        /************************************* Rotating Words ************************************/
+        .rw-wrapper {
+            width: 80%;
+            position: relative;
+            margin: 0 auto 0 auto;
+            padding: 10px;
+        }
+
+        .rw-sentence {
+            margin: 0;
+            text-align: left;
+        }
+
+        .rw-sentence span {
+            color: #fcfefe;
+            font-size: 200%;
+            font-weight: normal;
+        }
+
+        .rw-words {
+            display: inline;
+            text-indent: 10px;
+        }
+
+        .rw-words-1 span {
+            position: absolute;
+            opacity: 0;
+            overflow: hidden;
+            color: #f00;
+            -webkit-animation: rotateWord 18s linear infinite 0s;
+            -ms-animation: rotateWord 18s linear infinite 0s;
+            animation: rotateWord 18s linear infinite 0s;
+        }
+
+        .rw-words-1 span:nth-child(2) {
+            -webkit-animation-delay: 3s;
+            -ms-animation-delay: 3s;
+            animation-delay: 3s;
+            color: #f00;
+        }
+
+        .rw-words-1 span:nth-child(3) {
+            -webkit-animation-delay: 6s;
+            -ms-animation-delay: 6s;
+            animation-delay: 6s;
+            color: #f00;
+        }
+
+        .rw-words-1 span:nth-child(4) {
+            -webkit-animation-delay: 9s;
+            -ms-animation-delay: 9s;
+            animation-delay: 9s;
+            color: #f00;
+        }
+
+        .rw-words-1 span:nth-child(5) {
+            -webkit-animation-delay: 12s;
+            -ms-animation-delay: 12s;
+            animation-delay: 12s;
+            color: #f00;
+        }
+
+        .rw-words-1 span:nth-child(6) {
+            -webkit-animation-delay: 15s;
+            -ms-animation-delay: 15s;
+            animation-delay: 15s;
+            color: #f00;
+        }
+
+        @-webkit-keyframes rotateWord {
+            0% {
                 opacity: 0;
             }
-            to {
-                opacity: 1;
+            2% {
+                opacity: 0;
+                -webkit-transform: translateY(-30px);
             }
-        }
-
-        @-moz-keyframes fadein {
-        {# Firefox #}
-
-            from {
+            5% {
+                opacity: 1;
+                -webkit-transform: translateY(0px);
+            }
+            17% {
+                opacity: 1;
+                -webkit-transform: translateY(0px);
+            }
+            20% {
+                opacity: 0;
+                -webkit-transform: translateY(30px);
+            }
+            80% {
                 opacity: 0;
             }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @-webkit-keyframes fadein {
-        {# Safari and Chrome #}
-
-            from {
+            100% {
                 opacity: 0;
             }
-            to {
-                opacity: 1;
-            }
         }
 
-        @-o-keyframes fadein {
-        {# Opera #}
-
-            from {
+        @-ms-keyframes rotateWord {
+            0% {
                 opacity: 0;
             }
-            to {
+            2% {
+                opacity: 0;
+                -ms-transform: translateY(-30px);
+            }
+            5% {
                 opacity: 1;
+                -ms-transform: translateY(0px);
+            }
+            17% {
+                opacity: 1;
+                -ms-transform: translateY(0px);
+            }
+            20% {
+                opacity: 0;
+                -ms-transform: translateY(30px);
+            }
+            80% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 0;
             }
         }
 
-        {#*/#}
+        @keyframes rotateWord {
+            0% {
+                opacity: 0;
+            }
+            2% {
+                opacity: 0;
+                -webkit-transform: translateY(-30px);
+                transform: translateY(-30px);
+            }
+            5% {
+                opacity: 1;
+                -webkit-transform: translateY(0px);
+                transform: translateY(0px);
+            }
+            17% {
+                opacity: 1;
+                -webkit-transform: translateY(0px);
+                transform: translateY(0px);
+            }
+            20% {
+                opacity: 0;
+                -webkit-transform: translateY(30px);
+                transform: translateY(30px);
+            }
+            80% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 0;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .rw-sentence {
+                font-size: 18px;
+            }
+        }
+
+        @media screen and (max-width: 320px) {
+            .rw-sentence {
+                font-size: 14px;
+            }
+        }
+
     </style>
     <span id="loader"></span>
     <div class="REM_container">
@@ -139,31 +267,67 @@
         </div>
     </div>
 
+    <div class="small_REM_container">
+        <img src="/static/R_E_M/img/1_R_RED_PNG/R5.png" alt="R5" id="R5">
+        <img src="/static/R_E_M/img/2_E_RED_PNG/E5.png" alt="E5" id="E5">
+        <img src="/static/R_E_M/img/3_M_RED_PNG/M5.png" alt="M5" id="M5">
+    </div>
+    <section class="rw-wrapper">
+        <h2 class="rw-sentence">
+            <span>Hello,</span>
+            <br>
+            <span>My name is.</span>
+            <br/>
+            <span>Remington</span>
+            <br>
+            <span>Henderson.</span>
+            <br/>
+            <span>I am a </span>
+            <div class="rw-words rw-words-1">
+                <span>web designer</span>
+                <span>writer</span>
+                <span>director</span>
+                <span>photographer</span>
+                <span>cinematographer</span>
+                <span>film editor</span>
+            </div>
+        </h2>
+    </section>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.7/p5.min.js"></script>
-
 
     <script src="{% static 'javascript/glitch.js' %}"></script>
 
     <script>
         $(document).ready(function () {
-            let offsets = {};
-            gather_offset('#R1', {'opacity': '0.8', 'top': '250px'});
-            gather_offset('#R2', {'opacity': '0.8', 'top': '100px', 'left': '300px'});
-            gather_offset('#R3', {'opacity': '0.8', 'top': '-100px', 'left': '300px'});
-            gather_offset('#R4', {'opacity': '0.8', 'top': '250px', 'left': '300px'});
-            gather_offset('#E1', {'opacity': '0.8', 'top': '250px'});
-            gather_offset('#E2', {'opacity': '0.8', 'left': '750px'});
-            gather_offset('#E3', {'opacity': '0.8', 'left': '750px'});
-            gather_offset('#E4', {'opacity': '0.8', 'left': '750px'});
-            gather_offset('#M1', {'opacity': '0.8', 'top': '250px'});
-            gather_offset('#M2', {'opacity': '0.8', 'top': '-250px', 'left': '750px'});
-            gather_offset('#M3', {'opacity': '0.8', 'top': '-250px', 'left': '1350px'});
-            gather_offset('#M4', {'opacity': '0.8', 'top': '250px'});
+            let windowW = window.innerWidth;
+            console.log(windowW);
 
-            setTimeout(function () {
-                $('#loader').hide('slow');
+            if (window.matchMedia("(max-width: 768px)").matches) {
+                console.log('small')
+                $("#loader").css("display", "none")
+            } else {
+                $(".small_REM_container").css("display", "none");
+                $(".rw-wrapper").css("display", "none");
+
+                let offsets = {};
+                gather_offset('#R1', {'opacity': '0.8', 'top': '250px'});
+                gather_offset('#R2', {'opacity': '0.8', 'top': '100px', 'left': '300px'});
+                gather_offset('#R3', {'opacity': '0.8', 'top': '-100px', 'left': '300px'});
+                gather_offset('#R4', {'opacity': '0.8', 'top': '250px', 'left': '300px'});
+                gather_offset('#E1', {'opacity': '0.8', 'top': '250px'});
+                gather_offset('#E2', {'opacity': '0.8', 'left': '750px'});
+                gather_offset('#E3', {'opacity': '0.8', 'left': '750px'});
+                gather_offset('#E4', {'opacity': '0.8', 'left': '750px'});
+                gather_offset('#M1', {'opacity': '0.8', 'top': '250px'});
+                gather_offset('#M2', {'opacity': '0.8', 'top': '-250px', 'left': '750px'});
+                gather_offset('#M3', {'opacity': '0.8', 'top': '-250px', 'left': '1350px'});
+                gather_offset('#M4', {'opacity': '0.8', 'top': '250px'});
+
+                setTimeout(function () {
+                    $('#loader').hide('slow');
                     ani("#R1", offsets["#R1"], 2000);
                     ani("#R2", offsets["#R2"], 2000);
                     ani("#R3", offsets["#R3"], 2000);
@@ -176,40 +340,42 @@
                     ani("#M2", offsets["#M2"], 2000);
                     ani("#M3", offsets["#M3"], 2000);
                     ani("#M4", offsets["#M4"], 2000);
-            }, 500);
+                }, 500);
 
 
-            function gather_offset(id, css) {
-                offsets[id] = $(id).offset();
-                $(id).css(css)
+                function gather_offset(id, css) {
+                    offsets[id] = $(id).offset();
+                    $(id).css(css)
+                }
+
+                function ani(id, offset, time) {
+                    let el = $(`${id}`);
+                    $(el).animate(offset, time);
+                }
+
+                //console.log($("#R1").offset());
+                //console.log($("#E1").offset());
+                //console.log($("#M1").offset());
+                //console.log($("#R1").offset())//.animate({opacity: 0.8, top: '0'}, 2500);
+                {#$("#R2").animate({ opacity: 0.8, left: '+=220px', bottom: "-=80px" }, 2500);#}
+                {#$("#R3").animate({ opacity: 0.8, left: '+=180px', top: '-=180px' }, 2500);#}
+                {#$("#R4").animate({ opacity: 0.8, left: '+=200px', bottom: '-=100px' }, 2500);#}
+                {#$("#E1").animate({ opacity: 0.8, left: '250px', slidein }, 2500);#}
+                //$("#E2").animate({ opacity: 0.8, left: '250px' }, 2500);
+                //$("#E3").animate({ opacity: 0.8, left: '250px' }, 2500);
+                //$("#E4").animate({ opacity: 0.8, left: '250px' }, 2500);
+                //$("#M1").animate({ opacity: 0.8, left: '250px' }, 2500);
+                //$("#M2").animate({ opacity: 0.8, left: '250px' }, 2500);
+                //$("#M3").animate({ opacity: 0.8, left: '250px' }, 2500);
+                //$("#M4").animate({ opacity: 0.8, left: '250px' }, 2500)
+
+                //$(".R_container img").animate({ opacity: 0.8 }, 2500)
+                //$(".E_container img").animate({ opacity: 0.8 }, 2500)
+                //$(".E_container img").delay(1000).animate({ opacity: 0.8 }, 700)
+                //$(".M_container img").animate({ opacity: 0.8 }, 2500)
+                //$(".M_container img").delay(2000).animate({ opacity: 0.8 }, 700)
             }
 
-            function ani(id, offset, time) {
-                let el = $(`${id}`);
-                $(el).animate(offset, time);
-            }
-
-            //console.log($("#R1").offset());
-            //console.log($("#E1").offset());
-            //console.log($("#M1").offset());
-            //console.log($("#R1").offset())//.animate({opacity: 0.8, top: '0'}, 2500);
-            {#$("#R2").animate({ opacity: 0.8, left: '+=220px', bottom: "-=80px" }, 2500);#}
-            {#$("#R3").animate({ opacity: 0.8, left: '+=180px', top: '-=180px' }, 2500);#}
-            {#$("#R4").animate({ opacity: 0.8, left: '+=200px', bottom: '-=100px' }, 2500);#}
-            {#$("#E1").animate({ opacity: 0.8, left: '250px', slidein }, 2500);#}
-            //$("#E2").animate({ opacity: 0.8, left: '250px' }, 2500);
-            //$("#E3").animate({ opacity: 0.8, left: '250px' }, 2500);
-            //$("#E4").animate({ opacity: 0.8, left: '250px' }, 2500);
-            //$("#M1").animate({ opacity: 0.8, left: '250px' }, 2500);
-            //$("#M2").animate({ opacity: 0.8, left: '250px' }, 2500);
-            //$("#M3").animate({ opacity: 0.8, left: '250px' }, 2500);
-            //$("#M4").animate({ opacity: 0.8, left: '250px' }, 2500)
-
-            //$(".R_container img").animate({ opacity: 0.8 }, 2500)
-            //$(".E_container img").animate({ opacity: 0.8 }, 2500)
-            //$(".E_container img").delay(1000).animate({ opacity: 0.8 }, 700)
-            //$(".M_container img").animate({ opacity: 0.8 }, 2500)
-            //$(".M_container img").delay(2000).animate({ opacity: 0.8 }, 700)
         })
 
     </script>
