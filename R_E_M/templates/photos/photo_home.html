@@ -77,6 +77,12 @@
         body {
             font-family: 'Alegreya Sans SC', sans-serif;
         }
+
+        .more_link {
+            text-align: center;
+            font-size: 20px;
+            margin-top: 15px;
+        }
     </style>
     <div class="page_container">
         <div class="search_container">
@@ -156,8 +162,11 @@
             {% endfor %}
         </div>
 
+
         {% if albums.has_next %}
-            <a class="infinite-more-link" href="?page={{ numbers.next_page_number }}">More</a>
+            <div class="more_link">
+                <a class="infinite-more-link" href="?page={{ albums.next_page_number }}">Load More Albums</a>
+            </div>
         {% endif %}
 
         {% if albums.has_other_pages %}
@@ -216,9 +225,9 @@
     <script src="{% static 'waypoints/src/waypoint.js' %}"></script>
     <script src="{% static 'waypoints/lib/shortcuts/infinite.js' %}"></script>
     <script>
-        // var infinite = new Waypoint.Infinite({
-        //     element: $('.infinite-container')[0]
-        // });
+         let infinite = new Waypoint.Infinite({
+             element: $('.infinite-container')[0]
+         });
 
     /*
         $(document).ready(function () {
