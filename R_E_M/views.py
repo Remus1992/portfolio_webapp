@@ -462,16 +462,86 @@ def movie_create(request):
     return render(request, "movies/movie_create.html", {'cat': MovieCategory.objects.all()})
 
 
+def _websites(request, website_categories, category, complete_website_list):
+    paginator = Paginator(complete_website_list, 4)
+
+    try:
+        page = int(request.GET.get('page', '1'))
+    except:
+        page = 1
+
+    try:
+        complete_website_list = paginator.page(page)
+    except PageNotAnInteger:
+        complete_website_list = paginator.page(1)
+    except EmptyPage:
+        complete_website_list = paginator.page(paginator.num_pages)
+
+    # Get the index of the current page
+    index = complete_website_list.number - 1
+    # print(index)
+    # This value is maximum index of pages, so the last page - 1
+    max_index = len(paginator.page_range)
+    # print(max_index)
+    print("Index Length is: {}".format(max_index))
+    # range of 7, calculate where to slice the list
+    start_index = index - 3 if index >= 3 else 0
+    end_index = index + 4 if index <= max_index - 4 else max_index
+    # print(end_index)
+    # new page range
+    page_range = paginator.page_range[start_index:end_index]
+
+    # showing first and last links in pagination
+    if index >= 4:
+        start_index = 1
+    if end_index - index >= 4 and end_index != max_index:
+        end_index = max_index
+    else:
+        end_index = None
+
+    context = {
+        'websites': complete_website_list,
+        'website_cats': website_categories,
+        'category': category,
+        'page_range': page_range,
+        'start_index': start_index,
+        'end_index': end_index,
+    }
+
+    return render(request, "web_dev/web_dev_home.html", context)
+
+
 def webdev_home(request):
     website_categories = WebsiteCategory.objects.all()
     complete_website_list = Website.objects.all()
+
     query = request.GET.get("q")
-    if query:
+    category = request.GET.get('category')
+    if query is not None and query != '' and category is not None and category != '':
+        complete_website_list = complete_website_list.filter(
+            Q(category__slug=category, website_name__icontains=query) |
+            Q(category__slug=category, website_details__icontains=query) |
+            Q(category__slug=category, category__name__icontains=query)
+        )
+    elif query is not None and query != '':
         complete_website_list = complete_website_list.filter(
             Q(website_name__icontains=query) |
             Q(website_details__icontains=query) |
             Q(category__name__icontains=query)
         )
+    elif category is not None and category != '':
+        complete_website_list = complete_website_list.filter(
+            Q(category__slug=category) |
+            Q(category__slug=category) |
+            Q(category__slug=category)
+        )
+
+    # if query:
+    #     complete_website_list = complete_website_list.filter(
+    #         Q(website_name__icontains=query) |
+    #         Q(website_details__icontains=query) |
+    #         Q(category__name__icontains=query)
+    #     )
     if request.method == "POST":
         website = Website()
         website.owner = request.user
@@ -506,8 +576,8 @@ def webdev_home(request):
                 photo.save()
         return HttpResponseRedirect(
             reverse("website_single_view", kwargs={"cat": website.category.slug, "slug": website.slug}))
-    return render(request, "web_dev/web_dev_home.html",
-                  {"website_cats": website_categories, "websites": complete_website_list})
+    return _websites(request, website_categories, category, complete_website_list)
+    # return render(request, "web_dev/web_dev_home.html", {"website_cats": website_categories, "websites": complete_website_list})
 
 
 def website_ajax(request):

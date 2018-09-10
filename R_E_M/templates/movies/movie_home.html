@@ -165,44 +165,44 @@
             {% endfor %}
         </div>
     </div>
-     {% if movies.has_other_pages %}
-            <div class="text-center">
-                <input type="hidden" id="startIndex" value="{{ start_index }}">
-                <ul id="paginator" class="pagination pagination-lg text-center">
+    {% if movies.has_other_pages %}
+        <div class="text-center">
+            <input type="hidden" id="startIndex" value="{{ start_index }}">
+            <ul id="paginator" class="pagination pagination-lg text-center">
 
-                    {% if movies.has_previous %}
-                        <li><a href="?page={{ movies.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">&laquo;</a></li>
+                {% if movies.has_previous %}
+                    <li><a href="?page={{ movies.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">&laquo;</a></li>
+                {% else %}
+                    <li class="disabled"><span>&laquo;</span></li>
+                {% endif %}
+
+                {% if start_index %}
+                    <li><a href="?page={{ start_index }}">{{ start_index }}</a></li>
+                    <li class="disabled"><span>&mldr;</span></li>
+                {% endif %}
+
+                {% for i in page_range %}
+                    {% if movies.number == i %}
+                        <li class="active"><span>{{ i }}</span></li>
                     {% else %}
-                        <li class="disabled"><span>&laquo;</span></li>
+                        <li><a href="?page={{ i }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ i }}</a></li>
                     {% endif %}
+                {% endfor %}
 
-                    {% if start_index %}
-                        <li><a href="?page={{ start_index }}">{{ start_index }}</a></li>
+
+                {% if movies.has_next %}
+                    {% if end_index %}
                         <li class="disabled"><span>&mldr;</span></li>
+                        <li><a href="?page={{ end_index }}">{{ end_index }}</a></li>
                     {% endif %}
+                    <li><a href="?page={{ movies.next_page_number }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&raquo;</a></li>
+                {% else %}
+                    <li class="disabled"><span>&raquo;</span></li>
+                {% endif %}
 
-                    {% for i in page_range %}
-                        {% if movies.number == i %}
-                            <li class="active"><span>{{ i }}</span></li>
-                        {% else %}
-                            <li><a href="?page={{ i }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ i }}</a></li>
-                        {% endif %}
-                    {% endfor %}
-
-
-                    {% if movies.has_next %}
-                        {% if end_index %}
-                            <li class="disabled"><span>&mldr;</span></li>
-                            <li><a href="?page={{ end_index }}">{{ end_index }}</a></li>
-                        {% endif %}
-                        <li><a href="?page={{ movies.next_page_number }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&raquo;</a></li>
-                    {% else %}
-                        <li class="disabled"><span>&raquo;</span></li>
-                    {% endif %}
-
-                </ul>
-            </div>
-        {% endif %}
+            </ul>
+        </div>
+    {% endif %}
     <script>
         $('.checkbox').click(function () {
             let cat = this.id;

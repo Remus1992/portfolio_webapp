@@ -151,6 +151,44 @@
                 </div>
             {% endfor %}
         </div>
+        {% if movies.has_other_pages %}
+            <div class="text-center">
+                <input type="hidden" id="startIndex" value="{{ start_index }}">
+                <ul id="paginator" class="pagination pagination-lg text-center">
+
+                    {% if websites.has_previous %}
+                        <li><a href="?page={{ websites.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">&laquo;</a></li>
+                    {% else %}
+                        <li class="disabled"><span>&laquo;</span></li>
+                    {% endif %}
+
+                    {% if start_index %}
+                        <li><a href="?page={{ start_index }}">{{ start_index }}</a></li>
+                        <li class="disabled"><span>&mldr;</span></li>
+                    {% endif %}
+
+                    {% for i in page_range %}
+                        {% if websites.number == i %}
+                            <li class="active"><span>{{ i }}</span></li>
+                        {% else %}
+                            <li><a href="?page={{ i }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ i }}</a></li>
+                        {% endif %}
+                    {% endfor %}
+
+
+                    {% if websites.has_next %}
+                        {% if end_index %}
+                            <li class="disabled"><span>&mldr;</span></li>
+                            <li><a href="?page={{ end_index }}">{{ end_index }}</a></li>
+                        {% endif %}
+                        <li><a href="?page={{ websites.next_page_number }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&raquo;</a></li>
+                    {% else %}
+                        <li class="disabled"><span>&raquo;</span></li>
+                    {% endif %}
+
+                </ul>
+            </div>
+        {% endif %}
     </div>
 <script>
         $('.checkbox').click(function () {
@@ -196,42 +234,47 @@
             }
         });
 
-        $(".checkbox").click(function () {
-            let cat = this.id;
-            console.log(cat);
-            $.ajax({
-                url: "{% url "website_ajax" %}",
-                method: "POST",
-                data: {
-                    category: cat
-                },
-                success: function (response) {
-                    let wcc = $("#website_card_container");
-                    let html = "";
-                    $(wcc).html('');
-                    $(response).each(function (i, website) {
-                        console.dir(response)
-                        html += `<div class="website-card ${website.category.slug}">
-                                    <img src='${website.main_page.url}' class="website_cover"/>
-                                    <div class="web_gradient">
-                                        <div class="website_header">
-                                            <div class="website_name_container"><p>${website.website_name}</p></div>
-                                            <div class="website_date_container"><p>${website.date_built}</p></div>
-                                        </div>
-                                        <div class="website_read_more">
-                                            <a href="/webdev/websites/$[website.category.slug]/$[website.slug}" class="website_button">Read
-                                                More</a>
-                                        </div>
-                                        <div class="website_cat_header">
-                                            <div class="website_category_container"><p>Websites/ ${website.category.name}</p></div>
-                                        </div>
-                                    </div>
-                                </div>`
-                        });
-                    $(wcc).html(html);
-                }
-            });
+        $('.checkbox').click(function () {
+            window.location.replace(`/webdev/?category=${this.id}`);
         });
+
+
+        // $(".checkbox").click(function () {
+        //     let cat = this.id;
+        //     console.log(cat);
+        //     $.ajax({
+        //         url: "{% url "website_ajax" %}",
+        //         method: "POST",
+        //         data: {
+        //             category: cat
+        //         },
+        //         success: function (response) {
+        //             let wcc = $("#website_card_container");
+        //             let html = "";
+        //             $(wcc).html('');
+        //             $(response).each(function (i, website) {
+        //                 console.dir(response)
+        //                 html += `<div class="website-card ${website.category.slug}">
+        //                             <img src='${website.main_page.url}' class="website_cover"/>
+        //                             <div class="web_gradient">
+        //                                 <div class="website_header">
+        //                                     <div class="website_name_container"><p>${website.website_name}</p></div>
+        //                                     <div class="website_date_container"><p>${website.date_built}</p></div>
+        //                                 </div>
+        //                                 <div class="website_read_more">
+        //                                     <a href="/webdev/websites/$[website.category.slug]/$[website.slug}" class="website_button">Read
+        //                                         More</a>
+        //                                 </div>
+        //                                 <div class="website_cat_header">
+        //                                     <div class="website_category_container"><p>Websites/ ${website.category.name}</p></div>
+        //                                 </div>
+        //                             </div>
+        //                         </div>`
+        //                 });
+        //             $(wcc).html(html);
+        //         }
+        //     });
+        // });
 
     // IMAGE UPLOADER PLUS MODAL
         let imagesPreview = function (input, placeToInsertImagePreview) {
