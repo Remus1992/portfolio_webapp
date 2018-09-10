@@ -13,6 +13,28 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
         <script>
+            function calcImg(img) {
+                let h = $(img).height();
+                let w = $(img).width();
+
+                //console.log(h);
+                //console.log(w);
+
+                if ($(img).parent('.movie-image-wrap').length === 0) {
+                    // wrap the image in a "cropping" div
+                    $(img).wrap('<div class="movie-image-wrap"></div>');
+                }
+
+                if (w/h < 300/430){
+                    $(img).addClass('narrow');
+                } else if (w/h > 300/430) {
+                    $(img).addClass('wide');
+                } else {
+                    $(img).addClass('perfect');
+                }
+            }
+        </script>
+        <script>
             function calcPreviewImg(img) {
                 console.log(img);
                 let h = $(img).height();
@@ -138,7 +160,7 @@
         <div class="movie_card_container {{ movie.category.slug }} infinite-container" id="movie_card_container">
             {% for movie in movies %}
                 <div class="movie-card infinite-item element_move">
-                    <img src="{{ movie.movie_poster.url }}" class="movie_poster"/>
+                    <img src="{{ movie.movie_poster.url }}" class="movie_poster" onload="calcImg(this)"/>
                     <div class="title-content">
                         <h3>{{ movie.title }}</h3>
 
@@ -154,7 +176,7 @@
 
                     <div class="utility-info">
                         <ul class="utility-list">
-                            <li class="comments">12</li>
+{#                            <li class="comments">12</li>#}
                             <li class="date">{{ movie.date_built }}</li>
                         </ul>
                     </div><!-- /.utility-info -->

@@ -107,8 +107,10 @@
                                     <br>
                                     <br>
                                     <p>Website Main Page</p>
-                                    <input type="file" id="website_main_page" name="website_main_page" class="resizedTextbox">
-                                    <input type="text" id="web_alt_text" name="web_alt_text" placeholder="Website Main Page - Alt Text"
+                                    <input type="file" id="website_main_page" name="website_main_page"
+                                           class="resizedTextbox">
+                                    <input type="text" id="web_alt_text" name="web_alt_text"
+                                           placeholder="Website Main Page - Alt Text"
                                            class="resizedTextbox">
                                 </div>
                                 <div class="website-details-row">
@@ -130,9 +132,9 @@
                 </div>
             {% endif %}
         </div>
-        <div class="website_card_container {{ website.category.slug }}" id="website_card_container">
+        <div class="website_card_container {{ website.category.slug }} infinite-container" id="website_card_container">
             {% for website in websites %}
-                <div class="website-card">
+                <div class="website-card infinite-item element_move">
                     <img src="{{ website.main_page.url }}" class="website_cover"/>
                     <div class="web_gradient">
                         <div class="website_header">
@@ -141,7 +143,8 @@
                         </div>
 
                         <div class="website_read_more">
-                            <a href="{% url 'website_single_view' website.category.slug website.slug %}" class="website_button">Read
+                            <a href="{% url 'website_single_view' website.category.slug website.slug %}"
+                               class="website_button">Read
                                 More</a>
                         </div>
                         <div class="website_cat_header">
@@ -151,46 +154,36 @@
                 </div>
             {% endfor %}
         </div>
-        {% if movies.has_other_pages %}
-            <div class="text-center">
-                <input type="hidden" id="startIndex" value="{{ start_index }}">
-                <ul id="paginator" class="pagination pagination-lg text-center">
+        <div class="loading" style="display: none;">
+            <img src="{% static "R_E_M/img/loading_spiral.gif" %}" alt="loading_spiral.gif">
+        </div>
 
-                    {% if websites.has_previous %}
-                        <li><a href="?page={{ websites.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">&laquo;</a></li>
-                    {% else %}
-                        <li class="disabled"><span>&laquo;</span></li>
-                    {% endif %}
+        {% if websites.has_next %}
+            <div class="more_link">
+                <a class="infinite-more-link more_button" href="?page=
 
-                    {% if start_index %}
-                        <li><a href="?page={{ start_index }}">{{ start_index }}</a></li>
-                        <li class="disabled"><span>&mldr;</span></li>
-                    {% endif %}
-
-                    {% for i in page_range %}
-                        {% if websites.number == i %}
-                            <li class="active"><span>{{ i }}</span></li>
-                        {% else %}
-                            <li><a href="?page={{ i }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ i }}</a></li>
-                        {% endif %}
-                    {% endfor %}
-
-
-                    {% if websites.has_next %}
-                        {% if end_index %}
-                            <li class="disabled"><span>&mldr;</span></li>
-                            <li><a href="?page={{ end_index }}">{{ end_index }}</a></li>
-                        {% endif %}
-                        <li><a href="?page={{ websites.next_page_number }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&raquo;</a></li>
-                    {% else %}
-                        <li class="disabled"><span>&raquo;</span></li>
-                    {% endif %}
-
-                </ul>
+                        {{ websites.next_page_number }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Load
+                    More
+                    Websites</a>
             </div>
         {% endif %}
+
+
     </div>
-<script>
+    <script src="{% static 'waypoints/lib/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'waypoints/lib/shortcuts/infinite.min.js' %}"></script>
+    <script>
+
+        let infinite = new Waypoint.Infinite({
+            element: $('.infinite-container')[0],
+            onBeforePageLoad: function () {
+                $('.loading').show();
+            },
+            onAfterPageLoad: function ($items) {
+                $('.loading').hide();
+            }
+        });
+        
         $('.checkbox').click(function () {
             let cat = this.id;
 
@@ -202,84 +195,90 @@
             $(this).addClass('checkFocus');
         });
 
-
-        function getCookie(name) {
-            let cookieValue = null;
-            if (document.cookie && document.cookie !== '') {
-                let cookies = document.cookie.split(';');
-                for (let i = 0; i < cookies.length; i++) {
-                    let cookie = jQuery.trim(cookies[i]);
-                    // Does this cookie string begin with the name we want?
-                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                        break;
-                    }
-                }
-            }
-            return cookieValue;
-        }
-
-        let csrftoken = getCookie('csrftoken');
-
-        function csrfSafeMethod(method) {
-            // these HTTP methods do not require CSRF protection
-            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-        }
-
-        $.ajaxSetup({
-            beforeSend: function (xhr, settings) {
-                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
-                }
-            }
-        });
-
         $('.checkbox').click(function () {
             window.location.replace(`/webdev/?category=${this.id}`);
         });
 
-
-        // $(".checkbox").click(function () {
-        //     let cat = this.id;
-        //     console.log(cat);
-        //     $.ajax({
-        //         url: "{% url "website_ajax" %}",
-        //         method: "POST",
-        //         data: {
-        //             category: cat
-        //         },
-        //         success: function (response) {
-        //             let wcc = $("#website_card_container");
-        //             let html = "";
-        //             $(wcc).html('');
-        //             $(response).each(function (i, website) {
-        //                 console.dir(response)
-        //                 html += `<div class="website-card ${website.category.slug}">
-        //                             <img src='${website.main_page.url}' class="website_cover"/>
-        //                             <div class="web_gradient">
-        //                                 <div class="website_header">
-        //                                     <div class="website_name_container"><p>${website.website_name}</p></div>
-        //                                     <div class="website_date_container"><p>${website.date_built}</p></div>
-        //                                 </div>
-        //                                 <div class="website_read_more">
-        //                                     <a href="/webdev/websites/$[website.category.slug]/$[website.slug}" class="website_button">Read
-        //                                         More</a>
-        //                                 </div>
-        //                                 <div class="website_cat_header">
-        //                                     <div class="website_category_container"><p>Websites/ ${website.category.name}</p></div>
-        //                                 </div>
-        //                             </div>
-        //                         </div>`
-        //                 });
-        //             $(wcc).html(html);
-        //         }
-        //     });
-        // });
-
-    // IMAGE UPLOADER PLUS MODAL
+        // IMAGE UPLOADER PLUS MODAL
         let imagesPreview = function (input, placeToInsertImagePreview) {
             $(placeToInsertImagePreview).html('');
-            //let website_html = '<div class="website_info"><input type="text" id="website_title" name="website_title" class="resizedTextbox" placeholder="website Title"><input type="text" id="website_tag" name="website_tag" placeholder="website Tagline" class="resizedTextbox"><input list="categories" id="website_category" name="website_category" placeholder="website Category" class="resizedTextbox"><datalist id="categories">{% for c in website_cats %}<option value="{{ c.name }}">{% endfor %}</datalist><input type="text" id="youtube_link" name="website_youtube" placeholder="YouTube Link" class="resizedTextbox"><input type="date" id="website_date" name="website_date" class="resizedTextbox"><br><br><br><p>website Poster</p><input type="file" id="website_poster" name="website_poster" class="resizedTextbox"><input type="text" id="alt_text" name="alt_text" placeholder="Poster Alt Text" class="resizedTextbox"><br><br><br><p>website Script</p><input type="file" id="website_script" name="website_script" class="resizedTextbox"></div><div class="website-details-row"><textarea id="web_details" name="web_details" cols="30" rows="10" placeholder="website Details"></textarea></div><div class="website-still-input-row"><h2>website Stills</h2><input class="website_modal_btn" name="images" type="file" multiple id="gallery-website-still-add"></div><div id="website_gallery_images" class="website_gallery_images"></div>'
+            //let website_html = '<div class="website_info"><input type="text" id="website_title" name="website_title" class="resizedTextbox" placeholder="website Title"><input type="text" id="website_tag" name="website_tag" placeholder="website Tagline" class="resizedTextbox"><input list="categories" id="website_category" name="website_category" placeholder="website Category" class="resizedTextbox"><datalist id="categories">
+            {% for c in website_cats %}<option value = "{{ c.name }}
+                ">{% endfor %}</datalist><input type="
+            text
+            " id="
+            youtube_link
+            " name="
+            website_youtube
+            " placeholder="
+            YouTube
+            Link
+            " class="
+            resizedTextbox
+            "><input type="
+            date
+            " id="
+            website_date
+            " name="
+            website_date
+            " class="
+            resizedTextbox
+            "><br><br><br><p>website Poster</p><input type="
+            file
+            " id="
+            website_poster
+            " name="
+            website_poster
+            " class="
+            resizedTextbox
+            "><input type="
+            text
+            " id="
+            alt_text
+            " name="
+            alt_text
+            " placeholder="
+            Poster
+            Alt
+            Text
+            " class="
+            resizedTextbox
+            "><br><br><br><p>website Script</p><input type="
+            file
+            " id="
+            website_script
+            " name="
+            website_script
+            " class="
+            resizedTextbox
+            "></div><div class="
+            website - details - row
+            "><textarea id="
+            web_details
+            " name="
+            web_details
+            " cols="
+            30
+            " rows="
+            10
+            " placeholder="
+            website
+            Details
+            "></textarea></div><div class="
+            website - still - input - row
+            "><h2>website Stills</h2><input class="
+            website_modal_btn
+            " name="
+            images
+            " type="
+            file
+            " multiple id="
+            gallery - website - still - add
+            "></div><div id="
+            website_gallery_images
+            " class="
+            website_gallery_images
+            "></div>'
             //$(placeToInsertImagePreview).append(website_html);
 
             if (input.files) {
@@ -314,7 +313,7 @@
 
         function removeElement(parentDiv, childDiv) {
             console.log("Child Div is " + childDiv);
-            console.log("Parent Div is " +parentDiv);
+            console.log("Parent Div is " + parentDiv);
             if (childDiv == parentDiv) {
                 alert("The parent div cannot be removed.")
             } else if (document.getElementById(childDiv)) {
@@ -340,14 +339,90 @@
         let span = document.getElementsByClassName("website-close")[0];
 
         // When the user clicks the button, open the modal
-        websiteBtn.onclick = function() {
+        websiteBtn.onclick = function () {
             websiteUploadModal.style.display = "block";
         };
 
         // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
+        span.onclick = function () {
             websiteUploadModal.style.display = "none";
-            let website_html = '<div class="website_info"><input type="text" id="website_title" name="website_title" class="resizedTextbox" placeholder="website Title"><input type="text" id="website_tag" name="website_tag" placeholder="website Tagline" class="resizedTextbox"><input list="categories" id="website_category" name="website_category" placeholder="website Category" class="resizedTextbox"><datalist id="categories">{% for c in website_cats %}<option value="{{ c.name }}">{% endfor %}</datalist><input type="text" id="youtube_link" name="website_youtube" placeholder="YouTube Link" class="resizedTextbox"><input type="date" id="website_date" name="website_date" class="resizedTextbox"><br><br><br><p>website Poster</p><input type="file" id="website_poster" name="website_poster" class="resizedTextbox"><input type="text" id="alt_text" name="alt_text" placeholder="Poster Alt Text" class="resizedTextbox"><br><br><br><p>website Script</p><input type="file" id="website_script" name="website_script" class="resizedTextbox"></div><div class="website-details-row"><textarea id="web_details" name="web_details" cols="30" rows="10" placeholder="website Details"></textarea></div><div class="website-still-input-row"><h2>website Stills</h2><input class="website_modal_btn" name="images" type="file" multiple id="gallery-website-still-add"></div><div id="website_gallery_images" class="website_gallery_images"></div>'
+            let website_html = '<div class="website_info"><input type="text" id="website_title" name="website_title" class="resizedTextbox" placeholder="website Title"><input type="text" id="website_tag" name="website_tag" placeholder="website Tagline" class="resizedTextbox"><input list="categories" id="website_category" name="website_category" placeholder="website Category" class="resizedTextbox"><datalist id="categories">
+                {% for c in website_cats %}<option value = "{{ c.name }}
+                    ">{% endfor %}</datalist><input type="
+            text
+            " id="
+            youtube_link
+            " name="
+            website_youtube
+            " placeholder="
+            YouTube
+            Link
+            " class="
+            resizedTextbox
+            "><input type="
+            date
+            " id="
+            website_date
+            " name="
+            website_date
+            " class="
+            resizedTextbox
+            "><br><br><br><p>website Poster</p><input type="
+            file
+            " id="
+            website_poster
+            " name="
+            website_poster
+            " class="
+            resizedTextbox
+            "><input type="
+            text
+            " id="
+            alt_text
+            " name="
+            alt_text
+            " placeholder="
+            Poster
+            Alt
+            Text
+            " class="
+            resizedTextbox
+            "><br><br><br><p>website Script</p><input type="
+            file
+            " id="
+            website_script
+            " name="
+            website_script
+            " class="
+            resizedTextbox
+            "></div><div class="
+            website - details - row
+            "><textarea id="
+            web_details
+            " name="
+            web_details
+            " cols="
+            30
+            " rows="
+            10
+            " placeholder="
+            website
+            Details
+            "></textarea></div><div class="
+            website - still - input - row
+            "><h2>website Stills</h2><input class="
+            website_modal_btn
+            " name="
+            images
+            " type="
+            file
+            " multiple id="
+            gallery - website - still - add
+            "></div><div id="
+            website_gallery_images
+            " class="
+            website_gallery_images
+            "></div>'
             $("div.website_gallery").html(website_html);
             $('#gallery-website-still-add').on('change', function () {
                 imagesPreview(this, 'div.website_gallery_images');

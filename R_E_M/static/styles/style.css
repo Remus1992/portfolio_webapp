@@ -1370,13 +1370,13 @@ h3 {
 .utility-info {
     position: absolute;
     bottom: 0;
-    left: 0;
+    right: 0;
     z-index: 20;
 }
 
 .utility-list {
     list-style-type: none;
-    margin: 0 0 30px 20px;
+    margin: 0 30px 20px  0;
     padding: 0;
     width: 100%;
 
@@ -1447,6 +1447,46 @@ h3 {
     color: black;
     opacity: 0.8;
     font-weight: bold;
+}
+/******************** Movie Poster JQUERY ********************/
+
+.movie_poster {
+    visibility: hidden;
+}
+
+/* prevent a flash of giant image before the image is wrapped by jQuery */
+
+.movie-image-wrap {
+    /* whatever the dimensions you want the "cropped" image to be */
+        width: 310px;
+        height: 430px;
+    overflow: hidden;
+}
+
+@media only screen and (max-width: 768px) {
+    .movie-image-wrap {
+        width: 258px;
+        height: 430px;
+        overflow: hidden;
+    }
+}
+
+
+.movie-image-wrap img.perfect {
+    visibility: visible;
+    width: 100%;
+}
+
+.movie-image-wrap img.narrow {
+    visibility: visible;
+    width: 100%;
+    height: auto;
+}
+
+.movie-image-wrap img.wide {
+    visibility: visible;
+    height: 100%;
+    width: auto;
 }
 
 /*************************** Movie Upload ***************************/
