@@ -48,10 +48,7 @@ def contact(request):
 def _albums(request, album_categories, category, complete_album_list,  data):
     paginator = Paginator(complete_album_list, 4)
 
-    try:
-        page = int(request.GET.get('page', '1'))
-    except:
-        page = 1
+    page = request.GET.get('page', 1)
 
     try:
         complete_album_list = paginator.page(page)
