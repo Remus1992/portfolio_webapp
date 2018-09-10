@@ -2695,6 +2695,47 @@ body {
     }
 }
 
+/* infinite pagination */
+
+.more_link, .loading {
+    text-align: center;
+    font-size: 20px;
+    margin-top: 15px;
+}
+
+.more_button {
+    font-size: 20px;
+    padding: .5rem;
+    background: black;
+    color: white;
+    border-radius: 15px;
+    transition: 100ms;
+}
+
+.more_button:hover {
+    cursor: pointer;
+    box-shadow: 1px 1px 3px rgba(0, 0, 0, .2);
+}
+
+.more_link a, .more_link a:visited {
+    color: white !important;
+    text-decoration: none;
+}
+
+.element_move {
+    /* Apply animation to this element */
+    animation: element_move 0.4s ease-in-out;
+}
+
+/* Move it (define the animation) */
+@keyframes element_move {
+    0% {
+        transform: translateY(100%);
+    }
+    100% {
+        transform: translateY(0%);
+    }
+}
 
 ​
 

@@ -13,12 +13,41 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script>
             function calcImg(img) {
-                //console.log(img);
+                /* setTimeout(function () {
+                    $(img).parent().parent().parent().addClass('album_move').removeClass('invisible');
+                    console.log($(img).parent().parent().parent());
+                    let h = $(img).height();
+                    let w = $(img).width();
+                    console.log(h);
+                    console.log(w);
+
+                     if ($(img).parent('.album-image-wrap').length === 0) {
+                        // wrap the image in a "cropping" div
+                        $(img).wrap('<div class="album-image-wrap"></div>');
+                    }
+
+                    if (h > w) {
+                        // pic is portrait
+                        $(img).addClass('portrait');
+                        let m = -(((h / w) * 100) - 100) / 2; //math the negative margin
+                        $(img).css('margin-top', m + '%');
+                    } else if (w > h) {
+                        // pic is landscape
+                        $(img).addClass('landscape');
+                        let m = -(((w / h) * 100) - 100) / 2;  //math the negative margin
+                        $(img).css('margin-left', m + '%');
+                    } else {
+                        // pic is square
+                        $(img).addClass('square');
+                    }
+                }, Math.floor(Math.random() * 900) + 500); */
+
+
                 let h = $(img).height();
                 let w = $(img).width();
 
-                //console.log(h);
-                //console.log(w);
+                console.log(h);
+                console.log(w);
 
                 if ($(img).parent('.album-image-wrap').length === 0) {
                     // wrap the image in a "cropping" div
@@ -39,6 +68,7 @@
                     // pic is square
                     $(img).addClass('square');
                 }
+
             }
         </script>
         <script>
@@ -71,26 +101,27 @@
                 }
             }
         </script>
-
+        <script>
+            function album_add_mvnt() {
+                console.log("executed");
+                $(this).addClass('album_move')
+            }
+        </script>
     </head>
     <style>
         body {
             font-family: 'Alegreya Sans SC', sans-serif;
         }
 
-        .more_link {
-            text-align: center;
-            font-size: 20px;
-            margin-top: 15px;
-        }
     </style>
     <div class="page_container">
         <div class="search_container">
             <form method="GET" action="">
                 <div class="search_div">
                     <input type="text" name="q" placeholder="Search..." id="search_bar" value="{{ request.GET.q }}">
-                    <button type="submit" value="Search" class="search_button"><img src="/static/R_E_M/img/search_icon.png" alt="search_logo"
-                                                          id="search_img"/></button>
+                    <button type="submit" value="Search" class="search_button"><img
+                            src="/static/R_E_M/img/search_icon.png" alt="search_logo"
+                            id="search_img"/></button>
                 </div>
             </form>
         </div>
@@ -122,17 +153,24 @@
                             <div class="album-input-row">
                                 <h2>Album Upload</h2>
                                 <span>
-                                    <input class='album_modal_btn' name="images" type="file" value="Add Photos" multiple id="gallery-photo-add">
+                                    <input class='album_modal_btn' name="images" type="file" value="Add Photos" multiple
+                                           id="gallery-photo-add">
                                     <span class="album-close">&times;</span>
                                 </span>
                             </div>
                             <div class="album_gallery">
                                 <div class="album_info">
-                                    <input type="text" id="album_title" name="album_title" class="resizedTextbox" placeholder="Album Title">
-                                    <input type="text" id="album_alt_text" name="album_alt_text" placeholder="Album Alt Text" class="resizedTextbox">
-                                    <input list="categories" id="album_category" name="album_category" placeholder="Album Category" class="resizedTextbox">
-                                    <datalist id="categories">{% for c in album_cats %}<option value="{{ c.name }}">{% endfor %}</datalist>
-                                    <textarea rows="4" cols="50" id="album_details" name="album_details" placeholder="Album Details" class="resizedTextbox album_details"></textarea>
+                                    <input type="text" id="album_title" name="album_title" class="resizedTextbox"
+                                           placeholder="Album Title">
+                                    <input type="text" id="album_alt_text" name="album_alt_text"
+                                           placeholder="Album Alt Text" class="resizedTextbox">
+                                    <input list="categories" id="album_category" name="album_category"
+                                           placeholder="Album Category" class="resizedTextbox">
+                                    <datalist id="categories">{% for c in album_cats %}
+                                        <option value="{{ c.name }}">{% endfor %}</datalist>
+                                    <textarea rows="4" cols="50" id="album_details" name="album_details"
+                                              placeholder="Album Details"
+                                              class="resizedTextbox album_details"></textarea>
                                 </div>
                                 <div class="album_gallery_images" id="album_gallery_images"></div>
                             </div>
@@ -146,7 +184,8 @@
         </div>
         <div class="album_container infinite-container" id="album_container">
             {% for album in albums %}
-                <a href="{% url 'album_view' album.category.slug album.slug %}" class="text {{ album.category.slug }} infinite-item">
+                <a href="{% url 'album_view' album.category.slug album.slug %}"
+                   class="text {{ album.category.slug }} infinite-item album_item element_move">
                     <div class="album_set">
                         <img src="{{ album.photo_album.all.0.image.url }}" class="album-image"
                              alt="{{ album.photo_album.all.0.alt_text }}" onload="calcImg(this)">
@@ -162,53 +201,15 @@
             {% endfor %}
         </div>
         <div class="loading" style="display: none;">
-            Loading...
+            <img src="{% static "R_E_M/img/loading_spiral.gif" %}" alt="loading_spiral.gif">
         </div>
 
         {% if albums.has_next %}
             <div class="more_link">
-                <a class="infinite-more-link" href="?page={{ albums.next_page_number }}">Load More Albums</a>
+                <a class="infinite-more-link more_button" href="?page={{ albums.next_page_number }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Load More
+                    Albums</a>
             </div>
         {% endif %}
-
-{#        {% if albums.has_other_pages %}#}
-{#            <div class="text-center">#}
-{#                <input type="hidden" id="startIndex" value="{{ start_index }}">#}
-{#                <ul id="paginator" class="pagination pagination-lg text-center">#}
-{##}
-{#                    {% if albums.has_previous %}#}
-{#                        <li><a href="?page={{ albums.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">&laquo;</a></li>#}
-{#                    {% else %}#}
-{#                        <li class="disabled"><span>&laquo;</span></li>#}
-{#                    {% endif %}#}
-{##}
-{#                    {% if start_index %}#}
-{#                        <li><a href="?page={{ start_index }}">{{ start_index }}</a></li>#}
-{#                        <li class="disabled"><span>&mldr;</span></li>#}
-{#                    {% endif %}#}
-{##}
-{#                    {% for i in page_range %}#}
-{#                        {% if albums.number == i %}#}
-{#                            <li class="active"><span>{{ i }}</span></li>#}
-{#                        {% else %}#}
-{#                            <li><a href="?page={{ i }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ i }}</a></li>#}
-{#                        {% endif %}#}
-{#                    {% endfor %}#}
-{##}
-{##}
-{#                    {% if albums.has_next %}#}
-{#                        {% if end_index %}#}
-{#                            <li class="disabled"><span>&mldr;</span></li>#}
-{#                            <li><a href="?page={{ end_index }}">{{ end_index }}</a></li>#}
-{#                        {% endif %}#}
-{#                        <li><a href="?page={{ albums.next_page_number }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&raquo;</a></li>#}
-{#                    {% else %}#}
-{#                        <li class="disabled"><span>&raquo;</span></li>#}
-{#                    {% endif %}#}
-{##}
-{#                </ul>#}
-{#            </div>#}
-{#        {% endif %}#}
 
         <div class="instagram_holder">
             <div class="instagram_title">
@@ -238,44 +239,6 @@
             }
         });
 
-    /*
-        $(document).ready(function () {
-            setTimeout(function() {
-                calcImgs()
-            }, 50)
-        });
-
-        function calcImgs() {
-            $('img.album-image').each(function () {
-                let h = $(this).height();
-                let w = $(this).width();
-
-                // console.log(h);
-                // console.log(w);
-
-                if ($(this).parent('.album-image-wrap').length === 0) {
-                    // wrap the image in a "cropping" div
-                    $(this).wrap('<div class="album-image-wrap"></div>');
-                }
-
-                if (h > w) {
-                    // pic is portrait
-                    $(this).addClass('portrait');
-                    let m = -(((h / w) * 100) - 100) / 2; //math the negative margin
-                    $(this).css('margin-top', m + '%');
-                } else if (w > h) {
-                    // pic is landscape
-                    $(this).addClass('landscape');
-                    let m = -(((w / h) * 100) - 100) / 2;  //math the negative margin
-                    $(this).css('margin-left', m + '%');
-                } else {
-                    // pic is square
-                    $(this).addClass('square');
-                }
-            })
-        }
-        */
-
         $('.checkbox').click(function () {
             let cat = this.id;
 
@@ -287,75 +250,10 @@
             $(this).addClass('checkFocus');
         });
 
-
-        function getCookie(name) {
-            let cookieValue = null;
-            if (document.cookie && document.cookie !== '') {
-                let cookies = document.cookie.split(';');
-                for (let i = 0; i < cookies.length; i++) {
-                    let cookie = jQuery.trim(cookies[i]);
-                    // Does this cookie string begin with the name we want?
-                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                        break;
-                    }
-                }
-            }
-            return cookieValue;
-        }
-
-        let csrftoken = getCookie('csrftoken');
-
-        function csrfSafeMethod(method) {
-            // these HTTP methods do not require CSRF protection
-            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-        }
-
-        $.ajaxSetup({
-            beforeSend: function (xhr, settings) {
-                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
-                }
-            }
-        });
-
         $('.checkbox').click(function () {
             window.location.replace(`/photography/?category=${this.id}`);
         });
 
-        // AJAX Call based on Category Button Clicked
-        // $(".checkbox").click(function () {
-        //     let cat = this.id;
-        //     // console.log(category);
-        //     $.ajax({
-        //         url: "{% url "photo_ajax" %}",
-        //         method: "POST",
-        //         data: {
-        //             category: cat
-        //         },
-        //         success: function (response) {
-        //             //console.dir(response);
-        //             let ac = $("#album_container");
-        //             let html = "";
-        //             $(ac).html('');
-        //             $(response).each(function (i, album) {
-        //                 html += `<a href="/photography/galleries/${album.category.slug}/${album.slug}" class="text ${album.category.slug}"><div class="album_set">
-        //                             <img src="${album.photo_album[0].url}" class="album-image" onload="calcImg(this)" alt="${album.photo_album[0].alt_text}">
-        //                             <div class="middle">
-        //                                 <div class="text text_top">${album.title}</div>
-        //                                 <div class="text text_center">
-        //                                     <hr>
-        //                                 </div>
-        //                                 <div class="text text_bottom">${album.album_details}</div>
-        //                             </div>
-        //                         </div>
-        //                     </a>`
-        //             });
-        //             $(ac).html(html);
-        //             calcImgs();
-        //         }
-        //     });
-        // });
 
         // IMAGE UPLOADER PLUS MODAL
         let imagesPreview = function (input, placeToInsertImagePreview) {
@@ -411,7 +309,6 @@
         }
 
 
-
         // Get the modal
         let photoAlbumModal = document.getElementById('photoModal');
 
@@ -422,12 +319,12 @@
         let span = document.getElementsByClassName("album-close")[0];
 
         // When the user clicks the button, open the modal
-        photoAlbumBtn.onclick = function() {
+        photoAlbumBtn.onclick = function () {
             photoAlbumModal.style.display = "block";
         };
 
         // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
+        span.onclick = function () {
             photoAlbumModal.style.display = "none";
             let ac = $("div.album_gallery_images");
             $(ac).html('');

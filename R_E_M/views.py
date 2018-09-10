@@ -240,7 +240,7 @@ def photo_upload(request):
 
 
 def _movies(request, movie_categories, category, complete_movie_list):
-    paginator = Paginator(complete_movie_list, 4)
+    paginator = Paginator(complete_movie_list, 3)
 
     try:
         page = int(request.GET.get('page', '1'))
@@ -262,16 +262,16 @@ def _movies(request, movie_categories, category, complete_movie_list):
     # print(max_index)
     print("Index Length is: {}".format(max_index))
     # range of 7, calculate where to slice the list
-    start_index = index - 3 if index >= 3 else 0
-    end_index = index + 4 if index <= max_index - 4 else max_index
+    start_index = index - 2 if index >= 2 else 0
+    end_index = index + 3 if index <= max_index - 3 else max_index
     # print(end_index)
     # new page range
     page_range = paginator.page_range[start_index:end_index]
 
     # showing first and last links in pagination
-    if index >= 4:
+    if index >= 3:
         start_index = 1
-    if end_index - index >= 4 and end_index != max_index:
+    if end_index - index >= 3 and end_index != max_index:
         end_index = max_index
     else:
         end_index = None
