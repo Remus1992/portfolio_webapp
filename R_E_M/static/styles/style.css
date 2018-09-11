@@ -361,11 +361,6 @@ body:not(.always-use-overlay-nav) .nav-wrapper.desktop-nav-wrapper .folder:hover
     transition: opacity .14s .14s ease-in-out;
 }
 
-.mobile-nav-toggle-label {
-    top: 10px;
-    left: 10px;
-}
-
 .folder {
     position: relative;
 }
@@ -382,8 +377,8 @@ body:not(.always-use-overlay-nav) .nav-wrapper.desktop-nav-wrapper .folder:hover
     width: 10%;
     position: absolute;
     z-index: 1002;
-    top: 10px;
-    left: 10px;
+    top: 20px;
+    left: 20px;
     padding: 0;
     vertical-align: middle;
     line-height: 16px;
