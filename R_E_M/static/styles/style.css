@@ -22,10 +22,19 @@
 
 .title_header {
             text-align: center;
-            width: 30%;
+            width: 35%;
             margin: 10px auto;
         }
 
+.title_header h1 {
+    font-size: 230%;
+}
+
+.title_header p {
+    color: #a3a3a3;
+    font-size: 18px;
+    line-height: 150%;
+}
 
 body {
     font-family: 'Alegreya Sans SC', sans-serif;

@@ -19,8 +19,9 @@
     </style>
 
     <div class="page_container">
-        <div class="title_header"> <h1>Blog</h1>
-            <p>My thoughts, views, or insights on a diverse range of subjects. Search by title, category, or content</p> </div>
+        <div class="title_header"><h1>Remington's Blog</h1>
+            <p>My thoughts, views, or insights ranging from literature to film to technology. Search by title, category,
+                or content</p></div>
         <div class="search_container">
             <form method="GET" action="">
                 <div class="search_div">
@@ -124,6 +125,7 @@
                         <li><a href="?page=
 
 
+
                                 {{ blog_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">&laquo;</a>
                         </li>
                     {% else %}
@@ -142,6 +144,7 @@
                             <li><a href="?page=
 
 
+
                                     {{ i }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ i }}</a>
                             </li>
                         {% endif %}
@@ -153,6 +156,7 @@
                             <li><a href="?page={{ end_index }}">{{ end_index }}</a></li>
                         {% endif %}
                         <li><a href="?page=
+
 
 
                                 {{ blog_list.next_page_number }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&raquo;</a>
