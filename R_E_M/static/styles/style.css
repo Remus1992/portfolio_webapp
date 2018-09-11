@@ -1307,7 +1307,17 @@ a, a:visited {
     transition: background .3s cubic-bezier(.33, .66, .66, 1);
 }
 
-@media only screen and (max-width: 600px) {
+@media (max-width: 1024px) and (min-width: 766px) {
+    .movie-card, .movie-card .color-overlay {
+        width: 258px;
+    }
+
+    .movie-card {
+        height: 375px;
+    }
+}
+
+@media only screen and (max-width: 766px) {
     .movie-card, .movie-card .color-overlay {
         width: 258px;
     }
@@ -1446,7 +1456,13 @@ h3 {
     width: 300px;
 }
 
-@media only screen and (max-width: 600px) {
+@media (max-width: 1024px) and (min-width: 766px) {
+    .movie_poster {
+        width: 258px;
+    }
+}
+
+@media only screen and (max-width: 766px) {
     .movie_poster {
         width: 258px;
     }
@@ -1491,6 +1507,78 @@ h3 {
     color: black;
     opacity: 0.8;
     font-weight: bold;
+}
+
+@media (max-width: 1024px) and (min-width: 766px) {
+    .movie-card .color-overlay {
+        background: rgba(84, 104, 110, 0.9);
+    }
+
+    .movie-card .title-content {
+        opacity: 1;
+        bottom: 280px;
+    }
+
+    .movie-card .card-info {
+        opacity: 1;
+        bottom: 105px;
+    }
+
+    .movie-card .movie_read_more {
+        bottom: 5px;
+    }
+
+    .movie-card .movie_button {
+        background-color: white;
+        opacity: 0.7;
+        border: white solid 2px;
+        color: black;
+        padding: 3px 5px;
+        border-radius: 5px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 40px;
+        cursor: pointer;
+        font-weight: bold;
+    }
+}
+
+@media only screen and (max-width: 766px) {
+    .movie-card .color-overlay {
+        background: rgba(84, 104, 110, 0.9);
+    }
+
+    .movie-card .title-content {
+        opacity: 1;
+        bottom: 280px;
+    }
+
+    .movie-card .card-info {
+        opacity: 1;
+        bottom: 105px;
+    }
+
+    .movie-card .movie_read_more {
+        bottom: 5px;
+    }
+
+    .movie-card .movie_button {
+        background-color: white;
+        opacity: 0.7;
+        border: white solid 2px;
+        color: black;
+        padding: 3px 5px;
+        border-radius: 5px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 40px;
+        cursor: pointer;
+        font-weight: bold;
+    }
 }
 
 /******************** Movie Poster JQUERY ********************/
