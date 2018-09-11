@@ -99,6 +99,8 @@
                 <li><a href="?page=
 
 
+
+
                         {{ albums.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">&laquo;</a>
                 </li>
             {% else %}
@@ -117,6 +119,8 @@
                     <li><a href="?page=
 
 
+
+
                             {{ i }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ i }}</a>
                     </li>
                 {% endif %}
@@ -128,6 +132,8 @@
                     <li><a href="?page={{ end_index }}">{{ end_index }}</a></li>
                 {% endif %}
                 <li><a href="?page=
+
+
 
 
                         {{ albums.next_page_number }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&raquo;</a>
@@ -266,7 +272,36 @@ function calcImgs() {
 <a href="{% url 'picture_view' album.category.slug album.slug photo.slug %}">{{ photo.image_details }}</a>
 
 <!-- From Movie Home -->
+<div class="movie_card_container {{ movie.category.slug }} infinite-container" id="movie_card_container">
+    {% for movie in movies %}
+        <div class="movie-card infinite-item element_move">
+            <img src="{{ movie.movie_poster.url }}" class="movie_poster" onload="calcImg(this)"/>
+            <div class="title-content">
+                <h3>{{ movie.title }}</h3>
 
+                <hr/>
+                <div class="intro">{{ movie.tag_line }}</div>
+            </div><!-- /.title-content -->
+            <div class="card-info">
+                {{ movie.movie_details }}
+            </div><!-- /.card-info -->
+            <div class="movie_read_more">
+                <a href="{% url 'movie_single_view' movie.category.slug movie.slug %}" class="movie_button">Read
+                    More</a>
+            </div>
+
+            <div class="utility-info">
+                <ul class="utility-list">
+                    <li class="comments">12</li>
+                    <li class="date">{{ movie.date_built }}</li>
+                </ul>
+            </div><!-- /.utility-info -->
+            <!-- overlays -->
+            <div class="gradient-overlay"></div>
+            <div class="color-overlay"></div>
+        </div><!-- /.movie-card -->
+    {% endfor %}
+</div>
 {% if movies.has_other_pages %}
     <div class="text-center">
         <input type="hidden" id="startIndex" value="{{ start_index }}">
@@ -274,6 +309,8 @@ function calcImgs() {
 
             {% if movies.has_previous %}
                 <li><a href="?page=
+
+
 
                         {{ movies.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">&laquo;</a>
                 </li>
@@ -292,6 +329,8 @@ function calcImgs() {
                 {% else %}
                     <li><a href="?page=
 
+
+
                             {{ i }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ i }}</a>
                     </li>
                 {% endif %}
@@ -304,6 +343,8 @@ function calcImgs() {
                     <li><a href="?page={{ end_index }}">{{ end_index }}</a></li>
                 {% endif %}
                 <li><a href="?page=
+
+
 
                         {{ movies.next_page_number }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&raquo;</a>
                 </li>
@@ -405,6 +446,8 @@ function calcImgs() {
 
             {% if websites.has_previous %}
                 <li><a href="?page=
+
+
                         {{ websites.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">&laquo;</a>
                 </li>
             {% else %}
@@ -421,6 +464,8 @@ function calcImgs() {
                     <li class="active"><span>{{ i }}</span></li>
                 {% else %}
                     <li><a href="?page=
+
+
                             {{ i }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ i }}</a>
                     </li>
                 {% endif %}
@@ -433,6 +478,8 @@ function calcImgs() {
                     <li><a href="?page={{ end_index }}">{{ end_index }}</a></li>
                 {% endif %}
                 <li><a href="?page=
+
+
                         {{ websites.next_page_number }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&raquo;</a>
                 </li>
             {% else %}

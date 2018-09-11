@@ -11,73 +11,16 @@
     <head>
         <link rel="stylesheet" type="text/css" href="{% static 'styles/style.css' %}"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-        <script>
-            function calcImg(img) {
-                let h = $(img).height();
-                let w = $(img).width();
-
-                //console.log(h);
-                //console.log(w);
-
-                if ($(img).parent('.movie-image-wrap').length === 0) {
-                    // wrap the image in a "cropping" div
-                    $(img).wrap('<div class="movie-image-wrap"></div>');
-                }
-
-                if (w/h < 300/430){
-                    $(img).addClass('narrow');
-                } else if (w/h > 300/430) {
-                    $(img).addClass('wide');
-                } else {
-                    $(img).addClass('perfect');
-                }
-            }
-        </script>
-        <script>
-            function calcPreviewImg(img) {
-                console.log(img);
-                let h = $(img).height();
-                let w = $(img).width();
-
-                console.log(h);
-                console.log(w);
-
-                if ($(img).parent('.movie_gallery_images').length === 0) {
-                    // wrap the image in a "cropping" div
-                    $(img).wrap('<div class="movie-preview-image-wrap"></div>');
-                }
-
-                if (h > w) {
-                    // pic is portrait
-                    $(img).addClass('portrait');
-                    let m = -(((h / w) * 100) - 100) / 2; //math the negative margin
-                    $(img).css('margin-top', m + '%');
-                } else if (w > h) {
-                    // pic is landscape
-                    $(img).addClass('landscape');
-                    let m = -(((w / h) * 100) - 100) / 2;  //math the negative margin
-                    $(img).css('margin-left', m + '%');
-                } else {
-                    // pic is square
-                    $(img).addClass('square');
-                }
-            }
-        </script>
+        <!-- movie poster specific javascript -->
+        <script src="{% static 'javascript/movie_home_top.js' %}"></script>
 
     </head>
 
-    <style>
-        * {
-            {#box-sizing: border-box;#}
-        }
-        body {
-            font-family: 'Alegreya Sans SC', sans-serif;
-        }
-
-    </style>
-
     <div class="page_container">
+        <div class="title_header"><h1>Film Library</h1>
+            <p>This page I consider more to be a "storytelling" page than just my filmmaking efforts. The reason for this
+            is that I have also included screenplay excerpts I written from yet-to-be-realized projects.</p>
+        </div>
         <div class="search_container">
             <form method="GET" action="">
                 <div class="search_div">
@@ -122,18 +65,24 @@
                             </div>
                             <div class="movie_gallery">
                                 <div class="movie_info">
-                                    <input type="text" id="movie_title" name="movie_title" class="resizedTextbox" placeholder="Movie Title">
-                                    <input type="text" id="movie_tag" name="movie_tag" placeholder="Movie Tagline" class="resizedTextbox">
-                                    <input list="categories" id="movie_category" name="movie_category" placeholder="Movie Category" class="resizedTextbox">
-                                    <datalist id="categories">{% for c in movie_cats %}<option value="{{ c.name }}">{% endfor %}</datalist>
-                                    <input type="text" id="youtube_link" name="movie_youtube" placeholder="YouTube Link" class="resizedTextbox">
+                                    <input type="text" id="movie_title" name="movie_title" class="resizedTextbox"
+                                           placeholder="Movie Title">
+                                    <input type="text" id="movie_tag" name="movie_tag" placeholder="Movie Tagline"
+                                           class="resizedTextbox">
+                                    <input list="categories" id="movie_category" name="movie_category"
+                                           placeholder="Movie Category" class="resizedTextbox">
+                                    <datalist id="categories">{% for c in movie_cats %}
+                                        <option value="{{ c.name }}">{% endfor %}</datalist>
+                                    <input type="text" id="youtube_link" name="movie_youtube" placeholder="YouTube Link"
+                                           class="resizedTextbox">
                                     <input type="date" id="movie_date" name="movie_date" class="resizedTextbox">
                                     <br>
                                     <br>
                                     <br>
                                     <p>Movie Poster</p>
                                     <input type="file" id="movie_poster" name="movie_poster" class="resizedTextbox">
-                                    <input type="text" id="alt_text" name="alt_text" placeholder="Poster Alt Text" class="resizedTextbox">
+                                    <input type="text" id="alt_text" name="alt_text" placeholder="Poster Alt Text"
+                                           class="resizedTextbox">
                                     <br>
                                     <br>
                                     <br>
@@ -141,11 +90,13 @@
                                     <input type="file" id="movie_script" name="movie_script" class="resizedTextbox">
                                 </div>
                                 <div class="movie-details-row">
-                                    <textarea id="movie_details" name="movie_details" cols="30" rows="10" placeholder="Movie Details"></textarea>
+                                    <textarea id="movie_details" name="movie_details" cols="30" rows="10"
+                                              placeholder="Movie Details"></textarea>
                                 </div>
                                 <div class="movie-still-input-row">
                                     <h2>Movie Stills</h2>
-                                    <input class='movie_modal_btn' name="images" type="file" multiple id="gallery-movie-still-add">
+                                    <input class='movie_modal_btn' name="images" type="file" multiple
+                                           id="gallery-movie-still-add">
                                 </div>
                                 <div class="movie_gallery_images" id="movie_gallery_images"></div>
                             </div>
@@ -163,7 +114,6 @@
                     <img src="{{ movie.movie_poster.url }}" class="movie_poster" onload="calcImg(this)"/>
                     <div class="title-content">
                         <h3>{{ movie.title }}</h3>
-
                         <hr/>
                         <div class="intro">{{ movie.tag_line }}</div>
                     </div><!-- /.title-content -->
@@ -171,12 +121,12 @@
                         {{ movie.movie_details }}
                     </div><!-- /.card-info -->
                     <div class="movie_read_more">
-                        <a href="{% url 'movie_single_view' movie.category.slug movie.slug %}" class="movie_button">Read More</a>
+                        <a href="{% url 'movie_single_view' movie.category.slug movie.slug %}" class="movie_button">Read
+                            More</a>
                     </div>
 
                     <div class="utility-info">
                         <ul class="utility-list">
-{#                            <li class="comments">12</li>#}
                             <li class="date">{{ movie.date_built }}</li>
                         </ul>
                     </div><!-- /.utility-info -->
@@ -192,7 +142,9 @@
 
         {% if movies.has_next %}
             <div class="more_link">
-                <a class="infinite-more-link more_button" href="?page={{ movies.next_page_number }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Load More
+                <a class="infinite-more-link more_button" href="?page=
+                        {{ movies.next_page_number }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Load
+                    More
                     Movies</a>
             </div>
         {% endif %}
@@ -200,113 +152,8 @@
     </div>
     <script src="{% static 'waypoints/lib/jquery.waypoints.min.js' %}"></script>
     <script src="{% static 'waypoints/lib/shortcuts/infinite.min.js' %}"></script>
-    <script>
-
-        let infinite = new Waypoint.Infinite({
-            element: $('.infinite-container')[0],
-            onBeforePageLoad: function () {
-                $('.loading').show();
-            },
-            onAfterPageLoad: function ($items) {
-                $('.loading').hide();
-            }
-        });
-
-        $('.checkbox').click(function () {
-            let cat = this.id;
-
-            // removing shade from other elements
-            $('.checkbox').each(function (i, el) {
-                $(el).removeClass('checkFocus');
-            });
-
-            $(this).addClass('checkFocus');
-        });
-
-        $('.checkbox').click(function () {
-            window.location.replace(`/filmmaking/?category=${this.id}`);
-        });
-
-
-    // IMAGE UPLOADER PLUS MODAL
-        let imagesPreview = function (input, placeToInsertImagePreview) {
-            $(placeToInsertImagePreview).html('');
-            //let movie_html = '<div class="movie_info"><input type="text" id="movie_title" name="movie_title" class="resizedTextbox" placeholder="Movie Title"><input type="text" id="movie_tag" name="movie_tag" placeholder="Movie Tagline" class="resizedTextbox"><input list="categories" id="movie_category" name="movie_category" placeholder="Movie Category" class="resizedTextbox"><datalist id="categories">{% for c in movie_cats %}<option value="{{ c.name }}">{% endfor %}</datalist><input type="text" id="youtube_link" name="movie_youtube" placeholder="YouTube Link" class="resizedTextbox"><input type="date" id="movie_date" name="movie_date" class="resizedTextbox"><br><br><br><p>Movie Poster</p><input type="file" id="movie_poster" name="movie_poster" class="resizedTextbox"><input type="text" id="alt_text" name="alt_text" placeholder="Poster Alt Text" class="resizedTextbox"><br><br><br><p>Movie Script</p><input type="file" id="movie_script" name="movie_script" class="resizedTextbox"></div><div class="movie-details-row"><textarea id="movie_details" name="movie_details" cols="30" rows="10" placeholder="Movie Details"></textarea></div><div class="movie-still-input-row"><h2>Movie Stills</h2><input class="movie_modal_btn" name="images" type="file" multiple id="gallery-movie-still-add"></div><div id="movie_gallery_images" class="movie_gallery_images"></div>'
-            //$(placeToInsertImagePreview).append(movie_html);
-
-            if (input.files) {
-                let filesAmount = input.files.length;
-
-                for (let i = 0; i < filesAmount; i++) {
-                    let reader = new FileReader();
-                    let num = i;
-                    let name = input.files[i].name;
-                    reader.onload = function (event) {
-                        let html = $(`<div class="img_holder" id="image_${num + 1}"></div>`, {
-                            'id': `image_div_${num + 1}`
-                        })
-                            .append($(`<input>`).attr({
-                                'type': 'hidden',
-                                'value': event.target.result,
-                                'name': `image_${num + 1}`
-                            }))
-                            .append($(`<span class="movie-close" id="close_image_${num + 1}" onClick="removeElement('movie_gallery_images', 'image_${num + 1}')">&times;</span><img class="movie-preview-image" src="${event.target.result}" id="new_picture_${num + 1}" onload="calcPreviewImg(this)"><div><label for="image_name_${num + 1}">Photo Title</label></div><div><input type="text" value="${name}" name="image_name_${num + 1}"></div><div><label for="alt_text_${num + 1}">Alt Text</label></div><div><input type="text" id="alt_text_${num + 1}" name="alt_text_${num + 1}" value="${name}"></div><div><label for="creation_date_${num + 1}">Date Taken</label></div><div><input type="date" id="creation_date_${num + 1}" name="creation_date_${num + 1}"></div><div><label for="image_details_${num + 1}">Image Details</label></div><div><input type="textarea" id="image_details_${num + 1}" name="image_details_${num + 1}"></div>`));
-                        $(placeToInsertImagePreview).append(html);
-                    };
-
-                    reader.readAsDataURL(input.files[i]);
-                }
-            }
-            input.value = ''
-        };
-
-        $('#gallery-movie-still-add').on('change', function () {
-            imagesPreview(this, 'div.movie_gallery_images');
-        });
-
-        function removeElement(parentDiv, childDiv) {
-            console.log("Child Div is " + childDiv);
-            console.log("Parent Div is " +parentDiv);
-            if (childDiv == parentDiv) {
-                alert("The parent div cannot be removed.")
-            } else if (document.getElementById(childDiv)) {
-                let child = document.getElementById(childDiv);
-                let parent = document.getElementById(parentDiv);
-                console.log("Child Div is " + child);
-                console.log("Parent Div is " + parent);
-                parent.removeChild(child);
-            }
-            else {
-                alert("Child div has already been removed or does not exist.");
-                return false;
-            }
-        }
-
-        // Get the modal
-        let movieUploadModal = document.getElementById('movieModal');
-
-        // Get the button that opens the modal
-        let movieBtn = document.getElementById("movieModalBtn");
-
-        // Get the <span> element that closes the modal
-        let span = document.getElementsByClassName("movie-close")[0];
-
-        // When the user clicks the button, open the modal
-        movieBtn.onclick = function() {
-            movieUploadModal.style.display = "block";
-        };
-
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-            movieUploadModal.style.display = "none";
-            let movie_html = '<div class="movie_info"><input type="text" id="movie_title" name="movie_title" class="resizedTextbox" placeholder="Movie Title"><input type="text" id="movie_tag" name="movie_tag" placeholder="Movie Tagline" class="resizedTextbox"><input list="categories" id="movie_category" name="movie_category" placeholder="Movie Category" class="resizedTextbox"><datalist id="categories">{% for c in movie_cats %}<option value="{{ c.name }}">{% endfor %}</datalist><input type="text" id="youtube_link" name="movie_youtube" placeholder="YouTube Link" class="resizedTextbox"><input type="date" id="movie_date" name="movie_date" class="resizedTextbox"><br><br><br><p>Movie Poster</p><input type="file" id="movie_poster" name="movie_poster" class="resizedTextbox"><input type="text" id="alt_text" name="alt_text" placeholder="Poster Alt Text" class="resizedTextbox"><br><br><br><p>Movie Script</p><input type="file" id="movie_script" name="movie_script" class="resizedTextbox"></div><div class="movie-details-row"><textarea id="movie_details" name="movie_details" cols="30" rows="10" placeholder="Movie Details"></textarea></div><div class="movie-still-input-row"><h2>Movie Stills</h2><input class="movie_modal_btn" name="images" type="file" multiple id="gallery-movie-still-add"></div><div id="movie_gallery_images" class="movie_gallery_images"></div>'
-            $("div.movie_gallery").html(movie_html);
-            $('#gallery-movie-still-add').on('change', function () {
-                imagesPreview(this, 'div.movie_gallery_images');
-            });
-
-        };
-    </script>
+    <!-- movie poster specific javascript -->
+    <script src="{% static 'javascript/movie_home_bottom.js' %}"></script>
 {% endblock %}
 
 
