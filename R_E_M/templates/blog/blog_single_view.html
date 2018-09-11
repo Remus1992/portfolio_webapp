@@ -13,53 +13,27 @@
     </head>
     <style>
 
-        .container {
-            margin: 20px auto;
-            text-align: center;
-            width: 70%;
-        }
-
-        h2 {
-            font-weight: bold;
-        }
-
-        h1, body {
-            font-family: 'Alegreya Sans SC', sans-serif;
-
-        }
-
-        pre {
-            text-align: left;
-            white-space: pre-wrap; /* Since CSS 2.1 */
-            white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
-            white-space: -pre-wrap; /* Opera 4-6 */
-            white-space: -o-pre-wrap; /* Opera 7 */
-            word-wrap: break-word; /* Internet Explorer 5.5+ */
-        }
-
-        .blog_image {
-            width: 300px;
-        }
 
     </style>
 
     <div class="page_container">
-        <div class="container">
+        <div class="blog_content_container">
 
             {% blog_image_or_default blog %}
-            <!-- Title -->
-            <h2>{{ blog.title }}</h2>
+            <div class="blog_header">
 
-            <!-- Author -->
-            <p class="lead">
-                by
-                <a href="#" class="author">{{ blog.author.username }}</a>
-            </p>
+                <!-- Title -->
+                <h2>{{ blog.title }}</h2>
 
+                <!-- Author -->
+                <p class="lead">
+                    by
+                    <a href="#" class="author">{{ blog.author.username }}</a>
+                </p>
 
-            <!-- Date/Time -->
-            <p class="post-time">Posted on {{ blog.date }}</p>
-
+                <!-- Date/Time -->
+                <p class="post-time">Posted on {{ blog.date }}</p>
+            </div>
             <!--Post content-->
             <pre>{{ blog.content|safe_markdown }}</pre>
 
@@ -68,18 +42,6 @@
                 {{ blog.youtube_link|safe }}
 
             {% endif %}
-
-            <div class="card my-4">
-                <h5 class="card-header">Leave a Comment:</h5>
-                <div class="card-body">
-                    <form>
-                        <div class="form-group">
-                            <textarea class="form-control" rows="4" cols="50"></textarea>
-                        </div>
-                        <button type="submit" class="button">Submit</button>
-                    </form>
-                </div>
-            </div>
         </div>
     </div>
 {% endblock %}

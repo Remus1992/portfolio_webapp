@@ -1,64 +1,64 @@
 <!-- From Photo Home -->
 <script>
-            function calcImg(img) {
-                /* setTimeout(function () {
-                    $(img).parent().parent().parent().addClass('album_move').removeClass('invisible');
-                    console.log($(img).parent().parent().parent());
-                    let h = $(img).height();
-                    let w = $(img).width();
-                    console.log(h);
-                    console.log(w);
+    function calcImg(img) {
+        /* setTimeout(function () {
+            $(img).parent().parent().parent().addClass('album_move').removeClass('invisible');
+            console.log($(img).parent().parent().parent());
+            let h = $(img).height();
+            let w = $(img).width();
+            console.log(h);
+            console.log(w);
 
-                     if ($(img).parent('.album-image-wrap').length === 0) {
-                        // wrap the image in a "cropping" div
-                        $(img).wrap('<div class="album-image-wrap"></div>');
-                    }
-
-                    if (h > w) {
-                        // pic is portrait
-                        $(img).addClass('portrait');
-                        let m = -(((h / w) * 100) - 100) / 2; //math the negative margin
-                        $(img).css('margin-top', m + '%');
-                    } else if (w > h) {
-                        // pic is landscape
-                        $(img).addClass('landscape');
-                        let m = -(((w / h) * 100) - 100) / 2;  //math the negative margin
-                        $(img).css('margin-left', m + '%');
-                    } else {
-                        // pic is square
-                        $(img).addClass('square');
-                    }
-                }, Math.floor(Math.random() * 900) + 500); */
-
-
-                let h = $(img).height();
-                let w = $(img).width();
-
-                console.log(h);
-                console.log(w);
-
-                if ($(img).parent('.album-image-wrap').length === 0) {
-                    // wrap the image in a "cropping" div
-                    $(img).wrap('<div class="album-image-wrap"></div>');
-                }
-
-                if (h > w) {
-                    // pic is portrait
-                    $(img).addClass('portrait');
-                    let m = -(((h / w) * 100) - 100) / 2; //math the negative margin
-                    $(img).css('margin-top', m + '%');
-                } else if (w > h) {
-                    // pic is landscape
-                    $(img).addClass('landscape');
-                    let m = -(((w / h) * 100) - 100) / 2;  //math the negative margin
-                    $(img).css('margin-left', m + '%');
-                } else {
-                    // pic is square
-                    $(img).addClass('square');
-                }
-
+             if ($(img).parent('.album-image-wrap').length === 0) {
+                // wrap the image in a "cropping" div
+                $(img).wrap('<div class="album-image-wrap"></div>');
             }
-        </script>
+
+            if (h > w) {
+                // pic is portrait
+                $(img).addClass('portrait');
+                let m = -(((h / w) * 100) - 100) / 2; //math the negative margin
+                $(img).css('margin-top', m + '%');
+            } else if (w > h) {
+                // pic is landscape
+                $(img).addClass('landscape');
+                let m = -(((w / h) * 100) - 100) / 2;  //math the negative margin
+                $(img).css('margin-left', m + '%');
+            } else {
+                // pic is square
+                $(img).addClass('square');
+            }
+        }, Math.floor(Math.random() * 900) + 500); */
+
+
+        let h = $(img).height();
+        let w = $(img).width();
+
+        console.log(h);
+        console.log(w);
+
+        if ($(img).parent('.album-image-wrap').length === 0) {
+            // wrap the image in a "cropping" div
+            $(img).wrap('<div class="album-image-wrap"></div>');
+        }
+
+        if (h > w) {
+            // pic is portrait
+            $(img).addClass('portrait');
+            let m = -(((h / w) * 100) - 100) / 2; //math the negative margin
+            $(img).css('margin-top', m + '%');
+        } else if (w > h) {
+            // pic is landscape
+            $(img).addClass('landscape');
+            let m = -(((w / h) * 100) - 100) / 2;  //math the negative margin
+            $(img).css('margin-left', m + '%');
+        } else {
+            // pic is square
+            $(img).addClass('square');
+        }
+
+    }
+</script>
 <style>
     /*
 .invisible{
@@ -98,6 +98,7 @@
             {% if albums.has_previous %}
                 <li><a href="?page=
 
+
                         {{ albums.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">&laquo;</a>
                 </li>
             {% else %}
@@ -115,6 +116,7 @@
                 {% else %}
                     <li><a href="?page=
 
+
                             {{ i }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ i }}</a>
                     </li>
                 {% endif %}
@@ -126,6 +128,7 @@
                     <li><a href="?page={{ end_index }}">{{ end_index }}</a></li>
                 {% endif %}
                 <li><a href="?page=
+
 
                         {{ albums.next_page_number }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&raquo;</a>
                 </li>
@@ -268,6 +271,7 @@ function calcImgs() {
 
             {% if movies.has_previous %}
                 <li><a href="?page=
+
                         {{ movies.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">&laquo;</a>
                 </li>
             {% else %}
@@ -284,6 +288,7 @@ function calcImgs() {
                     <li class="active"><span>{{ i }}</span></li>
                 {% else %}
                     <li><a href="?page=
+
                             {{ i }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ i }}</a>
                     </li>
                 {% endif %}
@@ -296,6 +301,7 @@ function calcImgs() {
                     <li><a href="?page={{ end_index }}">{{ end_index }}</a></li>
                 {% endif %}
                 <li><a href="?page=
+
                         {{ movies.next_page_number }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&raquo;</a>
                 </li>
             {% else %}
@@ -308,78 +314,80 @@ function calcImgs() {
 
 <script>
     function getCookie(name) {
-            let cookieValue = null;
-            if (document.cookie && document.cookie !== '') {
-                let cookies = document.cookie.split(';');
-                for (let i = 0; i < cookies.length; i++) {
-                    let cookie = jQuery.trim(cookies[i]);
-                    // Does this cookie string begin with the name we want?
-                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                        break;
-                    }
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            let cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                let cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
                 }
             }
-            return cookieValue;
         }
+        return cookieValue;
+    }
 
-        let csrftoken = getCookie('csrftoken');
+    let csrftoken = getCookie('csrftoken');
 
-        function csrfSafeMethod(method) {
-            // these HTTP methods do not require CSRF protection
-            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-        }
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
 
-        $.ajaxSetup({
-            beforeSend: function (xhr, settings) {
-                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
-                }
+    $.ajaxSetup({
+        beforeSend: function (xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
             }
-        });
+        }
+    });
 
-         //   $(".checkbox").click(function () {
-     //       let cat = this.id;
-     //       console.log(cat);
-     //       $.ajax({
-     //           url: "{% url "movie_ajax" %}",
-     //           method: "POST",
-     //           data: {
-     //               category: cat
-     //           },
-     //           success: function (response) {
-     //               let mc = $("#movie_card_container");
-     //               let html = "";
-     //               $(mc).html('');
-     //               $(response).each(function (i, movie) {
-     //                   console.dir(response)
-     //                   html += `<div class="movie-card ${movie.category.slug}">
-     //                               <img src="${movie.movie_poster.url}" class="movie_poster"/>
-     //                               <div class="title-content">
-     //                                   <h3>${movie.title}</h3>
-     //                                   <hr/>
-     //                                   <div class="intro">${movie.tag_line}</div>
-     //                               </div><!-- /.title-content -->
-     //                               <div class="card-info">
-     //                                   ${movie.movie_details}
-     //                               </div><!-- /.card-info -->
-     //                               <div class="movie_read_more">
-     //                                   <a href="/filmmaking/movies/${movie.category.slug}/${movie.slug}" class="movie_button">Read More</a>
-     //                               </div>
-     //                               <div class="utility-info">
-     //                                   <ul class="utility-list">
-     //                                       <li class="comments">12</li>
-     //                                       <li class="date">${movie.date_built}</li>
-     //                                   </ul>
-     //                               </div>
-     //                               <div class="gradient-overlay"></div>
-     //                               <div class="color-overlay"></div>
-     //                           </div>`
-     //               });
-     //               $(mc).html(html);
-     //           }
-     //       });
-     //   });
+    //   $(".checkbox").click(function () {
+    //       let cat = this.id;
+    //       console.log(cat);
+    //       $.ajax({
+    //           url: "{% url "movie_ajax" %}",
+    //           method: "POST",
+    //           data: {
+    //               category: cat
+    //           },
+    //           success: function (response) {
+    //               let mc = $("#movie_card_container");
+    //               let html = "";
+    //               $(mc).html('');
+    //               $(response).each(function (i, movie) {
+    //                   console.dir(response)
+    //                   html += `<div class="movie-card ${movie.category.slug}">
+    //                               <img src="${movie.movie_poster.url}" class="movie_poster"/>
+    //                               <div class="title-content">
+    //                                   <h3>${movie.title}</h3>
+    //                                   <hr/>
+    //                                   <div class="intro">${movie.tag_line}</div>
+    //                               </div>
+    <!-- /.title-content -->
+    //                               <div class="card-info">
+    //                                   ${movie.movie_details}
+    //                               </div>
+    <!-- /.card-info -->
+    //                               <div class="movie_read_more">
+    //                                   <a href="/filmmaking/movies/${movie.category.slug}/${movie.slug}" class="movie_button">Read More</a>
+    //                               </div>
+    //                               <div class="utility-info">
+    //                                   <ul class="utility-list">
+    //                                       <li class="comments">12</li>
+    //                                       <li class="date">${movie.date_built}</li>
+    //                                   </ul>
+    //                               </div>
+    //                               <div class="gradient-overlay"></div>
+    //                               <div class="color-overlay"></div>
+    //                           </div>`
+    //               });
+    //               $(mc).html(html);
+    //           }
+    //       });
+    //   });
 
 
 </script>
@@ -393,7 +401,9 @@ function calcImgs() {
         <ul id="paginator" class="pagination pagination-lg text-center">
 
             {% if websites.has_previous %}
-                <li><a href="?page={{ websites.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">&laquo;</a></li>
+                <li><a href="?page=
+                        {{ websites.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">&laquo;</a>
+                </li>
             {% else %}
                 <li class="disabled"><span>&laquo;</span></li>
             {% endif %}
@@ -407,7 +417,9 @@ function calcImgs() {
                 {% if websites.number == i %}
                     <li class="active"><span>{{ i }}</span></li>
                 {% else %}
-                    <li><a href="?page={{ i }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ i }}</a></li>
+                    <li><a href="?page=
+                            {{ i }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ i }}</a>
+                    </li>
                 {% endif %}
             {% endfor %}
 
@@ -417,7 +429,9 @@ function calcImgs() {
                     <li class="disabled"><span>&mldr;</span></li>
                     <li><a href="?page={{ end_index }}">{{ end_index }}</a></li>
                 {% endif %}
-                <li><a href="?page={{ websites.next_page_number }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&raquo;</a></li>
+                <li><a href="?page=
+                        {{ websites.next_page_number }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&raquo;</a>
+                </li>
             {% else %}
                 <li class="disabled"><span>&raquo;</span></li>
             {% endif %}
@@ -428,160 +442,160 @@ function calcImgs() {
 
 <script>
     function getCookie(name) {
-            let cookieValue = null;
-            if (document.cookie && document.cookie !== '') {
-                let cookies = document.cookie.split(';');
-                for (let i = 0; i < cookies.length; i++) {
-                    let cookie = jQuery.trim(cookies[i]);
-                    // Does this cookie string begin with the name we want?
-                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                        break;
-                    }
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            let cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                let cookie = jQuery.trim(cookies[i]);
+                // Does this cookie string begin with the name we want?
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
                 }
             }
-            return cookieValue;
         }
+        return cookieValue;
+    }
 
-        let csrftoken = getCookie('csrftoken');
+    let csrftoken = getCookie('csrftoken');
 
-        function csrfSafeMethod(method) {
-            // these HTTP methods do not require CSRF protection
-            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-        }
+    function csrfSafeMethod(method) {
+        // these HTTP methods do not require CSRF protection
+        return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+    }
 
-        $.ajaxSetup({
-            beforeSend: function (xhr, settings) {
-                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
-                }
+    $.ajaxSetup({
+        beforeSend: function (xhr, settings) {
+            if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                xhr.setRequestHeader("X-CSRFToken", csrftoken);
             }
-        });
+        }
+    });
 
-        // $(".checkbox").click(function () {
-        //     let cat = this.id;
-        //     console.log(cat);
-        //     $.ajax({
-        //         url: "{% url "website_ajax" %}",
-        //         method: "POST",
-        //         data: {
-        //             category: cat
-        //         },
-        //         success: function (response) {
-        //             let wcc = $("#website_card_container");
-        //             let html = "";
-        //             $(wcc).html('');
-        //             $(response).each(function (i, website) {
-        //                 console.dir(response)
-        //                 html += `<div class="website-card ${website.category.slug}">
-        //                             <img src='${website.main_page.url}' class="website_cover"/>
-        //                             <div class="web_gradient">
-        //                                 <div class="website_header">
-        //                                     <div class="website_name_container"><p>${website.website_name}</p></div>
-        //                                     <div class="website_date_container"><p>${website.date_built}</p></div>
-        //                                 </div>
-        //                                 <div class="website_read_more">
-        //                                     <a href="/webdev/websites/$[website.category.slug]/$[website.slug}" class="website_button">Read
-        //                                         More</a>
-        //                                 </div>
-        //                                 <div class="website_cat_header">
-        //                                     <div class="website_category_container"><p>Websites/ ${website.category.name}</p></div>
-        //                                 </div>
-        //                             </div>
-        //                         </div>`
-        //                 });
-        //             $(wcc).html(html);
-        //         }
-        //     });
-        // });
+    // $(".checkbox").click(function () {
+    //     let cat = this.id;
+    //     console.log(cat);
+    //     $.ajax({
+    //         url: "{% url "website_ajax" %}",
+    //         method: "POST",
+    //         data: {
+    //             category: cat
+    //         },
+    //         success: function (response) {
+    //             let wcc = $("#website_card_container");
+    //             let html = "";
+    //             $(wcc).html('');
+    //             $(response).each(function (i, website) {
+    //                 console.dir(response)
+    //                 html += `<div class="website-card ${website.category.slug}">
+    //                             <img src='${website.main_page.url}' class="website_cover"/>
+    //                             <div class="web_gradient">
+    //                                 <div class="website_header">
+    //                                     <div class="website_name_container"><p>${website.website_name}</p></div>
+    //                                     <div class="website_date_container"><p>${website.date_built}</p></div>
+    //                                 </div>
+    //                                 <div class="website_read_more">
+    //                                     <a href="/webdev/websites/$[website.category.slug]/$[website.slug}" class="website_button">Read
+    //                                         More</a>
+    //                                 </div>
+    //                                 <div class="website_cat_header">
+    //                                     <div class="website_category_container"><p>Websites/ ${website.category.name}</p></div>
+    //                                 </div>
+    //                             </div>
+    //                         </div>`
+    //                 });
+    //             $(wcc).html(html);
+    //         }
+    //     });
+    // });
 </script>
 
 <!-- HOME HTML  -->
 
-    <script>
-        $(document).ready(function () {
-            let windowW = window.innerWidth;
-            //console.log(windowW);
+<script>
+    $(document).ready(function () {
+        let windowW = window.innerWidth;
+        //console.log(windowW);
 
-            if (window.matchMedia("(max-width: 768px)").matches) {
-                //console.log('small');
-                $("#loader").css("display", "none")
-            } else {
-                $(".small_REM_container").css("display", "none");
-                $(".rw-wrapper").css("display", "none");
+        if (window.matchMedia("(max-width: 768px)").matches) {
+            //console.log('small');
+            $("#loader").css("display", "none")
+        } else {
+            $(".small_REM_container").css("display", "none");
+            $(".rw-wrapper").css("display", "none");
 
-                let offsets = {};
-                gather_offset('#R1', {'opacity': '0.8', 'top': '250px'});
-                gather_offset('#R2', {'opacity': '0.8', 'top': '100px', 'left': '300px'});
-                gather_offset('#R3', {'opacity': '0.8', 'top': '-100px', 'left': '300px'});
-                gather_offset('#R4', {'opacity': '0.8', 'top': '250px', 'left': '300px'});
-                gather_offset('#E1', {'opacity': '0.8', 'top': '250px'});
-                gather_offset('#E2', {'opacity': '0.8', 'left': '750px'});
-                gather_offset('#E3', {'opacity': '0.8', 'left': '750px'});
-                gather_offset('#E4', {'opacity': '0.8', 'left': '750px'});
-                gather_offset('#M1', {'opacity': '0.8', 'top': '250px'});
-                gather_offset('#M2', {'opacity': '0.8', 'top': '-250px', 'left': '750px'});
-                gather_offset('#M3', {'opacity': '0.8', 'top': '-250px', 'left': '1350px'});
-                gather_offset('#M4', {'opacity': '0.8', 'top': '250px'});
+            let offsets = {};
+            gather_offset('#R1', {'opacity': '0.8', 'top': '250px'});
+            gather_offset('#R2', {'opacity': '0.8', 'top': '100px', 'left': '300px'});
+            gather_offset('#R3', {'opacity': '0.8', 'top': '-100px', 'left': '300px'});
+            gather_offset('#R4', {'opacity': '0.8', 'top': '250px', 'left': '300px'});
+            gather_offset('#E1', {'opacity': '0.8', 'top': '250px'});
+            gather_offset('#E2', {'opacity': '0.8', 'left': '750px'});
+            gather_offset('#E3', {'opacity': '0.8', 'left': '750px'});
+            gather_offset('#E4', {'opacity': '0.8', 'left': '750px'});
+            gather_offset('#M1', {'opacity': '0.8', 'top': '250px'});
+            gather_offset('#M2', {'opacity': '0.8', 'top': '-250px', 'left': '750px'});
+            gather_offset('#M3', {'opacity': '0.8', 'top': '-250px', 'left': '1350px'});
+            gather_offset('#M4', {'opacity': '0.8', 'top': '250px'});
 
-                setTimeout(function () {
-                    $('#loader').hide('slow');
-                    ani("#R1", offsets["#R1"], 2000);
-                    ani("#R2", offsets["#R2"], 2000);
-                    ani("#R3", offsets["#R3"], 2000);
-                    ani("#R4", offsets["#R4"], 2000);
-                    ani("#E1", offsets["#E1"], 2000);
-                    ani("#E2", offsets["#E2"], 2000);
-                    ani("#E3", offsets["#E3"], 2000);
-                    ani("#E4", offsets["#E4"], 2000);
-                    ani("#M1", offsets["#M1"], 2000);
-                    ani("#M2", offsets["#M2"], 2000);
-                    ani("#M3", offsets["#M3"], 2000);
-                    ani("#M4", offsets["#M4"], 2000);
-                }, 500);
+            setTimeout(function () {
+                $('#loader').hide('slow');
+                ani("#R1", offsets["#R1"], 2000);
+                ani("#R2", offsets["#R2"], 2000);
+                ani("#R3", offsets["#R3"], 2000);
+                ani("#R4", offsets["#R4"], 2000);
+                ani("#E1", offsets["#E1"], 2000);
+                ani("#E2", offsets["#E2"], 2000);
+                ani("#E3", offsets["#E3"], 2000);
+                ani("#E4", offsets["#E4"], 2000);
+                ani("#M1", offsets["#M1"], 2000);
+                ani("#M2", offsets["#M2"], 2000);
+                ani("#M3", offsets["#M3"], 2000);
+                ani("#M4", offsets["#M4"], 2000);
+            }, 500);
 
 
-                function gather_offset(id, css) {
-                    offsets[id] = $(id).offset();
-                    $(id).css(css)
-                }
-
-                function ani(id, offset, time) {
-                    let el = $(`${id}`);
-                    $(el).animate(offset, time);
-                }
-
-                //console.log($("#R1").offset());
-                //console.log($("#E1").offset());
-                //console.log($("#M1").offset());
-                //console.log($("#R1").offset())//.animate({opacity: 0.8, top: '0'}, 2500);
-                {#$("#R2").animate({ opacity: 0.8, left: '+=220px', bottom: "-=80px" }, 2500);#}
-                {#$("#R3").animate({ opacity: 0.8, left: '+=180px', top: '-=180px' }, 2500);#}
-                {#$("#R4").animate({ opacity: 0.8, left: '+=200px', bottom: '-=100px' }, 2500);#}
-                {#$("#E1").animate({ opacity: 0.8, left: '250px', slidein }, 2500);#}
-                //$("#E2").animate({ opacity: 0.8, left: '250px' }, 2500);
-                //$("#E3").animate({ opacity: 0.8, left: '250px' }, 2500);
-                //$("#E4").animate({ opacity: 0.8, left: '250px' }, 2500);
-                //$("#M1").animate({ opacity: 0.8, left: '250px' }, 2500);
-                //$("#M2").animate({ opacity: 0.8, left: '250px' }, 2500);
-                //$("#M3").animate({ opacity: 0.8, left: '250px' }, 2500);
-                //$("#M4").animate({ opacity: 0.8, left: '250px' }, 2500)
-
-                //$(".R_container img").animate({ opacity: 0.8 }, 2500)
-                //$(".E_container img").animate({ opacity: 0.8 }, 2500)
-                //$(".E_container img").delay(1000).animate({ opacity: 0.8 }, 700)
-                //$(".M_container img").animate({ opacity: 0.8 }, 2500)
-                //$(".M_container img").delay(2000).animate({ opacity: 0.8 }, 700)
+            function gather_offset(id, css) {
+                offsets[id] = $(id).offset();
+                $(id).css(css)
             }
 
-        })
+            function ani(id, offset, time) {
+                let el = $(`${id}`);
+                $(el).animate(offset, time);
+            }
 
-    </script>
+            //console.log($("#R1").offset());
+            //console.log($("#E1").offset());
+            //console.log($("#M1").offset());
+            //console.log($("#R1").offset())//.animate({opacity: 0.8, top: '0'}, 2500);
+            {#$("#R2").animate({ opacity: 0.8, left: '+=220px', bottom: "-=80px" }, 2500);#}
+            {#$("#R3").animate({ opacity: 0.8, left: '+=180px', top: '-=180px' }, 2500);#}
+            {#$("#R4").animate({ opacity: 0.8, left: '+=200px', bottom: '-=100px' }, 2500);#}
+            {#$("#E1").animate({ opacity: 0.8, left: '250px', slidein }, 2500);#}
+            //$("#E2").animate({ opacity: 0.8, left: '250px' }, 2500);
+            //$("#E3").animate({ opacity: 0.8, left: '250px' }, 2500);
+            //$("#E4").animate({ opacity: 0.8, left: '250px' }, 2500);
+            //$("#M1").animate({ opacity: 0.8, left: '250px' }, 2500);
+            //$("#M2").animate({ opacity: 0.8, left: '250px' }, 2500);
+            //$("#M3").animate({ opacity: 0.8, left: '250px' }, 2500);
+            //$("#M4").animate({ opacity: 0.8, left: '250px' }, 2500)
+
+            //$(".R_container img").animate({ opacity: 0.8 }, 2500)
+            //$(".E_container img").animate({ opacity: 0.8 }, 2500)
+            //$(".E_container img").delay(1000).animate({ opacity: 0.8 }, 700)
+            //$(".M_container img").animate({ opacity: 0.8 }, 2500)
+            //$(".M_container img").delay(2000).animate({ opacity: 0.8 }, 700)
+        }
+
+    })
+
+</script>
 
 <!-- BLOG HOME -->
 
 <!-- Pagination -->
-    <!-- Origin Pagination Method
+<!-- Origin Pagination Method
         <div class="pagination">
             <span class="step-links">
                 {% if blog_list.has_previous %}
@@ -601,77 +615,118 @@ function calcImgs() {
         </div>
         -->
 
-    <!-- Import Trumbowyg plugins... -->
+<!-- Import Trumbowyg plugins... -->
 {#    <script src="node_modules/trumbowyg/dist/plugins/upload/trumbowyg.cleanpaste.min.js"></script>#}
 {#    <script src="node_modules/trumbowyg/dist/plugins/upload/trumbowyg.pasteimage.min.js"></script>#}
 
-    <script>
+<script>
 
-        // Allows for continual coloring of button after click event
-        $('.checkbox').click(function () {
-            let cat = this.id;
+    // Allows for continual coloring of button after click event
+    $('.checkbox').click(function () {
+        let cat = this.id;
 
-            // removing shade from other elements
-            $('.checkbox').each(function (i, el) {
-                $(el).removeClass('checkFocus');
-            });
-
-            /*
-                // remove parallax
-                $('.image_holder').parallax('destroy');
-                $('.blog').each(function (i, el) {
-
-                    let img = $(el).find('.image_holder');
-                    if (!$(el).hasClass(cat)) {
-                        $(el).hide();
-                    } else {
-                        $(el).show();
-                    }
-                });
-                $('.image_holder').parallax('render');
-            */
-            $(this).addClass('checkFocus');
+        // removing shade from other elements
+        $('.checkbox').each(function (i, el) {
+            $(el).removeClass('checkFocus');
         });
 
-        // AJAX Call based on Category Button Clicked
-        //$(".checkbox").click(function () {
-        //    let cat = this.id;
-        //    let page = $('#startIndex').val();
-        //    console.log(page);
-        //    $.ajax({
-        //        url: "{% url "blog_ajax" %}",
-        //        method: "POST",
-        //        data: {
-        //            category: cat
-        //        },
-        //        success: function (response) {
-        //            console.dir(response);
-        //            // Destroys All of the Images created By Parallax when the page originally loaded
-        //            $('.image_holder').parallax('destroy');
-        //            let bc = $("#blog_container");
-        //            let html = "";
-        //            $(bc).html('');
-        //            $(response.blogs).each(function (i, b) {
-        //               //console.dir(b)
-        //                html += `<div class="blog ${b.category.slug}" data-image-src>
-        //            <div class="image_holder" data-parallax="scroll" data-src="${b.image.url}"
-        //                 data-image-src="${b.image.url}">
-        //                 <a href="/blog/${b.category.slug}/${b.slug}/"
-        //                   class="blog_button">Read More &nbsp; &nbsp; &nbsp; &nbsp;></a>
-        //            </div>
-//
-        //            <div class="main_content">
-        //                <div class="category">Blog / ${b.category.name}</div>
-        //                <h2 class="blog-title">${b.title}</h2>
-        //                <div class="card-footer"><i>~ Posted on ${b.date}</i></div>
-        //                <pre class="blog-text">${b.content}</pre></div></div>`
-        //            });
-        //            $(bc).html(html);
-        //            // Parallax now builds the images for the new set of blog elements
-        //            $('.image_holder').parallax('render');
-        //        }
-        //    });
-        //});
+        /*
+            // remove parallax
+            $('.image_holder').parallax('destroy');
+            $('.blog').each(function (i, el) {
 
-    </script>
+                let img = $(el).find('.image_holder');
+                if (!$(el).hasClass(cat)) {
+                    $(el).hide();
+                } else {
+                    $(el).show();
+                }
+            });
+            $('.image_holder').parallax('render');
+        */
+        $(this).addClass('checkFocus');
+    });
 
+    // AJAX Call based on Category Button Clicked
+    //$(".checkbox").click(function () {
+    //    let cat = this.id;
+    //    let page = $('#startIndex').val();
+    //    console.log(page);
+    //    $.ajax({
+    //        url: "{% url "blog_ajax" %}",
+    //        method: "POST",
+    //        data: {
+    //            category: cat
+    //        },
+    //        success: function (response) {
+    //            console.dir(response);
+    //            // Destroys All of the Images created By Parallax when the page originally loaded
+    //            $('.image_holder').parallax('destroy');
+    //            let bc = $("#blog_container");
+    //            let html = "";
+    //            $(bc).html('');
+    //            $(response.blogs).each(function (i, b) {
+    //               //console.dir(b)
+    //                html += `<div class="blog ${b.category.slug}" data-image-src>
+    //            <div class="image_holder" data-parallax="scroll" data-src="${b.image.url}"
+    //                 data-image-src="${b.image.url}">
+    //                 <a href="/blog/${b.category.slug}/${b.slug}/"
+    //                   class="blog_button">Read More &nbsp; &nbsp; &nbsp; &nbsp;></a>
+    //            </div>
+    //
+    //            <div class="main_content">
+    //                <div class="category">Blog / ${b.category.name}</div>
+    //                <h2 class="blog-title">${b.title}</h2>
+    //                <div class="card-footer"><i>~ Posted on ${b.date}</i></div>
+    //                <pre class="blog-text">${b.content}</pre></div></div>`
+    //            });
+    //            $(bc).html(html);
+    //            // Parallax now builds the images for the new set of blog elements
+    //            $('.image_holder').parallax('render');
+    //        }
+    //    });
+    //});
+
+</script>
+
+<!-- Blog Single View -->
+
+<div class="page_container">
+    <div class="blog_content_container">
+
+        {% blog_image_or_default blog %}
+        <!-- Title -->
+        <h2>{{ blog.title }}</h2>
+
+        <!-- Author -->
+        <p class="lead">
+            by
+            <a href="#" class="author">{{ blog.author.username }}</a>
+        </p>
+
+
+        <!-- Date/Time -->
+        <p class="post-time">Posted on {{ blog.date }}</p>
+
+        <!--Post content-->
+        <pre>{{ blog.content|safe_markdown }}</pre>
+
+        {% if blog.youtube_link %}
+
+            {{ blog.youtube_link|safe }}
+
+        {% endif %}
+
+        <div class="card my-4">
+            <h5 class="card-header">Leave a Comment:</h5>
+            <div class="card-body">
+                <form>
+                    <div class="form-group">
+                        <textarea class="form-control" rows="4" cols="50"></textarea>
+                    </div>
+                    <button type="submit" class="button">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

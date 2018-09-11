@@ -1372,7 +1372,7 @@ h3 {
 
 .utility-list {
     list-style-type: none;
-    margin: 0 30px 20px  0;
+    margin: 0 30px 20px 0;
     padding: 0;
     width: 100%;
 
@@ -1444,6 +1444,7 @@ h3 {
     opacity: 0.8;
     font-weight: bold;
 }
+
 /******************** Movie Poster JQUERY ********************/
 
 .movie_poster {
@@ -1454,8 +1455,8 @@ h3 {
 
 .movie-image-wrap {
     /* whatever the dimensions you want the "cropped" image to be */
-        width: 310px;
-        height: 430px;
+    width: 310px;
+    height: 430px;
     overflow: hidden;
 }
 
@@ -1466,7 +1467,6 @@ h3 {
         overflow: hidden;
     }
 }
-
 
 .movie-image-wrap img.perfect {
     visibility: visible;
@@ -1701,6 +1701,12 @@ h3 {
     justify-content: center;
 }
 
+@media only screen and (max-width: 1024px) {
+    .blog_container {
+        width: 95%;
+    }
+}
+
 .blog-title h2 {
     font-weight: bold;
     font-size: large;
@@ -1727,6 +1733,18 @@ pre {
 
 .blog:hover {
     box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 1024px) and (min-width: 640px) {
+    .blog {
+        width: 290px;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .blog {
+        width: 100%;
+    }
 }
 
 .main_content {
@@ -1792,6 +1810,12 @@ pre {
     margin: 0;
     padding: 30px 0;
     background-image: linear-gradient(to bottom, transparent, white);
+}
+
+@media only screen and (max-width: 1024px) {
+    .blog_fade {
+        display: none;
+    }
 }
 
 /*************************** Blog Upload ***************************/
@@ -1920,6 +1944,59 @@ pre {
 
 .blog_info p {
     font-weight: bold;
+}
+
+/********* Blog Page ********/
+
+.blog_content_container {
+    margin: auto;
+    text-align: center;
+    width: 70%;
+}
+
+.blog_content_container iframe {
+    margin-top: 20px;
+    width: 100%;
+}
+
+@media (max-width: 1024px) and (min-width: 766px) {
+    .blog_content_container {
+        width: 85%;
+    }
+}
+
+@media only screen and (max-width: 766px) {
+    .blog_content_container {
+        width: 95%;
+    }
+
+    .blog_content_container iframe {
+        width: 100%;
+        height: 200px;
+        margin-top: 10px;
+    }
+}
+
+.blog_content_container h2 {
+    font-weight: bold;
+}
+
+.blog_content_container pre {
+    text-align: left;
+    white-space: pre-wrap; /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+    white-space: -pre-wrap; /* Opera 4-6 */
+    white-space: -o-pre-wrap; /* Opera 7 */
+    word-wrap: break-word; /* Internet Explorer 5.5+ */
+}
+
+.blog_image {
+    margin-top: 15px;
+    width: 300px;
+}
+
+.blog_header {
+    margin: 15px;
 }
 
 /********* Photo Album Pages ********/
