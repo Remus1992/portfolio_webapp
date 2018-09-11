@@ -326,7 +326,7 @@
             let windowW = window.innerWidth;
             //console.log(windowW);
 
-            if (window.matchMedia("(max-width: 768px)").matches) {
+            if (window.matchMedia("(max-width: 767px)").matches) {
                 //console.log('small');
                 $("#loader").css("display", "none")
             } else {
@@ -373,28 +373,6 @@
                     let el = $(`${id}`);
                     $(el).animate(offset, time);
                 }
-
-                //console.log($("#R1").offset());
-                //console.log($("#E1").offset());
-                //console.log($("#M1").offset());
-                //console.log($("#R1").offset())//.animate({opacity: 0.8, top: '0'}, 2500);
-                {#$("#R2").animate({ opacity: 0.8, left: '+=220px', bottom: "-=80px" }, 2500);#}
-                {#$("#R3").animate({ opacity: 0.8, left: '+=180px', top: '-=180px' }, 2500);#}
-                {#$("#R4").animate({ opacity: 0.8, left: '+=200px', bottom: '-=100px' }, 2500);#}
-                {#$("#E1").animate({ opacity: 0.8, left: '250px', slidein }, 2500);#}
-                //$("#E2").animate({ opacity: 0.8, left: '250px' }, 2500);
-                //$("#E3").animate({ opacity: 0.8, left: '250px' }, 2500);
-                //$("#E4").animate({ opacity: 0.8, left: '250px' }, 2500);
-                //$("#M1").animate({ opacity: 0.8, left: '250px' }, 2500);
-                //$("#M2").animate({ opacity: 0.8, left: '250px' }, 2500);
-                //$("#M3").animate({ opacity: 0.8, left: '250px' }, 2500);
-                //$("#M4").animate({ opacity: 0.8, left: '250px' }, 2500)
-
-                //$(".R_container img").animate({ opacity: 0.8 }, 2500)
-                //$(".E_container img").animate({ opacity: 0.8 }, 2500)
-                //$(".E_container img").delay(1000).animate({ opacity: 0.8 }, 700)
-                //$(".M_container img").animate({ opacity: 0.8 }, 2500)
-                //$(".M_container img").delay(2000).animate({ opacity: 0.8 }, 700)
             }
 
         })

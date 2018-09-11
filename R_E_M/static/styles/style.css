@@ -480,13 +480,13 @@ body:not(.always-use-overlay-nav) .nav-wrapper.desktop-nav-wrapper .folder:hover
     display: none;
 }
 
-@media only screen and (min-width: 769px) {
+@media only screen and (min-width: 767px) {
     body:not(.always-use-overlay-nav) .mobile-nav-toggle-label {
         display: none;
     }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
     /*#header #headerNav {*/
     #mainNavigation .external a, #mainNavigation .folder {
         display: none;
@@ -791,7 +791,7 @@ body:not(.always-use-overlay-nav) .nav-wrapper nav > div > a {
     padding-bottom: 0;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
     .footer-inner {
         text-align: center;
     }
@@ -1098,7 +1098,7 @@ a, a:visited {
     padding-bottom: 0;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
     .pre-footer-inner {
         text-align: center;
     }
@@ -1128,6 +1128,9 @@ a, a:visited {
     width: 70%;
     margin: 30px auto;
     text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 @media only screen and (max-width: 600px) {
@@ -1152,7 +1155,7 @@ a, a:visited {
     border-radius: 50px;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
     .checkbox {
         font-size: 15px;
         margin: 5px;
@@ -2006,7 +2009,7 @@ pre {
     }
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
     .album_set {
         width: 250px;
         height: 250px;
@@ -2060,7 +2063,7 @@ pre {
     overflow: hidden;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 767px) {
     .album-image-wrap {
         width: 250px;
         height: 250px;
@@ -2722,7 +2725,7 @@ body {
 }
 
 /* No greater than 900px, no less than 400px */
-@media (max-width: 768px) and (min-width: 640px) {
+@media (max-width: 767px) and (min-width: 640px) {
     .header-inner {
         padding: 15px 0;
     }
