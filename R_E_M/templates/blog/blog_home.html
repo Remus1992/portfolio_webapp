@@ -32,10 +32,6 @@
         </div>
         <div class="categories-link-set">
             {% for c in cat %}
-                <!--
-                    <input class="filter-checkbox" type="checkbox" value="3" id="Filter_industry_3" name="Filter[industry][]">
-                    <label for="Filter_industry_3"><span>Architecture</span></label>
-                -->
                 <span class="checkbox" id="{{ c.slug }}">
                 <input class="filter-checkbox" type="checkbox">
                 <label for="{{ c.name }}">{{ c.name }}</label>
@@ -136,7 +132,6 @@
                     {% endif %}
                 {% endfor %}
 
-
                 {% if blog_list.has_next %}
                     {% if end_index %}
                         <li class="disabled"><span>&mldr;</span></li>
@@ -150,36 +145,12 @@
             </ul>
         </div>
     {% endif %}
-<!-- Pagination -->
-    <!-- Origin Pagination Method
-        <div class="pagination">
-            <span class="step-links">
-                {% if blog_list.has_previous %}
-                    <a href="?page=1">&laquo; first</a>
-                    <a href="?page={{ blog_list.previous_page_number }}">previous</a>
-                {% endif %}
-
-                <span class="current">
-                    Page {{ blog_list.number }} of {{ blog_list.paginator.num_pages }}.
-                </span>
-
-                {% if blog_list.has_next %}
-                    <a href="?page={{ blog_list.next_page_number }}">next</a>
-                    <a href="?page={{ blog_list.paginator.num_pages }}">last &raquo;</a>
-                {% endif %}
-            </span>
-        </div>
-        -->
     </div>
     <!-- Import jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <!-- Import Trumbowyg -->
     <script src="{% static  'trumbowyg/dist/trumbowyg.js' %}"></script>
-
-    <!-- Import Trumbowyg plugins... -->
-{#    <script src="node_modules/trumbowyg/dist/plugins/upload/trumbowyg.cleanpaste.min.js"></script>#}
-{#    <script src="node_modules/trumbowyg/dist/plugins/upload/trumbowyg.pasteimage.min.js"></script>#}
 
     <!-- Parallax -->
     <script src="{% static 'javascript/parallax.js-1.5.0/parallax.js' %}"></script>
@@ -199,20 +170,6 @@
                 $(el).removeClass('checkFocus');
             });
 
-            /*
-                // remove parallax
-                $('.image_holder').parallax('destroy');
-                $('.blog').each(function (i, el) {
-
-                    let img = $(el).find('.image_holder');
-                    if (!$(el).hasClass(cat)) {
-                        $(el).hide();
-                    } else {
-                        $(el).show();
-                    }
-                });
-                $('.image_holder').parallax('render');
-            */
             $(this).addClass('checkFocus');
         });
 
@@ -251,45 +208,6 @@
         $('.checkbox').click(function () {
             window.location.replace(`/blog/?category=${this.id}`);
         });
-        // AJAX Call based on Category Button Clicked
-        //$(".checkbox").click(function () {
-        //    let cat = this.id;
-        //    let page = $('#startIndex').val();
-        //    console.log(page);
-        //    $.ajax({
-        //        url: "{% url "blog_ajax" %}",
-        //        method: "POST",
-        //        data: {
-        //            category: cat
-        //        },
-        //        success: function (response) {
-        //            console.dir(response);
-        //            // Destroys All of the Images created By Parallax when the page originally loaded
-        //            $('.image_holder').parallax('destroy');
-        //            let bc = $("#blog_container");
-        //            let html = "";
-        //            $(bc).html('');
-        //            $(response.blogs).each(function (i, b) {
-        //               //console.dir(b)
-        //                html += `<div class="blog ${b.category.slug}" data-image-src>
-        //            <div class="image_holder" data-parallax="scroll" data-src="${b.image.url}"
-        //                 data-image-src="${b.image.url}">
-        //                 <a href="/blog/${b.category.slug}/${b.slug}/"
-        //                   class="blog_button">Read More &nbsp; &nbsp; &nbsp; &nbsp;></a>
-        //            </div>
-//
-        //            <div class="main_content">
-        //                <div class="category">Blog / ${b.category.name}</div>
-        //                <h2 class="blog-title">${b.title}</h2>
-        //                <div class="card-footer"><i>~ Posted on ${b.date}</i></div>
-        //                <pre class="blog-text">${b.content}</pre></div></div>`
-        //            });
-        //            $(bc).html(html);
-        //            // Parallax now builds the images for the new set of blog elements
-        //            $('.image_holder').parallax('render');
-        //        }
-        //    });
-        //});
 
         // Get the modal
         let blogUploadModal = document.getElementById('blogModal');
