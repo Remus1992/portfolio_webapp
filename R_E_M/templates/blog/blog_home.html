@@ -13,13 +13,21 @@
         <link rel="stylesheet" type="text/css" href="{% static 'styles/style.css' %}"/>
         <link rel="stylesheet" href="{% static 'trumbowyg/dist/ui/trumbowyg.css' %}">
     </head>
+    <style>
+
+
+    </style>
+
     <div class="page_container">
+        <div class="title_header"> <h1>Blog</h1>
+            <p>My thoughts, views, or insights on a diverse range of subjects. Search by title, category, or content</p> </div>
         <div class="search_container">
             <form method="GET" action="">
                 <div class="search_div">
                     <input type="text" name="q" placeholder="Search..." id="search_bar" value="{{ request.GET.q }}">
-                    <button type="submit" value="Search" class="search_button"><img src="/static/R_E_M/img/search_icon.png" alt="search_logo"
-                                                          id="search_img"/></button>
+                    <button type="submit" value="Search" class="search_button"><img
+                            src="/static/R_E_M/img/search_icon.png" alt="search_logo"
+                            id="search_img"/></button>
                 </div>
             </form>
         </div>
@@ -57,19 +65,25 @@
                             </div>
                             <div class="blog_gallery">
                                 <div class="blog_info">
-                                    <input type="text" id="blog_title" name="blog_title" class="resizedTextbox" placeholder="Blog Title">
-                                    <input list="categories" id="category" name="category" placeholder="Blog Category" class="resizedTextbox">
-                                    <datalist id="categories">{% for c in cat %}<option value="{{ c.name }}">{% endfor %}</datalist>
-                                    <input type="text" id="youtube_link" name="youtube_link" placeholder="YouTube Link" class="resizedTextbox">
+                                    <input type="text" id="blog_title" name="blog_title" class="resizedTextbox"
+                                           placeholder="Blog Title">
+                                    <input list="categories" id="category" name="category" placeholder="Blog Category"
+                                           class="resizedTextbox">
+                                    <datalist id="categories">{% for c in cat %}
+                                        <option value="{{ c.name }}">{% endfor %}</datalist>
+                                    <input type="text" id="youtube_link" name="youtube_link" placeholder="YouTube Link"
+                                           class="resizedTextbox">
                                     <br>
                                     <br>
                                     <br>
                                     <p>Blog Image</p>
                                     <input type="file" id="blog_image" name="blog_image" class="resizedTextbox">
-                                    <input type="text" id="alt_text" name="alt_text" placeholder="Alt Text" class="resizedTextbox">
+                                    <input type="text" id="alt_text" name="alt_text" placeholder="Alt Text"
+                                           class="resizedTextbox">
                                 </div>
                                 <div class="blog-details-row">
-                                    <textarea id="blog_content" name="blog_content" cols="30" rows="10" placeholder="Blog Content"></textarea>
+                                    <textarea id="blog_content" name="blog_content" cols="30" rows="10"
+                                              placeholder="Blog Content"></textarea>
                                 </div>
                             </div>
                             <div class="blog-submit-row">
@@ -100,44 +114,56 @@
                 </div>
             {% endfor %}
         </div>
-    <!-- Pagination -->
-    {% if blog_list.has_other_pages %}
-        <div class="text-center">
-            <input type="hidden" id="startIndex" value="{{ start_index }}">
-            <ul id="paginator" class="pagination pagination-lg text-center">
+        <!-- Pagination -->
+        {% if blog_list.has_other_pages %}
+            <div class="text-center">
+                <input type="hidden" id="startIndex" value="{{ start_index }}">
+                <ul id="paginator" class="pagination pagination-lg text-center">
 
-                {% if blog_list.has_previous %}
-                    <li><a href="?page={{ blog_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">&laquo;</a></li>
-                {% else %}
-                    <li class="disabled"><span>&laquo;</span></li>
-                {% endif %}
+                    {% if blog_list.has_previous %}
+                        <li><a href="?page=
 
-                {% if start_index %}
-                    <li><a href="?page={{ start_index }}">{{ start_index }}</a></li>
-                    <li class="disabled"><span>&mldr;</span></li>
-                {% endif %}
 
-                {% for i in page_range %}
-                    {% if blog_list.number == i %}
-                        <li class="active"><span>{{ i }}</span></li>
+                                {{ blog_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">&laquo;</a>
+                        </li>
                     {% else %}
-                        <li><a href="?page={{ i }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ i }}</a></li>
+                        <li class="disabled"><span>&laquo;</span></li>
                     {% endif %}
-                {% endfor %}
 
-                {% if blog_list.has_next %}
-                    {% if end_index %}
+                    {% if start_index %}
+                        <li><a href="?page={{ start_index }}">{{ start_index }}</a></li>
                         <li class="disabled"><span>&mldr;</span></li>
-                        <li><a href="?page={{ end_index }}">{{ end_index }}</a></li>
                     {% endif %}
-                    <li><a href="?page={{ blog_list.next_page_number }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&raquo;</a></li>
-                {% else %}
-                    <li class="disabled"><span>&raquo;</span></li>
-                {% endif %}
 
-            </ul>
-        </div>
-    {% endif %}
+                    {% for i in page_range %}
+                        {% if blog_list.number == i %}
+                            <li class="active"><span>{{ i }}</span></li>
+                        {% else %}
+                            <li><a href="?page=
+
+
+                                    {{ i }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ i }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if blog_list.has_next %}
+                        {% if end_index %}
+                            <li class="disabled"><span>&mldr;</span></li>
+                            <li><a href="?page={{ end_index }}">{{ end_index }}</a></li>
+                        {% endif %}
+                        <li><a href="?page=
+
+
+                                {{ blog_list.next_page_number }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&raquo;</a>
+                        </li>
+                    {% else %}
+                        <li class="disabled"><span>&raquo;</span></li>
+                    {% endif %}
+
+                </ul>
+            </div>
+        {% endif %}
     </div>
     <!-- Import jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
