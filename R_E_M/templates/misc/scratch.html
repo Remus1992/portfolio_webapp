@@ -261,6 +261,9 @@ function calcImgs() {
 
 </script>
 
+<!-- From Photo Album View -->
+
+<a href="{% url 'picture_view' album.category.slug album.slug photo.slug %}">{{ photo.image_details }}</a>
 
 <!-- From Movie Home -->
 

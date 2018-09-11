@@ -21,10 +21,10 @@
 }
 
 .title_header {
-            text-align: center;
-            width: 35%;
-            margin: 10px auto;
-        }
+    text-align: center;
+    width: 35%;
+    margin: 10px auto;
+}
 
 .title_header h1 {
     font-size: 230%;
@@ -34,6 +34,41 @@
     color: #a3a3a3;
     font-size: 18px;
     line-height: 150%;
+}
+
+@media screen and (max-width: 640px) {
+    .title_header {
+        width: 95%;
+    }
+
+    .title_header h1 {
+        font-size: 190%;
+    }
+
+    .title_header p {
+        color: #a3a3a3;
+        font-size: 14px;
+        line-height: 110%;
+    }
+
+}
+
+@media (max-width: 1024px) and (min-width: 640px) {
+    .title_header {
+        text-align: center;
+        width: 70%;
+        margin: 10px auto;
+    }
+
+    .title_header h1 {
+        font-size: 200%;
+    }
+
+    .title_header p {
+        color: #a3a3a3;
+        font-size: 16px;
+        line-height: 130%;
+    }
 }
 
 body {
@@ -540,9 +575,6 @@ body:not(.always-use-overlay-nav) .nav-wrapper.desktop-nav-wrapper .folder:hover
         display: block;
     }
 
-    h1:not(.site-title):not(.page-title):not(.flyoutitem-title) {
-        font-size: 34px !important;
-    }
 }
 
 /*! CSS Used from: Embedded */
@@ -2070,10 +2102,6 @@ pre {
 
 .album_set:hover .middle {
     opacity: 1;
-
-}
-
-.album_set:hover {
 }
 
 .category_container {
@@ -2083,6 +2111,17 @@ pre {
 
 .text, a:visited {
     color: black;
+}
+
+@media only screen and (max-width: 1024px) {
+    .album_set .album-image {
+        opacity: 0.6;
+    }
+
+    .album_set .middle {
+        opacity: 1;
+    }
+
 }
 
 /*** Instagram Holder ***/
@@ -2371,6 +2410,70 @@ pre {
     visibility: visible;
     height: 100%;
     width: auto;
+}
+
+/********************* Photo Album View *********************/
+
+.album_content_container {
+    margin: auto;
+    text-align: center;
+    width: 70%;
+}
+
+.album_header {
+    text-align: center;
+    width: 35%;
+    margin: 25px auto;
+}
+
+.album_header hr {
+    width: 35%;
+}
+
+.grid-item {
+    float: left;
+    width: 250px;
+    margin: 5px;
+}
+
+.grid {
+    margin: 0 auto;
+}
+
+@media (max-width: 1024px) and (min-width: 640px) {
+    .album_header {
+        width: 50%;
+        margin: 10px auto;
+    }
+
+    .album_content_container {
+        width: 85%;
+    }
+
+    .grid-item {
+        width: 160px;
+        margin: 2px;
+    }
+}
+
+@media only screen and (max-width: 640px) {
+    .album_header {
+        width: 75%;
+        margin: 10px auto;
+    }
+
+    .album_header hr {
+        width: 50%;
+    }
+
+    .album_content_container {
+        width: 100%;
+    }
+
+    .grid-item {
+        width: 100px;
+        margin: 2px;
+    }
 }
 
 /********************* Contact Page *********************/

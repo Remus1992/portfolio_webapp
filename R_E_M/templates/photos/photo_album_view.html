@@ -14,42 +14,21 @@
 
     </head>
     <style>
-        .image_pic {
-            width: 200px;
-            margin: 5px;
-        }
-
-
-        h1, body {
-            font-family: 'Alegreya Sans SC', sans-serif;
-            font-weight: bold;
-        }
-
-        .grid-item {
-            float: left;
-            width: 250px;
-        }
-
-        .grid {
-            margin: 0 auto;
-        }
 
     </style>
     <div class="page_container">
-        <div class="container">
-            <h1><b>{{ album.title }}</b></h1>
-            <p>_________</p>
-            <br>
-            {{ album.album_details }}
-            <br>
-            <br>
+        <div class="album_content_container">
+            <div class="album_header">
+                <h1>{{ album.title }}</h1>
+                <hr>
+                <h2>{{ album.album_details }}</h2>
+            </div>
+
             <div class="album grid">
                 {% for photo in album.photo_album.all %}
 
                     <a href="{{ photo.image.url }}" data-lightbox="{{ album.alt_text }}"
-                       data-title="<a href='{% url 'picture_view' album.category.slug album.slug photo.slug %}'>{{ photo.image_details }}</a>"><img src="{{ photo.image.url }}" class="image_pic grid-item "></a>
-
-{#                    <a href="{% url 'picture_view' album.category.slug album.slug photo.slug %}">{{ photo.image_details }}</a>#}
+                       data-title="{{ photo.image_details }}"><img src="{{ photo.image.url }}" class="grid-item"></a>
 
                 {% endfor %}
             </div>
