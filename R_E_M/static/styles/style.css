@@ -1959,6 +1959,34 @@ pre {
     width: 100%;
 }
 
+.blog_content_container h2 {
+    font-weight: bold;
+}
+
+.blog_content_container pre {
+    text-align: left;
+    white-space: pre-wrap; /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+    white-space: -pre-wrap; /* Opera 4-6 */
+    white-space: -o-pre-wrap; /* Opera 7 */
+    word-wrap: break-word; /* Internet Explorer 5.5+ */
+}
+
+.blog_image_holder {
+    height: 200px;
+    overflow: hidden;
+    margin-top: 12px;
+}
+
+.blog_image {
+    margin-top: -50%;
+    width: 100%;
+}
+
+.blog_header {
+    margin: 15px;
+}
+
 @media (max-width: 1024px) and (min-width: 766px) {
     .blog_content_container {
         width: 85%;
@@ -1975,28 +2003,18 @@ pre {
         height: 200px;
         margin-top: 10px;
     }
-}
 
-.blog_content_container h2 {
-    font-weight: bold;
-}
+    .blog_image {
+        margin-top: 15px;
+        width: 300px;
+    }
 
-.blog_content_container pre {
-    text-align: left;
-    white-space: pre-wrap; /* Since CSS 2.1 */
-    white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
-    white-space: -pre-wrap; /* Opera 4-6 */
-    white-space: -o-pre-wrap; /* Opera 7 */
-    word-wrap: break-word; /* Internet Explorer 5.5+ */
-}
+    .blog_image_holder {
+        height: auto;
+        overflow: auto;
+        margin-top: auto;
+    }
 
-.blog_image {
-    margin-top: 15px;
-    width: 300px;
-}
-
-.blog_header {
-    margin: 15px;
 }
 
 /********* Photo Album Pages ********/
