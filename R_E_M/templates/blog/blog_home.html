@@ -21,7 +21,7 @@
     <div class="page_container">
         <div class="title_header"><h1>Remington's Blog</h1>
             <p>My thoughts, views, or insights ranging from literature to film to technology. Search by title, category,
-                or content</p></div>
+                or content.</p></div>
         <div class="search_container">
             <form method="GET" action="">
                 <div class="search_div">
@@ -122,11 +122,7 @@
                 <ul id="paginator" class="pagination pagination-lg text-center">
 
                     {% if blog_list.has_previous %}
-                        <li><a href="?page=
-
-
-
-                                {{ blog_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">&laquo;</a>
+                        <li><a href="?page={{ blog_list.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}">&laquo;</a>
                         </li>
                     {% else %}
                         <li class="disabled"><span>&laquo;</span></li>
@@ -141,11 +137,7 @@
                         {% if blog_list.number == i %}
                             <li class="active"><span>{{ i }}</span></li>
                         {% else %}
-                            <li><a href="?page=
-
-
-
-                                    {{ i }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ i }}</a>
+                            <li><a href="?page={{ i }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">{{ i }}</a>
                             </li>
                         {% endif %}
                     {% endfor %}
