@@ -1517,7 +1517,7 @@ h3 {
         bottom: 260px;
     }
 
-    .movie-card .card-info, .movie-card:hover .card-info  {
+    .movie-card .card-info, .movie-card:hover .card-info {
         bottom: 130px;
     }
 
@@ -1799,6 +1799,10 @@ h3 {
     width: auto;
 }
 
+/********************************* Movie Single View *********************************/
+
+
+
 /********** Blog Cards **************/
 
 .blog_container {
@@ -2054,7 +2058,7 @@ pre {
     font-weight: bold;
 }
 
-/********* Blog Page ********/
+/**************************** Blog Page ****************************/
 
 .blog_content_container {
     margin: auto;

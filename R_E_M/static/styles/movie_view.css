@@ -1,0 +1,98 @@
+.movie_content_container {
+    margin: 20px auto;
+    text-align: center;
+    align-items: center;
+    width: 60%;
+}
+
+.movie_content_container iframe {
+    margin-top: 20px;
+    width: 80%;
+}
+
+.movie_content_container pre {
+    text-align: left;
+    white-space: pre-wrap; /* Since CSS 2.1 */
+    white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+    white-space: -pre-wrap; /* Opera 4-6 */
+    white-space: -o-pre-wrap; /* Opera 7 */
+    word-wrap: break-word; /* Internet Explorer 5.5+ */
+}
+
+.poster {
+    width: 50%;
+}
+
+.script {
+    width: 400px;
+    height: 500px;
+}
+
+/* ************* Slick Slide ************** */
+.js .slider-single > div:nth-child(1n+2) {
+    display: none
+}
+
+.js .slider-single.slick-initialized > div:nth-child(1n+2) {
+    display: block
+}
+
+h3 {
+    background: #f0f0f0;
+    color: #3498db;
+    font-size: 2.25rem;
+    margin: .5rem;
+    padding: 2%;
+    position: relative;
+    text-align: center;
+}
+
+.slider-single h3 {
+    line-height: 10rem;
+}
+
+.slider-nav h3::before {
+    content: "";
+    display: block;
+    padding-top: 75%;
+}
+
+.slider-nav h3 span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.slider-nav .slick-slide {
+    cursor: pointer;
+}
+
+.slick-slide.is-active h3 {
+    color: #c00;
+    background-color: #fff;
+}
+
+.slick-slide img {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.preview_image {
+    width: 80px;
+    margin: 10px;
+    vertical-align: middle;
+}
+
+.slider-nav {
+    height: 140px;
+    width: auto;
+}
+
+.movie_still_container {
+    height: 500px;
+}
+
+.movie_still_container img {
+    height: 100%;
+}

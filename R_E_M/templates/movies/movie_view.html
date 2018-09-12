@@ -12,163 +12,53 @@
         {#        <link href="{% static 'styles/lightbox.css' %}" rel="stylesheet">#}
         <link rel="stylesheet" type="text/css" href="{% static 'slick-1.8.1/slick/slick.css' %}"/>
         <link rel="stylesheet" type="text/css" href="{% static 'slick-1.8.1/slick/slick-theme.css' %}"/>
+        <link rel="stylesheet" type="text/css" href="{% static 'styles/movie_view.css' %}"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     </head>
     <style>
-        .poster {
-            width: 250px;
-        }
-
-        .page_container {
-            margin: 20px auto;
-            text-align: center;
-            width: 50%;
-            align-items: center;
-        }
-
-        pre {
-            text-align: left;
-            white-space: pre-wrap; /* Since CSS 2.1 */
-            white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
-            white-space: -pre-wrap; /* Opera 4-6 */
-            white-space: -o-pre-wrap; /* Opera 7 */
-            word-wrap: break-word; /* Internet Explorer 5.5+ */
-        }
-
-        .content_container, .movie_container, .script_container, .album_container {
-            width: 100%;
-        }
-
-        h1, body {
-            font-family: 'Alegreya Sans SC', sans-serif;
-            font-weight: bold;
-        }
-
-        /* ************* Slick Slide ************** */
-
-        body {
-            background-color: #aacccc
-        }
-
-        .js .slider-single > div:nth-child(1n+2) {
-            display: none
-        }
-
-        .js .slider-single.slick-initialized > div:nth-child(1n+2) {
-            display: block
-        }
-
-        h3 {
-            background: #f0f0f0;
-            color: #3498db;
-            font-size: 2.25rem;
-            margin: .5rem;
-            padding: 2%;
-            position: relative;
-            text-align: center;
-        }
-
-        .slider-single h3 {
-            line-height: 10rem;
-        }
-
-        .slider-nav h3::before {
-            content: "";
-            display: block;
-            padding-top: 75%;
-        }
-
-        .slider-nav h3 span {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .slider-nav .slick-slide {
-            cursor: pointer;
-        }
-
-        .slick-slide.is-active h3 {
-            color: #c00;
-            background-color: #fff;
-        }
-
-        .slick-slide img {
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .preview_image {
-            {#height: 100px;#}
-            width: 80px;
-            margin: 10px;
-            vertical-align: middle;
-        }
-
-        .slider-nav {
-            height: 140px;
-            width: auto;
-        }
-
-        .movie_still_container {
-            height: 500px;
-        }
-
-        .movie_still_container img {
-            height: 100%;
-        }
-
-        .still_slider_container {
-            {#background-color: gray;#}
-        }
-
-        /******************/
-        .script {
-            width: 400px;
-            height: 500px;
-        }
-
-        .poster {
-            float: left;
-            margin: 20px;
-        }
 
 
     </style>
-
     <div class="page_container">
-        <div class="content_container">
-            {#            <h1><b>{{ movie.title }}</b></h1>#}
+        <div class="movie_content_container">
             <img src="{{ movie.movie_poster.url }}" alt="{{ movie.alt_text }}" class="poster">
-            <br>
-            <pre>{{ movie.tag_line }}</pre>
-            <br>
+
+            <div class="blog_header">
+                <h1>{{ movie.title }}</h1>
+                <hr>
+                <p>{{ movie.tag_line }}</p>
+            </div>
             <pre>{{ movie.movie_details }}</pre>
-        </div>
-        <div class="movie_container">
             {% if movie.youtube %}
                 {{ movie.youtube|safe }}
             {% endif %}
-        </div>
-        <div class="script_container">
-            <object class="script" data="{{ movie.movie_script.url }}"></object>
-        </div>
+            <object class="script" data="{{ movie.movie_script.url }}">
+                <p>Your web browser doesn't have a PDF plugin.
+                    Instead you can <a href="{{ movie.movie_script.url }}">click here to
+                        download the PDF file.</a>
+                </p>
+            </object>
+            {#            <a href="{{ movie.movie_script.url }}">click here to#}
+            {#                        download the PDF file.</a>#}
 
-        <div class="still_slider_container">
-            <div class="slider slider-single">
-                {% for still in movie.movie_photo_album.all %}
-                    <div class="movie_still_container"><img src="{{ still.image.url }}" class="center_image"></div>
-                {% endfor %}
-            </div>
-            <div class="slider slider-nav">
-                {% for still in movie.movie_photo_album.all %}
-                    <div><img src="{{ still.image.url }}" class="preview_image"></div>
-                {% endfor %}
+
+            <div class="still_slider_container">
+                <div class="slider slider-single">
+                    {% for still in movie.movie_photo_album.all %}
+                        <div class="movie_still_container">
+                            <img src="{{ still.image.url }}" class="center_image">
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="slider slider-nav">
+                    {% for still in movie.movie_photo_album.all %}
+                        <div>
+                            <img src="{{ still.image.url }}" class="preview_image">
+                        </div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
-    </div>
-
     </div>
 
     <script src="{% static 'slick-1.8.1/slick/slick.min.js' %}"></script>
