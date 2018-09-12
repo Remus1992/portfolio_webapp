@@ -19,8 +19,23 @@ $('.checkbox').click(function () {
     $(this).addClass('checkFocus');
 });
 
+
 $('.checkbox').click(function () {
-    window.location.replace(`/webdev/?category=${this.id}`);
+    if (this.id === "All") {
+        window.location.replace(`/webdev/`);
+    } else {
+        window.location.replace(`/webdev/?category=${this.id}`);
+    }
+
+});
+
+$('.checkbox').each(function (i, el) {
+    //console.log(el.id);
+    //$(el).removeClass('checkFocus');
+    if (el.id === document.location.toString().split("?category=")[1]){
+        //console.log("Success!");
+        $(this).addClass('checkFocus');
+    }
 });
 
 // IMAGE UPLOADER PLUS MODAL

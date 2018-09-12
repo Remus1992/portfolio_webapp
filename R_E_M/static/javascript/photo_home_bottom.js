@@ -20,7 +20,21 @@ $('.checkbox').click(function () {
 });
 
 $('.checkbox').click(function () {
-    window.location.replace(`/photography/?category=${this.id}`);
+    if (this.id === "All") {
+        window.location.replace(`/photography/`);
+    } else {
+        window.location.replace(`/photography/?category=${this.id}`);
+    }
+
+});
+
+$('.checkbox').each(function (i, el) {
+    //console.log(el.id);
+    //$(el).removeClass('checkFocus');
+    if (el.id === document.location.toString().split("?category=")[1]){
+        //console.log("Success!");
+        $(this).addClass('checkFocus');
+    }
 });
 
 

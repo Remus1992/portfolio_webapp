@@ -20,9 +20,22 @@ $('.checkbox').click(function () {
 });
 
 $('.checkbox').click(function () {
-    window.location.replace(`/filmmaking/?category=${this.id}`);
+    if (this.id === "All") {
+        window.location.replace(`/filmmaking/`);
+    } else {
+        window.location.replace(`/filmmaking/?category=${this.id}`);
+    }
+
 });
 
+$('.checkbox').each(function (i, el) {
+    //console.log(el.id);
+    //$(el).removeClass('checkFocus');
+    if (el.id === document.location.toString().split("?category=")[1]){
+        //console.log("Success!");
+        $(this).addClass('checkFocus');
+    }
+});
 
 // IMAGE UPLOADER PLUS MODAL
 let imagesPreview = function (input, placeToInsertImagePreview) {
@@ -102,3 +115,4 @@ span.onclick = function() {
     });
 
 };
+

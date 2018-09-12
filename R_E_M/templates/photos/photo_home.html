@@ -14,12 +14,6 @@
         <!-- photo specific javascript -->
         <script src="{% static 'javascript/photo_home_top.js' %}"></script>
     </head>
-    <style>
-        body {
-            font-family: 'Alegreya Sans SC', sans-serif;
-        }
-
-    </style>
     <div class="page_container">
         <div class="title_header"><h1>Photo Library</h1>
             <p>I've been practicing photography now for 5 years. While I enjoy taking portraits the most, I have dabbled
@@ -41,6 +35,10 @@
                     <label for="{{ c.name }}">{{ c.name }}</label>
                 </span>
             {% endfor %}
+                <span class="checkbox" id="All">
+                    <input class="filter-checkbox" type="checkbox">
+                    <label for="All">Reset Categories</label>
+                </span>
         </div>
         <div class="line_container">
             <hr>

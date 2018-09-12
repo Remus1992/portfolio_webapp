@@ -23,6 +23,15 @@ $('.checkbox').click(function () {
 
 });
 
+$('.checkbox').each(function (i, el) {
+    //console.log(el.id);
+    //$(el).removeClass('checkFocus');
+    if (el.id === document.location.toString().split("?category=")[1]){
+        //console.log("Success!");
+        $(this).addClass('checkFocus');
+    }
+});
+
 // Get the modal
 let blogUploadModal = document.getElementById('blogModal');
 
@@ -55,13 +64,6 @@ if (blog_url_slug === "undefined") {
     console.log("Element is " + blog_url_slug)
 }
 
-$('.checkbox').each(function (i, el) {
-    console.log(el.id);
-    //$(el).removeClass('checkFocus');
-    if (el.id === document.location.toString().split("?category=")[1]){
-        console.log("Success!");
-        $(this).addClass('checkFocus');
-    }
-});
+
 
 
