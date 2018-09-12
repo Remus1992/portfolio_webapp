@@ -15,7 +15,12 @@ $('.checkbox').click(function () {
 });
 
 $('.checkbox').click(function () {
-    window.location.replace(`/blog/?category=${this.id}`);
+    if (this.id === "All") {
+        window.location.replace(`/blog/`);
+    } else {
+        window.location.replace(`/blog/?category=${this.id}`);
+    }
+
 });
 
 // Get the modal
@@ -52,7 +57,7 @@ if (blog_url_slug === "undefined") {
 
 $('.checkbox').each(function (i, el) {
     console.log(el.id);
-    $(el).removeClass('checkFocus');
+    //$(el).removeClass('checkFocus');
     if (el.id === document.location.toString().split("?category=")[1]){
         console.log("Success!");
         $(this).addClass('checkFocus');
