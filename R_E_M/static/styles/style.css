@@ -1354,7 +1354,6 @@ a, a:visited {
     width: 90%;
     left: 0;
     opacity: 0;
-
     bottom: 275px;
     transition: bottom .3s, opacity .3s cubic-bezier(.33, .66, .66, 1);
 }
@@ -1511,73 +1510,46 @@ h3 {
 
 @media (max-width: 1024px) and (min-width: 766px) {
     .movie-card .color-overlay {
-        background: rgba(84, 104, 110, 0.9);
+        /*background: none;*/
     }
 
-    .movie-card .title-content {
-        opacity: 1;
-        bottom: 280px;
+    .movie-card .title-content, .movie-card:hover .title-content {
+        bottom: 260px;
     }
 
-    .movie-card .card-info {
-        opacity: 1;
-        bottom: 105px;
+    .movie-card .card-info, .movie-card:hover .card-info  {
+        bottom: 130px;
     }
 
-    .movie-card .movie_read_more {
-        bottom: 5px;
+    .movie-card .movie_read_more, .movie-card:hover .movie_read_more {
+        bottom: 13px;
     }
 
     .movie-card .movie_button {
-        background-color: white;
-        opacity: 0.7;
-        border: white solid 2px;
-        color: black;
-        padding: 3px 5px;
-        border-radius: 5px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
         margin: 40px;
-        cursor: pointer;
-        font-weight: bold;
     }
 }
 
 @media only screen and (max-width: 766px) {
+
     .movie-card .color-overlay {
-        background: rgba(84, 104, 110, 0.9);
+        /*background: none;*/
     }
 
-    .movie-card .title-content {
-        opacity: 1;
-        bottom: 280px;
+    .movie-card .title-content, .movie-card:hover .title-content {
+        bottom: 235px;
     }
 
-    .movie-card .card-info {
-        opacity: 1;
-        bottom: 105px;
+    .movie-card .card-info, .movie-card:hover .card-info {
+        bottom: 120px;
     }
 
-    .movie-card .movie_read_more {
-        bottom: 5px;
+    .movie-card .movie_read_more, .movie-card:hover .movie_read_more {
+        bottom: 14px;
     }
 
     .movie-card .movie_button {
-        background-color: white;
-        opacity: 0.7;
-        border: white solid 2px;
-        color: black;
-        padding: 3px 5px;
-        border-radius: 5px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 16px;
         margin: 40px;
-        cursor: pointer;
-        font-weight: bold;
     }
 }
 

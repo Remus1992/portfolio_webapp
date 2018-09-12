@@ -8,6 +8,16 @@ let infinite = new Waypoint.Infinite({
         }
     });
 
+
+// $('.movie-card').click(function () {
+//     // removing shade from other elements
+//     $('.movie-card').each(function (i, el) {
+//         $(el).removeClass('movie_card_checkFocus');
+//     });
+//
+//     $(this).addClass('movie_card_checkFocus');
+// });
+
 $('.checkbox').click(function () {
     let cat = this.id;
 

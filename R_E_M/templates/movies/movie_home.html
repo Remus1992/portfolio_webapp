@@ -114,7 +114,7 @@
         </div>
         <div class="movie_card_container {{ movie.category.slug }} infinite-container" id="movie_card_container">
             {% for movie in movies %}
-                <div class="movie-card infinite-item element_move">
+                <div class="movie-card infinite-item element_move" onclick="movieCardCheckFocus(this)">
                     <img src="{{ movie.movie_poster.url }}" class="movie_poster" onload="calcImg(this)"/>
                     <div class="title-content">
                         <h3>{{ movie.title }}</h3>

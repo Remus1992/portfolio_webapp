@@ -47,3 +47,60 @@ function calcPreviewImg(img) {
         $(img).addClass('square');
     }
 }
+
+
+function movieCardCheckFocus(card) {
+    if (window.matchMedia("(max-width: 766px)").matches) {
+        $('.movie-card').each(function (i, el) {
+            $(el).children('.color-overlay').css({"background": "none"});
+            $(el).children('.title-content').css({"opacity": "0"});
+            $(el).children('.card-info').css({"opacity": "0"});
+            $(el).children('.movie_read_more').css({"opacity": "0"});
+            $(el).children('.movie_button').css({"opacity": "0", "margin": "40px"});
+        });
+        $(card).children('.color-overlay').css({"background": "rgba(84, 104, 110, 0.9)"});
+        $(card).children('.title-content').css({"opacity": "1"});
+        $(card).children('.card-info').css({"opacity": "1"});
+        $(card).children('.movie_read_more').css({"opacity": "1"});
+        $(card).children('.movie_button').css({"background-color": "white",
+                                            "opacity": "0.7",
+                                            "border": "white solid 2px",
+                                            "color": "black",
+                                            "padding": "3px 5px",
+                                            "border-radius": "5px",
+                                            "text-align": "center",
+                                            "text-decoration": "none",
+                                            "font-size": "16px",
+                                            "margin": "40px",
+                                            "cursor": "pointer",
+                                            "font-weight": "bold",
+                                            "display": "inline-block"});
+    } else if (window.matchMedia("(max-width: 1024px)").matches) {
+        $('.movie-card').each(function (i, el) {
+            $(el).children('.color-overlay').css({"background": "none"});
+            $(el).children('.title-content').css({"opacity": "0"});
+            $(el).children('.card-info').css({"opacity": "0"});
+            $(el).children('.movie_read_more').css({"opacity": "0"});
+            $(el).children('.movie_button').css({"opacity": "0", "margin": "40px"});
+        });
+        $(card).children('.color-overlay').css({"background": "rgba(84, 104, 110, 0.9)"});
+        $(card).children('.title-content').css({"opacity": "1"});
+        $(card).children('.card-info').css({"opacity": "1"});
+        $(card).children('.movie_read_more').css({"opacity": "1"});
+        $(card).children('.movie_button').css({"background-color": "white",
+                                            "opacity": "0.7",
+                                            "border": "white solid 2px",
+                                            "color": "black",
+                                            "padding": "3px 5px",
+                                            "border-radius": "5px",
+                                            "text-align": "center",
+                                            "text-decoration": "none",
+                                            "font-size": "16px",
+                                            "margin": "40px",
+                                            "cursor": "pointer",
+                                            "font-weight": "bold",
+                                            "display": "inline-block"});
+    } else {
+        console.log('Large')
+    }
+}
