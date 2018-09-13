@@ -21,17 +21,18 @@
     </style>
     <div class="page_container">
         <div class="movie_content_container">
-            <img src="{{ movie.movie_poster.url }}" alt="{{ movie.alt_text }}" class="poster">
-
-            <div class="blog_header">
+            <div class="movie_header">
                 <h1>{{ movie.title }}</h1>
                 <hr>
                 <p>{{ movie.tag_line }}</p>
             </div>
-            <pre>{{ movie.movie_details }}</pre>
+
             {% if movie.youtube %}
                 {{ movie.youtube|safe }}
             {% endif %}
+            <pre>{{ movie.movie_details }}</pre>
+            <img src="{{ movie.movie_poster.url }}" alt="{{ movie.alt_text }}" class="poster">
+
             <object class="script" data="{{ movie.movie_script.url }}">
                 <p>Your web browser doesn't have a PDF plugin.
                     Instead you can <a href="{{ movie.movie_script.url }}">click here to
