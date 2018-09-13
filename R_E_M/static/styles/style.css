@@ -2591,6 +2591,7 @@ pre {
 }
 
 .contact_header hr {
+    margin-top: 20px;
     width: 200px;
     height: 2px;
     background: black;
@@ -2614,6 +2615,50 @@ pre {
 
 .contact_submit {
     margin-left: 34%;
+}
+
+@media (max-width: 1024px) and (min-width: 766px) {
+    .contact_container {
+        width: 85%;
+    }
+
+    .contact_description p {
+        font-size: 18px;
+        line-height: 20px;
+    }
+
+}
+
+@media only screen and (max-width: 766px) {
+    .contact_container {
+        width: 95%;
+    }
+
+    .contact_form {
+        float: none;
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .contact_description {
+        margin: auto;
+        text-align: left;
+    }
+
+    .contact_description p {
+        font-size: 18px;
+        line-height: 20px;
+    }
+
+    .contact_header {
+        margin-top: 15px;
+        margin-bottom: 30px;
+    }
+
+    .contact_header hr {
+        margin-top: 10px;
+    }
+
 }
 
 /*************************** Website Upload ***************************/
