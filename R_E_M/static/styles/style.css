@@ -1801,8 +1801,6 @@ h3 {
 
 /********************************* Movie Single View *********************************/
 
-
-
 /********** Blog Cards **************/
 
 .blog_container {
@@ -2847,11 +2845,6 @@ pre {
     /*border: 1px solid #ddd;*/
 }
 
-.website-card:hover img {
-    /*-webkit-filter: blur(2px);*/
-    /*filter: blur(2px);*/
-}
-
 .website_read_more, .website_name_container, .website_date_container {
     display: none;
 }
@@ -2937,6 +2930,50 @@ pre {
     color: #e8eff0;
 }
 
+@media (max-width: 1024px) and (min-width: 766px) {
+
+}
+
+@media only screen and (max-width: 766px) {
+    .website-card {
+        width: 310px;
+        height: 155px;
+        margin: 5px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .website-card img {
+        height: 155px;
+    }
+
+    .website_read_more {
+        margin-top: 35px;
+        text-align: center;
+    }
+
+    .website-card:hover .website_read_more .website_button, .website_button:visited {
+        padding: 10px 20px;
+        font-size: 15px;
+        margin: 30px;
+    }
+
+    .website-card:hover .website_header {
+        left: 10px;
+        right: 10px;
+        top: 10px;
+    }
+
+    .website_name_container p, .website_date_container p {
+        font-size: 20px;
+    }
+
+    .website_category_container p {
+        font-size: 15px;
+    }
+
+}
+
 /**************************************************/
 
 .text-center {
@@ -2950,6 +2987,10 @@ pre {
     float: left;
     padding: 3px;
     font-size: 25px;
+}
+
+.pagination li a {
+    color: black;
 }
 
 .pagination li.active {

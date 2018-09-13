@@ -1,16 +1,16 @@
-.movie_content_container {
+.webdev_content_container {
     margin: 20px auto;
     text-align: center;
     align-items: center;
     width: 70%;
 }
 
-.movie_content_container iframe {
+.webdev_content_container iframe {
     margin-top: 20px;
     width: 100%;
 }
 
-.movie_content_container pre {
+.webdev_content_container pre {
     margin-top: 30px;
     text-align: left;
     white-space: pre-wrap; /* Since CSS 2.1 */
@@ -18,63 +18,47 @@
     white-space: -pre-wrap; /* Opera 4-6 */
     white-space: -o-pre-wrap; /* Opera 7 */
     word-wrap: break-word; /* Internet Explorer 5.5+ */
-
+    padding-bottom: 30px;
 }
 
-.movie_header {
+.webdev_header {
     margin: 15px;
 }
 
-.movie_header h1 {
+.webdev_header h1 {
     font-size: 5em;
     /*font-weight: bold;*/
 }
 
-.movie_header p {
+.webdev_header a {
     font-size: 1.5em;
     padding: 10px;
 }
 
-.movie_header hr {
+.webdev_header hr {
     width: 10%;
 }
 
-.poster {
-    width: 70%;
-    margin: 30px;
+.slider-single img {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.script {
-    width: 50%;
-    height: 750px;
-    margin: 30px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.movie_still_container {
     height: 500px;
 }
 
-.movie_still_container img {
-    height: 100%;
-}
-
-.slider-single img, .slider-nav img {
+.slider-nav img {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 @media (max-width: 1024px) and (min-width: 766px) {
-    .movie_content_container {
+    .webdev_content_container {
         width: 80%;
     }
 
-    .movie_content_container iframe {
+    .webdev_content_container iframe {
         margin-top: 10px;
         width: 100%;
     }
 
-    .movie_content_container pre {
+    .webdev_content_container pre {
         margin-top: 10px;
         text-align: left;
         white-space: pre-wrap; /* Since CSS 2.1 */
@@ -85,50 +69,38 @@
 
     }
 
-    .movie_header {
+    .webdev_header {
         margin: 5px;
     }
 
-    .movie_header h1 {
+    .webdev_header h1 {
         font-size: 2em;
         /*font-weight: bold;*/
     }
 
-    .movie_header p {
+    .webdev_header a {
         font-size: 1.5em;
         padding: 10px;
     }
 
-    .movie_header hr {
+    .webdev_header hr {
         width: 10%;
     }
-
-    .poster {
-        width: 80%;
-        margin: 10px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    }
-
-    .script {
-        width: 80%;
-        margin: 20px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    }
-
 }
 
+
 @media only screen and (max-width: 766px) {
-    .movie_content_container {
+    .webdev_content_container {
         width: 80%;
     }
 
-    .movie_content_container iframe {
+    .webdev_content_container iframe {
         margin-top: 10px;
         width: 100%;
         height: 200px;
     }
 
-    .movie_content_container pre {
+    .webdev_content_container pre {
         margin-top: 10px;
         text-align: left;
         white-space: pre-wrap; /* Since CSS 2.1 */
@@ -138,47 +110,32 @@
         word-wrap: break-word; /* Internet Explorer 5.5+ */
     }
 
-    .movie_header {
+    .webdev_header {
         margin: 5px;
     }
 
-    .movie_header h1 {
+    .webdev_header h1 {
         font-size: 2em;
         /*font-weight: bold;*/
     }
 
-    .movie_header p {
+    .webdev_header p {
         font-size: 1.5em;
         padding: 10px;
     }
 
-    .movie_header hr {
+    .webdev_header hr {
         width: 10%;
     }
 
-    .poster {
-        width: 90%;
-        margin: 10px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    .slider-single img {
+        height: 150px;
     }
 
-    .script {
-        width: 100%;
-        height: 300px;
-        margin: 20px;
-        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    }
-
-    .movie_still_container {
-        height: 200px;
-    }
-
-    .movie_still_container img {
-        height: 100%;
-    }
 }
 
 /* ************* Slick Slide ************** */
+
 .js .slider-single > div:nth-child(1n+2) {
     display: none
 }
@@ -234,10 +191,7 @@ h3 {
     vertical-align: middle;
 }
 
-.slider-nav {
-    height: 210px;
-    width: auto;
-}
+
 
 
 
