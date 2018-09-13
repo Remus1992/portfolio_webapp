@@ -75,7 +75,7 @@ body {
     font-family: 'Alegreya Sans SC', sans-serif;
 }
 
-/*! CSS Used from: https://static1.squarespace.com/static/sitecss/55ca0e9fe4b0e3531a269135/545/52e96934e4b0ea14d0f64568/565bde74e4b0a63eb2d48083/1112-05142015/1514119644508/site.css?&filterFeatures=false */
+/******************** Header CSS **********************/
 header, nav {
     display: block;
 }
@@ -249,26 +249,12 @@ html:not(.no-js) body:not(.always-use-overlay-nav) #headerNav {
     text-align: center;
 }
 
-/*#header #logoWrapper {*/
-/*position: relative;*/
-/*left: 50%;*/
-/*-webkit-transform: translate(-50%, 0);*/
-/*-moz-transform: translate(-50%, 0);*/
-/*-ms-transform: translate(-50%, 0);*/
-/*-o-transform: translate(-50%, 0);*/
-/*transform: translate(-50%, 0);*/
-/*text-align: center;*/
-/*}*/
 
 #header #logoWrapper, #header #logoImage {
     height: auto;
     width: 80px;
     line-height: 1;
 }
-
-/*#header #logoWrapper {*/
-/*z-index: 1001;*/
-/*}*/
 
 #logoImage {
     margin: 0;
@@ -538,31 +524,9 @@ body:not(.always-use-overlay-nav) .nav-wrapper.desktop-nav-wrapper .folder:hover
 }
 
 @media only screen and (max-width: 767px) {
-    /*#header #headerNav {*/
     #mainNavigation .external a, #mainNavigation .folder {
         display: none;
     }
-
-    /*
-    #header #logoWrapper {
-        position: absolute;
-        display: inline-block;
-        width: auto;
-        height: auto;
-        max-width: 70%;
-        vertical-align: middle;
-        padding: 0;
-        -moz-box-sizing: border-box;
-        -webkit-box-sizing: border-box;
-        box-sizing: border-box;
-    }
-
-    #header #logoWrapper #logoImage img {
-        max-height: 50px;
-        max-width: 100%;
-        width: auto;
-        height: auto;
-    } */
 }
 
 @media only screen and (max-width: 640px) {
@@ -589,22 +553,6 @@ body:not(.always-use-overlay-nav) .nav-wrapper.desktop-nav-wrapper .folder:hover
     font-weight: 400;
     font-style: normal;
 }
-
-/* NEW TESTING FOR SCREEN */
-/*#header #logoWrapper, #header #siteTitleWrapper {*/
-/*z-index: 1001;*/
-/*}*/
-
-/*#header #logoWrapper, #header #siteTitleWrapper {*/
-/*position: relative;*/
-/*left: 50%;*/
-/*-webkit-transform: translate(-50%,0);*/
-/*-moz-transform: translate(-50%,0);*/
-/*-ms-transform: translate(-50%,0);*/
-/*-o-transform: translate(-50%,0);*/
-/*transform: translate(-50%,0);*/
-/*text-align: center;*/
-/*}*/
 
 /* ****************************FOOTER************************ */
 
@@ -1181,7 +1129,7 @@ a, a:visited {
     justify-content: center;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 766px) {
     .categories-link-set {
         display: flex;
         flex-wrap: wrap;
@@ -1233,14 +1181,14 @@ a, a:visited {
     border: 1px #d1d1d1 solid;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 766px) {
     #search_bar {
         height: 30px;
         width: 193px;
     }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 766px) {
     #search_bar, .search_button {
         margin-top: 4px;
     }
@@ -1279,7 +1227,7 @@ a, a:visited {
     margin: auto;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 766px) {
     .movie_card_container {
         width: 90%;
     }
@@ -1568,7 +1516,7 @@ h3 {
     overflow: hidden;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 766px) {
     .movie-image-wrap {
         width: 258px;
         height: 430px;
@@ -2207,21 +2155,21 @@ pre {
     width: 70%;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 766px) {
     .instagram_holder {
         width: 100%;
         margin: 0;
     }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 766px) {
     .instagram_holder img {
         width: 32.7%;
         height: auto;
     }
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 766px) {
     .album_set {
         width: 250px;
         height: 250px;
@@ -3155,6 +3103,8 @@ body {
 
 .tech_header hr {
     width: 150px;
+    height: 2px;
+    background: black;
 }
 
 .tech_container p {
@@ -3251,6 +3201,8 @@ li.layer2 {
 
 .bio_header hr {
     width: 150px;
+    height: 2px;
+    background: black;
 }
 
 .bio_container p {
