@@ -13,12 +13,21 @@
     </head>
     <style>
         .tech_container {
-            width: 70%;
+            width: 50%;
             margin: 30px auto;
         }
 
-        .tech_container h1 {
+        .tech_header {
+            padding-bottom: 20px;
+        }
+
+        .tech_header h1 {
             text-align: center;
+            font-weight: bold;
+        }
+
+        .tech_header hr {
+            width: 150px;
         }
 
         .tech_container p {
@@ -27,34 +36,94 @@
         }
 
         .tech_container .bullet_heading {
+            padding-top: 20px;
             font-weight: bold;
         }
 
         li.layer1 {
             list-style-type: disc;
+            font-size: 20px;
+            line-height: 30px;
         }
 
         li.layer2 {
             list-style-type: circle;
+            font-size: 20px;
+            line-height: 30px;
         }
 
         /* Main Level */
-        ul {
+        .tech_container ul {
             margin-left: 50px;
         }
 
         /* Second Level */
-        ul ul {
+        .tech_container ul ul {
             margin-left: 15px;
+        }
+
+        @media (max-width: 1024px) and (min-width: 766px) {
+            .tech_container {
+                width: 80%;
+            }
+        }
+
+        @media only screen and (max-width: 766px) {
+            .tech_container {
+                width: 95%;
+            }
+
+            .tech_header h1 {
+                text-align: center;
+                font-weight: bold;
+                font-size: 25px;
+            }
+
+            .tech_container p {
+                font-size: 18px;
+                line-height: 20px;
+            }
+
+            li.layer1 {
+                list-style-type: disc;
+                font-size: 18px;
+                line-height: 20px;
+            }
+
+            li.layer2 {
+                list-style-type: circle;
+                font-size: 18px;
+                line-height: 20px;
+            }
+
+            /* Main Level */
+            .tech_container ul {
+                margin-left: 30px;
+            }
+
+            /* Second Level */
+            .tech_container ul ul {
+                margin-left: 15px;
+            }
         }
     </style>
     <div class="tech_container">
+        <div class="tech_header">
+            <h1>Technology & Equipment</h1>
+            <hr>
+        </div>
         <p>
             I’ve seen a lot of “What’s in my camera bag” videos online over the past five years which, from my
             perspective as a self-taught filmmaker, have always proved extremely helpful. They generally would do
-            two things for me: 1) bring to my attention a piece of equipment I didn’t know existed or 2) recommend
-            a single brand out of the imitidating Ocean of options. For those reasons, I’ve decided to post a
-            detailed list of my equipment with the hope that it may benefit others.
+            two things for me: 1) they brought a piece of equipment to my attention that I didn’t know existed or
+            2) they would recommend a single brand out of the intimidating Ocean of options. For those reasons,
+            I’ve decided to post a detailed list of my equipment with the hope that it may benefit others.
+        </p>
+        <br>
+        <p>
+            At the moment, my website is in its infancy. As such, this page is pretty barren but I intend to update
+            it with a bit of my thoughts and views on what I've used so far when I have the time. I might even write a
+            blog posting on some if necessary.
         </p>
 
         <p class="bullet_heading">Photography:</p>
@@ -78,8 +147,8 @@
         </ul>
         <p class="bullet_heading">Audio Recording:</p>
         <ul>
-            <li class="layer1">Zoom H6N</li>
-            <li class="layer1">Rode NTG2</li>
+            <li class="layer1">Zoom H6N Recorder</li>
+            <li class="layer1">Rode NTG2 Microphone</li>
             <li class="layer1">Sennheiser EW112P Lav Mics</li>
         </ul>
     </div>
