@@ -3137,6 +3137,101 @@ body {
     }
 }
 
+/************ Tech & Equip Page ***********/
 
+.tech_container {
+    width: 50%;
+    margin: 30px auto;
+}
+
+.tech_header {
+    padding-bottom: 20px;
+}
+
+.tech_header h1 {
+    text-align: center;
+    font-weight: bold;
+}
+
+.tech_header hr {
+    width: 150px;
+}
+
+.tech_container p {
+    font-size: 20px;
+    line-height: 30px;
+}
+
+.tech_container .bullet_heading {
+    padding-top: 20px;
+    font-weight: bold;
+}
+
+li.layer1 {
+    list-style-type: disc;
+    font-size: 20px;
+    line-height: 30px;
+}
+
+li.layer2 {
+    list-style-type: circle;
+    font-size: 20px;
+    line-height: 30px;
+}
+
+/* Main Level */
+.tech_container ul {
+    margin-left: 50px;
+}
+
+/* Second Level */
+.tech_container ul ul {
+    margin-left: 15px;
+}
+
+@media (max-width: 1024px) and (min-width: 766px) {
+    .tech_container {
+        width: 80%;
+    }
+}
+
+@media only screen and (max-width: 766px) {
+    .tech_container {
+        width: 95%;
+    }
+
+    .tech_header h1 {
+        text-align: center;
+        font-weight: bold;
+        font-size: 25px;
+    }
+
+    .tech_container p {
+        font-size: 18px;
+        line-height: 20px;
+    }
+
+    li.layer1 {
+        list-style-type: disc;
+        font-size: 18px;
+        line-height: 20px;
+    }
+
+    li.layer2 {
+        list-style-type: circle;
+        font-size: 18px;
+        line-height: 20px;
+    }
+
+    /* Main Level */
+    .tech_container ul {
+        margin-left: 30px;
+    }
+
+    /* Second Level */
+    .tech_container ul ul {
+        margin-left: 15px;
+    }
+}
 
 
