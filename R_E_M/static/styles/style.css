@@ -1119,6 +1119,15 @@ a, a:visited {
     }
 }
 
+
+.footer-inner::after {
+    background-color: black;
+    content: "";
+	height: 0;
+	width: 0;
+	position: absolute;
+}
+
 /************************** Filter Checkbox **************************/
 .categories-link-set {
     width: 70%;

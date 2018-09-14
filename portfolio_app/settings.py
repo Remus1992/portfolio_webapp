@@ -28,7 +28,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'remus1992.webfactional.com',
-    'remingtonhenderson.com'
+    'www.remingtonhenderson.com',
+    'remingtonhenderson.com',
+    '127.0.0.1'
 ]
 
 
