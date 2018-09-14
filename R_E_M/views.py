@@ -289,7 +289,7 @@ def _movies(request, movie_categories, category, complete_movie_list):
 
 
 def filmmaking_home(request):
-    complete_movie_list = Movie.objects.all()
+    complete_movie_list = Movie.objects.order_by("date_built").reverse()
     movie_categories = MovieCategory.objects.all()
 
     query = request.GET.get("q")
@@ -510,7 +510,7 @@ def _websites(request, website_categories, category, complete_website_list):
 
 def webdev_home(request):
     website_categories = WebsiteCategory.objects.all()
-    complete_website_list = Website.objects.all()
+    complete_website_list = Website.objects.order_by("date_built").reverse()
 
     query = request.GET.get("q")
     category = request.GET.get('category')
@@ -689,7 +689,7 @@ def _blogs(request, blog_list, category, cat):
 
 
 def blog(request):
-    blog_list = Blog.objects.all()
+    blog_list = Blog.objects.order_by("date").reverse()
     cat = Category.objects.all()
 
     # Original Pagination
