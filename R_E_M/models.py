@@ -72,7 +72,7 @@ class AlbumCategory(models.Model):
 
 
 def photo_image_uh(instance, filename):
-    return 'photography/{}/{}'.format(instance.album, filename)
+    return 'photography/{}/{}'.format(instance.album.slug, filename)
 
 
 class Photo(models.Model):
@@ -104,10 +104,6 @@ class Photo(models.Model):
         super().save(args, kwargs)
 
 
-def website_image_uh(instance, filename):
-    return 'websites/{}/{}'.format(instance.website_name, filename)
-
-
 class WebsiteCategory(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField(blank=True, null=True, unique=True)
@@ -132,6 +128,10 @@ class WebsiteCategory(models.Model):
 
     class Meta:
         verbose_name_plural = 'WebsiteCategories'
+
+
+def website_image_uh(instance, filename):
+    return 'websites/{}/{}'.format(instance.slug, filename)
 
 
 class Website(models.Model):
@@ -166,7 +166,7 @@ class Website(models.Model):
 
 
 def website_screen_shot_image_uh(instance, filename):
-    return 'websites/{}/{}'.format(instance.website_screenshots, filename)
+    return 'websites/{}/{}'.format(instance.website_screenshots.slug, filename)
 
 
 class WebsiteScreenShot(models.Model):
@@ -197,7 +197,7 @@ class WebsiteScreenShot(models.Model):
 
 
 def blog_image_uh(instance, filename):
-    return 'blog/{}/blog_image/{}'.format(instance.author, filename)
+    return 'blog/{}/blog_image/{}'.format(instance.author.username, filename)
 
 
 class Blog(models.Model):
@@ -260,11 +260,11 @@ class Category(models.Model):
 
 
 def movie_poster_image_uh(instance, filename):
-    return 'movies/{}/{}'.format(instance.title, filename)
+    return 'movies/{}/{}'.format(instance.slug, filename)
 
 
 def movie_document_uh(instance, filename):
-    return "movies/{}/{}".format(instance.title, filename)
+    return "movies/{}/{}".format(instance.slug, filename)
 
 
 class Movie(models.Model):
@@ -326,7 +326,7 @@ class MovieCategory(models.Model):
 
 
 def movie_still_photo_image_uh(instance, filename):
-    return 'movies/{}/{}'.format(instance.movie_album, filename)
+    return 'movies/{}/{}'.format(instance.movie_album.slug, filename)
 
 
 class MovieStillPhoto(models.Model):
