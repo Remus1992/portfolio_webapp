@@ -269,7 +269,7 @@ def movie_document_uh(instance, filename):
 
 class Movie(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="movies")
-    title = models.CharField(max_length=50, blank=True, null=True)
+    title = models.CharField(max_length=100, blank=True, null=True)
     category = models.ForeignKey("MovieCategory", default=1, related_name='movies', on_delete=models.SET_DEFAULT)
     tag_line = models.TextField(max_length=300, blank=True, null=True)
     movie_details = models.TextField()
@@ -277,7 +277,7 @@ class Movie(models.Model):
     date_built = models.CharField(max_length=50)
     youtube = models.CharField(max_length=255, blank=True, null=True)
     movie_poster = models.ImageField(upload_to=movie_poster_image_uh, blank=True, null=True)
-    alt_text = models.CharField(max_length=50, blank=True, null=True)
+    alt_text = models.CharField(max_length=100, blank=True, null=True)
     movie_script = models.FileField(upload_to=movie_document_uh, blank=True, null=True)
 
     def __str__(self):
