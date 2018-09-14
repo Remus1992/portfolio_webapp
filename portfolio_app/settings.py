@@ -158,3 +158,8 @@ EMAIL_PORT=587
 EMAIL_HOST_USER = 'remington.henderson'
 EMAIL_HOST_PASSWORD = gmail_password
 DEFAULT_EMAIL_FROM = gmail
+
+try:
+    from .local_settings import *
+except ImportError:
+    pass
