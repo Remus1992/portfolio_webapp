@@ -17,6 +17,6 @@ def blog_image_or_default(blog):
 def movie_pdf_or_default(movie):
     if movie.movie_script:
         return mark_safe(
-            '<object class ="script" data="{}" ><p>Your web browser doesn \'t have a PDF plugin. Instead you can <a href = "{}" > click here to download the PDF file.</a></p>'.format(
+            '<object class ="script" data="{}" ><p>Your web browser doesn \'t have a PDF plugin. Instead you can <a href = "{}"> click here to download the PDF file.</a></p></object>'.format(
                 movie.movie_script.url, movie.movie_script.url))
     return mark_safe('<div style="display:none"></div>')

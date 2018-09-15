@@ -31,8 +31,10 @@
 
             <img src="{{ movie.movie_poster.url }}" alt="{{ movie.alt_text }}" class="poster">
 
+            <div>
+                {% movie_pdf_or_default movie %}
+            </div>
 
-            {% movie_pdf_or_default movie %}
 
 {#            <object class="script" data="{{ movie.movie_script.url }}">#}
 {#                <p>Your web browser doesn't have a PDF plugin.#}
