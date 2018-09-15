@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% load static %}
+{% load R_E_M_tags %}
 
 {% block title %}
     : {{ movie.title }}
@@ -27,14 +28,18 @@
                 {{ movie.youtube|safe }}
             {% endif %}
             <pre>{{ movie.movie_details }}</pre>
+
             <img src="{{ movie.movie_poster.url }}" alt="{{ movie.alt_text }}" class="poster">
 
-            <object class="script" data="{{ movie.movie_script.url }}">
-                <p>Your web browser doesn't have a PDF plugin.
-                    Instead you can <a href="{{ movie.movie_script.url }}">click here to
-                        download the PDF file.</a>
-                </p>
-            </object>
+
+            {% movie_pdf_or_default movie %}
+
+{#            <object class="script" data="{{ movie.movie_script.url }}">#}
+{#                <p>Your web browser doesn't have a PDF plugin.#}
+{#                    Instead you can <a href="{{ movie.movie_script.url }}">click here to#}
+{#                        download the PDF file.</a>#}
+{#                </p>#}
+{#            </object>#}
             {#            <a href="{{ movie.movie_script.url }}">click here to#}
             {#                        download the PDF file.</a>#}
 
