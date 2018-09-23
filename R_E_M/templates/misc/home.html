@@ -11,7 +11,8 @@
     <style>
 
         html {
-            background: url("/static/R_E_M/img/rembrandt-lighting.jpg") no-repeat center center fixed;
+            /* background: url("/static/R_E_M/img/rembrandt-lighting.jpg") no-repeat center center fixed; */
+            background-color: gray;
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;
@@ -38,30 +39,43 @@
         }
 
         .R_container, .E_container, .M_container {
-        {#width: 500px;#} width: 33.333%;
+            width: 33.333%;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
         }
 
-        .R_container {
-        }
-
         .E_container {
-        {#margin-left: 500px;#} margin-left: 33.333%;
+            margin-left: 33.333%;
         }
 
         .M_container {
-        {#margin-left: 1000px;#} margin-left: 66.666%;
+            margin-left: 66.666%;
+        }
+
+
+        .small_R_container, .small_E_container, .small_M_container {
+            width: 33.333%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .small_E_container {
+            margin-left: 33.333%;
+        }
+
+        .small_M_container {
+            margin-left: 66.666%;
         }
 
         .R_container img, .E_container img, .M_container img {
             margin-top: 60px;
             position: absolute !important;
             opacity: 0;
-        {#height: 350px;#}{#width: 350px;#} width: 25%;
+            width: 25%;
             height: auto;
-
+            z-index: 5000;
         }
 
         .small_REM_container {
@@ -71,8 +85,10 @@
         }
 
         .small_REM_container img {
-            width: 100px;
+            width: 25%;
+            height: auto;
             opacity: 0.8;
+            z-index: 5000;
         }
 
         .small_REM_container img, .rw-wrapper {
@@ -251,12 +267,110 @@
 
         @keyframes image-load {
             0% {
-                opacity:0;
+                opacity: 0;
                 transform: translateY(-20px);
             }
             100% {
-                opacity:1;
+                opacity: 1;
                 transform: translateY(0%);
+            }
+        }
+
+        /********************** SLIDE SHOW **********************/
+        .mySlides {
+            display: none
+        }
+
+        img {
+            vertical-align: top;
+        }
+
+        @media only screen and (min-width: 1024px) {
+            .slideshow-container .mySlides img {
+                width: 100%;
+            }
+
+            .slideshow-container {
+
+                max-width: 100%;
+                position: relative;
+                margin: auto;
+            }
+        }
+
+        @media (max-width: 1024px) and (min-width: 766px) {
+            .slideshow-container .mySlides img {
+                width: 100%;
+            }
+
+            .slideshow-container {
+                max-width: 100%;
+                position: relative;
+                margin: auto;
+            }
+        }
+
+        @media only screen and (max-width: 766px) {
+            .slideshow-container .mySlides img {
+                width: 100%;
+            }
+
+            .slideshow-container {
+                max-width: 100%;
+                position: relative;
+                margin: auto;
+            }
+        }
+
+        /* Next & previous buttons */
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+        }
+
+        /* Position the "next button" to the right */
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        /* On hover, add a black background color with a little bit see-through */
+        .prev:hover, .next:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        /* Fading animation */
+        .fade {
+            -webkit-animation-name: fade;
+            -webkit-animation-duration: 1.5s;
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+
+        @-webkit-keyframes fade {
+            from {
+                opacity: .4
+            }
+            to {
+                opacity: 1
+            }
+        }
+
+        @keyframes fade {
+            from {
+                opacity: .4
+            }
+            to {
+                opacity: 1
             }
         }
 
@@ -284,9 +398,15 @@
     </div>
 
     <div class="small_REM_container">
-        <img src="/static/R_E_M/img/1_R_RED_PNG/R5.png" alt="R5" id="R5">
-        <img src="/static/R_E_M/img/2_E_RED_PNG/E5.png" alt="E5" id="E5">
-        <img src="/static/R_E_M/img/3_M_RED_PNG/M5.png" alt="M5" id="M5">
+        <div class="small_R_container">
+            <img src="/static/R_E_M/img/1_R_RED_PNG/R5.png" alt="R5" id="R5">
+        </div>
+        <div class="small_E_container">
+            <img src="/static/R_E_M/img/2_E_RED_PNG/E5.png" alt="E5" id="E5">
+        </div>
+        <div class="small_M_container">
+            <img src="/static/R_E_M/img/3_M_RED_PNG/M5.png" alt="M5" id="M5">
+        </div>
     </div>
     <section class="rw-wrapper">
         <h2 class="rw-sentence">
@@ -315,11 +435,67 @@
         </h2>
     </section>
 
+    <div class="slideshow-container">
+
+        <div class="mySlides fade">
+            <img src="{% static "R_E_M/img/Web Backgrounds/WebCover (1).jpg" %}">
+        </div>
+
+        <div class="mySlides fade">
+            <img src="{% static "R_E_M/img/Web Backgrounds/WebCover (2).jpg" %}">
+        </div>
+
+        <div class="mySlides fade">
+            <img src="{% static "R_E_M/img/Web Backgrounds/WebCover (3).jpg" %}">
+        </div>
+
+        <div class="mySlides fade">
+            <img src="{% static "R_E_M/img/Web Backgrounds/WebCover (4).jpg" %}">
+        </div>
+
+        <div class="mySlides fade">
+            <img src="{% static "R_E_M/img/Web Backgrounds/WebCover (5).jpg" %}">
+        </div>
+
+        <div class="mySlides fade">
+            <img src="{% static "R_E_M/img/Web Backgrounds/WebCover (6).jpg" %}">
+        </div>
+
+        <div class="mySlides fade">
+            <img src="{% static "R_E_M/img/Web Backgrounds/WebCover (7).jpg" %}">
+        </div>
+
+        <div class="mySlides fade">
+            <img src="{% static "R_E_M/img/Web Backgrounds/WebCover (8).jpg" %}">
+        </div>
+
+        <div class="mySlides fade">
+            <img src="{% static "R_E_M/img/Web Backgrounds/WebCover (9).jpg" %}">
+        </div>
+
+        <div class="mySlides fade">
+            <img src="{% static "R_E_M/img/Web Backgrounds/WebCover (10).jpg" %}">
+        </div>
+
+        <div class="mySlides fade">
+            <img src="{% static "R_E_M/img/Web Backgrounds/WebCover (11).jpg" %}">
+        </div>
+
+        <div class="mySlides fade">
+            <img src="{% static "R_E_M/img/Web Backgrounds/WebCover (12).jpg" %}">
+        </div>
+
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+    </div>
+    <br>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.7/p5.min.js"></script>
 
-    <script src="{% static 'javascript/glitch.js' %}"></script>
+    {#<script src="{% static 'javascript/glitch.js' %}"></script>#}
 
 
     <script>
@@ -376,8 +552,39 @@
                 }
             }
 
-        })
+        });
 
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        function plusSlides(n) {
+            showSlides(slideIndex += n);
+        }
+
+        setInterval(function () {
+            plusSlides(1)
+        }, 6000);
+
+
+        function currentSlide(n) {
+            showSlides(slideIndex = n);
+        }
+
+        function showSlides(n) {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            if (n > slides.length) {
+                slideIndex = 1
+            }
+            if (n < 1) {
+                slideIndex = slides.length
+            }
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slides[slideIndex - 1].style.display = "block";
+        }
     </script>
+
 
 {% endblock %}
