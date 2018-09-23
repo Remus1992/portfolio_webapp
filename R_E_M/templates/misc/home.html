@@ -11,12 +11,12 @@
     <style>
 
         html {
-            /* background: url("/static/R_E_M/img/rembrandt-lighting.jpg") no-repeat center center fixed; */
-            background-color: gray;
+            /* background: url("/static/R_E_M/img/rembrandt-lighting.jpg") no-repeat center center fixed;
+            background-color: black;
             -webkit-background-size: cover;
             -moz-background-size: cover;
             -o-background-size: cover;
-            background-size: cover;
+            background-size: cover; */
         }
 
         html, body {
@@ -53,6 +53,29 @@
             margin-left: 66.666%;
         }
 
+        .R_container img, .E_container img, .M_container img {
+            margin-top: 60px;
+            position: absolute !important;
+            opacity: 0;
+            width: 25%;
+            height: auto;
+            z-index: 700;
+        }
+
+        .small_REM_container {
+            {#margin: 35px auto auto auto;#}
+            {#width: 100%;#}
+            {#text-align: center;#}
+        }
+
+        .small_R_container img, .small_E_container img, .small_M_container img {
+            width: 25%;
+            position: absolute !important;
+            height: auto;
+            opacity: 0.8;
+            z-index: 700;
+            margin-top: 60px;
+        }
 
         .small_R_container, .small_E_container, .small_M_container {
             width: 33.333%;
@@ -69,28 +92,6 @@
             margin-left: 66.666%;
         }
 
-        .R_container img, .E_container img, .M_container img {
-            margin-top: 60px;
-            position: absolute !important;
-            opacity: 0;
-            width: 25%;
-            height: auto;
-            z-index: 5000;
-        }
-
-        .small_REM_container {
-            margin: 35px auto auto auto;
-            width: 100%;
-            text-align: center;
-        }
-
-        .small_REM_container img {
-            width: 25%;
-            height: auto;
-            opacity: 0.8;
-            z-index: 5000;
-        }
-
         .small_REM_container img, .rw-wrapper {
             -webkit-animation: image-load 1000ms ease-in;
             -ms-animation: image-load 1000ms ease-in;
@@ -102,7 +103,7 @@
             width: 90%;
             position: absolute;
             padding: 10px;
-            bottom: 50px;
+            {#bottom: 50px;#}
         }
 
         .rw-sentence {
@@ -112,7 +113,7 @@
 
         .rw-sentence span {
             line-height: 150%;
-            color: #fcfefe;
+            color: #000000;
             opacity: 0.8;
             font-size: 200%;
             font-weight: normal;
@@ -324,6 +325,7 @@
 
         /* Next & previous buttons */
         .prev, .next {
+            z-index: 800;
             cursor: pointer;
             position: absolute;
             top: 50%;
@@ -396,8 +398,7 @@
             <img src="/static/R_E_M/img/3_M_RED_PNG/M4.png" alt="M4" id="M4">
         </div>
     </div>
-
-    <div class="small_REM_container">
+      <div class="small_REM_container">
         <div class="small_R_container">
             <img src="/static/R_E_M/img/1_R_RED_PNG/R5.png" alt="R5" id="R5">
         </div>
@@ -408,33 +409,6 @@
             <img src="/static/R_E_M/img/3_M_RED_PNG/M5.png" alt="M5" id="M5">
         </div>
     </div>
-    <section class="rw-wrapper">
-        <h2 class="rw-sentence">
-            <span>Hello,</span>
-            <br>
-            <br>
-            <span>Welcome to</span>
-            <br/>
-            <span>my website.</span>
-            <br/>
-            <span>My name is</span>
-            <br/>
-            <span>Remington</span>
-            <br>
-            <span>Henderson.</span>
-            <br/>
-            <span>I am a </span>
-            <div class="rw-words rw-words-1">
-                <span>web designer</span>
-                <span>writer</span>
-                <span>director</span>
-                <span>photographer</span>
-                <span>cinematographer</span>
-                <span>film editor</span>
-            </div>
-        </h2>
-    </section>
-
     <div class="slideshow-container">
 
         <div class="mySlides fade">
@@ -489,6 +463,36 @@
         <a class="next" onclick="plusSlides(1)">&#10095;</a>
 
     </div>
+
+
+    <section class="rw-wrapper">
+        <h2 class="rw-sentence">
+            <span>Hello,</span>
+            <br>
+            <br>
+            <span>Welcome to</span>
+            <br/>
+            <span>my website.</span>
+            <br/>
+            <span>My name is</span>
+            <br/>
+            <span>Remington</span>
+            <br>
+            <span>Henderson.</span>
+            <br/>
+            <span>I am a </span>
+            <div class="rw-words rw-words-1">
+                <span>web designer</span>
+                <span>writer</span>
+                <span>director</span>
+                <span>photographer</span>
+                <span>cinematographer</span>
+                <span>film editor</span>
+            </div>
+        </h2>
+    </section>
+
+
     <br>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
