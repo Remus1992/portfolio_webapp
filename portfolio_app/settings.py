@@ -30,8 +30,7 @@ ALLOWED_HOSTS = [
     'remus1992.webfactional.com',
     'www.remingtonhenderson.com',
     'remingtonhenderson.com',
-    '127.0.0.1',
-    '192.168.1.21'
+    '127.0.0.1'
 ]
 
 
