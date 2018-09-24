@@ -11,7 +11,7 @@
     <style>
 
         html {
-
+            background-color: #fafafa;
             /* background: url("/static/R_E_M/img/rembrandt-lighting.jpg") no-repeat center center fixed;
             background-color: black;
             -webkit-background-size: cover;
@@ -101,11 +101,11 @@
 
         /************************************* Rotating Words ************************************/
         .rw-wrapper {
-            width: 90%;
-            position: absolute;
+            width: 85%;
+            {#position: absolute;#}
             padding: 10px;
-            margin: 10px;
-            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+            margin: 10px auto;
+            box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 1px 4px 0 rgba(0, 0, 0, 0.19);
         }
 
         .rw-sentence {
@@ -131,7 +131,7 @@
             opacity: 0;
             overflow: hidden;
             font-weight: bold;
-            text-shadow: 2px 2px #424242a6;
+            text-shadow: 1px 1px #424242a6;
             color: #f00;
             -webkit-animation: rotateWord 18s linear infinite 0s;
             -ms-animation: rotateWord 18s linear infinite 0s;
@@ -258,7 +258,7 @@
 
         @media screen and (max-width: 768px) {
             .rw-sentence {
-                font-size: 12px;
+                font-size: 11px;
             }
         }
 
@@ -319,7 +319,7 @@
             }
 
             .slideshow-container {
-                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+                box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.2), 0 1px 4px 0 rgba(0, 0, 0, 0.19);
                 max-width: 100%;
                 position: relative;
                 margin: auto;
@@ -472,16 +472,9 @@
         <h2 class="rw-sentence">
             <span>Hello,</span>
             <br>
-            <br>
-            <span>Welcome to</span>
+            <span>Welcome to my website.</span>
             <br/>
-            <span>my website.</span>
-            <br/>
-            <span>My name is</span>
-            <br/>
-            <span>Remington</span>
-            <br>
-            <span>Henderson.</span>
+            <span>My name is Remington Henderson</span>
             <br/>
             <span>I am a </span>
             <div class="rw-words rw-words-1">
@@ -516,6 +509,8 @@
             } else {
                 $(".small_REM_container").css("display", "none");
                 $(".rw-wrapper").css("display", "none");
+                $("#preFooter").css("display", "none");
+                $("#footer").css("display", "none");
 
                 let offsets = {};
                 gather_offset('#R1', {'opacity': '0.8', 'top': '250px'});
@@ -594,4 +589,8 @@
     </script>
 
 
+{% endblock %}
+
+{% block footer %}
+    {% include 'footer_base.html' %}
 {% endblock %}
