@@ -18,11 +18,16 @@ class User(AbstractUser):
     image = models.ImageField(upload_to=user_image_uh, blank=True, null=True)
 
 
+def album_cover_image_uh(instance, filename):
+    return 'movies/{}/{}'.format(instance.slug, filename)
+
+
 class Album(models.Model):
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="photo_albums")
     title = models.CharField(max_length=100, blank=True, null=True)
     category = models.ForeignKey("AlbumCategory", default=1, related_name='albums', on_delete=models.SET_DEFAULT)
     slug = models.SlugField(blank=True, null=True, unique=True)
+    album_cover = models.ImageField(upload_to=album_cover_image_uh, blank=True, null=True)
     album_details = models.TextField()
     alt_text = models.CharField(max_length=100, blank=True, null=True)
 

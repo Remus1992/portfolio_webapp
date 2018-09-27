@@ -139,7 +139,11 @@ def photography_home(request):
         album.owner = request.user
         album.title = request.POST.get('album_title')
         album.album_details = request.POST.get('album_details')
+        album_poster = request.FILES.get('album_cover_image')
         album.alt_text = request.POST.get('album_alt_text')
+        if album_poster:
+            album.album_cover = album_poster
+
         album.save()
 
         for k, v in request.POST.items():

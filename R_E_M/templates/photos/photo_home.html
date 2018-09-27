@@ -69,8 +69,7 @@
                                 <div class="album_info">
                                     <input type="text" id="album_title" name="album_title" class="resizedTextbox"
                                            placeholder="Album Title">
-                                    <input type="text" id="album_alt_text" name="album_alt_text"
-                                           placeholder="Album Alt Text" class="resizedTextbox">
+
                                     <input list="categories" id="album_category" name="album_category"
                                            placeholder="Album Category" class="resizedTextbox">
                                     <datalist id="categories">{% for c in album_cats %}
@@ -78,6 +77,11 @@
                                     <textarea rows="4" cols="50" id="album_details" name="album_details"
                                               placeholder="Album Details"
                                               class="resizedTextbox album_details"></textarea>
+                                    <p>Album Cover</p>
+                                    <input type="file" id="album_cover_image" name="movie_poster" class="resizedTextbox">
+                                    <input type="text" id="album_alt_text" name="album_alt_text"
+                                           placeholder="Album Alt Text" class="resizedTextbox">
+
                                 </div>
                                 <div class="album_gallery_images" id="album_gallery_images"></div>
                             </div>
@@ -94,8 +98,10 @@
                 <a href="{% url 'album_view' album.category.slug album.slug %}"
                    class="text {{ album.category.slug }} infinite-item album_item element_move">
                     <div class="album_set">
-                        <img src="{{ album.photo_album.all.0.image.url }}" class="album-image"
-                             alt="{{ album.photo_album.all.0.alt_text }}" onload="calcImg(this)">
+                        <!-- <img src="{{ album.photo_album.all.0.image.url }}" class="album-image"
+                             alt="{{ album.photo_album.all.0.alt_text }}" onload="calcImg(this)"> -->
+                        <img src="{{ album.album_cover.url }}" class="album-image"
+                             alt="{{ album.alt_text }}" onload="calcImg(this)">
                         <div class="middle">
                             <div class="text text_top">{{ album.title }}</div>
                             <div class="text text_center">
