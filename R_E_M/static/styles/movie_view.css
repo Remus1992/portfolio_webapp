@@ -64,6 +64,10 @@
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.movie_content_container pre {
+    font-size: 1.5em;
+}
+
 @media (max-width: 1024px) and (min-width: 766px) {
     .movie_content_container {
         width: 80%;
@@ -76,6 +80,7 @@
 
     .movie_content_container pre {
         margin-top: 10px;
+        font-size: 1em;
         text-align: left;
         white-space: pre-wrap; /* Since CSS 2.1 */
         white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
@@ -131,6 +136,7 @@
     .movie_content_container pre {
         margin-top: 10px;
         text-align: left;
+        font-size: 1em;
         white-space: pre-wrap; /* Since CSS 2.1 */
         white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
         white-space: -pre-wrap; /* Opera 4-6 */
