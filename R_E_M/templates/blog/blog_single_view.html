@@ -12,7 +12,29 @@
         <link rel="stylesheet" type="text/css" href="{% static 'styles/style.css' %}"/>
     </head>
     <style>
+        /*
+            p, li {
+                margin: auto;
+                padding: auto;
+            }
 
+            ol, ul {
+                list-style: inherit;
+            }
+    */
+
+        p, blockquote, ol, ul, li {
+            font-family: 'Alegreya Sans SC', sans-serif;
+            text-align: left;
+        }
+
+        i, cite, em, var, address, dfn {
+            font-style: italic;
+        }
+
+        strong {
+            font-weight: bold;
+        }
 
     </style>
 
@@ -37,7 +59,8 @@
                 <p class="post-time">Posted on {{ blog.date }}</p>
             </div>
             <!--Post content-->
-            <pre>{{ blog.content|safe_markdown }}</pre>
+{#            <pre>{{ blog.content|safe_markdown }}</pre>#}
+            {{ blog.content|safe_markdown }}
 
             {% if blog.youtube_link %}
 
@@ -46,6 +69,7 @@
             {% endif %}
         </div>
     </div>
+
 {% endblock %}
 
 {% block footer %}
