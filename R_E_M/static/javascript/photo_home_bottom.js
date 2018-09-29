@@ -40,9 +40,9 @@ $('.checkbox').each(function (i, el) {
 
 // IMAGE UPLOADER PLUS MODAL
 let imagesPreview = function (input, placeToInsertImagePreview) {
-    $(placeToInsertImagePreview).html('');
-    let album_html = '<div class="album_info"><input type="text" id="album_title" name="album_title" class="resizedTextbox" placeholder="Album Title"><input type="text" id="album_alt_text" name="album_alt_text" placeholder="Album Alt Text" class="resizedTextbox"><input list="categories" id="album_category" name="album_category" placeholder="Album Category" class="resizedTextbox"><datalist id="categories">{% for c in album_cats %}<option value="{{ c.name }}">{% endfor %}</datalist><textarea rows="4" cols="50" id="album_details" name="album_details" placeholder="Album Details" class="resizedTextbox album_details"></textarea></div><div class="album_gallery_images" id="album_gallery_images"></div>';
-    $(placeToInsertImagePreview).append(album_html);
+    // $(placeToInsertImagePreview).html('');
+    // let album_html = '<div class="album_info"><input type="text" id="album_title" name="album_title" class="resizedTextbox" placeholder="Album Title"><input type="text" id="album_alt_text" name="album_alt_text" placeholder="Album Alt Text" class="resizedTextbox"><input list="categories" id="album_category" name="album_category" placeholder="Album Category" class="resizedTextbox"><datalist id="categories">{% for c in album_cats %}<option value="{{ c.name }}">{% endfor %}</datalist><textarea rows="4" cols="50" id="album_details" name="album_details" placeholder="Album Details" class="resizedTextbox album_details"></textarea></div><div class="album_gallery_images" id="album_gallery_images"></div>';
+    // $(placeToInsertImagePreview).append(album_html);
 
     if (input.files) {
         let filesAmount = input.files.length;
