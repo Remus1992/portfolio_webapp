@@ -737,6 +737,7 @@ def blog(request):
 
         blog.alt_text = request.POST.get('alt_text')
         blog.youtube_link = request.POST.get('youtube_link')
+        blog.date = request.POST.get('blog_date')
         blog.save()
         return HttpResponseRedirect(reverse('blog_single_view', kwargs={'cat': blog.category.slug, 'slug': blog.slug}))
     return _blogs(request, blog_list, category, cat)

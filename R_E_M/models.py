@@ -208,7 +208,7 @@ def blog_image_uh(instance, filename):
 class Blog(models.Model):
     title = models.CharField(max_length=200)
     author = models.ForeignKey(User, related_name='blogs', on_delete=models.CASCADE)
-    date = models.DateTimeField(auto_now_add=True)
+    date = models.CharField(max_length=50)
     content = MartorField()
     slug = models.SlugField(blank=True, null=True, unique=True)
     category = models.ForeignKey("Category", default=1, related_name='blogs', on_delete=models.SET_DEFAULT)
