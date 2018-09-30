@@ -99,7 +99,7 @@ def photography_home(request):
     # for i in data["data"]:
     #     print(i["link"])
 
-    complete_album_list = Album.objects.all()
+    complete_album_list = Album.objects.order_by("album_date_built").reverse()
     album_categories = AlbumCategory.objects.all()
 
     query = request.GET.get("q")
@@ -139,6 +139,7 @@ def photography_home(request):
         album.owner = request.user
         album.title = request.POST.get('album_title')
         album.album_details = request.POST.get('album_details')
+        album.album_date_built = request.POST.get('album_date')
         album_poster = request.FILES.get('album_cover_image')
         album.alt_text = request.POST.get('album_alt_text')
         if album_poster:

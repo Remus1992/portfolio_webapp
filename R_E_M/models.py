@@ -29,6 +29,7 @@ class Album(models.Model):
     slug = models.SlugField(blank=True, null=True, unique=True)
     album_cover = models.ImageField(upload_to=album_cover_image_uh, blank=True, null=True)
     album_details = models.TextField()
+    album_date_built = models.CharField(max_length=50)
     alt_text = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):

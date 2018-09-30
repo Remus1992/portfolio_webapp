@@ -3242,3 +3242,7 @@ li.layer2 {
         line-height: 20px;
     }
 }
+
+pre {
+    font-family: 'Alegreya Sans SC', sans-serif;
+}
