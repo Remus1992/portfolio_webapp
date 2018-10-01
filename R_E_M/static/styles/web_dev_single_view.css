@@ -12,6 +12,7 @@
 
 .webdev_content_container pre {
     margin-top: 30px;
+    font-size: 1.25em;
     text-align: left;
     white-space: pre-wrap; /* Since CSS 2.1 */
     white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
@@ -60,6 +61,7 @@
 
     .webdev_content_container pre {
         margin-top: 10px;
+        font-size: 1em;
         text-align: left;
         white-space: pre-wrap; /* Since CSS 2.1 */
         white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
@@ -102,6 +104,7 @@
 
     .webdev_content_container pre {
         margin-top: 10px;
+        font-size: 1em;
         text-align: left;
         white-space: pre-wrap; /* Since CSS 2.1 */
         white-space: -moz-pre-wrap; /* Mozilla, since 1999 */

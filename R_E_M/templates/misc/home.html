@@ -7,119 +7,125 @@
 {% endblock %}
 
 {% block content %}
-<head>
-    <link rel="stylesheet" type="text/css" href="{% static 'styles/home.css' %}"/>
-</head>
-    <span id="loader"></span>
-    <div class="REM_container">
-        <div class="R_container TEST">
-            <img src="/static/R_E_M/img/1_R_RED_PNG/R1.png" alt="R1" id="R1">
-            <img src="/static/R_E_M/img/1_R_RED_PNG/R2.png" alt="R2" id="R2">
-            <img src="/static/R_E_M/img/1_R_RED_PNG/R3.png" alt="R3" id="R3">
-            <img src="/static/R_E_M/img/1_R_RED_PNG/R4.png" alt="R4" id="R4">
-        </div>
-        <div class="E_container TEST">
-            <img src="/static/R_E_M/img/2_E_RED_PNG/E1.png" alt="E1" id="E1">
-            <img src="/static/R_E_M/img/2_E_RED_PNG/E2.png" alt="E2" id="E2">
-            <img src="/static/R_E_M/img/2_E_RED_PNG/E3.png" alt="E3" id="E3">
-            <img src="/static/R_E_M/img/2_E_RED_PNG/E4.png" alt="E4" id="E4">
-        </div>
-        <div class="M_container TEST">
-            <img src="/static/R_E_M/img/3_M_RED_PNG/M1.png" alt="M1" id="M1">
-            <img src="/static/R_E_M/img/3_M_RED_PNG/M2.png" alt="M2" id="M2">
-            <img src="/static/R_E_M/img/3_M_RED_PNG/M3.png" alt="M3" id="M3">
-            <img src="/static/R_E_M/img/3_M_RED_PNG/M4.png" alt="M4" id="M4">
-        </div>
-    </div>
-      <div class="small_REM_container">
-        <div class="small_R_container">
-            <img src="/static/R_E_M/img/1_R_RED_PNG/R5.png" alt="R5" id="R5">
-        </div>
-        <div class="small_E_container">
-            <img src="/static/R_E_M/img/2_E_RED_PNG/E5.png" alt="E5" id="E5">
-        </div>
-        <div class="small_M_container">
-            <img src="/static/R_E_M/img/3_M_RED_PNG/M5.png" alt="M5" id="M5">
-        </div>
-    </div>
-    <div class="slideshow-container">
-
-        <div class="mySlides fade">
-            <img src="{% static "R_E_M/img/Web Backgrounds/WebCover (1).jpg" %}">
-        </div>
-
-        <div class="mySlides fade">
-            <img src="{% static "R_E_M/img/Web Backgrounds/WebCover (2).jpg" %}">
-        </div>
-
-        <div class="mySlides fade">
-            <img src="{% static "R_E_M/img/Web Backgrounds/WebCover (3).jpg" %}">
-        </div>
-
-        <div class="mySlides fade">
-            <img src="{% static "R_E_M/img/Web Backgrounds/WebCover (4).jpg" %}">
-        </div>
-
-        <div class="mySlides fade">
-            <img src="{% static "R_E_M/img/Web Backgrounds/WebCover (5).jpg" %}">
-        </div>
-
-        <div class="mySlides fade">
-            <img src="{% static "R_E_M/img/Web Backgrounds/WebCover (6).jpg" %}">
-        </div>
-
-        <div class="mySlides fade">
-            <img src="{% static "R_E_M/img/Web Backgrounds/WebCover (7).jpg" %}">
-        </div>
-
-        <div class="mySlides fade">
-            <img src="{% static "R_E_M/img/Web Backgrounds/WebCover (8).jpg" %}">
-        </div>
-
-        <div class="mySlides fade">
-            <img src="{% static "R_E_M/img/Web Backgrounds/WebCover (9).jpg" %}">
-        </div>
-
-        <div class="mySlides fade">
-            <img src="{% static "R_E_M/img/Web Backgrounds/WebCover (10).jpg" %}">
-        </div>
-
-        <div class="mySlides fade">
-            <img src="{% static "R_E_M/img/Web Backgrounds/WebCover (11).jpg" %}">
-        </div>
-
-        <div class="mySlides fade">
-            <img src="{% static "R_E_M/img/Web Backgrounds/WebCover (12).jpg" %}">
-        </div>
-
-        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-        <a class="next" onclick="plusSlides(1)">&#10095;</a>
-
-    </div>
-
-
-    <section class="rw-wrapper">
-        <h2 class="rw-sentence">
-            <span>Hello,</span>
-            <br>
-            <span>Welcome to my website.</span>
-            <br/>
-            <span>My name is Remington Henderson</span>
-            <br/>
-            <span>I am a </span>
-            <div class="rw-words rw-words-1">
-                <span>full-stack web developer</span>
-                <span>writer</span>
-                <span>director</span>
-                <span>photographer</span>
-                <span>cinematographer</span>
-                <span>film editor</span>
+    <head>
+        <link rel="stylesheet" type="text/css" href="{% static 'styles/home.css' %}"/>
+    </head>
+    <style>
+        .page_container {
+            padding-top: 0;
+        }
+    </style>
+    <div class="page_container">
+        <span id="loader"></span>
+        <div class="REM_container">
+            <div class="R_container TEST">
+                <img src="/static/R_E_M/img/1_R_RED_PNG/R1.png" alt="R1" id="R1">
+                <img src="/static/R_E_M/img/1_R_RED_PNG/R2.png" alt="R2" id="R2">
+                <img src="/static/R_E_M/img/1_R_RED_PNG/R3.png" alt="R3" id="R3">
+                <img src="/static/R_E_M/img/1_R_RED_PNG/R4.png" alt="R4" id="R4">
             </div>
-        </h2>
-    </section>
+            <div class="E_container TEST">
+                <img src="/static/R_E_M/img/2_E_RED_PNG/E1.png" alt="E1" id="E1">
+                <img src="/static/R_E_M/img/2_E_RED_PNG/E2.png" alt="E2" id="E2">
+                <img src="/static/R_E_M/img/2_E_RED_PNG/E3.png" alt="E3" id="E3">
+                <img src="/static/R_E_M/img/2_E_RED_PNG/E4.png" alt="E4" id="E4">
+            </div>
+            <div class="M_container TEST">
+                <img src="/static/R_E_M/img/3_M_RED_PNG/M1.png" alt="M1" id="M1">
+                <img src="/static/R_E_M/img/3_M_RED_PNG/M2.png" alt="M2" id="M2">
+                <img src="/static/R_E_M/img/3_M_RED_PNG/M3.png" alt="M3" id="M3">
+                <img src="/static/R_E_M/img/3_M_RED_PNG/M4.png" alt="M4" id="M4">
+            </div>
+        </div>
+        <div class="small_REM_container">
+            <div class="small_R_container">
+                <img src="/static/R_E_M/img/1_R_RED_PNG/R5.png" alt="R5" id="R5">
+            </div>
+            <div class="small_E_container">
+                <img src="/static/R_E_M/img/2_E_RED_PNG/E5.png" alt="E5" id="E5">
+            </div>
+            <div class="small_M_container">
+                <img src="/static/R_E_M/img/3_M_RED_PNG/M5.png" alt="M5" id="M5">
+            </div>
+        </div>
+        <div class="slideshow-container">
+
+            <div class="mySlides fade">
+                <img src="{% static "R_E_M/img/Web Backgrounds/WebCover (1).jpg" %}">
+            </div>
+
+            <div class="mySlides fade">
+                <img src="{% static "R_E_M/img/Web Backgrounds/WebCover (2).jpg" %}">
+            </div>
+
+            <div class="mySlides fade">
+                <img src="{% static "R_E_M/img/Web Backgrounds/WebCover (3).jpg" %}">
+            </div>
+
+            <div class="mySlides fade">
+                <img src="{% static "R_E_M/img/Web Backgrounds/WebCover (4).jpg" %}">
+            </div>
+
+            <div class="mySlides fade">
+                <img src="{% static "R_E_M/img/Web Backgrounds/WebCover (5).jpg" %}">
+            </div>
+
+            <div class="mySlides fade">
+                <img src="{% static "R_E_M/img/Web Backgrounds/WebCover (6).jpg" %}">
+            </div>
+
+            <div class="mySlides fade">
+                <img src="{% static "R_E_M/img/Web Backgrounds/WebCover (7).jpg" %}">
+            </div>
+
+            <div class="mySlides fade">
+                <img src="{% static "R_E_M/img/Web Backgrounds/WebCover (8).jpg" %}">
+            </div>
+
+            <div class="mySlides fade">
+                <img src="{% static "R_E_M/img/Web Backgrounds/WebCover (9).jpg" %}">
+            </div>
+
+            <div class="mySlides fade">
+                <img src="{% static "R_E_M/img/Web Backgrounds/WebCover (10).jpg" %}">
+            </div>
+
+            <div class="mySlides fade">
+                <img src="{% static "R_E_M/img/Web Backgrounds/WebCover (11).jpg" %}">
+            </div>
+
+            <div class="mySlides fade">
+                <img src="{% static "R_E_M/img/Web Backgrounds/WebCover (12).jpg" %}">
+            </div>
+
+            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+        </div>
 
 
-    <br>
+        <section class="rw-wrapper">
+            <h2 class="rw-sentence">
+                <span>Hello,</span>
+                <br>
+                <span>Welcome to my website.</span>
+                <br/>
+                <span>My name is Remington Henderson</span>
+                <br/>
+                <span>I am a </span>
+                <div class="rw-words rw-words-1">
+                    <span>full-stack web developer</span>
+                    <span>writer</span>
+                    <span>director</span>
+                    <span>photographer</span>
+                    <span>cinematographer</span>
+                    <span>film editor</span>
+                </div>
+            </h2>
+        </section>
+
+    </div>
+
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 

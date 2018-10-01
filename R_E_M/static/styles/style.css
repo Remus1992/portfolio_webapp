@@ -12,6 +12,8 @@
 .page_container {
     min-height: calc(75vh - 46px);
     padding-top: 3px;
+    padding-bottom: 10px;
+    background: white;
 }
 
 .container {
@@ -248,7 +250,6 @@ html:not(.no-js) body:not(.always-use-overlay-nav) #headerNav {
 #header #mainNavWrapper {
     text-align: center;
 }
-
 
 #header #logoWrapper, #header #logoImage {
     height: auto;
@@ -1064,7 +1065,7 @@ a, a:visited {
 }
 
 #preFooter {
-    margin-top: 20px;
+    /*margin-top: 20px;*/
     background-color: #000;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
@@ -1119,13 +1120,12 @@ a, a:visited {
     }
 }
 
-
 .footer-inner::after {
     background-color: black;
     content: "";
-	height: 0;
-	width: 0;
-	position: absolute;
+    height: 0;
+    width: 0;
+    position: absolute;
 }
 
 /************************** Filter Checkbox **************************/
@@ -1835,7 +1835,13 @@ pre {
     margin: 40px;
     cursor: pointer;
     font-weight: bold;
+    z-index: 15;
 }
+
+.image_holder {
+    z-index: 50;
+}
+
 
 .blog_button:hover {
     background-color: white;
@@ -2031,12 +2037,17 @@ pre {
 }
 
 .blog_content_container pre {
+
     text-align: left;
     white-space: pre-wrap; /* Since CSS 2.1 */
     white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
     white-space: -pre-wrap; /* Opera 4-6 */
     white-space: -o-pre-wrap; /* Opera 7 */
     word-wrap: break-word; /* Internet Explorer 5.5+ */
+}
+
+.blog_content_container p, .blog_content_container blockquote, .blog_content_container ul, .blog_content_container ol {
+    font-size: 1.25em;
 }
 
 .blog_image_holder {
@@ -2058,11 +2069,19 @@ pre {
     .blog_content_container {
         width: 85%;
     }
+
+    .blog_content_container p, .blog_content_container blockquote, .blog_content_container ul, .blog_content_container ol {
+        font-size: 1em;
+    }
 }
 
 @media only screen and (max-width: 766px) {
     .blog_content_container {
         width: 95%;
+    }
+
+    .blog_content_container p, .blog_content_container blockquote, .blog_content_container ul, .blog_content_container ol {
+        font-size: 1em;
     }
 
     .blog_content_container iframe {
@@ -2979,7 +2998,7 @@ pre {
 /**************************************************/
 
 .text-center {
-    margin: 20px 0 20px 0;
+    /*margin: 20px 0 20px 0;*/
     display: flex;
     align-items: center;
     justify-content: center;
@@ -2995,6 +3014,9 @@ pre {
     color: black;
 }
 
+#paginator {
+    padding-left: 0;
+}
 .pagination li.active {
     font-size: 30px;
     font-weight: bold;
@@ -3002,6 +3024,7 @@ pre {
 
 body {
     /*font-family: 'Roboto', sans-serif;*/
+    background: black;
 }
 
 #overlayNav {
