@@ -2095,9 +2095,9 @@ pre {
     }
 
     .blog_image_holder {
-        height: auto;
-        overflow: auto;
-        margin-top: auto;
+        /*height: auto;*/
+        /*overflow: auto;*/
+        /*margin-top: auto;*/
     }
 
 }
