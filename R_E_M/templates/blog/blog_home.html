@@ -158,11 +158,7 @@
                             <li class="disabled"><span>&mldr;</span></li>
                             <li><a href="?page={{ end_index }}">{{ end_index }}</a></li>
                         {% endif %}
-                        <li><a href="?page=
-
-
-
-                                {{ blog_list.next_page_number }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&raquo;</a>
+                        <li><a href="?page={{ blog_list.next_page_number }}{% if request.GET.category %}&category={{ request.GET.category }}{% endif %}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">&raquo;</a>
                         </li>
                     {% else %}
                         <li class="disabled"><span>&raquo;</span></li>

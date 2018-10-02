@@ -42,9 +42,11 @@
 
     <div class="page_container">
         <div class="blog_content_container">
-            <div class="blog_image_holder">
-                {% blog_image_or_default blog %}
-            </div>
+{#            <div class="blog_image_holder">#}
+{#                {% blog_image_or_default blog %}#}
+{#            </div>#}
+            <div class="blog_image_holder" data-parallax="scroll" data-src="{{ blog.image.url }}"
+                 data-image-src="{{ blog.image.url }}"></div>
 
             <div class="blog_header">
 
@@ -71,6 +73,12 @@
             {% endif %}
         </div>
     </div>
+
+    <!-- Import jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Parallax -->
+    <script src="{% static 'javascript/parallax.js-1.5.0/parallax.js' %}"></script>
 
 {% endblock %}
 
