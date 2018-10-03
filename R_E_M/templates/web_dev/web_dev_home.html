@@ -9,12 +9,18 @@
 {% block content %}
     <head>
         <link rel="stylesheet" type="text/css" href="{% static 'styles/style.css' %}"/>
+        <link href="https://fonts.googleapis.com/css?family=Righteous" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <!-- webdev specific javascript -->
         <script src="{% static 'javascript/web_dev_top.js' %}"></script>
 
     </head>
 
+    <style>
+        .title_header h1 {
+            font-family: 'Righteous', cursive;
+        }
+    </style>
     <div class="page_container">
         <div class="title_header"><h1>Remus Ex Machina</h1>
             <p>I started coding in November 2017 with a bootcamp and became hooked immediately. The focus of the course
