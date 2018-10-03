@@ -1217,8 +1217,10 @@ a, a:visited {
 }
 
 .search_button {
-    /*background-color: #cecece;*/
-
+     -webkit-appearance: none;
+    background: -webkit-linear-gradient(rgb(221, 221, 221) 50%, rgb(204, 204, 204));
+    border: none;
+    box-shadow: inset 0px 0px 0px 1px #d1d1d1;
 }
 
 .search_button:hover {
