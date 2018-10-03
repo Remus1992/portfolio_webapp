@@ -10,12 +10,21 @@
 
     <head>
         <link rel="stylesheet" type="text/css" href="{% static 'styles/style.css' %}"/>
+        <link href="https://fonts.googleapis.com/css?family=Dancing+Script" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Charmonman" rel="stylesheet">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <!-- photo specific javascript -->
         <script src="{% static 'javascript/photo_home_top.js' %}"></script>
     </head>
+    <style>
+        .title_header h1 {
+            padding-top: 5px;
+            {#font-family: 'Dancing Script', cursive;#}
+            font-family: 'Charmonman', cursive;
+        }
+    </style>
     <div class="page_container">
-        <div class="title_header"><h1>Photo Library</h1>
+        <div class="title_header"><h1>Réfléchi En Mémoire</h1>
             <p>I've been practicing photography now for five years. While I enjoy taking portraits the most, I have
                 dabbled in just about every style of photography there is.</p></div>
         <div class="search_container">
