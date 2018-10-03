@@ -1188,6 +1188,7 @@ a, a:visited {
     height: 30px;
     width: 250px;
     border: 1px #d1d1d1 solid;
+    -webkit-appearance: none;
 }
 
 @media only screen and (max-width: 766px) {
@@ -1217,7 +1218,7 @@ a, a:visited {
 }
 
 .search_button {
-     -webkit-appearance: none;
+    -webkit-appearance: none;
     background: -webkit-linear-gradient(rgb(221, 221, 221) 50%, rgb(204, 204, 204));
     border: none;
     box-shadow: inset 0px 0px 0px 1px #d1d1d1;
