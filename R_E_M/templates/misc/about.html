@@ -13,6 +13,29 @@
     </head>
     <style>
 
+        .bio_photo {
+            height: 350px;
+            float: right;
+            margin: 5px;
+        }
+
+        @media (max-width: 1024px) and (min-width: 766px) {
+            .bio_photo {
+                height: 250px;
+                float: right;
+                margin: 10px;
+            }
+        }
+
+        @media only screen and (max-width: 766px) {
+            .bio_photo {
+                width: 100%;
+                height: auto;
+                float: none;
+                margin: 0;
+            }
+        }
+
 
     </style>
     <div class="page_container">
@@ -26,6 +49,8 @@
             <p>I was born and raised in Klamath Falls, Oregon. When I was ten, my family moved out to the countryside,
                 and two of my passions developed from having long open roads spreading off in every direction:
                 cross-country running and cycling.</p>
+
+            <img class="bio_photo" src="{% static "R_E_M/img/beach_photoshoot_tiny.JPG" %}">
 
             <p>I also spent a lot of time outdoors with the Boy Scouts. I went on to attain the rank of Eagle Scout
                 (within two weeks of my 18th birthday much to my parent’s chagrin).</p>
