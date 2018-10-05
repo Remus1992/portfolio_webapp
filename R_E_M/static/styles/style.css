@@ -1186,25 +1186,14 @@ a, a:visited {
 
 #search_bar {
     -webkit-appearance: none;
-    height: 30px;
+    /*height: 30px;*/
     width: 250px;
     /*border: 1px #d1d1d1 solid;*/
     border: none;
+    border-radius: 0;
     box-shadow: inset 0px 0px 0px 1px #d1d1d1;
 }
 
-@media only screen and (max-width: 766px) {
-    #search_bar {
-        height: 30px;
-        width: 193px;
-    }
-}
-
-@media only screen and (max-width: 766px) {
-    #search_bar, .search_button {
-        margin-top: 4px;
-    }
-}
 
 #search_bar:hover {
     /*box-shadow: 1px 1px 3px rgba(0, 0, 0, .2);*/
@@ -1224,12 +1213,30 @@ a, a:visited {
     background: -webkit-linear-gradient(rgb(221, 221, 221) 50%, rgb(204, 204, 204));
     border: none;
     box-shadow: inset 0px 0px 0px 1px #d1d1d1;
+    height: 33px;
+    margin-left: -1px;
 }
 
 .search_button:hover {
     /*background-color: #b2b2b2;*/
     box-shadow: 1px 1px 3px rgba(0, 0, 0, .2);
 }
+
+@media only screen and (max-width: 766px) {
+    #search_bar, .search_button {
+        margin-top: 4px;
+    }
+
+    #search_bar {
+        /*height: 30px;*/
+        width: 193px;
+    }
+
+    .search_button {
+        height: 35px;
+    }
+}
+
 
 /**************** Movie Card ************************/
 
