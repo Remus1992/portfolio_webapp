@@ -12,7 +12,25 @@
         <link rel="stylesheet" type="text/css" href="{% static 'styles/style.css' %}"/>
     </head>
     <style>
+        .equip_photo {
+            margin-top: 5px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            width: 60%;
+        }
 
+        @media (max-width: 1024px) and (min-width: 766px) {
+            .equip_photo {
+            }
+        }
+
+        @media only screen and (max-width: 766px) {
+            .equip_photo {
+                width: 90%;
+                height: auto;
+            }
+        }
     </style>
     <div class="page_container">
         <div class="tech_container">
@@ -50,18 +68,23 @@
                 <li class="layer1">Godox X1-S (wireless remote)</li>
                 <li class="layer1">Godox TT685S (x3)</li>
             </ul>
+            <img class="equip_photo" src="{% static "R_E_M/img/equip/photo_equip_web.jpg" %}">
+
             <p class="bullet_heading">Filmmaking:</p>
             <ul>
                 <li class="layer1">Rhino Slider (Ultimate Slider Bundle)</li>
                 <li class="layer1">Kessler Pocket Jib</li>
                 <li class="layer1">Glidecam Stabilizer & Support Sys</li>
             </ul>
+            <img class="equip_photo" src="{% static "R_E_M/img/equip/video_equip_web.jpg" %}">
+
             <p class="bullet_heading">Audio Recording:</p>
             <ul>
                 <li class="layer1">Zoom H6N Recorder</li>
                 <li class="layer1">Rode NTG2 Microphone</li>
                 <li class="layer1">Sennheiser EW112P Lav Mics</li>
             </ul>
+            <img class="equip_photo" src="{% static "R_E_M/img/equip/audio_equip_web.jpg" %}">
         </div>
     </div>
     </div>
