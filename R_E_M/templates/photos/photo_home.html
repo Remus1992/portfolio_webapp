@@ -134,18 +134,7 @@
             </div>
         {% endif %}
 
-        <div class="instagram_holder">
-            <div class="instagram_title">
-                <h1>Instagram</h1>
-                <hr>
-            </div>
-
-            {% for image in insta|slice:":6" %}
-                <a href="{{ image.link }}" target="_blank">
-                    <img src="{{ image.images.thumbnail.url }}" alt="{{ image.images. }}">
-                </a>
-            {% endfor %}
-        </div>
+        
     </div>
 
     <script src="{% static 'waypoints/lib/jquery.waypoints.min.js' %}"></script>
@@ -159,3 +148,17 @@
 {% block footer %}
     {% include 'footer_base.html' %}
 {% endblock %}
+
+/* The following doesn't work anymore because the Instagram API is different */
+        /* <div class="instagram_holder">
+            <div class="instagram_title">
+                <h1>Instagram</h1>
+                <hr>
+            </div>
+
+            {% for image in insta|slice:":6" %}
+                <a href="{{ image.link }}" target="_blank">
+                    <img src="{{ image.images.thumbnail.url }}" alt="{{ image.images. }}">
+                </a>
+            {% endfor %}
+        </div> */

@@ -45,7 +45,7 @@ def contact(request):
     return render(request, 'misc/contact.html')
 
 
-def _albums(request, album_categories, category, complete_album_list,  data):
+def _albums(request, album_categories, category, complete_album_list): # 'data' removed from imports
     paginator = Paginator(complete_album_list, 4)
 
     page = request.GET.get('page', 1)
@@ -81,7 +81,7 @@ def _albums(request, album_categories, category, complete_album_list,  data):
 
     context = {
         'albums': complete_album_list,
-        'insta': data,
+        # 'insta': data,
         'album_cats': album_categories,
         'category': category,
         'page_range': page_range,
@@ -93,9 +93,12 @@ def _albums(request, album_categories, category, complete_album_list,  data):
 
 
 def photography_home(request):
-    r = requests.get(
-        "https://api.instagram.com/v1/users/self/media/recent/?access_token={}".format(insta_api_access_token))
-    data = r.json()["data"]
+    # the following won't work because of Instagram's new API
+    # r = requests.get(
+    #     "https://api.instagram.com/v1/users/self/media/recent/?access_token={}".format(insta_api_access_token))
+    # data = r.json()["data"]
+
+    # unrelated ?
     # for i in data["data"]:
     #     print(i["link"])
 
@@ -165,7 +168,8 @@ def photography_home(request):
                 photo.save()
 
         return HttpResponseRedirect('/photography/galleries/{}/{}/'.format(album.category.slug, album.slug))
-    return _albums(request, album_categories, category, complete_album_list, data)
+    return _albums(request, album_categories, category, complete_album_list)
+    # return _albums(request, album_categories, category, complete_album_list, data) data removed due to insta
     # return render(request, 'photos/photo_home.html', {"album_cats": album_categories, 'albums': complete_album_list, "insta": data})
 
 
