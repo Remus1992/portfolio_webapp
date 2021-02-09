@@ -27,7 +27,7 @@ SECRET_KEY = secret_key
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'remus1992.webfactional.com',
+    'webapp-1040048.pythonanywhere.com',
     'www.remingtonhenderson.com',
     'remingtonhenderson.com',
     '127.0.0.1'
