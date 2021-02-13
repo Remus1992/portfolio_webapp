@@ -19,7 +19,7 @@ class User(AbstractUser):
 
 
 def album_cover_image_uh(instance, filename):
-    return 'movies/{}/{}'.format(instance.slug, filename)
+    return 'album_covers/{}/{}'.format(instance.slug, filename)
 
 
 class Album(models.Model):
