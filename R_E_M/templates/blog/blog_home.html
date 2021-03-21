@@ -116,7 +116,8 @@
             {% for b in blog_list %}
                 <div class="blog {{ b.category.slug }}" data-image-src>
                     <div class="image_holder" data-parallax="scroll" data-src="{{ b.image.url }}"
-                         data-image-src="{{ b.image.url }}">
+                         data-image-src="{{ b.image.url }}"
+                         data-z-index="zIndex: 0">
                         <a href="{% url 'blog_single_view' b.category.slug b.slug %}"
                            class="blog_button">Read More &nbsp; &nbsp; &nbsp; &nbsp;></a>
                     </div>
